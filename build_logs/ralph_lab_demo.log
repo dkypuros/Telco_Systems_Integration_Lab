@@ -1,0 +1,7 @@
+Telco Systems Integration Lab Demo Readiness
+================================================
+Runtime-ready mock imports: YES
+Regression tests passing:   YES
+Copied AST/import scope:    25 Python files / 23 imports
+What this demonstrates: copied mock 5G core/RAN/O-RAN code is organized, dependency-declared, importable, and regression-checked.
+What it does not claim: Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance.

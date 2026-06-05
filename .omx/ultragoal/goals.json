@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "createdAt": "2026-06-05T00:50:31.552Z",
+  "updatedAt": "2026-06-05T01:04:37.080Z",
+  "briefPath": ".omx/ultragoal/brief.md",
+  "goalsPath": ".omx/ultragoal/goals.json",
+  "ledgerPath": ".omx/ultragoal/ledger.jsonl",
+  "codexGoalMode": "aggregate",
+  "goals": [
+    {
+      "id": "G001-complete-explore-inventories-for-tec",
+      "title": "Complete explore inventories for Tech-Co, BF3-5G-Demo, and supporting...",
+      "objective": "Complete explore inventories for Tech-Co, BF3-5G-Demo, and supporting sources.",
+      "status": "complete",
+      "attempt": 0,
+      "createdAt": "2026-06-05T00:50:31.552Z",
+      "updatedAt": "2026-06-05T00:55:41.167Z",
+      "completedAt": "2026-06-05T00:55:41.167Z",
+      "evidence": "Explore lanes completed for Tech-Co, BF3-5G-Demo, and supporting sources; consolidated in traceability/team_mapping_summary_2026-06-05.md."
+    },
+    {
+      "id": "G002-refresh-official-3gpp-tm-forum-and-o",
+      "title": "Refresh official 3GPP, TM Forum, and O-RAN standards release evidence.",
+      "objective": "Refresh official 3GPP, TM Forum, and O-RAN standards release evidence.",
+      "status": "complete",
+      "attempt": 0,
+      "createdAt": "2026-06-05T00:50:31.552Z",
+      "updatedAt": "2026-06-05T00:55:42.453Z",
+      "completedAt": "2026-06-05T00:55:42.453Z",
+      "evidence": "Official standards-release evidence captured in traceability/standards_best_practice_research_2026-06-05.md and standards_release_register.yaml."
+    },
+    {
+      "id": "G003-maintain-release-register-source-inv",
+      "title": "Maintain release register, source inventory, copy manifest, and exclu...",
+      "objective": "Maintain release register, source inventory, copy manifest, and exclusion policy.",
+      "status": "complete",
+      "attempt": 0,
+      "createdAt": "2026-06-05T00:50:31.552Z",
+      "updatedAt": "2026-06-05T00:55:43.747Z",
+      "completedAt": "2026-06-05T00:55:43.747Z",
+      "evidence": "Release register, source inventory, copy manifest, exclusion policy, and release tracking procedure exist under traceability/ and procedures/."
+    },
+    {
+      "id": "G004-produce-a-team-style-mapping-summary",
+      "title": "Produce a team-style mapping summary for source-to-bucket copy priori...",
+      "objective": "Produce a team-style mapping summary for source-to-bucket copy priorities.",
+      "status": "complete",
+      "attempt": 0,
+      "createdAt": "2026-06-05T00:50:31.552Z",
+      "updatedAt": "2026-06-05T00:55:44.648Z",
+      "completedAt": "2026-06-05T00:55:44.648Z",
+      "evidence": "Team-style mapping summary written to traceability/team_mapping_summary_2026-06-05.md and planned copy candidates appended to copy_manifest.csv."
+    },
+    {
+      "id": "G005-verify-scaffold-release-tracking-cop",
+      "title": "Verify scaffold, release tracking, copy-only condition, and no exclud...",
+      "objective": "Verify scaffold, release tracking, copy-only condition, and no excluded content copied.",
+      "status": "complete",
+      "attempt": 0,
+      "createdAt": "2026-06-05T00:50:31.552Z",
+      "updatedAt": "2026-06-05T01:04:37.080Z",
+      "evidence": "Final local validation passed; independent code-reviewer APPROVE; architect CLEAR; copy-only condition preserved and no excluded source content copied.",
+      "completedAt": "2026-06-05T01:04:37.080Z"
+    }
+  ],
+  "codexObjective": "Complete the copy-only, standards-release-aware intake pipeline for Telco Systems Integration Lab using the durable plan in .omx/ultragoal/goals.json and evidence in traceability/.",
+  "codexObjectiveAliases": [
+    "Complete the copy-only, standards-release-aware intake pipeline for Telco Systems Integration Lab using the durable plan in .omx/ultragoal/goals.json and evidence in traceability/.",
+    "Complete the durable ultragoal plan in .omx/ultragoal/goals.json, including later accepted/appended stories, under the original brief constraints; use .omx/ultragoal/ledger.jsonl as the audit trail."
+  ]
+}

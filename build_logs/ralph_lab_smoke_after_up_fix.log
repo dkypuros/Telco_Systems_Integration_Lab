@@ -1,0 +1,6 @@
+lab smoke: pass
+  AST files: 25
+  Imported modules: 23
+  Missing deps: 0
+  Evidence: <USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_smoke_runtime.json
+  Caveat: Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance.

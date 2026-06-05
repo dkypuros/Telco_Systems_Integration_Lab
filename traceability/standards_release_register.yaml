@@ -1,0 +1,161 @@
+# Standards release register.
+# Refresh official evidence before using this for implementation decisions.
+checked_at: "2026-06-05"
+policy:
+  copy_only: true
+  no_source_code_updates_until_gap_recorded: true
+  track_latest_and_tested_against_separately: true
+  o_ran_release_tracking: "per WG/spec/interface, not global"
+  tmforum_release_tracking: "API spec version and CTK/RI asset version are separate"
+fields:
+  - standards_body
+  - standard_family
+  - spec_id
+  - interface_or_api
+  - latest_open_or_active
+  - latest_frozen_or_stable
+  - stable_target_baseline
+  - local_tested_against
+  - local_test_evidence_path
+  - implementation_path
+  - source_asset_version
+  - conformance_level
+  - known_gap_to_latest
+  - next_step
+  - official_source_url
+  - official_evidence_checked_at
+  - evidence_snapshot_path
+  - notes
+entries:
+  - standards_body: "3GPP"
+    standard_family: "3gpp"
+    spec_id: "release-baseline"
+    interface_or_api: "all 3GPP work"
+    latest_open_or_active: "Rel-21 Open; Rel-20 Open"
+    latest_frozen_or_stable: "Rel-19 Frozen"
+    stable_target_baseline: "Rel-19 for current stable gap planning unless a specific spec requires another baseline"
+    local_tested_against: "Mixed; BF3 docs claim Release 16 in places; Tech-Co records 6/6 functional 3GPP smoke tests, not formal protocol conformance"
+    local_test_evidence_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/README.md; <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/reference.md; <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/3gpp-compliance.md"
+    implementation_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0; <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/components"
+    source_asset_version: "source-specific; requires per-spec audit"
+    conformance_level: "functional smoke / documentation-mapped; formal protocol conformance not established globally"
+    known_gap_to_latest: "unknown_requires_audit"
+    next_step: "Inventory by TS/TR, release, test evidence, and formal conformance status before code updates"
+    official_source_url: "https://portal.3gpp.org/Releases?SubTB=385&tbid=375"
+    official_evidence_checked_at: "2026-06-05"
+    evidence_snapshot_path: "traceability/evidence_snapshots/2026-06-05-standards-release-baseline.md"
+    notes: "Do not collapse Rel-21/Rel-20 open work into the tested baseline. Track frozen/stable and open/latest separately."
+
+  - standards_body: "TM Forum"
+    standard_family: "tmforum"
+    spec_id: "TMF620"
+    interface_or_api: "Product Catalog Management API"
+    latest_open_or_active: "v5.0 official API assets"
+    latest_frozen_or_stable: "v5.0 stable page"
+    stable_target_baseline: "v5.0"
+    local_tested_against: "TMF620 v4 CTK per Tech-Co docs"
+    local_test_evidence_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF620-ProductCatalog/jsonResults.json"
+    implementation_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/src/catalog_api/app/api/tmf620.py"
+    source_asset_version: "Local CTK folder; official v5 CTK/RI asset updated separately"
+    conformance_level: "Tech-Co docs report 1421/1421 CTK assertions against local v4 baseline"
+    known_gap_to_latest: "major_version_gap_or_asset_update_required"
+    next_step: "Preserve v4 evidence, then test against TMF620 v5 CTK before claiming v5 conformance"
+    official_source_url: "https://www.tmforum.org/open-digital-architecture/open-apis/product-catalog-management-api-TMF620/v5.0"
+    official_evidence_checked_at: "2026-06-05"
+    evidence_snapshot_path: "traceability/evidence_snapshots/2026-06-05-standards-release-baseline.md"
+    notes: "Separate API spec version from CTK/RI release date."
+
+  - standards_body: "TM Forum"
+    standard_family: "tmforum"
+    spec_id: "TMF622"
+    interface_or_api: "Product Ordering Management API"
+    latest_open_or_active: "v5.0 official API assets"
+    latest_frozen_or_stable: "v5.0 stable page"
+    stable_target_baseline: "v5.0"
+    local_tested_against: "TMF622 v4 CTK per Tech-Co docs"
+    local_test_evidence_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF622-ProductOrdering/jsonResults.json"
+    implementation_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/src/order_engine/app/api/tmf622.py"
+    source_asset_version: "Local CTK folder; official v5 CTK/RI asset updated separately"
+    conformance_level: "Tech-Co docs report 63/63 CTK assertions against local v4 baseline"
+    known_gap_to_latest: "major_version_gap_or_asset_update_required"
+    next_step: "Preserve v4 evidence, then test against TMF622 v5 CTK before claiming v5 conformance"
+    official_source_url: "https://www.tmforum.org/oda/open-apis/directory/TMF622"
+    official_evidence_checked_at: "2026-06-05"
+    evidence_snapshot_path: "traceability/evidence_snapshots/2026-06-05-standards-release-baseline.md"
+    notes: "Separate API spec version from CTK/RI release date."
+
+  - standards_body: "TM Forum"
+    standard_family: "tmforum"
+    spec_id: "TMF641"
+    interface_or_api: "Service Ordering Management API"
+    latest_open_or_active: "v5.0 official API assets"
+    latest_frozen_or_stable: "v5.0 page; stable version noted as v4.1 on source page"
+    stable_target_baseline: "requires official page refresh before implementation claim"
+    local_tested_against: "Tech-Co docs describe TMF641 v4 GET-only/service-order derivation, not full CTK conformance"
+    local_test_evidence_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/architecture.md"
+    implementation_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/src/order_engine/app/api/tmf641.py"
+    source_asset_version: "local implementation only; CTK skipped in Tech-Co summary"
+    conformance_level: "partial implementation"
+    known_gap_to_latest: "formal_conformance_missing"
+    next_step: "Do not claim TMF641 conformance until CTK target and API version are selected and run"
+    official_source_url: "https://www.tmforum.org/open-digital-architecture/open-apis/service-ordering-management-api-TMF641/v5.0"
+    official_evidence_checked_at: "2026-06-05"
+    evidence_snapshot_path: "traceability/evidence_snapshots/2026-06-05-standards-release-baseline.md"
+    notes: "Page advertises this version v5.0 but also stable version v4.1; preserve nuance."
+
+  - standards_body: "TM Forum"
+    standard_family: "tmforum"
+    spec_id: "TMF638"
+    interface_or_api: "Service Inventory Management API"
+    latest_open_or_active: "v5.1 preview; v5.0 official assets"
+    latest_frozen_or_stable: "v5.0"
+    stable_target_baseline: "v5.0"
+    local_tested_against: "Tech-Co docs say TMF638 ServiceInventory not implemented"
+    local_test_evidence_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/architecture.md"
+    implementation_path: "not implemented in Tech-Co baseline"
+    source_asset_version: "N/A"
+    conformance_level: "not implemented"
+    known_gap_to_latest: "missing_implementation"
+    next_step: "Treat as future capability or reference-only until implementation/test scope is approved"
+    official_source_url: "https://www.tmforum.org/oda/open-apis/directory/service-inventory-management-api-TMF638/v5.0.0E"
+    official_evidence_checked_at: "2026-06-05"
+    evidence_snapshot_path: "traceability/evidence_snapshots/2026-06-05-standards-release-baseline.md"
+    notes: "Track preview vs stable separately."
+
+  - standards_body: "TM Forum"
+    standard_family: "tmforum"
+    spec_id: "TMF921"
+    interface_or_api: "Intent Management API"
+    latest_open_or_active: "v5.0 official API assets"
+    latest_frozen_or_stable: "v5.0 stable page"
+    stable_target_baseline: "v5.0"
+    local_tested_against: "No direct local CTK evidence found in first pass"
+    local_test_evidence_path: "TBD"
+    implementation_path: "TBD"
+    source_asset_version: "TBD"
+    conformance_level: "unknown_requires_audit"
+    known_gap_to_latest: "unknown_requires_audit"
+    next_step: "Map any intent/closed-loop code to TMF921 only after inventory confirms implementation path"
+    official_source_url: "https://www.tmforum.org/oda/open-apis/directory/intent-management-api-TMF921/v5.0"
+    official_evidence_checked_at: "2026-06-05"
+    evidence_snapshot_path: "traceability/evidence_snapshots/2026-06-05-standards-release-baseline.md"
+    notes: "Do not infer TMF921 conformance from O-RAN closed-loop demos."
+
+  - standards_body: "O-RAN Alliance"
+    standard_family: "oran"
+    spec_id: "architecture-and-security-baseline"
+    interface_or_api: "O-RAN WG/spec baseline"
+    latest_open_or_active: "per WG/spec/interface; refresh required"
+    latest_frozen_or_stable: "examples: Architecture Description v16; Security Requirements/Protocols v14.0; Security Tests v12.0; Threat Modeling v8.0 from Feb 2026 references"
+    stable_target_baseline: "per target interface, not global"
+    local_tested_against: "Tech-Co records O-RAN closed-loop demo exit 0; docs identify A1/E2 as HTTP-mock implementations"
+    local_test_evidence_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/build_logs/run/oran_closed_loop_20260518_223843.log; <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/architecture.md"
+    implementation_path: "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/src; <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API"
+    source_asset_version: "local HTTP-mock/demo assets; per-spec versions require audit"
+    conformance_level: "demo/functional; not formal O-RAN conformance"
+    known_gap_to_latest: "formal_conformance_missing"
+    next_step: "Create per-interface entries for A1, E2AP, E2SM, O1, O2, Open FH before copying or claiming conformance"
+    official_source_url: "https://www.o-ran.org/specifications"
+    official_evidence_checked_at: "2026-06-05"
+    evidence_snapshot_path: "traceability/evidence_snapshots/2026-06-05-standards-release-baseline.md"
+    notes: "O-RAN has no single global version. Track by WG/spec/interface."

@@ -1,0 +1,152 @@
+{
+	"id": "b897c1fb-5aad-4abf-b677-fdb79aa03008",
+	"name": "CTK-TMFENV-V3.0.0",
+	"values": [
+		{
+			"key": "ServiceInventoryAPI",
+			"value": "{{Service_Inventory}}/tmf-api/serviceInventory/v3",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			},
+			"enabled": true
+		},
+		{
+			"key": "Service_Ordering",
+			"value": "https://apictk-service-ordering-v3-0-0.mybluemix.net",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			},
+			"enabled": true
+		},
+		{
+			"key": "Service_Qualification",
+			"value": "https://apictk-service-qualification-management-v3-0-0.mybluemix.net",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			},
+			"enabled": true
+		},
+		{
+			"key": "Service_Test",
+			"value": "https://api-service-test-management-v3-0-0.mybluemix.net",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			},
+			"enabled": true
+		},
+		{
+			"key": "Usage_Consumption",
+			"value": "https://api-usage-consumption-v3-0-0.mybluemix.net",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			},
+			"enabled": true
+		},
+		{
+			"key": "Service_Activation",
+			"value": "https://api-service-activation-and-configuration-v3-0-0.mybluemix.net",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			},
+			"enabled": true
+		},
+		{
+			"key": "Service_Catalog",
+			"value": "https://api-service-catalog-management-v3-0-0.mybluemix.net",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			},
+			"enabled": true
+		},
+		{
+			"key": "Service_Problem",
+			"value": "https://api-service-problem-management-v3-0-0.mybluemix.net",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			},
+			"enabled": true
+		},
+		{
+			"key": "Service_Inventory",
+			"value": "https://apictk-service-inventory-management-v3-0-0.mybluemix.net",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			},
+			"enabled": true
+		},
+		{
+			"key": "ServiceCatalogAPI",
+			"value": "{{Service_Catalog}}/tmf-api/serviceCatalogManagement/v3",
+			"description": {
+				"content": "",
+				"type": "text/plain"
+			},
+			"enabled": true
+		},
+		{
+			"key": "id",
+			"value": "eff330b1-2ae8-4b22-b554-aa94afb8acbe",
+			"enabled": true
+		},
+		{
+			"key": "offset",
+			"value": "0",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "limit",
+			"value": "5",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "localhost",
+			"value": "http://127.0.0.1:8080",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "schema",
+			"value": "https",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "host",
+			"value": "localhost",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "port",
+			"value": "8080",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "ServiceOrderingAPI",
+			"value": "{{Service_Ordering}}/tmf-api/serviceOrdering/v3",
+			"description": "",
+			"enabled": true
+		},
+		{
+			"key": "ServiceQualificationAPI",
+			"value": "{{Service_Qualification}}/tmf-api/serviceQualificationManagement/v3",
+			"description": "",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-04-18T18:26:39.292Z",
+	"_postman_exported_using": "Postman/6.7.1"
+}

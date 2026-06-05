@@ -1,0 +1,47 @@
+{
+  "recorded_at": "2026-06-05T16:05:11.946088+00:00",
+  "runtime_smoke": {
+    "status": "pass",
+    "ast_count": 25,
+    "imported_count": 23,
+    "missing_dependencies": [],
+    "errors": []
+  },
+  "pytest": "15 passed in 4.04s",
+  "services": {
+    "ready": 19,
+    "total": 26,
+    "all_ready": false,
+    "external": [
+      "nrf",
+      "amf",
+      "smf",
+      "upf",
+      "ausf",
+      "udm",
+      "smo",
+      "r1",
+      "y1",
+      "o_ru",
+      "o1",
+      "teiv",
+      "o2",
+      "security",
+      "slicing",
+      "energy",
+      "xhaul",
+      "ntn_radio",
+      "oran_gateway"
+    ],
+    "failed": [],
+    "state_file": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/.lab/state/lab_services.json",
+    "evidence_file": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_services.json",
+    "log_dir": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services"
+  },
+  "evidence": {
+    "smoke": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_smoke_runtime.json",
+    "test": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_test_pytest.log",
+    "services": null
+  },
+  "caveat": "Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance."
+}

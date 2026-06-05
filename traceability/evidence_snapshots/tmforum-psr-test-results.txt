@@ -1,0 +1,308 @@
+PSR MODEL IMPLEMENTATION - TEST RESULTS
+=======================================
+
+Test Date: 2025-01-11
+Python Version: 3.x
+Location: tmforum_psr_learning/
+
+
+SUMMARY
+-------
+
+All tests PASSED.
+
+  Specification Tests:  30 tests passed
+  Demo Execution:       Successful
+  JSON Output:          TM Forum compliant
+
+
+======================================================================
+SPECIFICATION TEST RESULTS (run_all_specs.py)
+======================================================================
+
+Command: python3 run_all_specs.py
+
+----------------------------------------------------------------------
+Entity and EntityRef (Common Base Classes)
+----------------------------------------------------------------------
+
+Schema Sources:
+  - schemas/Common/Entity.schema.json
+  - schemas/Common/EntityRef.schema.json
+
+Results:
+  [PASS] Entity has all required fields
+  [PASS] Entity serializes correctly with @ prefix fields
+  [PASS] EntityRef extends Entity
+  [PASS] EntityRef has all required fields
+  [PASS] EntityRef serializes correctly
+  [PASS] Empty fields correctly omitted from serialization
+
+Tests: 6/6 passed
+
+
+----------------------------------------------------------------------
+Resource (Bottom Layer of PSR)
+----------------------------------------------------------------------
+
+Schema Sources:
+  - schemas/Resource/Resource.schema.json
+  - schemas/Resource/ResourceRef.schema.json
+
+Results:
+  [PASS] Resource has all schema fields
+  [PASS] Resource serializes with camelCase field names
+  [PASS] Resource supports characteristics
+  [PASS] Resource supports relationships to other resources
+  [PASS] ResourceRef created correctly from Resource
+  [PASS] ResourceRef supports value field for public identifiers
+  [PASS] Resource demonstrated as PSR bottom layer
+
+Tests: 7/7 passed
+
+Example output:
+  Resources Created:
+    - GigE Port 1/0/24 (PhysicalPort)
+    - 203.0.113.50/30 (IPAddress)
+
+
+----------------------------------------------------------------------
+Service (Middle Layer of PSR)
+----------------------------------------------------------------------
+
+Schema Sources:
+  - schemas/Service/Service.schema.json
+  - schemas/Service/BaseService.schema.json
+  - schemas/Service/ServiceRef.schema.json
+
+Results:
+  [PASS] Service has all schema fields
+  [PASS] ServiceStateType matches schema enum
+  [PASS] Service serializes correctly
+  [PASS] Service links DOWN to Resources via supportingResource
+  [PASS] CFS links to RFS via supportingService
+  [PASS] Service supports characteristics
+  [PASS] ServiceRef created correctly from Service
+  [PASS] CFS/RFS classification helpers work
+  [PASS] Service demonstrated as PSR middle layer
+
+Tests: 9/9 passed
+
+PSR Structure Verified:
+  [Product Layer - would link here]
+         |
+         v realizingService
+  CFS: Internet Access 100Mbps
+         |
+         v supportingService
+  RFS: IP Connectivity
+         |
+         v supportingResource
+  Resources: GigE Port, 203.0.113.50
+
+
+----------------------------------------------------------------------
+Product (Top Layer of PSR)
+----------------------------------------------------------------------
+
+Schema Sources:
+  - schemas/Product/Product.schema.json
+  - schemas/Product/ProductStatusType.schema.json
+
+Results:
+  [PASS] Product has all schema fields
+  [PASS] ProductStatusType matches schema enum
+  [PASS] Product serializes correctly
+  [PASS] Product links DOWN to Services via realizingService
+  [PASS] Product links directly to Resources via realizingResource
+  [PASS] Product supports pricing
+  [PASS] Product supports characteristics
+  [PASS] ProductRef created correctly from Product
+  [PASS] Complete PSR hierarchy created successfully
+
+Tests: 9/9 passed (includes comprehensive PSR hierarchy test)
+
+Complete PSR Hierarchy Verified:
+  PRODUCT (Top Layer)
+  └── Business Internet Pro - $99/mo
+      Status: active
+      │
+      ├── realizingService:
+      │   └── Internet Access 100Mbps (CFS)
+      │       │
+      │       └── supportingService:
+      │           └── IP Connectivity (RFS)
+      │               │
+      │               └── supportingResource:
+      │                   ├── GigE Port 1/0/24
+      │                   └── 203.0.113.50
+      │
+      └── realizingResource (direct):
+          └── Customer Router BR-100
+
+
+======================================================================
+DEMO EXECUTION RESULTS (example_psr_demo.py)
+======================================================================
+
+Command: python3 example_psr_demo.py
+
+Demo: Business Internet Product Example
+
+----------------------------------------------------------------------
+Resources Created (Bottom Layer)
+----------------------------------------------------------------------
+
+  1. GigE Port 1/0/24 on Edge Router NYC-01
+     - Category: PhysicalPort
+     - Characteristics: speed=1Gbps, mediaType=RJ45
+
+  2. 203.0.113.48/30
+     - Category: IPAddress
+     - Characteristics: customerIP=203.0.113.50
+
+  3. Business Router BR-200
+     - Category: CPE
+     - Characteristics: serialNumber=BR200-2024-00142
+
+
+----------------------------------------------------------------------
+Services Created (Middle Layer)
+----------------------------------------------------------------------
+
+  1. IP Connectivity NYC (RFS)
+     - Links to: router port, IP block
+     - Category: Resource-Facing Service
+
+  2. Internet Access 100Mbps (CFS)
+     - Links to: IP Connectivity RFS
+     - Category: Customer-Facing Service
+     - Characteristics: 100Mbps down / 20Mbps up
+
+
+----------------------------------------------------------------------
+Product Created (Top Layer)
+----------------------------------------------------------------------
+
+  Business Internet Pro
+  - ID: prod-001
+  - Status: active
+  - realizingService: Internet Access 100Mbps
+  - realizingResource: Business Router BR-200
+  - Prices:
+      Monthly Service: $99.00 (recurring)
+      Installation: $199.00 (oneTime)
+      Router Rental: $15.00 (recurring)
+
+
+----------------------------------------------------------------------
+JSON Output Validation
+----------------------------------------------------------------------
+
+The Product serialized to TM Forum compliant JSON:
+
+  - Uses camelCase field names (isBundle, isCustomerVisible)
+  - Uses @ prefix for meta fields (@referredType)
+  - Includes realizingService array with ServiceRef objects
+  - Includes realizingResource array with ResourceRef objects
+  - Includes productCharacteristic array
+  - Includes productPrice array with proper structure
+
+Sample JSON structure verified:
+  {
+    "id": "prod-001",
+    "name": "Business Internet Pro",
+    "isBundle": false,
+    "isCustomerVisible": true,
+    "status": "active",
+    "realizingService": [
+      {
+        "id": "cfs-001",
+        "name": "Internet Access 100Mbps",
+        "@referredType": "Service"
+      }
+    ],
+    "realizingResource": [
+      {
+        "id": "cpe-001",
+        "name": "Business Router BR-200",
+        "@referredType": "Resource"
+      }
+    ]
+  }
+
+
+======================================================================
+PSR MODEL LINKAGE VERIFICATION
+======================================================================
+
+The following PSR relationships were successfully demonstrated:
+
+1. Product -> Service (realizingService)
+   Product "Business Internet Pro" realizes Service "Internet Access 100Mbps"
+
+2. Service -> Service (supportingService)
+   CFS "Internet Access 100Mbps" is supported by RFS "IP Connectivity NYC"
+
+3. Service -> Resource (supportingResource)
+   RFS "IP Connectivity NYC" uses Resources "GigE Port" and "IP Block"
+
+4. Product -> Resource (realizingResource)
+   Product "Business Internet Pro" directly includes "Business Router BR-200"
+
+
+======================================================================
+FILES TESTED
+======================================================================
+
+Source Files (src/):
+  - src/common/entity.py
+  - src/common/characteristic.py
+  - src/resource/resource.py
+  - src/resource/resource_ref.py
+  - src/resource/enums.py
+  - src/service/service.py
+  - src/service/service_ref.py
+  - src/service/enums.py
+  - src/product/product.py
+  - src/product/product_ref.py
+  - src/product/enums.py
+
+Specification Files (spec/):
+  - spec/common/entity_spec.py
+  - spec/resource/resource_spec.py
+  - spec/service/service_spec.py
+  - spec/product/product_spec.py
+
+
+======================================================================
+CONCLUSION
+======================================================================
+
+The PSR model implementation is working correctly:
+
+1. All 30 specification tests pass
+2. The demo creates a realistic Business Internet product
+3. JSON output is TM Forum compliant
+4. PSR linkages work in both directions:
+   - Product -> Service -> Resource (standard path)
+   - Product -> Resource (direct path for hardware)
+
+The implementation correctly maps to these TM Forum schema files:
+  - schemas/Common/Entity.schema.json
+  - schemas/Common/EntityRef.schema.json
+  - schemas/Common/Characteristic.schema.json
+  - schemas/Resource/Resource.schema.json
+  - schemas/Resource/ResourceRef.schema.json
+  - schemas/Service/Service.schema.json
+  - schemas/Service/BaseService.schema.json
+  - schemas/Service/ServiceRef.schema.json
+  - schemas/Service/ServiceStateType.schema.json
+  - schemas/Product/Product.schema.json
+  - schemas/Product/ProductStatusType.schema.json
+
+The code is ready for extension with:
+  - Catalog management (ProductCatalog, ServiceCatalog, ResourceCatalog)
+  - Order processing (ProductOrder, ServiceOrder, ResourceOrder)
+  - Inventory management
+  - REST API exposure via FastAPI

@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+httpx
+requests
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-instrumentation-fastapi
+opentelemetry-exporter-prometheus
+prometheus_client
+pytest
+pytest-asyncio
+PyJWT

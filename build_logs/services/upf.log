@@ -1,0 +1,4 @@
+2026-06-05T17:26:32.034512+00:00 SCENARIO OK UPF direct PFCP fallback POST http://127.0.0.1:9002/n4/sessions status=200 response={"cause": "REQUEST_ACCEPTED", "status": "SESSION_CREATED"}
+2026-06-05T17:26:32.035462+00:00 SCENARIO OK UPF simulate user traffic POST http://127.0.0.1:9002/upf/simulate-traffic status=200 response={"status": "FORWARDED"}
+2026-06-05T17:26:49.523688+00:00 SCENARIO OK UPF direct PFCP fallback POST http://127.0.0.1:9002/n4/sessions status=200 response={"cause": "REQUEST_ACCEPTED", "status": "SESSION_CREATED"}
+2026-06-05T17:26:49.525508+00:00 SCENARIO OK UPF simulate user traffic POST http://127.0.0.1:9002/upf/simulate-traffic status=200 response={"status": "FORWARDED"}

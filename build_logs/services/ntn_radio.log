@@ -1,0 +1,2 @@
+2026-06-05T17:26:49.498979+00:00 SCENARIO OK NTN radio tick POST http://127.0.0.1:8132/ntn/tick status=200
+2026-06-05T17:26:49.500054+00:00 SCENARIO OK NTN radio logs GET http://127.0.0.1:8132/ntn/logs?limit=12 status=200 response={"count": 12}

@@ -1,0 +1,684 @@
+========================================================================================================================
+                                    5G WIRELINE CONVERGENCE SIMULATOR
+                                    Requirements and Architecture Document
+========================================================================================================================
+
+Document Version: 1.0
+Created: January 29, 2026
+Purpose: Define requirements for simulating 5G-Wireline convergence with MPLS/Segment Routing transport
+
+========================================================================================================================
+                                         EXECUTIVE SUMMARY
+========================================================================================================================
+
+This simulator models the convergence of 5G mobile networks with traditional wireline transport infrastructure. Unlike
+the Michael-SoftBank lab (which uses direct spine/leaf connectivity), this simulator introduces:
+
+  - MPLS/SR transport network between 5G Core and edge sites
+  - PE (Provider Edge) routers for VPN services
+  - Fixed Wireless Access (FWA) use cases
+  - Wireline backhaul for 5G small cells
+  - Network slicing over shared transport infrastructure
+
+Target Use Cases:
+  1. Carrier-grade 5G backhaul over MPLS/SR-MPLS transport
+  2. 5G Fixed Wireless Access (FWA) replacing DSL/Cable last mile
+  3. Enterprise 5G with L3VPN integration
+  4. Multi-access Edge Computing (MEC) with wireline fallback
+  5. Network slicing across mobile and wireline domains
+
+========================================================================================================================
+                                         WHY PE ROUTERS ARE NEEDED
+========================================================================================================================
+
+In the Michael-SoftBank lab, traffic flows:
+
+    gNodeB --> Leaf Switch --> Spine Switch --> 5G Core
+
+This works for single-site deployments but lacks:
+  - Multi-site VPN isolation
+  - Traffic engineering across WAN
+  - QoS enforcement at transport layer
+  - Network slicing at transport level
+
+The 5G Wireline Simulator introduces PE routers:
+
+    gNodeB --> CE Router --> PE Router --> P Router --> PE Router --> 5G Core (UPF)
+                             (Edge)       (Core)       (Core)
+
+PE Router Functions:
+  +---------------------------+------------------------------------------------------------------+
+  | Function                  | Description                                                      |
+  +---------------------------+------------------------------------------------------------------+
+  | VRF Isolation             | Separate routing tables per slice/customer                       |
+  | MPLS Label Imposition     | Push labels for transport across core                            |
+  | BGP VPNv4/VPNv6           | Exchange VPN routes with other PEs                               |
+  | QoS Classification        | Map 5QI to MPLS TC/EXP bits                                      |
+  | Segment Routing (SR-MPLS) | Traffic engineering for slice SLAs                               |
+  | BFD/Fast Reroute          | Sub-50ms failover for transport                                  |
+  +---------------------------+------------------------------------------------------------------+
+
+========================================================================================================================
+                                         REFERENCE ARCHITECTURE
+========================================================================================================================
+
+                                    +------------------------------------------+
+                                    |              5G CORE (CENTRALIZED)       |
+                                    |  +--------+  +--------+  +--------+      |
+                                    |  |  AMF   |  |  SMF   |  |  UDM   |      |
+                                    |  +--------+  +--------+  +--------+      |
+                                    |                  |                       |
+                                    |              +---+---+                   |
+                                    |              |  UPF  | (Anchor)          |
+                                    |              +---+---+                   |
+                                    +------------------|------------------------+
+                                                       | N6 (to DN)
+                                                       | N3 (to gNB via transport)
+                                                       |
+                                    +------------------+------------------+
+                                    |           CORE PE ROUTER            |
+                                    |  (PE-CORE-1)                        |
+                                    |  - VRF: 5G-Slice-eMBB              |
+                                    |  - VRF: 5G-Slice-URLLC             |
+                                    |  - VRF: Enterprise-VPN             |
+                                    |  - SR-MPLS / LDP                   |
+                                    +------------------+------------------+
+                                                       |
+                                    +------------------+------------------+
+                                    |           P ROUTER (CORE)           |
+                                    |  (P-CORE-1, P-CORE-2)              |
+                                    |  - Label switching only            |
+                                    |  - No VRF awareness                |
+                                    |  - TI-LFA for fast reroute         |
+                                    +------------------+------------------+
+                                                       |
+                    +----------------------------------+----------------------------------+
+                    |                                  |                                  |
+     +--------------+---------------+  +--------------+---------------+  +--------------+---------------+
+     |        EDGE PE ROUTER        |  |        EDGE PE ROUTER        |  |        EDGE PE ROUTER        |
+     |  (PE-EDGE-1)                 |  |  (PE-EDGE-2)                 |  |  (PE-EDGE-3)                 |
+     |  - VRF: 5G-Slice-eMBB       |  |  - VRF: 5G-Slice-URLLC      |  |  - VRF: Enterprise-VPN       |
+     |  - Distributed UPF (opt)    |  |  - Edge UPF for URLLC       |  |  - L3VPN for enterprise      |
+     |  - QoS: 5QI mapping         |  |  - Sub-ms latency path      |  |  - No UPF (wireline only)    |
+     +--------------+---------------+  +--------------+---------------+  +--------------+---------------+
+                    |                                  |                                  |
+     +--------------+---------------+  +--------------+---------------+  +--------------+---------------+
+     |           CE ROUTER          |  |           CE ROUTER          |  |           CE ROUTER          |
+     |  (Cell Site Gateway)         |  |  (Factory Floor)             |  |  (Enterprise Branch)         |
+     +--------------+---------------+  +--------------+---------------+  +--------------+---------------+
+                    |                                  |                                  |
+     +--------------+---------------+  +--------------+---------------+  +--------------+---------------+
+     |           gNodeB             |  |      Private 5G + Sensors    |  |      Enterprise LAN          |
+     |  (Macro Cell / Small Cell)   |  |  (URLLC Industrial IoT)      |  |  (Wireline + WiFi)           |
+     +------------------------------+  +------------------------------+  +------------------------------+
+
+========================================================================================================================
+                                         NETWORK SLICING OVER TRANSPORT
+========================================================================================================================
+
+Each network slice maps to a VRF on the PE routers:
+
+    +----------------+----------------+------------------+--------------------+---------------------+
+    | Slice Type     | SST/SD         | VRF Name         | Transport SLA      | PE QoS Treatment    |
+    +----------------+----------------+------------------+--------------------+---------------------+
+    | eMBB           | SST=1          | 5G-Slice-eMBB    | Best effort        | MPLS EXP=0 (BE)     |
+    | URLLC          | SST=2          | 5G-Slice-URLLC   | <10ms, 99.999%     | MPLS EXP=5 (EF)     |
+    | mMTC           | SST=3          | 5G-Slice-mMTC    | Relaxed latency    | MPLS EXP=1 (AF11)   |
+    | Enterprise     | SST=1, SD=xxx  | Enterprise-VPN   | Per-contract SLA   | MPLS EXP=3 (AF31)   |
+    +----------------+----------------+------------------+--------------------+---------------------+
+
+5QI to DSCP/MPLS-EXP Mapping (at PE ingress):
+    +-------+------------------+------+----------+
+    | 5QI   | Traffic Type     | DSCP | MPLS EXP |
+    +-------+------------------+------+----------+
+    | 1     | Conversational   | EF   | 5        |
+    | 5     | IMS Signaling    | AF31 | 3        |
+    | 9     | Video Streaming  | AF21 | 2        |
+    | 80    | Low-latency eMBB | AF41 | 4        |
+    | 82    | Discrete Auto    | EF   | 5        |
+    | 83    | V2X              | EF   | 5        |
+    +-------+------------------+------+----------+
+
+========================================================================================================================
+                                         SIMULATOR COMPONENTS
+========================================================================================================================
+
+1. ROUTING PLATFORM (Choose one or combine)
+   --------------------------------------------------------------------------------
+
+   OPTION A: FRRouting (FRR) - Open Source
+   +----------------------------------+--------------------------------------------+
+   | Component                        | Purpose                                    |
+   +----------------------------------+--------------------------------------------+
+   | FRR 9.x containers               | PE/P/CE router simulation                  |
+   | BGP daemon (bgpd)                | VPNv4/VPNv6, EVPN route exchange           |
+   | IS-IS daemon (isisd)             | IGP for MPLS transport                     |
+   | MPLS (zebra + mpls)              | Label switching                            |
+   | Segment Routing (pathd)          | SR-MPLS traffic engineering                |
+   | BFD daemon (bfdd)                | Fast failure detection                     |
+   +----------------------------------+--------------------------------------------+
+
+   OPTION B: Containerlab + Nokia SR Linux / Arista cEOS
+   +----------------------------------+--------------------------------------------+
+   | Component                        | Purpose                                    |
+   +----------------------------------+--------------------------------------------+
+   | Containerlab                     | Topology orchestration                     |
+   | Nokia SR Linux (free tier)       | Production-grade SR-MPLS                   |
+   | Arista cEOS                      | Alternative vendor simulation              |
+   | GoBGP                            | Route reflector simulation                 |
+   +----------------------------------+--------------------------------------------+
+
+   OPTION C: GNS3 / EVE-NG with Cisco IOS-XR or Juniper vMX
+   +----------------------------------+--------------------------------------------+
+   | Component                        | Purpose                                    |
+   +----------------------------------+--------------------------------------------+
+   | GNS3 / EVE-NG                    | Network emulation platform                 |
+   | Cisco IOS-XRv 9000               | Full MPLS/SR feature set                   |
+   | Juniper vMX                      | Alternative vendor                         |
+   +----------------------------------+--------------------------------------------+
+
+   RECOMMENDED: FRRouting for cost/simplicity, Containerlab + SR Linux for realism
+
+2. 5G CORE SIMULATION
+   --------------------------------------------------------------------------------
+
+   +----------------------------------+--------------------------------------------+
+   | Component                        | Purpose                                    |
+   +----------------------------------+--------------------------------------------+
+   | Open5GS                          | Full 5G Core (AMF, SMF, UPF, etc.)         |
+   | free5GC                          | Alternative 5G Core implementation         |
+   | UERANSIM                         | gNodeB and UE simulation                   |
+   | PacketRusher                     | High-performance UE/gNB simulator          |
+   +----------------------------------+--------------------------------------------+
+
+3. DATA PLANE / UPF OPTIONS
+   --------------------------------------------------------------------------------
+
+   +----------------------------------+--------------------------------------------+
+   | Component                        | Purpose                                    |
+   +----------------------------------+--------------------------------------------+
+   | Open5GS UPF                      | Basic GTP-U processing                     |
+   | UPG-VPP (Travelping)             | VPP-based high-performance UPF             |
+   | eUPF                             | eBPF-based UPF                             |
+   | DPDK-based UPF                   | Custom DPDK implementation                 |
+   +----------------------------------+--------------------------------------------+
+
+4. INFRASTRUCTURE
+   --------------------------------------------------------------------------------
+
+   +----------------------------------+--------------------------------------------+
+   | Component                        | Purpose                                    |
+   +----------------------------------+--------------------------------------------+
+   | Docker / Podman                  | Container runtime                          |
+   | Containerlab                     | Network topology definition                |
+   | Linux network namespaces         | Isolation for simulated nodes              |
+   | Open vSwitch                     | Virtual switching                          |
+   | tc/netem                         | Delay/jitter/loss simulation               |
+   +----------------------------------+--------------------------------------------+
+
+========================================================================================================================
+                                         MINIMUM TOPOLOGY REQUIREMENTS
+========================================================================================================================
+
+For a functional 5G-Wireline convergence simulator, deploy at minimum:
+
+    Nodes Required:
+    +------------------+----------+------------------------------------------+
+    | Node Type        | Quantity | Software                                 |
+    +------------------+----------+------------------------------------------+
+    | PE Router (Core) | 1        | FRR or SR Linux                          |
+    | PE Router (Edge) | 2        | FRR or SR Linux                          |
+    | P Router         | 2        | FRR or SR Linux (optional for small lab) |
+    | CE Router        | 2        | FRR (lightweight)                        |
+    | 5G Core          | 1        | Open5GS or free5GC                       |
+    | gNodeB Simulator | 1        | UERANSIM                                 |
+    | UE Simulator     | 1+       | UERANSIM                                 |
+    +------------------+----------+------------------------------------------+
+
+    Minimum Resource Requirements:
+    +------------------+------------------------------------------+
+    | Resource         | Requirement                              |
+    +------------------+------------------------------------------+
+    | CPU              | 8 cores (16 recommended)                 |
+    | RAM              | 16 GB (32 GB recommended)                |
+    | Storage          | 50 GB SSD                                |
+    | Network          | Host with multiple veth pairs            |
+    +------------------+------------------------------------------+
+
+========================================================================================================================
+                                         PROTOCOL STACK COMPARISON
+========================================================================================================================
+
+    Michael-SoftBank Lab (Current):
+    +------------------+------------------+------------------+
+    |     5G Core      |    Transport     |      Edge        |
+    +------------------+------------------+------------------+
+    | N2 (SCTP/NGAP)   | Ethernet/IP      | BlueField DPU    |
+    | N3 (GTP-U)       | Direct L3        | OVS-DOCA         |
+    | N4 (PFCP)        | No MPLS          | No PE routers    |
+    | N6 (IP)          | Spine/Leaf only  | Single site      |
+    +------------------+------------------+------------------+
+
+    5G Wireline Simulator (New):
+    +------------------+------------------+------------------+------------------+
+    |     5G Core      |   Core Transport |   Edge Transport |      Edge        |
+    +------------------+------------------+------------------+------------------+
+    | N2 (SCTP/NGAP)   | MPLS/SR-MPLS     | L3VPN (VRF)      | CE Router        |
+    | N3 (GTP-U)       | VPNv4 over MPLS  | Per-slice VRF    | gNodeB           |
+    | N4 (PFCP)        | iBGP + IGP       | BGP PE-CE        | Optional UPF     |
+    | N6 (IP)          | TI-LFA FRR       | QoS at PE        | Enterprise LAN   |
+    +------------------+------------------+------------------+------------------+
+
+========================================================================================================================
+                                         CONTAINERLAB TOPOLOGY EXAMPLE
+========================================================================================================================
+
+File: topology.clab.yml
+
+    ---
+    name: 5g-wireline-sim
+
+    topology:
+      nodes:
+        # 5G Core
+        core:
+          kind: linux
+          image: open5gs:latest
+
+        # Core PE (connected to 5G Core)
+        pe-core:
+          kind: linux
+          image: frrouting/frr:v9.1.0
+
+        # P Routers (transport core)
+        p1:
+          kind: linux
+          image: frrouting/frr:v9.1.0
+        p2:
+          kind: linux
+          image: frrouting/frr:v9.1.0
+
+        # Edge PEs
+        pe-edge-1:
+          kind: linux
+          image: frrouting/frr:v9.1.0
+        pe-edge-2:
+          kind: linux
+          image: frrouting/frr:v9.1.0
+
+        # CE Routers (cell site gateways)
+        ce-site-1:
+          kind: linux
+          image: frrouting/frr:v9.1.0
+        ce-site-2:
+          kind: linux
+          image: frrouting/frr:v9.1.0
+
+        # gNodeB Simulator
+        gnb:
+          kind: linux
+          image: ueransim:latest
+
+        # UE Simulator
+        ue:
+          kind: linux
+          image: ueransim:latest
+
+      links:
+        # Core to PE-Core
+        - endpoints: ["core:eth1", "pe-core:eth0"]
+
+        # PE-Core to P routers
+        - endpoints: ["pe-core:eth1", "p1:eth0"]
+        - endpoints: ["pe-core:eth2", "p2:eth0"]
+
+        # P router interconnect
+        - endpoints: ["p1:eth1", "p2:eth1"]
+
+        # P routers to Edge PEs
+        - endpoints: ["p1:eth2", "pe-edge-1:eth0"]
+        - endpoints: ["p2:eth2", "pe-edge-2:eth0"]
+
+        # Edge PEs to CEs
+        - endpoints: ["pe-edge-1:eth1", "ce-site-1:eth0"]
+        - endpoints: ["pe-edge-2:eth1", "ce-site-2:eth0"]
+
+        # CE to gNB
+        - endpoints: ["ce-site-1:eth1", "gnb:eth0"]
+
+        # gNB to UE (simulated radio)
+        - endpoints: ["gnb:eth1", "ue:eth0"]
+
+========================================================================================================================
+                                         PE ROUTER CONFIGURATION (FRR)
+========================================================================================================================
+
+Example FRR configuration for PE-EDGE-1:
+
+    frr version 9.1
+    frr defaults traditional
+    hostname pe-edge-1
+    !
+    ! Interfaces
+    interface eth0
+      description "TO P1 (MPLS CORE)"
+      ip address 10.0.0.2/30
+      ip router isis CORE
+      isis circuit-type level-2-only
+      isis network point-to-point
+    !
+    interface eth1
+      description "TO CE-SITE-1 (CUSTOMER)"
+      ip address 192.168.1.1/30
+    !
+    interface lo
+      ip address 10.255.0.2/32
+      ip router isis CORE
+      isis passive
+    !
+    ! VRF for 5G eMBB Slice
+    vrf 5G-eMBB
+      rd 65000:100
+      rt import 65000:100
+      rt export 65000:100
+    !
+    interface eth1 vrf 5G-eMBB
+      ip address 192.168.100.1/24
+    !
+    ! IS-IS for IGP
+    router isis CORE
+      net 49.0001.0102.5500.0002.00
+      is-type level-2-only
+      metric-style wide
+      segment-routing on
+      segment-routing global-block 16000 23999
+      segment-routing node-msd 8
+      segment-routing prefix 10.255.0.2/32 index 2
+    !
+    ! BGP for VPNv4
+    router bgp 65000
+      bgp router-id 10.255.0.2
+      no bgp default ipv4-unicast
+      neighbor 10.255.0.1 remote-as 65000
+      neighbor 10.255.0.1 update-source lo
+      !
+      address-family ipv4 vpn
+        neighbor 10.255.0.1 activate
+      exit-address-family
+      !
+      address-family ipv4 unicast vrf 5G-eMBB
+        redistribute connected
+        label vpn export auto
+        rd vpn export 65000:100
+        rt vpn both 65000:100
+        export vpn
+        import vpn
+      exit-address-family
+    !
+    ! MPLS
+    mpls ldp
+      router-id 10.255.0.2
+      address-family ipv4
+        discovery transport-address 10.255.0.2
+        interface eth0
+      exit-address-family
+    !
+
+========================================================================================================================
+                                         IMPLEMENTATION PHASES
+========================================================================================================================
+
+PHASE 1: Transport Network Foundation (Week 1-2)
+--------------------------------------------------------------------------------
+  - Deploy FRR containers for PE/P routers
+  - Configure IS-IS as IGP
+  - Enable MPLS LDP or SR-MPLS
+  - Verify label-switched paths (LSPs) between PEs
+  - Test basic IP reachability
+
+PHASE 2: L3VPN Configuration (Week 2-3)
+--------------------------------------------------------------------------------
+  - Create VRFs for each network slice
+  - Configure BGP VPNv4 between PEs
+  - Establish PE-CE routing (static or eBGP)
+  - Verify VPN isolation between slices
+  - Test inter-site connectivity within same VRF
+
+PHASE 3: 5G Core Integration (Week 3-4)
+--------------------------------------------------------------------------------
+  - Deploy Open5GS or free5GC
+  - Configure N3 interface over VRF
+  - Connect UPF to PE-CORE via VRF
+  - Deploy UERANSIM for gNB/UE simulation
+  - Test end-to-end PDU session establishment
+
+PHASE 4: QoS and Slicing (Week 4-5)
+--------------------------------------------------------------------------------
+  - Implement 5QI to DSCP mapping at UPF
+  - Configure PE ingress classification
+  - Apply MPLS EXP marking per slice
+  - Test differentiated forwarding
+  - Validate latency/bandwidth per slice
+
+PHASE 5: High Availability (Week 5-6)
+--------------------------------------------------------------------------------
+  - Configure BFD on PE-P links
+  - Enable TI-LFA for fast reroute
+  - Test link/node failure scenarios
+  - Measure convergence time
+  - Document failover behavior
+
+PHASE 6: Advanced Features (Optional)
+--------------------------------------------------------------------------------
+  - Add EVPN for L2 services
+  - Implement SRv6 (if FRR supports)
+  - Add telemetry (gNMI, streaming)
+  - Integrate with orchestrator (NSO, Crosswork)
+
+========================================================================================================================
+                                         KEY DIFFERENCES FROM MICHAEL-SOFTBANK LAB
+========================================================================================================================
+
+    +---------------------------+------------------------------+------------------------------+
+    | Aspect                    | Michael-SoftBank Lab         | 5G Wireline Simulator        |
+    +---------------------------+------------------------------+------------------------------+
+    | Transport Technology      | Ethernet (Spine/Leaf)        | MPLS / SR-MPLS               |
+    | VPN Capability            | None (single tenant)         | L3VPN with VRFs              |
+    | PE Routers                | Not present                  | Central to architecture      |
+    | Slice Isolation           | OVN network policies         | VRF + MPLS labels            |
+    | QoS Enforcement           | DPU-level (OVS-DOCA)         | PE-level (MPLS EXP)          |
+    | Scale                     | Single site / DC             | Multi-site WAN               |
+    | Failover Mechanism        | DPU HA (active-backup)       | MPLS FRR (TI-LFA)            |
+    | Target Use Case           | Edge AI + 5G UPF             | Carrier transport            |
+    | Hardware Dependency       | BlueField-3 DPU required     | Software-only possible       |
+    +---------------------------+------------------------------+------------------------------+
+
+========================================================================================================================
+                                         DIRECTORY STRUCTURE
+========================================================================================================================
+
+    5G_Wireline_Simulator/
+    +-- 00_simulator_requirements.txt     # This document
+    +-- 01_topology/
+    |   +-- topology.clab.yml             # Containerlab topology file
+    |   +-- topology_diagram.html         # Visual topology
+    +-- 02_configs/
+    |   +-- pe-core/
+    |   |   +-- frr.conf                  # PE-CORE FRR configuration
+    |   +-- pe-edge-1/
+    |   |   +-- frr.conf
+    |   +-- pe-edge-2/
+    |   |   +-- frr.conf
+    |   +-- p1/
+    |   |   +-- frr.conf
+    |   +-- p2/
+    |   |   +-- frr.conf
+    |   +-- ce-site-1/
+    |   |   +-- frr.conf
+    +-- 03_5g_core/
+    |   +-- open5gs/
+    |   |   +-- docker-compose.yml
+    |   |   +-- configs/
+    |   +-- ueransim/
+    |       +-- gnb.yaml
+    |       +-- ue.yaml
+    +-- 04_scripts/
+    |   +-- deploy.sh                     # Launch entire lab
+    |   +-- teardown.sh                   # Clean up
+    |   +-- test_connectivity.sh          # Verification tests
+    |   +-- inject_traffic.sh             # Traffic generation
+    +-- 05_documentation/
+        +-- lab_guide.txt                 # Step-by-step instructions
+        +-- troubleshooting.txt           # Common issues
+        +-- protocol_captures/            # Example pcaps
+
+========================================================================================================================
+                                    EXISTING REPO RESOURCES (CROSS-REFERENCES)
+========================================================================================================================
+
+The following resources already exist in this repository and should be used as reference material when building the
+5G Wireline Simulator. All paths are relative to the repository root.
+
+MPLS FUNDAMENTALS
+--------------------------------------------------------------------------------
+Location: 4Public_Networking_Public_Data/01_Layer2_DataLink/MPLS/
+
+    +---------------------------------------+--------------------------------------------------+
+    | File                                  | Content                                          |
+    +---------------------------------------+--------------------------------------------------+
+    | rfc3031_MPLS_Architecture.txt         | MPLS architecture overview                       |
+    | rfc3032_MPLS_Label_Stack.txt          | Label stack encoding                             |
+    +---------------------------------------+--------------------------------------------------+
+
+L3VPN / PE ROUTER DESIGN
+--------------------------------------------------------------------------------
+Location: 4Public_Networking_Public_Data/07_MPLS_Advanced/L3VPN/
+
+    +---------------------------------------+--------------------------------------------------+
+    | File                                  | Content                                          |
+    +---------------------------------------+--------------------------------------------------+
+    | rfc4364_L3VPN.txt                     | BGP/MPLS L3VPN - PE router architecture          |
+    | rfc4364_BGP_MPLS_VPN.txt              | VPNv4 route exchange between PEs                 |
+    +---------------------------------------+--------------------------------------------------+
+
+    Key concepts from RFC 4364 relevant to this simulator:
+      - VRF (Virtual Routing and Forwarding) tables
+      - Route Distinguishers (RD) and Route Targets (RT)
+      - MP-BGP for VPNv4/VPNv6 address families
+      - PE-CE routing options (static, eBGP, OSPF)
+
+EVPN (ADVANCED L2/L3 VPN)
+--------------------------------------------------------------------------------
+Location: 4Public_Networking_Public_Data/07_MPLS_Advanced/EVPN/
+
+    +---------------------------------------+--------------------------------------------------+
+    | File                                  | Content                                          |
+    +---------------------------------------+--------------------------------------------------+
+    | rfc7432_EVPN.txt                      | EVPN architecture and route types                |
+    | rfc8365_EVPN_VXLAN.txt                | EVPN with VXLAN data plane                       |
+    | rfc8584_EVPN_IRB.txt                  | Integrated routing and bridging                  |
+    | rfc9136_EVPN_Type5.txt                | IP Prefix routes (L3VPN over EVPN)               |
+    | rfc9161_EVPN_Operational.txt          | Operational aspects                              |
+    | rfc8214_EVPN_Virtual_Subnet.txt       | Virtual subnet support                           |
+    | rfc8317_EVPN_Inclusive_Multicast.txt  | BUM traffic handling                             |
+    | rfc9047_EVPN_ARP_ND.txt               | ARP/ND proxy                                     |
+    | rfc9135_EVPN_IGMP_MLD.txt             | Multicast support                                |
+    +---------------------------------------+--------------------------------------------------+
+
+VPLS (LAYER 2 VPN)
+--------------------------------------------------------------------------------
+Location: 4Public_Networking_Public_Data/07_MPLS_Advanced/VPLS/
+
+    +---------------------------------------+--------------------------------------------------+
+    | File                                  | Content                                          |
+    +---------------------------------------+--------------------------------------------------+
+    | rfc4761_VPLS_BGP.txt                  | VPLS using BGP signaling                         |
+    | rfc4762_VPLS_LDP.txt                  | VPLS using LDP signaling                         |
+    +---------------------------------------+--------------------------------------------------+
+
+SEGMENT ROUTING
+--------------------------------------------------------------------------------
+Location: 4Public_Networking_Public_Data/08_Segment_Routing/
+
+    SR-MPLS/
+    +---------------------------------------+--------------------------------------------------+
+    | rfc8402_SR_Architecture.txt           | Segment Routing architecture                     |
+    | rfc8660_SR_MPLS.txt                   | SR with MPLS data plane                          |
+    +---------------------------------------+--------------------------------------------------+
+
+    SRv6/
+    +---------------------------------------+--------------------------------------------------+
+    | rfc8986_SRv6.txt                      | SRv6 Network Programming                         |
+    +---------------------------------------+--------------------------------------------------+
+
+ROUTING PROTOCOLS (IGP/EGP)
+--------------------------------------------------------------------------------
+Location: 4Public_Networking_Public_Data/04_Routing/
+
+    BGP/
+    +---------------------------------------+--------------------------------------------------+
+    | (multiple RFCs)                       | BGP-4, MP-BGP, communities, etc.                 |
+    +---------------------------------------+--------------------------------------------------+
+
+    IS-IS/
+    +---------------------------------------+--------------------------------------------------+
+    | (IS-IS RFCs)                          | Recommended IGP for SR-MPLS                      |
+    +---------------------------------------+--------------------------------------------------+
+
+    LDP/
+    +---------------------------------------+--------------------------------------------------+
+    | (LDP RFCs)                            | Label Distribution Protocol                      |
+    +---------------------------------------+--------------------------------------------------+
+
+    FRR_Fast_Reroute/
+    +---------------------------------------+--------------------------------------------------+
+    | rfc4090_MPLS_FRR.txt                  | MPLS Fast Reroute (facility backup)              |
+    | rfc7490_Remote_LFA.txt                | Remote Loop-Free Alternates                      |
+    | rfc7916_TI_LFA.txt                    | Topology-Independent LFA (recommended)           |
+    +---------------------------------------+--------------------------------------------------+
+
+FUNDAMENTALS SCAFFOLDS
+--------------------------------------------------------------------------------
+Location: 4Public_Networking_Public_Data/5_fundamentals/
+
+    +---------------------------------------+--------------------------------------------------+
+    | 06_routing_protocols/fundamentals.txt | Core routing concepts, protocol comparison       |
+    +---------------------------------------+--------------------------------------------------+
+
+    Quick Reference Mirror: 100_Repo_Simple_List/network_protocols/reference.txt
+
+RELATED LAB (COMPARISON)
+--------------------------------------------------------------------------------
+Location: 9.LABS_5G_lab_simulator/michael-softbank/
+
+    +---------------------------------------+--------------------------------------------------+
+    | File                                  | Content                                          |
+    +---------------------------------------+--------------------------------------------------+
+    | 00_lab_architecture.txt               | Spine/leaf architecture (no PE routers)          |
+    | 01_physical_topology.html             | Physical network diagram                         |
+    | 05_5g_interface_mapping.html          | N2/N3/N4/N6 interface assignments                |
+    +---------------------------------------+--------------------------------------------------+
+
+    The Michael-SoftBank lab demonstrates 5G at a single site without MPLS transport.
+    Use it as reference for 5G Core and BlueField-3 DPU integration patterns.
+
+========================================================================================================================
+                                         EXTERNAL REFERENCES
+========================================================================================================================
+
+Software Documentation:
+  - FRRouting:    https://docs.frrouting.org/
+  - Containerlab: https://containerlab.dev/
+  - Open5GS:      https://open5gs.org/open5gs/docs/
+  - UERANSIM:     https://github.com/aligungr/UERANSIM
+  - Nokia SR Linux: https://learn.srlinux.dev/
+
+3GPP Specifications:
+  - TS 23.501: 5G System Architecture
+  - TS 23.502: 5G Procedures
+  - TS 29.244: PFCP (N4 interface)
+  - TS 38.413: NGAP (N2 interface)
+
+========================================================================================================================
+                                         END OF REQUIREMENTS DOCUMENT
+========================================================================================================================

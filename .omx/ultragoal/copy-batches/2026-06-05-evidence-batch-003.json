@@ -1,0 +1,124 @@
+{
+  "batch_id": "evidence-batch-003",
+  "status": "copied_verified",
+  "objective": "Copy the third standards/release traceability evidence batch, including small boundary mapping source files only where explicitly listed.",
+  "created_at": "2026-06-05T01:42:20Z",
+  "constraints": [
+    "copy-only; do not move or delete source files",
+    "do not copy whole source workspaces or directories",
+    "small boundary source files are mapping evidence only, not conformance proof",
+    "preserve source and destination SHA-256 checksums",
+    "check Markdown link integrity after copying"
+  ],
+  "planned_rows": [
+    "planned-evidence-019",
+    "planned-evidence-020",
+    "planned-evidence-021",
+    "planned-evidence-022",
+    "planned-evidence-023",
+    "planned-evidence-024",
+    "planned-evidence-025"
+  ],
+  "verification_required": [
+    "source exists for each row",
+    "destination exists for each copied row",
+    "source sha256 equals destination sha256",
+    "manifest/report/tracker status and checksums are populated",
+    "no excluded directories or whole source folders copied",
+    "Markdown relative links are checked and caveated if intentionally unresolved"
+  ],
+  "results": [
+    {
+      "copy_batch_id": "planned-evidence-019",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/specs_guide.md",
+      "destination_path": "traceability/requirements/tmf-specs-guide.md",
+      "artifact_class": "cross_standard_specs_guide",
+      "standards_body": "TM Forum;O-RAN;3GPP",
+      "spec_id": "mixed",
+      "checksum_source": "71b0da4b7492954189322089a8a007b5e8804ab3e5de1301f6075e5d0b230d63",
+      "checksum_destination": "71b0da4b7492954189322089a8a007b5e8804ab3e5de1301f6075e5d0b230d63",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Narrative/mapping evidence only; not conformance proof; copied and checksum verified"
+    },
+    {
+      "copy_batch_id": "planned-evidence-020",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/networking_specs_inventory.txt",
+      "destination_path": "traceability/requirements/networking-spec-inventory.txt",
+      "artifact_class": "standards_inventory",
+      "standards_body": "3GPP;TM Forum;O-RAN",
+      "spec_id": "mixed",
+      "checksum_source": "8977b01e4c1194bf1f135c196fb6cb2d2244d51b0acec60bc6d2d457e55571df",
+      "checksum_destination": "8977b01e4c1194bf1f135c196fb6cb2d2244d51b0acec60bc6d2d457e55571df",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Inventory/scope evidence only; not conformance proof; copied and checksum verified"
+    },
+    {
+      "copy_batch_id": "planned-evidence-021",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/build_logs/stage19_oran_closed_loop.md",
+      "destination_path": "traceability/evidence_snapshots/techco-stage19-oran-closed-loop.md",
+      "artifact_class": "oran_observed_behavior_evidence",
+      "standards_body": "O-RAN",
+      "spec_id": "closed-loop/O1/O2/E2 mapping",
+      "checksum_source": "c8d8469f889e0ecae6520245d6daf1eea61d2ae95b827fcc03b7036a2c0204d1",
+      "checksum_destination": "c8d8469f889e0ecae6520245d6daf1eea61d2ae95b827fcc03b7036a2c0204d1",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Observed/demo behavior only; not formal O-RAN certification; copied and checksum verified"
+    },
+    {
+      "copy_batch_id": "planned-evidence-022",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/README.md",
+      "destination_path": "traceability/requirements/tmf638-ctk-r18-0-readme.md",
+      "artifact_class": "ctk_reference_doc",
+      "standards_body": "TM Forum",
+      "spec_id": "TMF638",
+      "checksum_source": "36dd95d48f2a8da4cba3a44556a02c63dcd3c749ac6fe9cbd160b899d9590a77",
+      "checksum_destination": "36dd95d48f2a8da4cba3a44556a02c63dcd3c749ac6fe9cbd160b899d9590a77",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Package context only; no TMF638 implementation/conformance proof; copied and checksum verified"
+    },
+    {
+      "copy_batch_id": "planned-evidence-023",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/src/order_engine/app/adapters/o2ims_real_adapter.py",
+      "destination_path": "traceability/standards_mapping/oran-o2ims-real-adapter.py",
+      "artifact_class": "boundary_source_mapping",
+      "standards_body": "O-RAN",
+      "spec_id": "O2IMS boundary mapping",
+      "checksum_source": "bc7e328374902e4e5942474f8819bdd5d86cf91d60df71c7371e2349fffa1be7",
+      "checksum_destination": "bc7e328374902e4e5942474f8819bdd5d86cf91d60df71c7371e2349fffa1be7",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Small boundary source file copied as mapping evidence only; corroborate with tests/reports before claims; copied and checksum verified"
+    },
+    {
+      "copy_batch_id": "planned-evidence-024",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/src/order_engine/app/adapters/bf3_python_adapter.py",
+      "destination_path": "traceability/standards_mapping/bf3-python-adapter.py",
+      "artifact_class": "boundary_source_mapping",
+      "standards_body": "3GPP;O-RAN",
+      "spec_id": "BF3 service/control-plane boundary mapping",
+      "checksum_source": "27444d5b568676ea0b287751cf65d78094261b35df61ebc50b281d9bd15e54c2",
+      "checksum_destination": "27444d5b568676ea0b287751cf65d78094261b35df61ebc50b281d9bd15e54c2",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Small boundary source file copied as mapping evidence only; operational behavior is not formal protocol compliance; copied and checksum verified"
+    },
+    {
+      "copy_batch_id": "planned-evidence-025",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/tmforum_psr_learning/00_README.txt",
+      "destination_path": "references/learning_assets/tmforum-psr-learning-readme.txt",
+      "artifact_class": "learning_reference",
+      "standards_body": "TM Forum",
+      "spec_id": "PSR learning/reference",
+      "checksum_source": "5a61924ccb4650d7a06c6cf41f16310f7688d61fc623351a083820940bb06e17",
+      "checksum_destination": "5a61924ccb4650d7a06c6cf41f16310f7688d61fc623351a083820940bb06e17",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Reference-only learning context; not conformance proof; copied and checksum verified"
+    }
+  ],
+  "copied_at": "2026-06-05T01:43:06Z"
+}

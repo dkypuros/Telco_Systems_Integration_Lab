@@ -1,0 +1,161 @@
+{
+  "batch_id": "evidence-batch-002",
+  "copied_at": "2026-06-05T01:26:50Z",
+  "results": [
+    {
+      "copy_batch_id": "planned-evidence-007",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/ctk/CTK-TMF641-ServiceOrdering-R18-5.postman_collection.json",
+      "destination_path": "traceability/evidence_snapshots/tmf641-r18.5-ctk-collection.json",
+      "artifact_class": "ctk_collection",
+      "standards_body": "TM Forum",
+      "spec_id": "TMF641",
+      "checksum_source": "5d1b8a420ce79f93ec658cf461f1c9b154f8be686d320d8e379394f9d342ffa4",
+      "checksum_destination": "5d1b8a420ce79f93ec658cf461f1c9b154f8be686d320d8e379394f9d342ffa4",
+      "verified": true,
+      "status": "copied"
+    },
+    {
+      "copy_batch_id": "planned-evidence-008",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/ctk/CTK-TMFENV-V3.0.0.postman_environment.json",
+      "destination_path": "traceability/evidence_snapshots/tmf641-r18.5-ctk-environment.json",
+      "artifact_class": "ctk_environment",
+      "standards_body": "TM Forum",
+      "spec_id": "TMF641",
+      "checksum_source": "417946a27c90228d1b92bbe8ccb0c8631056522680d5852602880d464df31599",
+      "checksum_destination": "417946a27c90228d1b92bbe8ccb0c8631056522680d5852602880d464df31599",
+      "verified": true,
+      "status": "copied"
+    },
+    {
+      "copy_batch_id": "planned-evidence-009",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/README.md",
+      "destination_path": "traceability/requirements/tmf641-ctk-readme.md",
+      "artifact_class": "ctk_reference_doc",
+      "standards_body": "TM Forum",
+      "spec_id": "TMF641",
+      "checksum_source": "567ab90d589da70f70f293e7ea1df59049e4c1047824578ad53948df928b391d",
+      "checksum_destination": "567ab90d589da70f70f293e7ea1df59049e4c1047824578ad53948df928b391d",
+      "verified": true,
+      "status": "copied"
+    },
+    {
+      "copy_batch_id": "planned-evidence-010",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory/ctk/CTK-TMF638-ServiceInventory-R18-5.postman_collection.json",
+      "destination_path": "traceability/evidence_snapshots/tmf638-r18.5-ctk-collection.json",
+      "artifact_class": "ctk_collection",
+      "standards_body": "TM Forum",
+      "spec_id": "TMF638",
+      "checksum_source": "b928d2263f6c8373ad17cb568826a20e1224e242a199d1b7d7cc180a4c836b93",
+      "checksum_destination": "b928d2263f6c8373ad17cb568826a20e1224e242a199d1b7d7cc180a4c836b93",
+      "verified": true,
+      "status": "copied"
+    },
+    {
+      "copy_batch_id": "planned-evidence-011",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/ctk/CTK-TMF638-ServiceInventory-R18-5.postman_collection.json",
+      "destination_path": "traceability/evidence_snapshots/tmf638-r18-alt-ctk-collection.json",
+      "artifact_class": "ctk_collection_variant",
+      "standards_body": "TM Forum",
+      "spec_id": "TMF638",
+      "checksum_source": "a45781147b884a8dab06645ca8ab044f1c7aa99a4a538d48b94ae14d7d153b94",
+      "checksum_destination": "a45781147b884a8dab06645ca8ab044f1c7aa99a4a538d48b94ae14d7d153b94",
+      "verified": true,
+      "status": "copied"
+    },
+    {
+      "copy_batch_id": "planned-evidence-012",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R16.5/ctk/TMForum.postman_environment.json",
+      "destination_path": "traceability/evidence_snapshots/tmf638-r16.5-ctk-environment.json",
+      "artifact_class": "ctk_environment_legacy",
+      "standards_body": "TM Forum",
+      "spec_id": "TMF638",
+      "checksum_source": "a8e358e4c224feb1c3e64e15359638cef979998fc54914599f6f0ab4c8dadee0",
+      "checksum_destination": "a8e358e4c224feb1c3e64e15359638cef979998fc54914599f6f0ab4c8dadee0",
+      "verified": true,
+      "status": "copied"
+    },
+    {
+      "copy_batch_id": "planned-evidence-013",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/oran-compliance.md",
+      "destination_path": "traceability/requirements/bf3-oran-compliance-matrix.md",
+      "artifact_class": "oran_compliance_matrix",
+      "standards_body": "O-RAN",
+      "spec_id": "mixed O-RAN WG/spec mapping",
+      "checksum_source": "4966f440de1c237b82e0b97c9d7e48ca84f4b8a9d775cc831aa598f810d33955",
+      "checksum_destination": "4966f440de1c237b82e0b97c9d7e48ca84f4b8a9d775cc831aa598f810d33955",
+      "verified": true,
+      "status": "copied"
+    },
+    {
+      "copy_batch_id": "planned-evidence-014",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/oran-architecture.md",
+      "destination_path": "traceability/requirements/bf3-oran-enhancement-architecture.md",
+      "artifact_class": "oran_architecture_map",
+      "standards_body": "O-RAN",
+      "spec_id": "mixed O-RAN architecture/WG mapping",
+      "checksum_source": "adf4aad2da6f2fa74f585aba5407694901c05923f1aa27358b8f54225dc0b035",
+      "checksum_destination": "adf4aad2da6f2fa74f585aba5407694901c05923f1aa27358b8f54225dc0b035",
+      "verified": true,
+      "status": "copied"
+    },
+    {
+      "copy_batch_id": "planned-evidence-015",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/oran/oran_spec_coverage.json",
+      "destination_path": "traceability/evidence_snapshots/oran-spec-coverage.json",
+      "artifact_class": "oran_machine_readable_coverage",
+      "standards_body": "O-RAN",
+      "spec_id": "mixed O-RAN spec coverage",
+      "checksum_source": "1d5bf4dfe38542a4223462154429a240e6c9108bb646852d77ffd6112973ff33",
+      "checksum_destination": "1d5bf4dfe38542a4223462154429a240e6c9108bb646852d77ffd6112973ff33",
+      "verified": true,
+      "status": "copied"
+    },
+    {
+      "copy_batch_id": "planned-evidence-016",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/spec-analysis/3_Complete-Specification-Map.txt",
+      "destination_path": "traceability/requirements/bf3-complete-specification-map.txt",
+      "artifact_class": "specification_map",
+      "standards_body": "3GPP;O-RAN;RFC",
+      "spec_id": "mixed",
+      "checksum_source": "3c6ae29a1d58a7ada2cc5cb475dac02cde9ece002d8404dfb93297a8af22021e",
+      "checksum_destination": "3c6ae29a1d58a7ada2cc5cb475dac02cde9ece002d8404dfb93297a8af22021e",
+      "verified": true,
+      "status": "copied"
+    },
+    {
+      "copy_batch_id": "planned-evidence-017",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/oran-compliance.md",
+      "destination_path": "traceability/requirements/oran-compliance.md",
+      "artifact_class": "linked_oran_requirement_doc",
+      "standards_body": "O-RAN",
+      "spec_id": "mixed O-RAN WG/spec mapping",
+      "checksum_source": "4966f440de1c237b82e0b97c9d7e48ca84f4b8a9d775cc831aa598f810d33955",
+      "checksum_destination": "4966f440de1c237b82e0b97c9d7e48ca84f4b8a9d775cc831aa598f810d33955",
+      "verified": true,
+      "status": "copied",
+      "link_fix_for": "traceability/requirements/bf3-oran-enhancement-architecture.md"
+    },
+    {
+      "copy_batch_id": "planned-evidence-018",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/oran-fronthaul.md",
+      "destination_path": "traceability/requirements/oran-fronthaul.md",
+      "artifact_class": "linked_oran_requirement_doc",
+      "standards_body": "O-RAN",
+      "spec_id": "O-RAN WG4 Open Fronthaul",
+      "checksum_source": "5f2fafd58f1545fe04c23519e2c1fca03fd074f96c824398d7af4e326540539f",
+      "checksum_destination": "5f2fafd58f1545fe04c23519e2c1fca03fd074f96c824398d7af4e326540539f",
+      "verified": true,
+      "status": "copied",
+      "link_fix_for": "traceability/requirements/bf3-oran-enhancement-architecture.md"
+    }
+  ],
+  "guardrails": [
+    "copy-only via shutil.copy2",
+    "no source paths modified",
+    "destination paths constrained under target lab",
+    "source/destination SHA-256 equality verified for each copied artifact",
+    "no whole source workspace copied",
+    "link-fix copied linked Markdown files under original relative filenames without editing copied content"
+  ],
+  "link_fix_at": "2026-06-05T01:31:55Z"
+}

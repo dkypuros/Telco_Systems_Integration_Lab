@@ -1,0 +1,27 @@
+# OS/editor noise
+.DS_Store
+*.swp
+*.swo
+
+# Python cache/test cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local secrets/environment overrides
+.env
+.env.*
+!.env.example
+
+# Node/package caches
+node_modules/
+.npm/

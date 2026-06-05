@@ -1,0 +1,1596 @@
+{
+	"info": {
+		"_postman_id": "f82e90e7-445d-425f-8159-ebffa4c99ea0",
+		"name": "CTK-TMF641-ServiceOrdering-R18-5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "N1",
+			"item": [
+				{
+					"name": "Creates a ServiceOrder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2439570e-6d2a-4b2e-8b5c-65afaba8a60c",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData)) { ",
+									"  ",
+									"    pm.test('Array not expected as response', function (){pm.expect.fail()});",
+									"  ",
+									"",
+									"}",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var instance = pm.response.json();",
+									"var requiredAttributes = [ 'id', 'href', 'state', 'orderDate', 'orderItem',  ];",
+									"",
+									"pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"",
+									"",
+									"",
+									"pm.test('Response id attribute is of type string', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"pm.test('Response href attribute is of type string', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"pm.test('Response state attribute is of type string', function() { pm.expect(instance.state).to.be.a('string'); });",
+									"pm.test('Response orderDate attribute is of type string', function() { pm.expect(instance.orderDate).to.be.a('string'); });",
+									"pm.test('Response orderItem attribute is of type array', function() { pm.expect(instance.orderItem).to.be.a('array'); });",
+									"pm.test('Response orderItem.id attribute is of type string', function() { pm.expect(instance.orderItem[0].id).to.be.a('string'); });",
+									"pm.test('Response orderItem.action attribute is of type string', function() { pm.expect(instance.orderItem[0].action).to.be.a('string'); });",
+									"pm.test('Response orderItem.state attribute is of type string', function() { pm.expect(instance.orderItem[0].state).to.be.a('string'); });",
+									"",
+									"",
+									"pm.test('id is set', function() {pm.globals.set('IDSO01', instance.id); pm.expect(instance.id) == pm.globals.get(\"IDSO01\");});",
+									"pm.test('href is set', function() {pm.globals.set('HREFSO01', instance.href); pm.expect(instance.href) == pm.globals.get(\"HREFSO01\");});",
+									"pm.test('state is set', function() {pm.globals.set('STATESO01', instance.state); pm.expect(instance.state) == pm.globals.get(\"STATESO01\");});",
+									"pm.test('orderDate is set', function() {pm.globals.set('ORDERDATESO01', instance.orderDate); pm.expect(instance.orderDate) == pm.globals.get(\"ORDERDATESO01\");});",
+									"pm.test('orderItem is set', function() {pm.globals.set('ORDERITEMSO01', instance.orderItem); pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO01\");});",
+									"pm.test('orderItem_id is set', function() {pm.globals.set('ORDERITEM_IDSO01', instance.orderItem[0].id); pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO01\");});",
+									"pm.test('orderItem_action is set', function() {pm.globals.set('ORDERITEM_ACTIONSO01', instance.orderItem[0].action); pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO01\");});",
+									"pm.test('orderItem_state is set', function() {pm.globals.set('ORDERITEM_STATESO01', instance.orderItem[0].state); pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO01\");});",
+									"",
+									"",
+									"pm.test(\"Body includes value held on id\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.id);",
+									"      });",
+									"pm.test(\"Body includes value held on href\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.href);",
+									"      });",
+									"pm.test(\"Body includes value held on state\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.state);",
+									"      });",
+									"pm.test(\"Body includes value held on orderDate\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.orderDate);",
+									"      });",
+									"pm.test(\"Body includes value held on orderItem[0].id\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].id);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].action\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].action);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].state\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].state);",
+									"        });",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"externalId\": \"OrangeBSS748\",\n  \"priority\": \"1\",\n  \"description\": \"Service order description\",\n  \"category\": \"CloudServiceOrdering\",\n  \"requestedStartDate\": \"2018-01-15T09:37:40.508Z\",\n  \"requestedCompletionDate\": \"2018-01-15T09:37:40.508Z\",\n  \"orderItem\": [\n    {\n      \"id\": \"1\",\n      \"action\": \"add\",\n      \"service\": {\n        \"state\": \"active\",\n        \"serviceType\" : \"CFS\",\n        \"serviceCharacteristic\": [\n          {\n            \"name\": \"vCPE_IP\",\n            \"valueType\": \"String\",\n            \"value\": \"193.218.236.21\"\n          }\n        ],\n        \"serviceSpecification\": {\n          \"id\": \"12\",\n          \"href\": \"http://serverurl/productCatalogManagement/v1/productSpecification/12\",\n          \"name\": \"vCPE\",\n          \"version\": \"1\"\n        }\n      }\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{ServiceOrderingAPI}}/serviceOrder",
+							"host": [
+								"{{ServiceOrderingAPI}}"
+							],
+							"path": [
+								"serviceOrder"
+							]
+						},
+						"description": "This operation creates a ServiceOrder entity."
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieves a ServiceOrder by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2439570e-6d2a-4b2e-8b5c-65afaba8a60c",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData)) { ",
+									"  ",
+									"    pm.test('Array not expected as response', function (){pm.expect.fail()});",
+									"  ",
+									"",
+									"}",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var instance = pm.response.json();",
+									"var requiredAttributes = [ 'id', 'href', 'state', 'orderDate', 'orderItem',  ];",
+									"",
+									"pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"",
+									"",
+									"",
+									"pm.test('Response id attribute is of type string', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"pm.test('Response href attribute is of type string', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"pm.test('Response state attribute is of type string', function() { pm.expect(instance.state).to.be.a('string'); });",
+									"pm.test('Response orderDate attribute is of type string', function() { pm.expect(instance.orderDate).to.be.a('string'); });",
+									"pm.test('Response orderItem attribute is of type array', function() { pm.expect(instance.orderItem).to.be.a('array'); });",
+									"pm.test('Response orderItem.id attribute is of type string', function() { pm.expect(instance.orderItem[0].id).to.be.a('string'); });",
+									"pm.test('Response orderItem.action attribute is of type string', function() { pm.expect(instance.orderItem[0].action).to.be.a('string'); });",
+									"pm.test('Response orderItem.state attribute is of type string', function() { pm.expect(instance.orderItem[0].state).to.be.a('string'); });",
+									"",
+									"",
+									"pm.test('id is ' + pm.globals.get(\"IDSO01\"), function() {pm.expect(instance.id) == pm.globals.get(\"IDSO01\");});",
+									"pm.test('href is ' + pm.globals.get(\"HREFSO01\"), function() {pm.expect(instance.href) == pm.globals.get(\"HREFSO01\");});",
+									"pm.test('state is ' + pm.globals.get(\"STATESO01\"), function() {pm.expect(instance.state) == pm.globals.get(\"STATESO01\");});",
+									"pm.test('orderDate is ' + pm.globals.get(\"ORDERDATESO01\"), function() {pm.expect(instance.orderDate) == pm.globals.get(\"ORDERDATESO01\");});",
+									"pm.test('orderItem is ' + pm.globals.get(\"ORDERITEMSO01\"), function() {pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO01\");});",
+									"pm.test('ORDERITEM_IDSO is ' + pm.globals.get(\"ORDERITEM_IDSO01\"), function() {pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO01\");});",
+									"pm.test('ORDERITEM_ACTIONSO is ' + pm.globals.get(\"ORDERITEM_ACTIONSO01\"), function() {pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO01\");});",
+									"pm.test('ORDERITEM_STATESO is ' + pm.globals.get(\"ORDERITEM_STATESO01\"), function() {pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO01\");});",
+									"",
+									"",
+									"pm.test(\"Body includes value held on id\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.id);",
+									"      });",
+									"pm.test(\"Body includes value held on href\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.href);",
+									"      });",
+									"pm.test(\"Body includes value held on state\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.state);",
+									"      });",
+									"pm.test(\"Body includes value held on orderDate\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.orderDate);",
+									"      });",
+									"pm.test(\"Body includes value held on orderItem[0].id\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].id);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].action\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].action);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].state\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].state);",
+									"        });",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ServiceOrderingAPI}}/serviceOrder/{{IDSO01}}",
+							"host": [
+								"{{ServiceOrderingAPI}}"
+							],
+							"path": [
+								"serviceOrder",
+								"{{IDSO01}}"
+							]
+						},
+						"description": "This operation creates a ServiceOrder entity."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "N2",
+			"item": [
+				{
+					"name": "Creates a ServiceOrder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2439570e-6d2a-4b2e-8b5c-65afaba8a60c",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData)) { ",
+									"  ",
+									"    pm.test('Array not expected as response', function (){pm.expect.fail()});",
+									"  ",
+									"",
+									"}",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"  pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var instance = pm.response.json();",
+									"var requiredAttributes = [ 'id', 'href', 'state', 'orderDate', 'orderItem',  ];",
+									"",
+									"pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"",
+									"",
+									"",
+									"pm.test('Response id attribute is of type string', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"pm.test('Response href attribute is of type string', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"pm.test('Response state attribute is of type string', function() { pm.expect(instance.state).to.be.a('string'); });",
+									"pm.test('Response orderDate attribute is of type string', function() { pm.expect(instance.orderDate).to.be.a('string'); });",
+									"pm.test('Response orderItem attribute is of type array', function() { pm.expect(instance.orderItem).to.be.a('array'); });",
+									"pm.test('Response orderItem.id attribute is of type string', function() { pm.expect(instance.orderItem[0].id).to.be.a('string'); });",
+									"pm.test('Response orderItem.action attribute is of type string', function() { pm.expect(instance.orderItem[0].action).to.be.a('string'); });",
+									"pm.test('Response orderItem.state attribute is of type string', function() { pm.expect(instance.orderItem[0].state).to.be.a('string'); });",
+									"",
+									"",
+									"pm.test('id is set', function() {pm.globals.set('IDSO02', instance.id); pm.expect(instance.id) == pm.globals.get(\"IDSO02\");});",
+									"pm.test('href is set', function() {pm.globals.set('HREFSO02', instance.href); pm.expect(instance.href) == pm.globals.get(\"HREFSO02\");});",
+									"pm.test('state is set', function() {pm.globals.set('STATESO02', instance.state); pm.expect(instance.state) == pm.globals.get(\"STATESO02\");});",
+									"pm.test('orderDate is set', function() {pm.globals.set('ORDERDATESO02', instance.orderDate); pm.expect(instance.orderDate) == pm.globals.get(\"ORDERDATESO02\");});",
+									"pm.test('orderItem is set', function() {pm.globals.set('ORDERITEMSO02', instance.orderItem); pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO02\");});",
+									"pm.test('orderItem_id is set', function() {pm.globals.set('ORDERITEM_IDSO02', instance.orderItem[0].id); pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO02\");});",
+									"pm.test('orderItem_action is set', function() {pm.globals.set('ORDERITEM_ACTIONSO02', instance.orderItem[0].action); pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO02\");});",
+									"pm.test('orderItem_state is set', function() {pm.globals.set('ORDERITEM_STATESO02', instance.orderItem[0].state); pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO02\");});",
+									"",
+									"",
+									"pm.test(\"Body includes value held on id\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.id);",
+									"      });",
+									"pm.test(\"Body includes value held on href\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.href);",
+									"      });",
+									"pm.test(\"Body includes value held on state\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.state);",
+									"      });",
+									"pm.test(\"Body includes value held on orderDate\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.orderDate);",
+									"      });",
+									"pm.test(\"Body includes value held on orderItem[0].id\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].id);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].action\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].action);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].state\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].state);",
+									"        });",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"externalId\": \"TMFSO741\",\n  \"priority\": \"2\",\n  \"description\": \"Service order description\",\n  \"category\": \"CloudServiceOrdering\",\n  \"requestedStartDate\": \"2019-03-15T09:37:40.508Z\",\n  \"requestedCompletionDate\": \"2019-03-15T09:37:40.508Z\",\n  \"orderItem\": [\n    {\n      \"id\": \"1\",\n      \"action\": \"add\",\n      \"service\": {\n        \"state\": \"active\",\n        \"serviceType\" : \"RFS\",\n        \"serviceCharacteristic\": [\n          {\n            \"name\": \"ProtectionLevel\",\n            \"valueType\": \"String\",\n            \"value\": \"BulletProof\"\n          },\n          {\n            \"name\": \"active\",\n            \"valueType\": \"boolean\",\n            \"value\": true\n          }\n        ],\n        \"serviceSpecification\": {\n          \"id\": \"5697-hg45\",\n          \"href\": \"http://serverurl/productCatalogManagement/v1/productSpec/5697-hg45\",\n          \"name\": \"NiceGuyFirewal\",\n          \"version\": \"1\"\n        }\n      }\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{ServiceOrderingAPI}}/serviceOrder",
+							"host": [
+								"{{ServiceOrderingAPI}}"
+							],
+							"path": [
+								"serviceOrder"
+							]
+						},
+						"description": "This operation creates a ServiceOrder entity."
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieves a ServiceOrder by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2439570e-6d2a-4b2e-8b5c-65afaba8a60c",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData)) { ",
+									"  ",
+									"    pm.test('Array not expected as response', function (){pm.expect.fail()});",
+									"  ",
+									"",
+									"}",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var instance = pm.response.json();",
+									"var requiredAttributes = [ 'id', 'href', 'state', 'orderDate', 'orderItem',  ];",
+									"",
+									"pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"",
+									"",
+									"",
+									"pm.test('Response id attribute is of type string', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"pm.test('Response href attribute is of type string', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"pm.test('Response state attribute is of type string', function() { pm.expect(instance.state).to.be.a('string'); });",
+									"pm.test('Response orderDate attribute is of type string', function() { pm.expect(instance.orderDate).to.be.a('string'); });",
+									"pm.test('Response orderItem attribute is of type array', function() { pm.expect(instance.orderItem).to.be.a('array'); });",
+									"pm.test('Response orderItem.id attribute is of type string', function() { pm.expect(instance.orderItem[0].id).to.be.a('string'); });",
+									"pm.test('Response orderItem.action attribute is of type string', function() { pm.expect(instance.orderItem[0].action).to.be.a('string'); });",
+									"pm.test('Response orderItem.state attribute is of type string', function() { pm.expect(instance.orderItem[0].state).to.be.a('string'); });",
+									"",
+									"",
+									"pm.test('id is ' + pm.globals.get(\"IDSO02\"), function() {pm.expect(instance.id) == pm.globals.get(\"IDSO02\");});",
+									"pm.test('href is ' + pm.globals.get(\"HREFSO02\"), function() {pm.expect(instance.href) == pm.globals.get(\"HREFSO02\");});",
+									"pm.test('state is ' + pm.globals.get(\"STATESO02\"), function() {pm.expect(instance.state) == pm.globals.get(\"STATESO02\");});",
+									"pm.test('orderDate is ' + pm.globals.get(\"ORDERDATESO02\"), function() {pm.expect(instance.orderDate) == pm.globals.get(\"ORDERDATESO02\");});",
+									"pm.test('orderItem is ' + pm.globals.get(\"ORDERITEMSO02\"), function() {pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO02\");});",
+									"pm.test('ORDERITEM_IDSO is ' + pm.globals.get(\"ORDERITEM_IDSO02\"), function() {pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO02\");});",
+									"pm.test('ORDERITEM_ACTIONSO is ' + pm.globals.get(\"ORDERITEM_ACTIONSO02\"), function() {pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO02\");});",
+									"pm.test('ORDERITEM_STATESO is ' + pm.globals.get(\"ORDERITEM_STATESO02\"), function() {pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO02\");});",
+									"",
+									"",
+									"pm.test(\"Body includes value held on id\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.id);",
+									"      });",
+									"pm.test(\"Body includes value held on href\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.href);",
+									"      });",
+									"pm.test(\"Body includes value held on state\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.state);",
+									"      });",
+									"pm.test(\"Body includes value held on orderDate\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.orderDate);",
+									"      });",
+									"pm.test(\"Body includes value held on orderItem[0].id\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].id);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].action\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].action);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].state\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].state);",
+									"        });",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ServiceOrderingAPI}}/serviceOrder/{{IDSO02}}",
+							"host": [
+								"{{ServiceOrderingAPI}}"
+							],
+							"path": [
+								"serviceOrder",
+								"{{IDSO02}}"
+							]
+						},
+						"description": "This operation creates a ServiceOrder entity."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "N3",
+			"item": [
+				{
+					"name": "/serviceOrder?category=cloudServiceOrdering",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2439570e-6d2a-4b2e-8b5c-65afaba8a60c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function (instance, index) {",
+									"    ",
+									"    var requiredAttributes = [ 'id', 'href', 'state', 'orderDate', 'orderItem',  ];",
+									"    ",
+									"    pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"    ",
+									"    ",
+									"    ",
+									"    pm.test('Response id attribute is of type string', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"pm.test('Response href attribute is of type string', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"pm.test('Response state attribute is of type string', function() { pm.expect(instance.state).to.be.a('string'); });",
+									"pm.test('Response orderDate attribute is of type string', function() { pm.expect(instance.orderDate).to.be.a('string'); });",
+									"pm.test('Response orderItem attribute is of type array', function() { pm.expect(instance.orderItem).to.be.a('array'); });",
+									"pm.test('Response orderItem.id attribute is of type string', function() { pm.expect(instance.orderItem[0].id).to.be.a('string'); });",
+									"pm.test('Response orderItem.action attribute is of type string', function() { pm.expect(instance.orderItem[0].action).to.be.a('string'); });",
+									"pm.test('Response orderItem.state attribute is of type string', function() { pm.expect(instance.orderItem[0].state).to.be.a('string'); });",
+									"",
+									"    ",
+									"    pm.test(\"Body includes value held on id\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.id);",
+									"      });",
+									"pm.test(\"Body includes value held on href\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.href);",
+									"      });",
+									"pm.test(\"Body includes value held on state\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.state);",
+									"      });",
+									"pm.test(\"Body includes value held on orderDate\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.orderDate);",
+									"      });",
+									"pm.test(\"Body includes value held on orderItem[0].id\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].id);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].action\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].action);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].state\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].state);",
+									"        });",
+									"",
+									"    ",
+									"    ",
+									"",
+									"    // Individualized tests",
+									"    if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"",
+									"      pm.test('id is ' + pm.globals.get(\"IDSO01\"), function() {pm.expect(instance.id) == pm.globals.get(\"IDSO01\");});",
+									"pm.test('href is ' + pm.globals.get(\"HREFSO01\"), function() {pm.expect(instance.href) == pm.globals.get(\"HREFSO01\");});",
+									"pm.test('state is ' + pm.globals.get(\"STATESO01\"), function() {pm.expect(instance.state) == pm.globals.get(\"STATESO01\");});",
+									"pm.test('orderDate is ' + pm.globals.get(\"ORDERDATESO01\"), function() {pm.expect(instance.orderDate) == pm.globals.get(\"ORDERDATESO01\");});",
+									"pm.test('orderItem is ' + pm.globals.get(\"ORDERITEMSO01\"), function() {pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO01\");});",
+									"pm.test('ORDERITEM_IDSO is ' + pm.globals.get(\"ORDERITEM_IDSO01\"), function() {pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO01\");});",
+									"pm.test('ORDERITEM_ACTIONSO is ' + pm.globals.get(\"ORDERITEM_ACTIONSO01\"), function() {pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO01\");});",
+									"pm.test('ORDERITEM_STATESO is ' + pm.globals.get(\"ORDERITEM_STATESO01\"), function() {pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO01\");});",
+									"",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"",
+									"      pm.test('id is ' + pm.globals.get(\"IDSO02\"), function() {pm.expect(instance.id) == pm.globals.get(\"IDSO02\");});",
+									"pm.test('href is ' + pm.globals.get(\"HREFSO02\"), function() {pm.expect(instance.href) == pm.globals.get(\"HREFSO02\");});",
+									"pm.test('state is ' + pm.globals.get(\"STATESO02\"), function() {pm.expect(instance.state) == pm.globals.get(\"STATESO02\");});",
+									"pm.test('orderDate is ' + pm.globals.get(\"ORDERDATESO02\"), function() {pm.expect(instance.orderDate) == pm.globals.get(\"ORDERDATESO02\");});",
+									"pm.test('orderItem is ' + pm.globals.get(\"ORDERITEMSO02\"), function() {pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO02\");});",
+									"pm.test('ORDERITEM_IDSO is ' + pm.globals.get(\"ORDERITEM_IDSO02\"), function() {pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO02\");});",
+									"pm.test('ORDERITEM_ACTIONSO is ' + pm.globals.get(\"ORDERITEM_ACTIONSO02\"), function() {pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO02\");});",
+									"pm.test('ORDERITEM_STATESO is ' + pm.globals.get(\"ORDERITEM_STATESO02\"), function() {pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO02\");});",
+									"",
+									"    }",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"",
+									"    pm.test('Array with 2 elements expected on this test', function (){pm.expect.fail()});",
+									" ",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ServiceOrderingAPI}}/serviceOrder?category=CloudServiceOrdering",
+							"host": [
+								"{{ServiceOrderingAPI}}"
+							],
+							"path": [
+								"serviceOrder"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "CloudServiceOrdering"
+								}
+							]
+						},
+						"description": "This operation creates a ServiceOrder entity."
+					},
+					"response": []
+				},
+				{
+					"name": "{{ServiceOrderingAPI}}/serviceOrder?priority=\"1\"&category=CloudServiceOrdering",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2439570e-6d2a-4b2e-8b5c-65afaba8a60c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function (instance, index) {",
+									"    ",
+									"    var requiredAttributes = [ 'id', 'href', 'state', 'orderDate', 'orderItem',  ];",
+									"    ",
+									"    pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"    ",
+									"    ",
+									"    ",
+									"    pm.test('Response id attribute is of type string', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"pm.test('Response href attribute is of type string', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"pm.test('Response state attribute is of type string', function() { pm.expect(instance.state).to.be.a('string'); });",
+									"pm.test('Response orderDate attribute is of type string', function() { pm.expect(instance.orderDate).to.be.a('string'); });",
+									"pm.test('Response orderItem attribute is of type array', function() { pm.expect(instance.orderItem).to.be.a('array'); });",
+									"pm.test('Response orderItem.id attribute is of type string', function() { pm.expect(instance.orderItem[0].id).to.be.a('string'); });",
+									"pm.test('Response orderItem.action attribute is of type string', function() { pm.expect(instance.orderItem[0].action).to.be.a('string'); });",
+									"pm.test('Response orderItem.state attribute is of type string', function() { pm.expect(instance.orderItem[0].state).to.be.a('string'); });",
+									"",
+									"    ",
+									"    pm.test(\"Body includes value held on id\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.id);",
+									"      });",
+									"pm.test(\"Body includes value held on href\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.href);",
+									"      });",
+									"pm.test(\"Body includes value held on state\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.state);",
+									"      });",
+									"pm.test(\"Body includes value held on orderDate\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.orderDate);",
+									"      });",
+									"pm.test(\"Body includes value held on orderItem[0].id\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].id);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].action\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].action);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].state\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].state);",
+									"        });",
+									"",
+									"    ",
+									"    ",
+									"",
+									"    // Individualized tests",
+									"    if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"",
+									"      pm.test('id is ' + pm.globals.get(\"IDSO01\"), function() {pm.expect(instance.id) == pm.globals.get(\"IDSO01\");});",
+									"pm.test('href is ' + pm.globals.get(\"HREFSO01\"), function() {pm.expect(instance.href) == pm.globals.get(\"HREFSO01\");});",
+									"pm.test('state is ' + pm.globals.get(\"STATESO01\"), function() {pm.expect(instance.state) == pm.globals.get(\"STATESO01\");});",
+									"pm.test('orderDate is ' + pm.globals.get(\"ORDERDATESO01\"), function() {pm.expect(instance.orderDate) == pm.globals.get(\"ORDERDATESO01\");});",
+									"pm.test('orderItem is ' + pm.globals.get(\"ORDERITEMSO01\"), function() {pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO01\");});",
+									"pm.test('ORDERITEM_IDSO is ' + pm.globals.get(\"ORDERITEM_IDSO01\"), function() {pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO01\");});",
+									"pm.test('ORDERITEM_ACTIONSO is ' + pm.globals.get(\"ORDERITEM_ACTIONSO01\"), function() {pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO01\");});",
+									"pm.test('ORDERITEM_STATESO is ' + pm.globals.get(\"ORDERITEM_STATESO01\"), function() {pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO01\");});",
+									"",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"",
+									"      pm.test('pm.globals.get(IDSO02) not expected on this test', function (){pm.expect.fail()});",
+									"    }",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"  var requiredAttributes = [ 'id', 'href', 'state', 'orderDate', 'orderItem',  ];",
+									"  var instance = pm.response.json();",
+									"    ",
+									"  pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"  ",
+									"  ",
+									"  ",
+									"  pm.test('Response id attribute is of type string', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"pm.test('Response href attribute is of type string', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"pm.test('Response state attribute is of type string', function() { pm.expect(instance.state).to.be.a('string'); });",
+									"pm.test('Response orderDate attribute is of type string', function() { pm.expect(instance.orderDate).to.be.a('string'); });",
+									"pm.test('Response orderItem attribute is of type array', function() { pm.expect(instance.orderItem).to.be.a('array'); });",
+									"pm.test('Response orderItem.id attribute is of type string', function() { pm.expect(instance.orderItem[0].id).to.be.a('string'); });",
+									"pm.test('Response orderItem.action attribute is of type string', function() { pm.expect(instance.orderItem[0].action).to.be.a('string'); });",
+									"pm.test('Response orderItem.state attribute is of type string', function() { pm.expect(instance.orderItem[0].state).to.be.a('string'); });",
+									"",
+									"  ",
+									"  pm.test(\"Body includes value held on id\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.id);",
+									"      });",
+									"pm.test(\"Body includes value held on href\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.href);",
+									"      });",
+									"pm.test(\"Body includes value held on state\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.state);",
+									"      });",
+									"pm.test(\"Body includes value held on orderDate\", function () {",
+									"          pm.expect(pm.response.text()).to.include(instance.orderDate);",
+									"      });",
+									"pm.test(\"Body includes value held on orderItem[0].id\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].id);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].action\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].action);",
+									"        });",
+									"pm.test(\"Body includes value held on orderItem[0].state\", function () {",
+									"            pm.expect(pm.response.text()).to.include(instance.orderItem[0].state);",
+									"        });",
+									"",
+									"  ",
+									"  ",
+									"",
+									"  // Individualized tests",
+									"  if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"",
+									"    pm.test('id is ' + pm.globals.get(\"IDSO01\"), function() {pm.expect(instance.id) == pm.globals.get(\"IDSO01\");});",
+									"pm.test('href is ' + pm.globals.get(\"HREFSO01\"), function() {pm.expect(instance.href) == pm.globals.get(\"HREFSO01\");});",
+									"pm.test('state is ' + pm.globals.get(\"STATESO01\"), function() {pm.expect(instance.state) == pm.globals.get(\"STATESO01\");});",
+									"pm.test('orderDate is ' + pm.globals.get(\"ORDERDATESO01\"), function() {pm.expect(instance.orderDate) == pm.globals.get(\"ORDERDATESO01\");});",
+									"pm.test('orderItem is ' + pm.globals.get(\"ORDERITEMSO01\"), function() {pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO01\");});",
+									"pm.test('ORDERITEM_IDSO is ' + pm.globals.get(\"ORDERITEM_IDSO01\"), function() {pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO01\");});",
+									"pm.test('ORDERITEM_ACTIONSO is ' + pm.globals.get(\"ORDERITEM_ACTIONSO01\"), function() {pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO01\");});",
+									"pm.test('ORDERITEM_STATESO is ' + pm.globals.get(\"ORDERITEM_STATESO01\"), function() {pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO01\");});",
+									"",
+									"  }",
+									"  if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"",
+									"    pm.test('pm.globals.get(IDSO02) not expected on this test', function (){pm.expect.fail()});",
+									"  }",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ServiceOrderingAPI}}/serviceOrder?priority=\"1\"&category=CloudServiceOrdering",
+							"host": [
+								"{{ServiceOrderingAPI}}"
+							],
+							"path": [
+								"serviceOrder"
+							],
+							"query": [
+								{
+									"key": "priority",
+									"value": "\"1\""
+								},
+								{
+									"key": "category",
+									"value": "CloudServiceOrdering"
+								}
+							]
+						},
+						"description": "This operation creates a ServiceOrder entity."
+					},
+					"response": []
+				},
+				{
+					"name": "/serviceOrder?externalId=TMFSO741",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2439570e-6d2a-4b2e-8b5c-65afaba8a60c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function (instance, index) {",
+									"",
+									"    var requiredAttributes = ['id', 'href', 'state', 'orderDate', 'orderItem', ];",
+									"",
+									"    pm.test('Instance has all mandatory attributes', function () {",
+									"      pm.expect(Object.keys(instance)).to.include.members(requiredAttributes)",
+									"    });",
+									"",
+									"",
+									"",
+									"    pm.test('Response id attribute is of type string', function () {",
+									"      pm.expect(instance.id).to.be.a('string');",
+									"    });",
+									"    pm.test('Response href attribute is of type string', function () {",
+									"      pm.expect(instance.href).to.be.a('string');",
+									"    });",
+									"    pm.test('Response state attribute is of type string', function () {",
+									"      pm.expect(instance.state).to.be.a('string');",
+									"    });",
+									"    pm.test('Response orderDate attribute is of type string', function () {",
+									"      pm.expect(instance.orderDate).to.be.a('string');",
+									"    });",
+									"    pm.test('Response orderItem attribute is of type array', function () {",
+									"      pm.expect(instance.orderItem).to.be.a('array');",
+									"    });",
+									"    pm.test('Response orderItem.id attribute is of type string', function () {",
+									"      pm.expect(instance.orderItem[0].id).to.be.a('string');",
+									"    });",
+									"    pm.test('Response orderItem.action attribute is of type string', function () {",
+									"      pm.expect(instance.orderItem[0].action).to.be.a('string');",
+									"    });",
+									"    pm.test('Response orderItem.state attribute is of type string', function () {",
+									"      pm.expect(instance.orderItem[0].state).to.be.a('string');",
+									"    });",
+									"",
+									"",
+									"    pm.test(\"Body includes value held on id\", function () {",
+									"      pm.expect(pm.response.text()).to.include(instance.id);",
+									"    });",
+									"    pm.test(\"Body includes value held on href\", function () {",
+									"      pm.expect(pm.response.text()).to.include(instance.href);",
+									"    });",
+									"    pm.test(\"Body includes value held on state\", function () {",
+									"      pm.expect(pm.response.text()).to.include(instance.state);",
+									"    });",
+									"    pm.test(\"Body includes value held on orderDate\", function () {",
+									"      pm.expect(pm.response.text()).to.include(instance.orderDate);",
+									"    });",
+									"    pm.test(\"Body includes value held on orderItem[0].id\", function () {",
+									"      pm.expect(pm.response.text()).to.include(instance.orderItem[0].id);",
+									"    });",
+									"    pm.test(\"Body includes value held on orderItem[0].action\", function () {",
+									"      pm.expect(pm.response.text()).to.include(instance.orderItem[0].action);",
+									"    });",
+									"    pm.test(\"Body includes value held on orderItem[0].state\", function () {",
+									"      pm.expect(pm.response.text()).to.include(instance.orderItem[0].state);",
+									"    });",
+									"",
+									"",
+									"",
+									"",
+									"    // Individualized tests",
+									"    if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"",
+									"      pm.test('id is ' + pm.globals.get(\"IDSO02\"), function () {",
+									"        pm.expect(instance.id) == pm.globals.get(\"IDSO02\");",
+									"      });",
+									"      pm.test('href is ' + pm.globals.get(\"HREFSO02\"), function () {",
+									"        pm.expect(instance.href) == pm.globals.get(\"HREFSO02\");",
+									"      });",
+									"      pm.test('state is ' + pm.globals.get(\"STATESO02\"), function () {",
+									"        pm.expect(instance.state) == pm.globals.get(\"STATESO02\");",
+									"      });",
+									"      pm.test('orderDate is ' + pm.globals.get(\"ORDERDATESO02\"), function () {",
+									"        pm.expect(instance.orderDate) == pm.globals.get(\"ORDERDATESO02\");",
+									"      });",
+									"      pm.test('orderItem is ' + pm.globals.get(\"ORDERITEMSO02\"), function () {",
+									"        pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO02\");",
+									"      });",
+									"      pm.test('ORDERITEM_IDSO is ' + pm.globals.get(\"ORDERITEM_IDSO02\"), function () {",
+									"        pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO02\");",
+									"      });",
+									"      pm.test('ORDERITEM_ACTIONSO is ' + pm.globals.get(\"ORDERITEM_ACTIONSO02\"), function () {",
+									"        pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO02\");",
+									"      });",
+									"      pm.test('ORDERITEM_STATESO is ' + pm.globals.get(\"ORDERITEM_STATESO02\"), function () {",
+									"        pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO02\");",
+									"      });",
+									"",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"",
+									"      pm.test('pm.globals.get(IDSO01) not expected on this test', function () {",
+									"        pm.expect.fail()",
+									"      });",
+									"    }",
+									"",
+									"  });",
+									"} else {",
+									"  var requiredAttributes = ['id', 'href', 'state', 'orderDate', 'orderItem', ];",
+									"",
+									"  pm.test('Instance has all mandatory attributes', function () {",
+									"    pm.expect(Object.keys(instance)).to.include.members(requiredAttributes)",
+									"  });",
+									"",
+									"",
+									"",
+									"  pm.test('Response id attribute is of type string', function () {",
+									"    pm.expect(instance.id).to.be.a('string');",
+									"  });",
+									"  pm.test('Response href attribute is of type string', function () {",
+									"    pm.expect(instance.href).to.be.a('string');",
+									"  });",
+									"  pm.test('Response state attribute is of type string', function () {",
+									"    pm.expect(instance.state).to.be.a('string');",
+									"  });",
+									"  pm.test('Response orderDate attribute is of type string', function () {",
+									"    pm.expect(instance.orderDate).to.be.a('string');",
+									"  });",
+									"  pm.test('Response orderItem attribute is of type array', function () {",
+									"    pm.expect(instance.orderItem).to.be.a('array');",
+									"  });",
+									"  pm.test('Response orderItem.id attribute is of type string', function () {",
+									"    pm.expect(instance.orderItem[0].id).to.be.a('string');",
+									"  });",
+									"  pm.test('Response orderItem.action attribute is of type string', function () {",
+									"    pm.expect(instance.orderItem[0].action).to.be.a('string');",
+									"  });",
+									"  pm.test('Response orderItem.state attribute is of type string', function () {",
+									"    pm.expect(instance.orderItem[0].state).to.be.a('string');",
+									"  });",
+									"",
+									"",
+									"  pm.test(\"Body includes value held on id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(instance.id);",
+									"  });",
+									"  pm.test(\"Body includes value held on href\", function () {",
+									"    pm.expect(pm.response.text()).to.include(instance.href);",
+									"  });",
+									"  pm.test(\"Body includes value held on state\", function () {",
+									"    pm.expect(pm.response.text()).to.include(instance.state);",
+									"  });",
+									"  pm.test(\"Body includes value held on orderDate\", function () {",
+									"    pm.expect(pm.response.text()).to.include(instance.orderDate);",
+									"  });",
+									"  pm.test(\"Body includes value held on orderItem[0].id\", function () {",
+									"    pm.expect(pm.response.text()).to.include(instance.orderItem[0].id);",
+									"  });",
+									"  pm.test(\"Body includes value held on orderItem[0].action\", function () {",
+									"    pm.expect(pm.response.text()).to.include(instance.orderItem[0].action);",
+									"  });",
+									"  pm.test(\"Body includes value held on orderItem[0].state\", function () {",
+									"    pm.expect(pm.response.text()).to.include(instance.orderItem[0].state);",
+									"  });",
+									"",
+									"",
+									"",
+									"",
+									"  // Individualized tests",
+									"  if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"",
+									"    pm.test('id is ' + pm.globals.get(\"IDSO02\"), function () {",
+									"      pm.expect(instance.id) == pm.globals.get(\"IDSO02\");",
+									"    });",
+									"    pm.test('href is ' + pm.globals.get(\"HREFSO02\"), function () {",
+									"      pm.expect(instance.href) == pm.globals.get(\"HREFSO02\");",
+									"    });",
+									"    pm.test('state is ' + pm.globals.get(\"STATESO02\"), function () {",
+									"      pm.expect(instance.state) == pm.globals.get(\"STATESO02\");",
+									"    });",
+									"    pm.test('orderDate is ' + pm.globals.get(\"ORDERDATESO02\"), function () {",
+									"      pm.expect(instance.orderDate) == pm.globals.get(\"ORDERDATESO02\");",
+									"    });",
+									"    pm.test('orderItem is ' + pm.globals.get(\"ORDERITEMSO02\"), function () {",
+									"      pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO02\");",
+									"    });",
+									"    pm.test('ORDERITEM_IDSO is ' + pm.globals.get(\"ORDERITEM_IDSO02\"), function () {",
+									"      pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO02\");",
+									"    });",
+									"    pm.test('ORDERITEM_ACTIONSO is ' + pm.globals.get(\"ORDERITEM_ACTIONSO02\"), function () {",
+									"      pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO02\");",
+									"    });",
+									"    pm.test('ORDERITEM_STATESO is ' + pm.globals.get(\"ORDERITEM_STATESO02\"), function () {",
+									"      pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO02\");",
+									"    });",
+									"",
+									"  }",
+									"  if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"",
+									"    pm.test('IDSO01 not expected on this test', function () {",
+									"      pm.expect.fail()",
+									"    });",
+									"  }",
+									"}",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ServiceOrderingAPI}}/serviceOrder?externalId=TMFSO741",
+							"host": [
+								"{{ServiceOrderingAPI}}"
+							],
+							"path": [
+								"serviceOrder"
+							],
+							"query": [
+								{
+									"key": "externalId",
+									"value": "TMFSO741"
+								}
+							]
+						},
+						"description": "This operation creates a ServiceOrder entity."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "N4",
+			"item": [
+				{
+					"name": "/serviceOrder/{{IDSO02}}?fields=id,href,state",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2439570e-6d2a-4b2e-8b5c-65afaba8a60c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function (instance, index) {",
+									"    ",
+									"    var requiredAttributes = ['id','href','orderItem','state'];",
+									"    ",
+									"    pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"    ",
+									"",
+									"",
+									"    // Individualized tests",
+									"    if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"",
+									"      pm.test('Response id attribute is of type string', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"      pm.test('Response href attribute is of type string', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"      pm.test('Response state attribute is of type string', function() { pm.expect(instance.state).to.be.a('string'); });",
+									"      pm.test('Response orderItem attribute is of type array', function() { pm.expect(instance.orderItem).to.be.a('array'); });",
+									"  ",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"",
+									"      pm.test('pm.globals.get(IDSO01) not expected on this test', function (){pm.expect.fail()});",
+									"    }",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"  var instance = pm.response.json();",
+									"    ",
+									"  var requiredAttributes = ['id','href','orderItem','state'];",
+									"    ",
+									"  pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"  ",
+									"",
+									"",
+									"  // Individualized tests",
+									"  if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"",
+									"    pm.test('Response id attribute is of type string', function() { pm.expect(instance.id).to.be.a('string'); });",
+									"    pm.test('Response href attribute is of type string', function() { pm.expect(instance.href).to.be.a('string'); });",
+									"    pm.test('Response state attribute is of type string', function() { pm.expect(instance.state).to.be.a('string'); });",
+									"    pm.test('Response orderItem attribute is of type array', function() { pm.expect(instance.orderItem).to.be.a('array'); });",
+									"",
+									"  }",
+									"  if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"",
+									"    pm.test('pm.globals.get(IDSO01) not expected on this test', function (){pm.expect.fail()});",
+									"  }",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ServiceOrderingAPI}}/serviceOrder/{{IDSO02}}?fields=id,href,state,orderItem",
+							"host": [
+								"{{ServiceOrderingAPI}}"
+							],
+							"path": [
+								"serviceOrder",
+								"{{IDSO02}}"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,href,state,orderItem"
+								}
+							]
+						},
+						"description": "This operation creates a ServiceOrder entity."
+					},
+					"response": []
+				},
+				{
+					"name": "/serviceOrder/{{IDSO02}}?fields=id,href,state Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2439570e-6d2a-4b2e-8b5c-65afaba8a60c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function (instance, index) {",
+									"    ",
+									"    var requiredAttributes = ['id','orderItem','state'];",
+									"    ",
+									"    pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"    ",
+									"",
+									"",
+									"    // Individualized tests",
+									"    if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"      pm.test('IDSO02 not expected on this test', function (){pm.expect.fail()});",
+									"",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"      pm.test('href is ' + pm.globals.get(\"HREFSO01\"), function() {pm.expect(instance.href) == pm.globals.get(\"HREFSO01\");});",
+									"      pm.test('state is ' + pm.globals.get(\"STATESO01\"), function() {pm.expect(instance.state) == pm.globals.get(\"STATESO01\");});",
+									"      pm.test('orderItem is ' + pm.globals.get(\"ORDERITEMSO01\"), function() {pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO01\");});",
+									"      pm.test('ORDERITEM_IDSO is ' + pm.globals.get(\"ORDERITEM_IDSO01\"), function() {pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO01\");});",
+									"      pm.test('ORDERITEM_ACTIONSO is ' + pm.globals.get(\"ORDERITEM_ACTIONSO01\"), function() {pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO01\");});",
+									"      pm.test('ORDERITEM_STATESO is ' + pm.globals.get(\"ORDERITEM_STATESO01\"), function() {pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO01\");});",
+									"      ",
+									"      ",
+									"    }",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"  var instance = pm.response.json();",
+									"    ",
+									"  var requiredAttributes = ['id','orderItem','state'];",
+									"    ",
+									"    pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"    ",
+									"",
+									"",
+									"    // Individualized tests",
+									"    if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"      pm.test('IDSO02 not expected on this test', function (){pm.expect.fail()});",
+									"",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"      pm.test('href is ' + pm.globals.get(\"HREFSO01\"), function() {pm.expect(instance.href) == pm.globals.get(\"HREFSO01\");});",
+									"      pm.test('state is ' + pm.globals.get(\"STATESO01\"), function() {pm.expect(instance.state) == pm.globals.get(\"STATESO01\");});",
+									"      pm.test('orderItem is ' + pm.globals.get(\"ORDERITEMSO01\"), function() {pm.expect(instance.orderItem) == pm.globals.get(\"ORDERITEMSO01\");});",
+									"      pm.test('ORDERITEM_IDSO is ' + pm.globals.get(\"ORDERITEM_IDSO01\"), function() {pm.expect(instance.orderItem[0].id) == pm.globals.get(\"ORDERITEM_IDSO01\");});",
+									"      pm.test('ORDERITEM_ACTIONSO is ' + pm.globals.get(\"ORDERITEM_ACTIONSO01\"), function() {pm.expect(instance.orderItem[0].action) == pm.globals.get(\"ORDERITEM_ACTIONSO01\");});",
+									"      pm.test('ORDERITEM_STATESO is ' + pm.globals.get(\"ORDERITEM_STATESO01\"), function() {pm.expect(instance.orderItem[0].state) == pm.globals.get(\"ORDERITEM_STATESO01\");});",
+									"      ",
+									"      ",
+									"    }",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ServiceOrderingAPI}}/serviceOrder/{{IDSO01}}?fields=id,state,orderItem.id,orderItem.state,orderItem.action",
+							"host": [
+								"{{ServiceOrderingAPI}}"
+							],
+							"path": [
+								"serviceOrder",
+								"{{IDSO01}}"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "id,state,orderItem.id,orderItem.state,orderItem.action"
+								}
+							]
+						},
+						"description": "This operation creates a ServiceOrder entity."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "N5",
+			"item": [
+				{
+					"name": "/serviceOrder?externalId=OrangeBSS748&fields=id,state",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2439570e-6d2a-4b2e-8b5c-65afaba8a60c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"if (Array.isArray(jsonData) && (jsonData.length > 0)) {",
+									"  jsonData.forEach(function (instance, index) {",
+									"    ",
+									"    var requiredAttributes = ['id','state'];",
+									"    ",
+									"    pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"    ",
+									"",
+									"",
+									"    // Individualized tests",
+									"    if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"      pm.test('IDSO02 not expected on this test', function (){pm.expect.fail()});",
+									"",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"      pm.test('href is ' + pm.globals.get(\"HREFSO01\"), function() {pm.expect(instance.href) == pm.globals.get(\"HREFSO01\");});",
+									"      pm.test('state is ' + pm.globals.get(\"STATESO01\"), function() {pm.expect(instance.state) == pm.globals.get(\"STATESO01\");});",
+									"    }",
+									"",
+									"  });",
+									"}",
+									"else {",
+									"  var instance = pm.response.json();",
+									"    ",
+									"  var requiredAttributes = ['id','state'];",
+									"    ",
+									"    pm.test('Instance has all mandatory attributes', function () { pm.expect(Object.keys(instance)).to.include.members(requiredAttributes) });",
+									"    ",
+									"",
+									"",
+									"    // Individualized tests",
+									"    if (instance.id == pm.globals.get(\"IDSO02\")) {",
+									"      pm.test('IDSO02 not expected on this test', function (){pm.expect.fail()});",
+									"",
+									"    }",
+									"    if (instance.id == pm.globals.get(\"IDSO01\")) {",
+									"      pm.test('href is ' + pm.globals.get(\"HREFSO01\"), function() {pm.expect(instance.href) == pm.globals.get(\"HREFSO01\");});",
+									"      pm.test('state is ' + pm.globals.get(\"STATESO01\"), function() {pm.expect(instance.state) == pm.globals.get(\"STATESO01\");});",
+									"      ",
+									"    }",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{ServiceOrderingAPI}}/serviceOrder?externalId=OrangeBSS748&fields=id,state",
+							"host": [
+								"{{ServiceOrderingAPI}}"
+							],
+							"path": [
+								"serviceOrder"
+							],
+							"query": [
+								{
+									"key": "externalId",
+									"value": "OrangeBSS748"
+								},
+								{
+									"key": "fields",
+									"value": "id,state"
+								}
+							]
+						},
+						"description": "This operation creates a ServiceOrder entity."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "E1",
+			"item": [
+				{
+					"name": "/serviceOrder/{IDSO3}",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7819423d-278d-4b17-b8a9-d9a45834535c",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{Service_Ordering}}/tmf-api/serviceOrdering/v3/serviceOrder/123123123123?",
+							"host": [
+								"{{Service_Ordering}}"
+							],
+							"path": [
+								"tmf-api",
+								"serviceOrdering",
+								"v3",
+								"serviceOrder",
+								"123123123123"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "{{fields}}",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "{{offset}}",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "{{limit}}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This operation list or find ServiceOrder entities"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "E2",
+			"item": [
+				{
+					"name": "Post Error 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7819423d-278d-4b17-b8a9-d9a45834535c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"externalId\": \"TMFSO789\",\n  \"priority\": \"3\",\n  \"description\": \"Service order description\",\n  \"category\": \"CloudServiceOrdering\",\n  \"requestedStartDate\": \"2019-03-15T09:37:40.508Z\",\n  \"state\": \"acknowledged\",\n  \"requestedCompletionDate\": \"2019-03-15T09:37:40.508Z\",\n  \"expectedCompletionDate\": \"2000-01-23T04:56:07.000+00:00\",\n    \"note\": [\n    {\n    \"date\": \"2018-01-15T09:37:40.508Z\",\n    \"author\": \"Jean Pontus\",\n    \"text\": \"bla bla bla\"\n  }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{Service_Ordering}}/tmf-api/serviceOrdering/v3/serviceOrder?",
+							"host": [
+								"{{Service_Ordering}}"
+							],
+							"path": [
+								"tmf-api",
+								"serviceOrdering",
+								"v3",
+								"serviceOrder"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "{{fields}}",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "{{offset}}",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "{{limit}}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This operation list or find ServiceOrder entities"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "E3",
+			"item": [
+				{
+					"name": "Post Error 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7819423d-278d-4b17-b8a9-d9a45834535c",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"externalId\": \"TMFS1245\",\n  \"priority\": \"1\",\n  \"description\": \"Service order description\",\n  \"category\": \"CloudServiceOrdering\",\n  \"requestedStartDate\": \"2019-03-15T09:37:40.508Z\",\n  \"state\": \"acknowledged\",\n  \"requestedCompletionDate\": \"2019-03-15T09:37:40.508Z\",\n  \"expectedCompletionDate\": \"2000-01-23T04:56:07.000+00:00\",\n    \"note\": [\n    {\n    \"date\": \"2018-01-15T09:37:40.508Z\",\n    \"author\": \"Jean Pontus\",\n    \"text\": \"bla bla bla\"\n  }\n    ],\n  \"orderItem\": [\n    {\n      \"id\": \"1\",\n      \"action\": \"add\",\n      \"state\": \"acknowledged\",\n      \"service\": {\n        \"state\": \"active\",\n        \"serviceType\" : \"RFS\",\n        \"serviceCharacteristic\": [\n          {\n            \"name\": \"ProtectionLevel\",\n            \"valueType\": \"String\",\n            \"value\": \"BulletProof\"\n          },\n          {\n            \"name\": \"active\",\n            \"valueType\": \"boolean\",\n            \"value\": true\n          }\n        ],\n        \"serviceSpecification\": {\n          \"name\": \"NiceGuyFirewal\",\n          \"version\": \"1\"\n        }\n      }\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{Service_Ordering}}/tmf-api/serviceOrdering/v3/serviceOrder?",
+							"host": [
+								"{{Service_Ordering}}"
+							],
+							"path": [
+								"tmf-api",
+								"serviceOrdering",
+								"v3",
+								"serviceOrder"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "{{fields}}",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "{{offset}}",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "{{limit}}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "This operation list or find ServiceOrder entities"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,98 @@
+{
+  "batch_id": "evidence-batch-007",
+  "status": "copied_verified_claims_caveated",
+  "objective": "Copy the seventh safe documentation/reference evidence batch and prepare for batch-008 code-intake planning.",
+  "created_at": "2026-06-05T02:16:35Z",
+  "constraints": [
+    "copy-only; do not move or delete source files",
+    "do not copy whole source workspaces or directories",
+    "documentation/reference artifacts are evidence only, not formal conformance proof",
+    "preserve source and destination SHA-256 checksums",
+    "verify Markdown local links after copying"
+  ],
+  "planned_rows": [
+    "planned-evidence-056",
+    "planned-evidence-057",
+    "planned-evidence-058",
+    "planned-evidence-059",
+    "planned-evidence-060"
+  ],
+  "verification_required": [
+    "source exists for each row",
+    "destination exists for each copied row",
+    "source sha256 equals destination sha256",
+    "manifest/report/tracker status and checksums are populated",
+    "Markdown relative links are clean",
+    "no excluded directories or whole source folders copied"
+  ],
+  "results": [
+    {
+      "copy_batch_id": "planned-evidence-056",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/components/ai_observer.md",
+      "destination_path": "traceability/requirements/techco-ai-observer-component.md",
+      "artifact_class": "component_mapping_doc",
+      "standards_body": "O-RAN;AI operations",
+      "spec_id": "AI observer/closed-loop context",
+      "checksum_source": "63c660962605d53d7147b99c38f5ed4a434cbbc961a7e1ef58201b16d6953be4",
+      "checksum_destination": "63c660962605d53d7147b99c38f5ed4a434cbbc961a7e1ef58201b16d6953be4",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Documentation evidence only; no formal O-RAN/AI conformance claim; copied and checksum verified"
+    },
+    {
+      "copy_batch_id": "planned-evidence-057",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/development.md",
+      "destination_path": "traceability/requirements/techco-development.md",
+      "artifact_class": "development_reference_doc",
+      "standards_body": "TM Forum;3GPP;O-RAN",
+      "spec_id": "development workflow reference",
+      "checksum_source": "173d3b393a0f00868ce7876792f24f43d8e56fe37809930fef2c190fca742cfd",
+      "checksum_destination": "173d3b393a0f00868ce7876792f24f43d8e56fe37809930fef2c190fca742cfd",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Reference doc only; not conformance proof; copied and checksum verified"
+    },
+    {
+      "copy_batch_id": "planned-evidence-058",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/roadmap.md",
+      "destination_path": "traceability/requirements/techco-roadmap.md",
+      "artifact_class": "roadmap_reference_doc",
+      "standards_body": "TM Forum;3GPP;O-RAN",
+      "spec_id": "roadmap/gap planning",
+      "checksum_source": "b98ab555ac8d0772440a17198a1cbdd51c5db15cb6ca6a714151ea709cc39227",
+      "checksum_destination": "b98ab555ac8d0772440a17198a1cbdd51c5db15cb6ca6a714151ea709cc39227",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Planning doc only; not implementation or conformance evidence; copied and checksum verified"
+    },
+    {
+      "copy_batch_id": "planned-evidence-059",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/components/storefront.md",
+      "destination_path": "traceability/requirements/techco-storefront-component.md",
+      "artifact_class": "component_mapping_doc",
+      "standards_body": "TM Forum",
+      "spec_id": "northbound UX/API flow context",
+      "checksum_source": "e1fd8a783f90d0502fb42f9f8b4922395f7a25900bbdcedd0adab7ae7d214b28",
+      "checksum_destination": "e1fd8a783f90d0502fb42f9f8b4922395f7a25900bbdcedd0adab7ae7d214b28",
+      "verified": "true",
+      "status": "copied",
+      "notes": "UX/component documentation only; not TMF conformance proof; copied and checksum verified"
+    },
+    {
+      "copy_batch_id": "planned-evidence-060",
+      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/docs/GETTING_STARTED.txt",
+      "destination_path": "references/bf3/5g-emulator-getting-started.txt",
+      "artifact_class": "emulator_reference_doc",
+      "standards_body": "3GPP;O-RAN",
+      "spec_id": "BF3 emulator usage reference",
+      "checksum_source": "c8cc6ca2a9c197c685128443d98eb26faadea43241c969e04b49e526f71c2cb5",
+      "checksum_destination": "c8cc6ca2a9c197c685128443d98eb26faadea43241c969e04b49e526f71c2cb5",
+      "verified": "true",
+      "status": "copied",
+      "notes": "Reference-only emulator usage context; not conformance proof; copied and checksum verified"
+    }
+  ],
+  "copied_at": "2026-06-05T02:17:02Z",
+  "claim_caveat_at": "2026-06-05T02:17:40Z",
+  "claim_caveat_artifact": "traceability/evidence_batch_007_claim_caveats.md"
+}

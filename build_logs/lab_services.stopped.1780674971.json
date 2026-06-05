@@ -1,0 +1,537 @@
+{
+  "started_at": "2026-06-05T15:55:44.091834+00:00",
+  "bf3_api_root": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API",
+  "python": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+  "protocol_mode": "rest",
+  "services": {
+    "nrf": {
+      "path": "core_network/nrf.py",
+      "port": 8000,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/nrf.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/nrf.log",
+      "started_at": "2026-06-05T15:55:44.091888+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        37261
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "amf": {
+      "path": "core_network/amf.py",
+      "port": 9000,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/amf.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "9000",
+        "--protocol-mode",
+        "rest"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/amf.log",
+      "started_at": "2026-06-05T15:55:44.134438+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        37436
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "smf": {
+      "path": "core_network/smf.py",
+      "port": 9001,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/smf.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "9001",
+        "--protocol-mode",
+        "rest"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/smf.log",
+      "started_at": "2026-06-05T15:55:44.176360+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        37573
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "upf": {
+      "path": "core_network/upf.py",
+      "port": 9002,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/upf.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "9002",
+        "--protocol-mode",
+        "rest"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/upf.log",
+      "started_at": "2026-06-05T15:55:44.219049+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        37643
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "ausf": {
+      "path": "core_network/ausf.py",
+      "port": 9003,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/ausf.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "9003"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/ausf.log",
+      "started_at": "2026-06-05T15:55:44.263338+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        37701
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "udm": {
+      "path": "core_network/udm.py",
+      "port": 9004,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/udm.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "9004"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/udm.log",
+      "started_at": "2026-06-05T15:55:44.311430+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        37754
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "udr": {
+      "path": "core_network/udr.py",
+      "port": 9005,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/udr.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "9005"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/udr.log",
+      "started_at": "2026-06-05T15:55:44.356182+00:00",
+      "state": "started",
+      "pid": 54934
+    },
+    "udsf": {
+      "path": "core_network/udsf.py",
+      "port": 9006,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/udsf.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "9006"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/udsf.log",
+      "started_at": "2026-06-05T15:55:44.513371+00:00",
+      "state": "started",
+      "pid": 54953
+    },
+    "cu": {
+      "path": "ran/cu/cu.py",
+      "port": 9008,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/cu/cu.py"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/cu.log",
+      "started_at": "2026-06-05T15:55:44.668434+00:00",
+      "state": "started",
+      "pid": 54972
+    },
+    "du": {
+      "path": "ran/du/du.py",
+      "port": 9007,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/du.log",
+      "started_at": "2026-06-05T15:55:44.824218+00:00",
+      "state": "started",
+      "pid": 55037
+    },
+    "rru": {
+      "path": "ran/rru/rru.py",
+      "port": 9009,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/rru.log",
+      "started_at": "2026-06-05T15:55:44.978532+00:00",
+      "state": "started",
+      "pid": 55213
+    },
+    "ptp": {
+      "path": "ptp/ptp.py",
+      "port": 9010,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ptp/ptp.py"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/ptp.log",
+      "started_at": "2026-06-05T15:55:45.166872+00:00",
+      "state": "started",
+      "pid": 55241
+    },
+    "assurance": {
+      "path": "service_assurance/assurance_api.py",
+      "port": 9011,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "-m",
+        "service_assurance.assurance_api",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "9011"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/assurance.log",
+      "started_at": "2026-06-05T15:55:45.345078+00:00",
+      "state": "started",
+      "pid": 55273
+    },
+    "smo": {
+      "path": "smo/smo_framework.py",
+      "port": 8122,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "-m",
+        "smo.smo_framework",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8122"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/smo.log",
+      "started_at": "2026-06-05T15:55:45.502751+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        15739
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "r1": {
+      "path": "smo/r1.py",
+      "port": 8124,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "-m",
+        "smo.r1",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8124"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/r1.log",
+      "started_at": "2026-06-05T15:55:45.561921+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        15889
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "y1": {
+      "path": "ran/ric/y1.py",
+      "port": 8123,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ric/y1.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8123"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/y1.log",
+      "started_at": "2026-06-05T15:55:45.623978+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        15979
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "o_ru": {
+      "path": "ran/fronthaul/o_ru.py",
+      "port": 8120,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "-m",
+        "ran.fronthaul.o_ru",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8120"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/o_ru.log",
+      "started_at": "2026-06-05T15:55:45.683115+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        16065
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "o1": {
+      "path": "oam/o1.py",
+      "port": 8125,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "-m",
+        "oam.o1",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8125"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/o1.log",
+      "started_at": "2026-06-05T15:55:45.863074+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        16221
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "teiv": {
+      "path": "oam/teiv.py",
+      "port": 8126,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/oam/teiv.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8126"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/teiv.log",
+      "started_at": "2026-06-05T15:55:46.020586+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        16340
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "o2": {
+      "path": "etsi/o2/o_cloud_notification.py",
+      "port": 8127,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/etsi/o2/o_cloud_notification.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8127"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/o2.log",
+      "started_at": "2026-06-05T15:55:46.085343+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        16484
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "security": {
+      "path": "security/security_service.py",
+      "port": 8128,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "-m",
+        "security.security_service",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8128"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/security.log",
+      "started_at": "2026-06-05T15:55:46.131304+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        16578
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "slicing": {
+      "path": "ran/slicing/oran_slicing.py",
+      "port": 8129,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/slicing/oran_slicing.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8129"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/slicing.log",
+      "started_at": "2026-06-05T15:55:46.182813+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        16660
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "energy": {
+      "path": "ran/energy/nes.py",
+      "port": 8130,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/energy/nes.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8130"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/energy.log",
+      "started_at": "2026-06-05T15:55:46.244762+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        16816
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "xhaul": {
+      "path": "transport/xhaul.py",
+      "port": 8131,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/transport/xhaul.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8131"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/xhaul.log",
+      "started_at": "2026-06-05T15:55:46.292879+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        16953
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "ntn_radio": {
+      "path": "ran/ntn_radio.py",
+      "port": 8132,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ntn_radio.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8132"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/ntn_radio.log",
+      "started_at": "2026-06-05T15:55:46.341831+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        17060
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    },
+    "oran_gateway": {
+      "path": "api_gateway/oran_gateway.py",
+      "port": 8088,
+      "command": [
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/api_gateway/oran_gateway.py",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8088"
+      ],
+      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/oran_gateway.log",
+      "started_at": "2026-06-05T15:55:46.390489+00:00",
+      "state": "external_port_listening",
+      "pid": null,
+      "external_pids": [
+        17133
+      ],
+      "note": "Port is already listening; lab did not kill untracked processes."
+    }
+  },
+  "caveat": "Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance.",
+  "last_stop_attempt": {
+    "recorded_at": "2026-06-05T15:55:51.307052+00:00",
+    "stopped": {
+      "udr": {
+        "pid": 54934,
+        "stopped": true,
+        "detail": "terminated"
+      },
+      "udsf": {
+        "pid": 54953,
+        "stopped": true,
+        "detail": "terminated"
+      },
+      "cu": {
+        "pid": 54972,
+        "stopped": true,
+        "detail": "terminated"
+      },
+      "du": {
+        "pid": 55037,
+        "stopped": true,
+        "detail": "terminated"
+      },
+      "rru": {
+        "pid": 55213,
+        "stopped": true,
+        "detail": "terminated"
+      },
+      "ptp": {
+        "pid": 55241,
+        "stopped": true,
+        "detail": "terminated"
+      },
+      "assurance": {
+        "pid": 55273,
+        "stopped": false,
+        "detail": "pid command did not match tracked service: /opt/homebrew/Cellar/python@3.14/3.14.4_1/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -m service_assurance.assurance_ap"
+      }
+    }
+  }
+}

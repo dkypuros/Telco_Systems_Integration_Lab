@@ -1,0 +1,313 @@
+Tech-Co: Networking Specs Inventory
+Author: David Kypuros
+Date: 2026-05-18
+
+All paths relative to:
+  <USER_HOME>/Documents/Git_Offline/active/
+
+Primary spec root:
+  4Public_Networking_Public_Data/
+
+Master index file:
+  4Public_Networking_Public_Data/00_Index/Protocol_Index.txt
+
+
+======================================================================
+ORGANIZATION (the OSI + telecom-stack layout)
+======================================================================
+
+The spec library is organized in layers, climbing the stack:
+
+  0_Security                    Security specs across all layers (incl. Wireless RFCs, Compliance Standards)
+  01_Layer2_DataLink            L2 / data link
+  02_Layer3_Network             L3 / network
+  03_Layer4_Transport           L4 / transport
+  04_Routing                    Routing protocols
+  05_First_Hop_Redundancy       HSRP, VRRP, GLBP
+  06_BFD                        Bidirectional Forwarding Detection
+  07_MPLS_Advanced              MPLS
+  08_Segment_Routing            SR / SR-MPLS / SRv6
+  09_QoS                        Quality of Service
+  10_Multicast                  Multicast
+  11_VPN_Tunneling              VPN
+  12_Tunneling                  Generic tunneling
+  13_NAT                        Network Address Translation
+  14_NAT_Traversal              NAT traversal (STUN/TURN/ICE-adjacent)
+  15_Data_Center                DC fabrics
+  16_Virtualization             Network virtualization
+  17_SDN                        Software-Defined Networking
+  18_Infrastructure_Services    Core infra services
+  19_DNS_Extended               DNS
+  20_Naming_Discovery           Naming / discovery
+  21_Authentication             AuthN / AuthZ
+  22_Application_Security       App-layer security
+  23_Web                        HTTP / HTTPS / Web
+  24_Email                      Email protocols
+  25_File_Transfer              FTP / SFTP / etc.
+  26_VoIP_RealTime              VoIP / real-time
+  27_Monitoring                 Monitoring protocols
+  28_Network_Management         SNMP / NETCONF / YANG / gNMI
+  29_Timing_Sync                NTP / PTP / SyncE
+  30_Congestion_Control         Congestion control
+  31_Load_Balancing             LB protocols
+  32_Storage_Networking         iSCSI / NVMe-oF / FC
+  33_Proxy                      Proxy protocols
+  34_Wireless                   Wi-Fi / wireless
+  35_Cellular                   Cellular (broad)
+  36_IoT                        IoT
+  37_Industrial                 Industrial networking
+  38_IPv6_Transition            IPv6 transition mechanisms
+  39_Legacy                     Legacy protocols
+  40_Telecom_3GPP               3GPP control / user plane (Diameter, GTP, NAS, NGAP, etc.)
+  41_Telecom_Core               Telecom core
+  42_Telecom_IMS                IMS Diameter interfaces (Cx/Dx, Gx, Gy, Rf, Ro, Rx, Sh, SIP_IMS)
+  43_Telecom_5G_Interfaces      5G N-interfaces (N1..N15, N22, N26, N27)
+  44_Telecom_LTE_Interfaces     LTE interfaces
+  45_Telecom_5G_NFs             5G NFs (AMF, AUSF, CHF, NEF, NRF, NSSF, NWDAF, PCF, SMF, UDM, UPF)
+  46_Telecom_Radio              Radio layer
+  47_Telecom_Security           Telecom security
+  48_Telecom_Codecs             Voice / video codecs
+  49_TMForum_Standards          TM Forum Open APIs (TMF620, 621, 622, ... 915 AI, ODA)
+  50_3GPP                       3GPP releases (Rel-19)
+  51_AI-RAN-Alliance            AI-RAN Alliance specs
+  52_ETSI                       ETSI: forge, MEC, NFV, ZSM
+  53_O-RAN                      O-RAN Alliance / ETSI O-RAN (already inventoried)
+
+
+======================================================================
+THE SPECS THAT MATTER MOST FOR TECH-CO
+======================================================================
+
+These map directly to Tech-Co components. Use these first.
+
+
+--- 5G Core component specs ---
+
+5G Network Functions (one folder per NF, contains the specs governing it)
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/AMF/
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/SMF/
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/UPF/
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/AUSF/
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/UDM/
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/PCF/
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/NRF/
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/NSSF/
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/NEF/
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/CHF/
+  4Public_Networking_Public_Data/45_Telecom_5G_NFs/NWDAF/
+
+5G interfaces (point-to-point N interfaces)
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N1/    UE to AMF (NAS)
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N2/    AMF to gNB (NGAP)
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N3/    gNB to UPF (GTP-U)
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N4/    SMF to UPF (PFCP)
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N6/    UPF to DN (edge breakout)
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N7/    SMF to PCF
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N8/    AMF to UDM
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N9/    UPF to UPF
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N10/   SMF to UDM
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N11/   AMF to SMF
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N12/   AMF to AUSF
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N13/   AUSF to UDM
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N14/   AMF to AMF
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N15/   AMF to PCF
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N22/   AMF to NSSF
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N26/   AMF to MME (interworking)
+  4Public_Networking_Public_Data/43_Telecom_5G_Interfaces/N27/   inter-NRF
+
+3GPP control / user plane protocols
+  4Public_Networking_Public_Data/40_Telecom_3GPP/NGAP/         N2 control
+  4Public_Networking_Public_Data/40_Telecom_3GPP/NAS/          UE to AMF NAS
+  4Public_Networking_Public_Data/40_Telecom_3GPP/GTP-U/        N3 user plane
+  4Public_Networking_Public_Data/40_Telecom_3GPP/GTPv2-C/      EPC control
+  4Public_Networking_Public_Data/40_Telecom_3GPP/SBA_HTTP2/    SBI / service-based interface
+  4Public_Networking_Public_Data/40_Telecom_3GPP/Diameter/     Diameter signaling
+  4Public_Networking_Public_Data/40_Telecom_3GPP/F1AP/         gNB-CU to gNB-DU
+  4Public_Networking_Public_Data/40_Telecom_3GPP/E1AP/         gNB-CU-CP to gNB-CU-UP
+  4Public_Networking_Public_Data/40_Telecom_3GPP/XnAP/         inter-gNB
+  4Public_Networking_Public_Data/40_Telecom_3GPP/X2AP/         LTE eNB to eNB
+  4Public_Networking_Public_Data/40_Telecom_3GPP/S1AP/         LTE eNB to MME
+  4Public_Networking_Public_Data/40_Telecom_3GPP/RRC/          radio resource control
+  4Public_Networking_Public_Data/40_Telecom_3GPP/MAC/          MAC sublayer
+  4Public_Networking_Public_Data/40_Telecom_3GPP/RLC/          RLC sublayer
+  4Public_Networking_Public_Data/40_Telecom_3GPP/PDCP/         PDCP sublayer
+  4Public_Networking_Public_Data/40_Telecom_3GPP/SDAP/         SDAP sublayer
+  4Public_Networking_Public_Data/40_Telecom_3GPP/SS7_SIGTRAN/  legacy SS7
+
+3GPP release content
+  4Public_Networking_Public_Data/50_3GPP/Rel-19/
+
+
+--- IMS specs ---
+
+IMS Diameter and SIP interfaces
+  4Public_Networking_Public_Data/42_Telecom_IMS/Cx_Dx/    HSS interfaces
+  4Public_Networking_Public_Data/42_Telecom_IMS/Gx/       PCRF to PGW
+  4Public_Networking_Public_Data/42_Telecom_IMS/Gy/       online charging
+  4Public_Networking_Public_Data/42_Telecom_IMS/Rf/       offline charging
+  4Public_Networking_Public_Data/42_Telecom_IMS/Ro/       online charging
+  4Public_Networking_Public_Data/42_Telecom_IMS/Rx/       Rx (PCRF policy)
+  4Public_Networking_Public_Data/42_Telecom_IMS/Sh/       Sh (HSS data)
+  4Public_Networking_Public_Data/42_Telecom_IMS/SIP_IMS/  SIP for IMS
+
+Voice / video codecs
+  4Public_Networking_Public_Data/48_Telecom_Codecs/
+
+
+--- O-RAN specs (already inventoried in component_locations.txt) ---
+
+  4Public_Networking_Public_Data/53_O-RAN/
+
+
+--- AI-RAN specs ---
+
+  4Public_Networking_Public_Data/51_AI-RAN-Alliance/
+
+
+--- ETSI infrastructure specs ---
+
+  4Public_Networking_Public_Data/52_ETSI/NFV/                 NFV specs
+  4Public_Networking_Public_Data/52_ETSI/NFV/Specs-Reports/   NFV specs and reports
+  4Public_Networking_Public_Data/52_ETSI/MEC/                 Multi-access Edge Computing
+  4Public_Networking_Public_Data/52_ETSI/ZSM/                 Zero-touch Service Management
+  4Public_Networking_Public_Data/52_ETSI/forge/               ETSI forge artifacts
+
+
+--- OSS/BSS specs (TM Forum Open APIs) ---
+
+Core catalog and inventory
+  49_TMForum_Standards/CTK-TMF620-ProductCatalog/
+  49_TMForum_Standards/CTK-TMF633-ServiceCatalog/
+  49_TMForum_Standards/CTK-TMF637-ProductInventory/
+  49_TMForum_Standards/CTK-TMF638-ServiceInventory/
+  49_TMForum_Standards/CTK-TMF638-ServiceInventory-R16.5/
+  49_TMForum_Standards/CTK-TMF638-ServiceInventory-R18-0/
+  49_TMForum_Standards/CTK-TMF639-ResourceInventory/
+
+Ordering and lifecycle
+  49_TMForum_Standards/CTK-TMF622-ProductOrdering/
+  49_TMForum_Standards/CTK-TMF641-ServiceOrder-R16.5/
+  49_TMForum_Standards/CTK-TMF641-ServiceOrdering/
+  49_TMForum_Standards/CTK-TMF641-ServiceOrdering-R18-0/
+  49_TMForum_Standards/CTK-TMF640-ServiceActivationAndConfiguration/
+  49_TMForum_Standards/CTK-TMF640-ServiceActivation-R18-5/
+  49_TMForum_Standards/CTK-TMF645-ServiceQualification/
+  49_TMForum_Standards/CTK-TMF645-ServiceQualification-R18-0/
+  49_TMForum_Standards/CTK-TMF679-ProductOfferingQualification-R18.0/
+
+Customer and party
+  49_TMForum_Standards/CTK-TMF629-Customer/
+  49_TMForum_Standards/CTK-TMF629-CustomerManagement-R18-0/
+  49_TMForum_Standards/CTK-TMF632-Party/
+  49_TMForum_Standards/CTK-TMF669-PartyRole/
+  49_TMForum_Standards/CTK-TMF683-PartyInteraction/
+  49_TMForum_Standards/CTK-TMF666-Account/
+  49_TMForum_Standards/CTK-TMF666-AccountManagement-R18-0/
+  49_TMForum_Standards/CTK-TMF651-AgreementManagement-R18-0/
+
+Billing and charging
+  49_TMForum_Standards/CTK-TMF635-Usage/
+  49_TMForum_Standards/CTK-TMF677-UsageConsumption/
+  49_TMForum_Standards/CTK-TMF676_Payment/
+  49_TMForum_Standards/CTK-TMF678-CustomerBill/
+  49_TMForum_Standards/CTK-TMF654-PrepayBalance/
+
+Assurance, problem, quality, tickets
+  49_TMForum_Standards/CTK-TMF621-TroubleTicket-R18-0/
+  49_TMForum_Standards/CTK-TMF642-Alarm/
+  49_TMForum_Standards/CTK-TMF656-ServiceProblem/
+  49_TMForum_Standards/CTK-TMF657-ServiceQualityManagement-R18-0/
+
+Test framework (TMF704-710 = MODA)
+  49_TMForum_Standards/CTK-TMF653-ServiceTest/
+  49_TMForum_Standards/CTK-TMF704-TestCase/
+  49_TMForum_Standards/CTK-TMF705-TestEnvironment/
+  49_TMForum_Standards/CTK-TMF706-TestData/
+  49_TMForum_Standards/CTK-TMF707-TestResult/
+  49_TMForum_Standards/CTK-TMF709-TestScenario/
+  49_TMForum_Standards/CTK-TMF710-GeneralTestArtifact/
+
+Partner / commerce
+  49_TMForum_Standards/CTK-TMF668-PartnershipTypeManagement-R18-0/
+  49_TMForum_Standards/CTK-TMF663-ShoppingCart/
+  49_TMForum_Standards/CTK-TMF687-Stock/
+  49_TMForum_Standards/CTK-TMF681-Communication/
+  49_TMForum_Standards/CTK-TMF644-Privacy/
+  49_TMForum_Standards/CTK-TMF674_GeographicSite/
+
+AI in OSS/BSS
+  49_TMForum_Standards/CTK-TMF915-AI/
+
+ODA (Open Digital Architecture)
+  49_TMForum_Standards/MODA/
+  49_TMForum_Standards/oda-helm-charts/
+  49_TMForum_Standards/ODA-Operator-Development/
+
+Open API model and developer guide
+  49_TMForum_Standards/Open_Api_And_Data_Model-latest/
+  49_TMForum_Standards/ig1353-api-developers-guide/
+  49_TMForum_Standards/async-api-assets/
+  49_TMForum_Standards/PM-PostmansR18-5/                Postman collections
+  49_TMForum_Standards/explanations/
+  49_TMForum_Standards/gsma-gst/                        GSMA Generic network Slice Template
+  49_TMForum_Standards/CanvasSpecjam2024/
+
+
+--- Security specs ---
+
+  4Public_Networking_Public_Data/0_Security/
+  4Public_Networking_Public_Data/0_Security/06_Wireless_Security/RFCs/
+  4Public_Networking_Public_Data/0_Security/21_Compliance_Standards/
+  4Public_Networking_Public_Data/47_Telecom_Security/
+
+
+--- Transport, DC, SDN, NFV-adjacent ---
+
+  4Public_Networking_Public_Data/07_MPLS_Advanced/
+  4Public_Networking_Public_Data/08_Segment_Routing/
+  4Public_Networking_Public_Data/09_QoS/
+  4Public_Networking_Public_Data/11_VPN_Tunneling/
+  4Public_Networking_Public_Data/15_Data_Center/
+  4Public_Networking_Public_Data/16_Virtualization/
+  4Public_Networking_Public_Data/17_SDN/
+  4Public_Networking_Public_Data/29_Timing_Sync/        NTP / PTP / SyncE
+  4Public_Networking_Public_Data/28_Network_Management/ NETCONF / YANG / gNMI
+
+
+======================================================================
+SECONDARY SPEC LOCATIONS (inside the lab tree)
+======================================================================
+
+3GPP spec excerpts that drive BF3
+  9.LABS_5G_lab_simulator/BF3-5G-Demo/3GGP_spec/
+  9.LABS_5G_lab_simulator/BF3-5G-Demo/spec-analysis/
+
+TM Forum PSR spec material (per-project)
+  9.LABS_5G_lab_simulator/tmforum_psr_learning/spec/
+
+ETSI O-RAN .tex files (already inventoried)
+  4Public_Networking_Public_Data/53_O-RAN/
+
+
+======================================================================
+HOW TO USE THIS LIBRARY WHEN BUILDING TECH-CO
+======================================================================
+
+For each Tech-Co component you build or graft in, open the matching spec
+folder first and let the spec drive the implementation.
+
+  Building AMF       -> 45_Telecom_5G_NFs/AMF/ + 40_Telecom_3GPP/NGAP/ + 40_Telecom_3GPP/NAS/
+  Building SMF       -> 45_Telecom_5G_NFs/SMF/ + 40_Telecom_3GPP/SBA_HTTP2/ + N11, N4, N7, N10
+  Building UPF       -> 45_Telecom_5G_NFs/UPF/ + 40_Telecom_3GPP/GTP-U/ + N3, N4, N6, N9
+  Building NSSF      -> 45_Telecom_5G_NFs/NSSF/ + N22
+  Wiring IMS         -> 42_Telecom_IMS/* + 48_Telecom_Codecs/
+  Wiring SMO / O2    -> 53_O-RAN/* + ETSI O-RAN TS docs
+  Wiring OSS/BSS     -> 49_TMForum_Standards/* (start with TMF620, 622, 633, 638, 641, 678)
+  Wiring edge / MEC  -> 52_ETSI/MEC/ + 43_Telecom_5G_Interfaces/N6/
+  Wiring NFV layer   -> 52_ETSI/NFV/
+  Wiring SDN         -> 17_SDN/ + 28_Network_Management/
+  Wiring timing      -> 29_Timing_Sync/
+  Wiring compliance  -> 47_Telecom_Security/ + 0_Security/21_Compliance_Standards/
+
+This is the standards backbone Tech-Co runs on. Every implementation
+choice should be traceable to a spec in this library.

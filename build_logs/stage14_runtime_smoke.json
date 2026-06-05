@@ -1,0 +1,104 @@
+{
+  "status": "blocked",
+  "interpretation": "runtime smoke only; not formal 3GPP/O-RAN conformance",
+  "pythonpath_entries": [
+    "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/adapters/mock_oran",
+    "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/adapters/mock_ran/ran/ric",
+    "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/adapters/mock_ran",
+    "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/services/mock_5g_core"
+  ],
+  "ast": {
+    "count": 25,
+    "errors": []
+  },
+  "imports": {
+    "imported": [
+      "config.ports",
+      "core_network.transport",
+      "e2sm_ni",
+      "e2sm_ccc",
+      "e2sm_llc",
+      "e2ap",
+      "ran.fronthaul.cus_plane",
+      "oran.o_ran_spec_map"
+    ],
+    "missing_dependencies": [
+      {
+        "module": "core_network.nrf",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "core_network.amf",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "core_network.smf",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "core_network.upf",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "core_network.udm",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "core_network.udr",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "core_network.ausf",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "core_network.nssf",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "ran.gnb",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "ran.cu",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "ran.du",
+        "missing": "fastapi",
+        "error": "No module named 'fastapi'"
+      },
+      {
+        "module": "ran.ric.near_rt_ric",
+        "missing": "uvicorn",
+        "error": "No module named 'uvicorn'"
+      },
+      {
+        "module": "ran.ric.non_rt_ric",
+        "missing": "uvicorn",
+        "error": "No module named 'uvicorn'"
+      },
+      {
+        "module": "ran.slicing.oran_slicing",
+        "missing": "uvicorn",
+        "error": "No module named 'uvicorn'"
+      },
+      {
+        "module": "api_gateway.oran_gateway",
+        "missing": "uvicorn",
+        "error": "No module named 'uvicorn'"
+      }
+    ],
+    "errors": []
+  }
+}

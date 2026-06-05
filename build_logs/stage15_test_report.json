@@ -1,0 +1,23 @@
+{
+  "batch": "stage15-code-testing",
+  "recorded_at": "2026-06-05T15:07:45.178961+00:00",
+  "runtime_smoke": {
+    "status": "pass",
+    "ast_count": 25,
+    "imported_count": 23,
+    "missing_dependencies": [],
+    "errors": []
+  },
+  "pytest": ".....                                                                    [100%]\n5 passed in 2.03s",
+  "test_files_added": [
+    "tests/unit/test_runtime_requirements.py",
+    "tests/regression/test_copy_identity.py",
+    "tests/integration/test_mock_runtime_smoke.py"
+  ],
+  "evidence_logs": [
+    "build_logs/stage15_runtime_smoke_test.json",
+    "build_logs/stage15_pytest_initial.log",
+    "build_logs/stage15_pytest_all.log"
+  ],
+  "claim_caveat": "Runtime/import/copy-identity regression testing only; not formal standards conformance."
+}

@@ -1,0 +1,9 @@
+{
+  "batch": "evidence-batch-010",
+  "recorded_at": "2026-06-05T14:55:38.175647+00:00",
+  "copied_manifest_rows_checked": 85,
+  "copy_identity_errors": [],
+  "runtime_smoke_without_deps": "build_logs/stage14_runtime_smoke.json",
+  "runtime_smoke_with_deps": "build_logs/stage14_runtime_smoke_with_deps.json",
+  "status": "runtime_smoke_pass_copy_identity_preserved"
+}
