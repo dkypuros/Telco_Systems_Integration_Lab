@@ -16,11 +16,11 @@ Create a new formal lab root at `9.LABS_Telco_Systems_Integration_Lab` using cop
 
 ## First-pass source workspaces
 
-- `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co`
-- `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo`
-- `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/tmforum_psr_learning`
-- `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/open_source_5g_cores`
-- `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/5G_Wireline_Simulator`
+- `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co`
+- `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo`
+- `<SOURCE_5G_LAB_SIMULATOR_ROOT>/tmforum_psr_learning`
+- `<SOURCE_5G_LAB_SIMULATOR_ROOT>/open_source_5g_cores`
+- `<SOURCE_5G_LAB_SIMULATOR_ROOT>/5G_Wireline_Simulator`
 - `<USER_HOME>/Documents/Git_Offline/active/9.LABS_telco_soup_to_nuts`
 
 ## Migration sequence

@@ -1,36 +1,36 @@
 
 --- lab up 2026-06-05T15:48:15.991118+00:00 service=rru port=9009 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
 RRU started
 RRU running...
 
 --- lab up 2026-06-05T15:50:36.438287+00:00 service=rru port=9009 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
 RRU started
 RRU running...
 
 --- lab up 2026-06-05T15:54:35.893198+00:00 service=rru port=9009 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
 RRU started
 RRU running...
 
 --- lab up 2026-06-05T15:55:45.008788+00:00 service=rru port=9009 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
 RRU started
 RRU running...
 
 --- lab up 2026-06-05T16:00:14.676859+00:00 service=rru port=9009 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
 RRU started
 RRU running...
 
 --- lab up 2026-06-05T16:04:41.547404+00:00 service=rru port=9009 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
 RRU started
 RRU running...
 
 --- lab up 2026-06-05T16:29:48.745235+00:00 service=rru port=9009 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
 RRU started
 RRU running...
 RRU running...
@@ -81,7 +81,7 @@ RRU running...
 RRU running...
 
 --- lab up 2026-06-05T17:25:21.994064+00:00 service=rru port=9009 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py
 RRU started
 RRU running...
 RRU running...

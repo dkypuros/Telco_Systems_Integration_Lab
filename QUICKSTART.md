@@ -5,11 +5,15 @@
 From this lab root:
 
 ```bash
-cd <USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab
+cd path/to/Telco_Systems_Integration_Lab
 
 ./lab up
 ./lab services
 ```
+
+If you keep the BF3 5G emulator outside this repository, set
+`BF3_5G_API_ROOT=/path/to/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API`
+before running `./lab up`.
 
 What happens:
 

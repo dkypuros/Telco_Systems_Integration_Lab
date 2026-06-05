@@ -4,7 +4,7 @@
   "results": [
     {
       "copy_batch_id": "planned-evidence-007",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/ctk/CTK-TMF641-ServiceOrdering-R18-5.postman_collection.json",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/ctk/CTK-TMF641-ServiceOrdering-R18-5.postman_collection.json",
       "destination_path": "traceability/evidence_snapshots/tmf641-r18.5-ctk-collection.json",
       "artifact_class": "ctk_collection",
       "standards_body": "TM Forum",
@@ -16,7 +16,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-008",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/ctk/CTK-TMFENV-V3.0.0.postman_environment.json",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/ctk/CTK-TMFENV-V3.0.0.postman_environment.json",
       "destination_path": "traceability/evidence_snapshots/tmf641-r18.5-ctk-environment.json",
       "artifact_class": "ctk_environment",
       "standards_body": "TM Forum",
@@ -28,7 +28,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-009",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/README.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/README.md",
       "destination_path": "traceability/requirements/tmf641-ctk-readme.md",
       "artifact_class": "ctk_reference_doc",
       "standards_body": "TM Forum",
@@ -40,7 +40,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-010",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory/ctk/CTK-TMF638-ServiceInventory-R18-5.postman_collection.json",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory/ctk/CTK-TMF638-ServiceInventory-R18-5.postman_collection.json",
       "destination_path": "traceability/evidence_snapshots/tmf638-r18.5-ctk-collection.json",
       "artifact_class": "ctk_collection",
       "standards_body": "TM Forum",
@@ -52,7 +52,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-011",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/ctk/CTK-TMF638-ServiceInventory-R18-5.postman_collection.json",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/ctk/CTK-TMF638-ServiceInventory-R18-5.postman_collection.json",
       "destination_path": "traceability/evidence_snapshots/tmf638-r18-alt-ctk-collection.json",
       "artifact_class": "ctk_collection_variant",
       "standards_body": "TM Forum",
@@ -64,7 +64,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-012",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R16.5/ctk/TMForum.postman_environment.json",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R16.5/ctk/TMForum.postman_environment.json",
       "destination_path": "traceability/evidence_snapshots/tmf638-r16.5-ctk-environment.json",
       "artifact_class": "ctk_environment_legacy",
       "standards_body": "TM Forum",
@@ -76,7 +76,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-013",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/oran-compliance.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/oran-compliance.md",
       "destination_path": "traceability/requirements/bf3-oran-compliance-matrix.md",
       "artifact_class": "oran_compliance_matrix",
       "standards_body": "O-RAN",
@@ -88,7 +88,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-014",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/oran-architecture.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/oran-architecture.md",
       "destination_path": "traceability/requirements/bf3-oran-enhancement-architecture.md",
       "artifact_class": "oran_architecture_map",
       "standards_body": "O-RAN",
@@ -100,7 +100,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-015",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/oran/oran_spec_coverage.json",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/oran/oran_spec_coverage.json",
       "destination_path": "traceability/evidence_snapshots/oran-spec-coverage.json",
       "artifact_class": "oran_machine_readable_coverage",
       "standards_body": "O-RAN",
@@ -112,7 +112,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-016",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/spec-analysis/3_Complete-Specification-Map.txt",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/spec-analysis/3_Complete-Specification-Map.txt",
       "destination_path": "traceability/requirements/bf3-complete-specification-map.txt",
       "artifact_class": "specification_map",
       "standards_body": "3GPP;O-RAN;RFC",
@@ -124,7 +124,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-017",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/oran-compliance.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/oran-compliance.md",
       "destination_path": "traceability/requirements/oran-compliance.md",
       "artifact_class": "linked_oran_requirement_doc",
       "standards_body": "O-RAN",
@@ -137,7 +137,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-018",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/oran-fronthaul.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/oran-fronthaul.md",
       "destination_path": "traceability/requirements/oran-fronthaul.md",
       "artifact_class": "linked_oran_requirement_doc",
       "standards_body": "O-RAN",

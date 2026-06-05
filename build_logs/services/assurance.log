@@ -1,6 +1,6 @@
 
 --- lab up 2026-06-05T15:48:16.311405+00:00 service=assurance port=9011 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
 INFO:     Started server process [7387]
 INFO:     Waiting for application startup.
 INFO:__main__:Starting Service Assurance...
@@ -43,7 +43,7 @@ INFO:service_assurance.rca_engine:Starting RCA for trigger: e302ea7e-1513-4ba2-a
 INFO:service_assurance.rca_engine:RCA completed: d3733611-5cf4-4b28-b572-5b13aaa9e6cd - 5 causes identified
 WARNING:service_assurance.sla_manager:SLA Violation: URLLC Standard Service SLA - kqi_service_availability (actual: 99.99108181025022, threshold: >= 99.9999)
 WARNING:service_assurance.sla_manager:SLA Violation: mMTC Standard Service SLA - kqi_registration_success_rate (actual: 86.46616541353383, threshold: >= 99.0)
-<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   timestamp=datetime.utcnow(),
 INFO:     127.0.0.1:51319 - "GET /health HTTP/1.1" 200 OK
 INFO:     127.0.0.1:51369 - "GET /health HTTP/1.1" 200 OK
@@ -52,7 +52,7 @@ INFO:     Waiting for application shutdown.
 INFO:__main__:Shutting down Service Assurance...
 
 --- lab up 2026-06-05T15:50:36.756966+00:00 service=assurance port=9011 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
 INFO:     Started server process [19784]
 INFO:     Waiting for application startup.
 INFO:__main__:Starting Service Assurance...
@@ -99,7 +99,7 @@ INFO:service_assurance.anomaly_detector:Anomaly monitoring started (interval: 30
 INFO:__main__:Service Assurance started successfully
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:9011 (Press CTRL+C to quit)
-<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   timestamp=datetime.utcnow(),
 INFO:     127.0.0.1:51813 - "GET /health HTTP/1.1" 200 OK
 INFO:     Shutting down
@@ -107,7 +107,7 @@ INFO:     Waiting for application shutdown.
 INFO:__main__:Shutting down Service Assurance...
 
 --- lab up 2026-06-05T15:54:36.208318+00:00 service=assurance port=9011 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
 INFO:     Started server process [48303]
 INFO:     Waiting for application startup.
 INFO:__main__:Starting Service Assurance...
@@ -158,7 +158,7 @@ INFO:__main__:Auto-triggering RCA for violation: 050bc032-8fc5-4810-8cad-3783d6f
 INFO:service_assurance.rca_engine:Starting RCA for trigger: 050bc032-8fc5-4810-8cad-3783d6f78a13
 INFO:service_assurance.rca_engine:RCA completed: a83d5fe8-b49d-4f88-9481-4eb891dd2f85 - 5 causes identified
 WARNING:service_assurance.sla_manager:SLA Violation: N6 Firewall Security SLA - kqi_n6_firewall_availability (actual: 99.99654260500633, threshold: >= 99.999)
-<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   timestamp=datetime.utcnow(),
 INFO:     127.0.0.1:52593 - "GET /health HTTP/1.1" 200 OK
 INFO:     127.0.0.1:52680 - "GET /health HTTP/1.1" 200 OK
@@ -167,7 +167,7 @@ INFO:     Waiting for application shutdown.
 INFO:__main__:Shutting down Service Assurance...
 
 --- lab up 2026-06-05T15:55:45.345296+00:00 service=assurance port=9011 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
 INFO:     Started server process [55273]
 INFO:     Waiting for application startup.
 INFO:__main__:Starting Service Assurance...
@@ -217,7 +217,7 @@ INFO:service_assurance.anomaly_detector:Anomaly monitoring started (interval: 30
 INFO:__main__:Service Assurance started successfully
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:9011 (Press CTRL+C to quit)
-<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   timestamp=datetime.utcnow(),
 INFO:     127.0.0.1:53359 - "GET /health HTTP/1.1" 200 OK
 INFO:     Shutting down
@@ -225,7 +225,7 @@ INFO:     Waiting for application shutdown.
 INFO:__main__:Shutting down Service Assurance...
 
 --- lab up 2026-06-05T16:00:15.053962+00:00 service=assurance port=9011 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
 INFO:     Started server process [83537]
 INFO:     Waiting for application startup.
 INFO:__main__:Starting Service Assurance...
@@ -272,7 +272,7 @@ INFO:service_assurance.rca_engine:RCA completed: f36d8d72-be83-4a74-8f24-3e66ac2
 WARNING:service_assurance.sla_manager:SLA Violation: N6 Firewall Security SLA - kqi_n6_firewall_availability (actual: 99.99256103960889, threshold: >= 99.999)
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:9011 (Press CTRL+C to quit)
-<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   timestamp=datetime.utcnow(),
 INFO:     127.0.0.1:54800 - "GET /health HTTP/1.1" 200 OK
 INFO:     127.0.0.1:54852 - "GET /health HTTP/1.1" 200 OK
@@ -292,7 +292,7 @@ INFO:     Waiting for application shutdown.
 INFO:__main__:Shutting down Service Assurance...
 
 --- lab up 2026-06-05T16:04:41.910505+00:00 service=assurance port=9011 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
 INFO:     Started server process [4079]
 INFO:     Waiting for application startup.
 INFO:__main__:Starting Service Assurance...
@@ -352,7 +352,7 @@ INFO:service_assurance.rca_engine:Starting RCA for trigger: 1c4099f0-f43d-4b6e-b
 INFO:service_assurance.rca_engine:RCA completed: e150e3d7-725b-4fac-8dd3-24c58cb567a2 - 5 causes identified
 WARNING:service_assurance.sla_manager:SLA Violation: N6 Firewall Security SLA - kqi_n6_firewall_availability (actual: 99.9942240471737, threshold: >= 99.999)
 INFO:     Uvicorn running on http://0.0.0.0:9011 (Press CTRL+C to quit)
-<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   timestamp=datetime.utcnow(),
 INFO:     127.0.0.1:56122 - "GET /health HTTP/1.1" 200 OK
 INFO:     127.0.0.1:56169 - "GET /health HTTP/1.1" 200 OK
@@ -361,7 +361,7 @@ INFO:     Waiting for application shutdown.
 INFO:__main__:Shutting down Service Assurance...
 
 --- lab up 2026-06-05T16:29:49.105829+00:00 service=assurance port=9011 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
 INFO:     Started server process [5106]
 INFO:     Waiting for application startup.
 INFO:__main__:Starting Service Assurance...
@@ -408,7 +408,7 @@ INFO:__main__:Auto-triggering RCA for violation: 92f25794-c7c5-4357-b32c-eb1b619
 INFO:service_assurance.rca_engine:Starting RCA for trigger: 92f25794-c7c5-4357-b32c-eb1b619e7dfd
 INFO:service_assurance.rca_engine:RCA completed: 40ba3077-9021-49fb-9826-274c4e7e2967 - 5 causes identified
 WARNING:service_assurance.sla_manager:SLA Violation: N6 Firewall Security SLA - kqi_n6_firewall_availability (actual: 99.99797502198982, threshold: >= 99.999)
-<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   timestamp=datetime.utcnow(),
 INFO:     127.0.0.1:56387 - "GET /health HTTP/1.1" 200 OK
 INFO:__main__:Auto-triggering RCA for violation: a316bc1f-2df2-4858-9a5d-bbfe263b9717
@@ -583,7 +583,7 @@ INFO:     Waiting for application shutdown.
 INFO:__main__:Shutting down Service Assurance...
 
 --- lab up 2026-06-05T17:25:22.344959+00:00 service=assurance port=9011 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011
 INFO:     Started server process [29211]
 INFO:     Waiting for application startup.
 INFO:__main__:Starting Service Assurance...
@@ -638,7 +638,7 @@ INFO:service_assurance.anomaly_detector:Anomaly monitoring started (interval: 30
 INFO:__main__:Service Assurance started successfully
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:9011 (Press CTRL+C to quit)
-<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/service_assurance/assurance_api.py:177: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   timestamp=datetime.utcnow(),
 INFO:     127.0.0.1:57119 - "GET /health HTTP/1.1" 200 OK
 WARNING:service_assurance.sla_manager:SLA Violation: mMTC Standard Service SLA - kqi_registration_success_rate (actual: 88.10810810810811, threshold: >= 99.0)

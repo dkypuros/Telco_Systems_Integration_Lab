@@ -4,7 +4,7 @@
   "results": [
     {
       "copy_batch_id": "planned-evidence-046",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/api_reference.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/api_reference.md",
       "destination_path": "traceability/requirements/techco-api-reference.md",
       "artifact_class": "api_reference_doc",
       "standards_body": "TM Forum;3GPP;O-RAN",
@@ -17,7 +17,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-047",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/operations.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/operations.md",
       "destination_path": "traceability/requirements/techco-operations.md",
       "artifact_class": "operations_reference_doc",
       "standards_body": "TM Forum;3GPP;O-RAN",
@@ -30,7 +30,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-048",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/components/ims.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/components/ims.md",
       "destination_path": "traceability/requirements/techco-ims-component.md",
       "artifact_class": "component_mapping_doc",
       "standards_body": "3GPP",
@@ -43,7 +43,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-049",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/components/epc.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/components/epc.md",
       "destination_path": "traceability/requirements/techco-epc-component.md",
       "artifact_class": "component_mapping_doc",
       "standards_body": "3GPP",
@@ -56,7 +56,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-050",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/components/order_engine.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/components/order_engine.md",
       "destination_path": "traceability/requirements/techco-order-engine-component.md",
       "artifact_class": "component_mapping_doc",
       "standards_body": "TM Forum",
@@ -69,7 +69,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-051",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/testing.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/testing.md",
       "destination_path": "traceability/requirements/bf3-testing.md",
       "artifact_class": "test_strategy_doc",
       "standards_body": "3GPP;O-RAN",
@@ -82,7 +82,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-052",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/api-reference.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/api-reference.md",
       "destination_path": "traceability/requirements/bf3-api-reference.md",
       "artifact_class": "api_reference_doc",
       "standards_body": "3GPP;O-RAN",
@@ -95,7 +95,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-053",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/core-network.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/core-network.md",
       "destination_path": "traceability/requirements/bf3-core-network.md",
       "artifact_class": "component_mapping_doc",
       "standards_body": "3GPP",
@@ -108,7 +108,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-054",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/ric-architecture.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/ric-architecture.md",
       "destination_path": "traceability/requirements/ric-architecture.md",
       "artifact_class": "oran_architecture_doc",
       "standards_body": "O-RAN",
@@ -121,7 +121,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-055",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/ran-components.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/ran-components.md",
       "destination_path": "traceability/requirements/bf3-ran-components.md",
       "artifact_class": "component_mapping_doc",
       "standards_body": "3GPP;O-RAN",

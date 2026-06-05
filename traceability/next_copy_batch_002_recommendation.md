@@ -1,8 +1,8 @@
 # Next Copy-Only Batch Recommendation: Evidence Batch 002
 
-Date: 2026-06-05  
-Target lab: `<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab`  
-Source umbrella: `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator`  
+Date: 2026-06-05
+Target lab: `<LAB_ROOT>`
+Source umbrella: `<SOURCE_5G_LAB_SIMULATOR_ROOT>`
 Status: recommendation only; no files copied in this batch recommendation step.
 
 ## Selection rule
@@ -20,16 +20,16 @@ All source files below were checked for existence on 2026-06-05.
 
 | Priority | Source | Recommended destination | Reason | Risk / label |
 |---:|---|---|---|---|
-| 1 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/ctk/CTK-TMF641-ServiceOrdering-R18-5.postman_collection.json` | `traceability/evidence_snapshots/tmf641-r18.5-ctk-collection.json` | TMF641 Service Ordering CTK collection for release-labeled test surface. | Evidence-only; do not claim official v5 conformance from this alone. |
-| 2 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/ctk/CTK-TMFENV-V3.0.0.postman_environment.json` | `traceability/evidence_snapshots/tmf641-r18.5-ctk-environment.json` | CTK execution environment for reproducibility. | Environment version must be tied to the CTK run/version it supports. |
-| 3 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/README.md` | `traceability/requirements/tmf641-ctk-readme.md` | README support artifact for CTK usage and reproducibility. | Reference evidence only; not a test result. |
-| 4 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory/ctk/CTK-TMF638-ServiceInventory-R18-5.postman_collection.json` | `traceability/evidence_snapshots/tmf638-r18.5-ctk-collection.json` | TMF638 Service Inventory CTK collection for gap and release mapping. | Register currently treats TMF638 as missing implementation; label coverage/gap evidence only. |
-| 5 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/ctk/CTK-TMF638-ServiceInventory-R18-5.postman_collection.json` | `traceability/evidence_snapshots/tmf638-r18-alt-ctk-collection.json` | Alternate R18-family TMF638 CTK collection for release reconciliation. | Potential duplicate functional intent with priority 4; dedupe before claims. |
-| 6 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R16.5/ctk/TMForum.postman_environment.json` | `traceability/evidence_snapshots/tmf638-r16.5-ctk-environment.json` | Legacy TMF638 environment evidence for version comparison. | Historical/reference only; likely semantic drift vs R18. |
-| 7 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/oran-compliance.md` | `traceability/requirements/bf3-oran-compliance-matrix.md` | O-RAN compliance/coverage matrix for WG and spec mapping. | Derived evidence; verify recency before external claims. |
-| 8 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/docs/oran-architecture.md` | `traceability/requirements/bf3-oran-enhancement-architecture.md` | Architecture-to-module map for O-RAN enhancement scope. | Architecture claims need implementation/transport caveats. |
-| 9 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/oran/oran_spec_coverage.json` | `traceability/evidence_snapshots/oran-spec-coverage.json` | Machine-readable O-RAN coverage snapshot for future diffing. | Snapshot can go stale; preserve hash and source date when copied. |
-| 10 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/spec-analysis/3_Complete-Specification-Map.txt` | `traceability/requirements/bf3-complete-specification-map.txt` | High-level 3GPP/5G specification map. | Coverage-map evidence, not conformance proof. |
+| 1 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/ctk/CTK-TMF641-ServiceOrdering-R18-5.postman_collection.json` | `traceability/evidence_snapshots/tmf641-r18.5-ctk-collection.json` | TMF641 Service Ordering CTK collection for release-labeled test surface. | Evidence-only; do not claim official v5 conformance from this alone. |
+| 2 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/ctk/CTK-TMFENV-V3.0.0.postman_environment.json` | `traceability/evidence_snapshots/tmf641-r18.5-ctk-environment.json` | CTK execution environment for reproducibility. | Environment version must be tied to the CTK run/version it supports. |
+| 3 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF641-ServiceOrdering/README.md` | `traceability/requirements/tmf641-ctk-readme.md` | README support artifact for CTK usage and reproducibility. | Reference evidence only; not a test result. |
+| 4 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory/ctk/CTK-TMF638-ServiceInventory-R18-5.postman_collection.json` | `traceability/evidence_snapshots/tmf638-r18.5-ctk-collection.json` | TMF638 Service Inventory CTK collection for gap and release mapping. | Register currently treats TMF638 as missing implementation; label coverage/gap evidence only. |
+| 5 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/ctk/CTK-TMF638-ServiceInventory-R18-5.postman_collection.json` | `traceability/evidence_snapshots/tmf638-r18-alt-ctk-collection.json` | Alternate R18-family TMF638 CTK collection for release reconciliation. | Potential duplicate functional intent with priority 4; dedupe before claims. |
+| 6 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R16.5/ctk/TMForum.postman_environment.json` | `traceability/evidence_snapshots/tmf638-r16.5-ctk-environment.json` | Legacy TMF638 environment evidence for version comparison. | Historical/reference only; likely semantic drift vs R18. |
+| 7 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/oran-compliance.md` | `traceability/requirements/bf3-oran-compliance-matrix.md` | O-RAN compliance/coverage matrix for WG and spec mapping. | Derived evidence; verify recency before external claims. |
+| 8 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/oran-architecture.md` | `traceability/requirements/bf3-oran-enhancement-architecture.md` | Architecture-to-module map for O-RAN enhancement scope. | Architecture claims need implementation/transport caveats. |
+| 9 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/oran/oran_spec_coverage.json` | `traceability/evidence_snapshots/oran-spec-coverage.json` | Machine-readable O-RAN coverage snapshot for future diffing. | Snapshot can go stale; preserve hash and source date when copied. |
+| 10 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/spec-analysis/3_Complete-Specification-Map.txt` | `traceability/requirements/bf3-complete-specification-map.txt` | High-level 3GPP/5G specification map. | Coverage-map evidence, not conformance proof. |
 
 ## Not-copy-yet / exclusion notes
 

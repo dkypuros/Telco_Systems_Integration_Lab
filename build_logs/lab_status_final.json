@@ -34,13 +34,13 @@
       "oran_gateway"
     ],
     "failed": [],
-    "state_file": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/.lab/state/lab_services.json",
-    "evidence_file": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_services.json",
-    "log_dir": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services"
+    "state_file": "<LAB_ROOT>/.lab/state/lab_services.json",
+    "evidence_file": "<LAB_ROOT>/build_logs/lab_services.json",
+    "log_dir": "<LAB_ROOT>/build_logs/services"
   },
   "evidence": {
-    "smoke": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_smoke_runtime.json",
-    "test": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_test_pytest.log",
+    "smoke": "<LAB_ROOT>/build_logs/lab_smoke_runtime.json",
+    "test": "<LAB_ROOT>/build_logs/lab_test_pytest.log",
     "services": null
   },
   "caveat": "Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance."

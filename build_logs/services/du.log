@@ -1,6 +1,6 @@
 
 --- lab up 2026-06-05T15:48:15.833142+00:00 service=du port=9007 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
 INFO:     Started server process [7370]
 INFO:     Waiting for application startup.
 Failed to register DU with NRF: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/register
@@ -12,7 +12,7 @@ INFO:     Application shutdown complete.
 INFO:     Finished server process [7370]
 
 --- lab up 2026-06-05T15:50:36.280283+00:00 service=du port=9007 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
 INFO:     Started server process [19706]
 INFO:     Waiting for application startup.
 Failed to register DU with NRF: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/register
@@ -24,7 +24,7 @@ INFO:     Application shutdown complete.
 INFO:     Finished server process [19706]
 
 --- lab up 2026-06-05T15:54:35.709903+00:00 service=du port=9007 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
 INFO:     Started server process [48287]
 INFO:     Waiting for application startup.
 Failed to register DU with NRF: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/register
@@ -36,7 +36,7 @@ INFO:     Application shutdown complete.
 INFO:     Finished server process [48287]
 
 --- lab up 2026-06-05T15:55:44.824544+00:00 service=du port=9007 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
 INFO:     Started server process [55037]
 INFO:     Waiting for application startup.
 Failed to register DU with NRF: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/register
@@ -48,7 +48,7 @@ INFO:     Application shutdown complete.
 INFO:     Finished server process [55037]
 
 --- lab up 2026-06-05T16:00:14.468752+00:00 service=du port=9007 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
 INFO:     Started server process [83412]
 INFO:     Waiting for application startup.
 Failed to register DU with NRF: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/register
@@ -60,7 +60,7 @@ INFO:     Application shutdown complete.
 INFO:     Finished server process [83412]
 
 --- lab up 2026-06-05T16:04:41.356220+00:00 service=du port=9007 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
 INFO:     Started server process [4054]
 INFO:     Waiting for application startup.
 Failed to register DU with NRF: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/register
@@ -72,7 +72,7 @@ INFO:     Application shutdown complete.
 INFO:     Finished server process [4054]
 
 --- lab up 2026-06-05T16:29:48.562883+00:00 service=du port=9007 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
 INFO:     Started server process [5079]
 INFO:     Waiting for application startup.
 Failed to register DU with NRF: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/register
@@ -84,7 +84,7 @@ INFO:     Application shutdown complete.
 INFO:     Finished server process [5079]
 
 --- lab up 2026-06-05T17:25:21.707336+00:00 service=du port=9007 ---
-$ <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
+$ <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python <SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py
 INFO:     Started server process [29177]
 INFO:     Waiting for application startup.
 Failed to register DU with NRF: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/register

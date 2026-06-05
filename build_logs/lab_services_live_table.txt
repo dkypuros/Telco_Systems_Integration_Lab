@@ -26,7 +26,7 @@ Services: 26/26 ready
   OK ntn_radio     port=8132  pid=17060*   state=external_port_listening health=http://127.0.0.1:8132/health
   OK oran_gateway  port=8088  pid=17133*   state=external_port_listening health=http://127.0.0.1:8088/health
 Note: PID values ending in * are external/untracked; ./lab down will not kill them.
-Evidence: <USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_services.json
-State: <USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/.lab/state/lab_services.json
-Logs: <USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services
+Evidence: <LAB_ROOT>/build_logs/lab_services.json
+State: <LAB_ROOT>/.lab/state/lab_services.json
+Logs: <LAB_ROOT>/build_logs/services
 Caveat: Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance.

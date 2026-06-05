@@ -3,7 +3,7 @@ WARNING:opentelemetry.trace:Overriding of current TracerProvider is not allowed
 WARNING:opentelemetry.trace:Overriding of current TracerProvider is not allowed
 INFO:ran.ric.near_rt_ric:Near-RT RIC initialized: near-rt-ric-001
 WARNING:opentelemetry.trace:Overriding of current TracerProvider is not allowed
-<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/adapters/mock_ran/ran/ric/non_rt_ric.py:144: UserWarning: Field name "schema" in "EiType" shadows an attribute in parent "BaseModel"
+<LAB_ROOT>/adapters/mock_ran/ran/ric/non_rt_ric.py:144: UserWarning: Field name "schema" in "EiType" shadows an attribute in parent "BaseModel"
   class EiType(BaseModel):
 INFO:ran.ric.non_rt_ric:Initialized 3 default policy types
 INFO:ran.ric.non_rt_ric:Non-RT RIC initialized: non-rt-ric-001

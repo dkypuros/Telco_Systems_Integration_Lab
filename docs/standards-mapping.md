@@ -13,6 +13,13 @@ authoritative release state is [`traceability/standards_release_register.yaml`](
 
 ## 3GPP transport references used by the copied mock services
 
+The local Rel-19 spec bundle is used only as a read-only reference. See the
+derived [local standards spec inventory](../traceability/spec_inventory_2026-06-05.md)
+and [3GPP candidate release gap matrix](../traceability/conformance_matrix/3gpp_release_gap_matrix.md),
+[3GPP transport gap matrix](../traceability/conformance_matrix/3gpp_transport_gap_matrix.md),
+and [3GPP service/RAN wording tracker](../traceability/conformance_matrix/3gpp_service_ran_wording_tracker.md)
+before using any 3GPP wording beyond candidate/reference readiness.
+
 | Interface/protocol | Standards mapping | Port/reference | Current lab status |
 |---|---|---|---|
 | GTP-U / N3 user plane | 3GPP TS 29.281 | UDP `2152` | Minimal G-PDU header handling and UDP socket helper exist in copied code. Full end-to-end forwarding is not proven. |

@@ -15,5 +15,8 @@ Note: target-local `.omx/` files may be created by OMX workflow tracking. That d
 - SQLite/db files unless explicitly retained as evidence
 - generated build outputs
 - `.DS_Store`
+- raw standards bundles under `specs/`, including PDFs, DOC/DOCX, ZIPs, local
+  generated/auxiliary spec files, and `Codex.dmg`; commit derived inventories,
+  matrices, or evidence summaries instead
 
 Operational evidence rule: curated run evidence goes in `build_logs/`; traceability entries point to it. Raw logs stay out unless intentionally curated.

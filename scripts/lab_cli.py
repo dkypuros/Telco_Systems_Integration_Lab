@@ -41,9 +41,10 @@ SERVICE_LOG_DIR = BUILD_LOGS / "services"
 LAB_OWNER = "telco-lab-cli"
 
 CAVEAT = "Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance."
+DEFAULT_BF3_API_ROOT = LAB_ROOT / "external" / "BF3-5G-Demo" / "open-digital-platform-2_0" / "5G_Emulator_API"
 BF3_API_ROOT = Path(os.environ.get(
     "BF3_5G_API_ROOT",
-    "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API",
+    str(DEFAULT_BF3_API_ROOT),
 ))
 
 # Mirrors the service list in the original BF3 5G_Emulator_API/main.py while
@@ -896,14 +897,12 @@ def stop_tracked_services() -> dict[str, Any]:
 def cmd_up(args: argparse.Namespace) -> int:
     BUILD_LOGS.mkdir(exist_ok=True)
     SERVICE_LOG_DIR.mkdir(exist_ok=True)
-    if not BF3_API_ROOT.exists():
-        print(f"BF3 API root not found: {BF3_API_ROOT}", file=sys.stderr)
-        return 2
-
     if args.dry_run:
         print("lab up would start managed BF3 5G/RAN/O-RAN services in the background")
         print("Launcher: lab-owned direct service inventory (no monolithic launcher, no psutil)")
         print(f"Working directory: {BF3_API_ROOT}")
+        if not BF3_API_ROOT.exists():
+            print("Working directory status: missing; set BF3_5G_API_ROOT or place BF3 under external/ before real startup")
         print(f"Python: {bf3_python()}")
         print("Startup order: dependency-aware NRF -> UPF -> SMF -> AMF, then remaining services")
         for service in service_start_sequence():
@@ -913,6 +912,11 @@ def cmd_up(args: argparse.Namespace) -> int:
         print(f"PID state: {SERVICES_STATE}")
         print(f"Evidence copy: {SERVICES_EVIDENCE}")
         return 0
+
+    if not BF3_API_ROOT.exists():
+        print(f"BF3 API root not found: {BF3_API_ROOT}", file=sys.stderr)
+        print("Set BF3_5G_API_ROOT or place BF3 under external/BF3-5G-Demo before starting services.", file=sys.stderr)
+        return 2
 
     if args.replace:
         stop_tracked_services()

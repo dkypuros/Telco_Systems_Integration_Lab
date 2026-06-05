@@ -1,4 +1,4 @@
 ........                                                                 [100%]
 8 passed in 0.92s
-Evidence: <USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_test_pytest.log
+Evidence: <LAB_ROOT>/build_logs/lab_test_pytest.log
 Caveat: Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance.

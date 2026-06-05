@@ -30,8 +30,11 @@ tracer = trace.get_tracer(__name__)
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="oauth2/token")
 security = HTTPBearer()
 
-# JWT Secret key for token signing (configurable via environment variable)
-JWT_SECRET_KEY = os.environ.get("NRF_JWT_SECRET", "5g-emulator-lab-development-secret-key-2024")
+# JWT signing key for lab tokens.
+#
+# Public repo safety: do not ship a reusable default signing secret. Operators
+# that need stable tokens across NRF restarts should set NRF_JWT_SECRET.
+JWT_SECRET_KEY = os.environ.get("NRF_JWT_SECRET") or secrets.token_urlsafe(32)
 JWT_ALGORITHM = "HS256"
 JWT_ACCESS_TOKEN_EXPIRE_MINUTES = 60
 

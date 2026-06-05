@@ -4,7 +4,7 @@
   "results": [
     {
       "copy_batch_id": "planned-evidence-056",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/components/ai_observer.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/components/ai_observer.md",
       "destination_path": "traceability/requirements/techco-ai-observer-component.md",
       "artifact_class": "component_mapping_doc",
       "standards_body": "O-RAN;AI operations",
@@ -17,7 +17,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-057",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/development.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/development.md",
       "destination_path": "traceability/requirements/techco-development.md",
       "artifact_class": "development_reference_doc",
       "standards_body": "TM Forum;3GPP;O-RAN",
@@ -30,7 +30,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-058",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/roadmap.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/roadmap.md",
       "destination_path": "traceability/requirements/techco-roadmap.md",
       "artifact_class": "roadmap_reference_doc",
       "standards_body": "TM Forum;3GPP;O-RAN",
@@ -43,7 +43,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-059",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/components/storefront.md",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/components/storefront.md",
       "destination_path": "traceability/requirements/techco-storefront-component.md",
       "artifact_class": "component_mapping_doc",
       "standards_body": "TM Forum",
@@ -56,7 +56,7 @@
     },
     {
       "copy_batch_id": "planned-evidence-060",
-      "source_path": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/docs/GETTING_STARTED.txt",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/docs/GETTING_STARTED.txt",
       "destination_path": "references/bf3/5g-emulator-getting-started.txt",
       "artifact_class": "emulator_reference_doc",
       "standards_body": "3GPP;O-RAN",

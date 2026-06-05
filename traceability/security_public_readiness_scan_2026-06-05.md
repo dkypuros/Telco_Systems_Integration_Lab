@@ -1,0 +1,50 @@
+# Public-readiness security scan — 2026-06-05
+
+Scope: current tracked tree for `Telco_Systems_Integration_Lab`, plus a high-signal secret scan across existing Git history.
+
+## Result
+
+Current tracked tree is publishable from a sensitive-data perspective after this cleanup pass:
+
+- No high-signal credential patterns found in tracked files.
+- No tracked raw 3GPP/O-RAN/TM Forum standards bundles, ZIPs, PDFs, DOCX files, or `Codex.dmg` found.
+- No tracked sensitive filenames such as `.env`, private keys, kubeconfigs, npm/pypi credentials, or PEM/P12/PFX material found.
+- No current-tree private absolute path markers found after redaction.
+- `.gitignore` now blocks local secrets, runtime state, generated logs, raw standards bundles, and common key/cert material.
+
+## Commands run
+
+```bash
+git diff --check
+python3 -m compileall -q scripts adapters services tests lab
+./lab test
+python3 scripts/validate_oran_spec_map.py --format markdown --output traceability/oran_spec_map_validation.md
+python3 scripts/validate_oran_spec_map.py --strict  # expected exit 1 while known gaps remain
+git grep -n -I -E '<high-signal secret patterns>' -- .
+git grep -n -I -E '<private/local runtime path patterns>' -- .
+git ls-files | grep -Ei '<sensitive filename patterns>'
+git ls-files | grep -Ei '^specs/(3gpp|oran|tmforum)/.*\.(pdf|docx?|xlsx?|zip|dmg)$|Codex\.dmg'
+git grep -n -I -E '<high-signal secret patterns>' $(git rev-list --all) -- .
+```
+
+## Verification evidence
+
+- Test suite: `24 passed` via `./lab test`.
+- Markdown link check: tracked Markdown links resolved.
+- O-RAN validator: report regenerates; strict mode exits `1` because it intentionally surfaces 33 missing implementation paths and 1 missing local spec filename stem.
+- Ignore checks: `.env`, `.env.*`, private keys/certs, kubeconfig, `.lab/state/`, `build_logs/**`, `logs/**`, `.omx` runtime dirs, and raw standards bundle paths are ignored.
+
+## Remediations applied
+
+- Removed tracked local runtime state under `.lab/state/`.
+- Removed tracked OMX runtime context/log/state/ultragoal artifacts while preserving repo planning files under `.omx/plans/`.
+- Removed newly generated empty runtime logs under `logs/`.
+- Redacted private absolute paths in tracked run evidence and traceability artifacts to placeholders such as `<LAB_ROOT>` and `<SOURCE_5G_LAB_SIMULATOR_ROOT>`.
+- Replaced the NRF reusable development JWT default with an ephemeral generated key unless `NRF_JWT_SECRET` is explicitly set.
+- Updated copy-manifest checksums for redacted artifacts.
+
+## Remaining risks before making the repository public
+
+1. **Git history still contains pre-cleanup local path markers.** No high-signal secrets were found in history, but prior private commits retain local path strings. If the repository must be path-clean in history too, publish from a fresh sanitized repository or run a history rewrite before changing repository visibility.
+2. **Mock services still use permissive CORS in several FastAPI apps.** This is acceptable for a local simulator, but not for production deployment without origin restrictions.
+3. **Dependency vulnerability audit was limited.** `npm audit` was skipped because there is no `package.json`; Python security audit tools such as `pip-audit`/`safety` were not installed, so dependency CVE scanning was not performed.

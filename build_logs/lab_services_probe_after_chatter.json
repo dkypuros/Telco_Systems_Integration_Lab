@@ -1,9 +1,9 @@
 {
   "recorded_at": "2026-06-05T17:29:17.605750+00:00",
-  "bf3_api_root": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API",
-  "state_file": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/.lab/state/lab_services.json",
-  "evidence_file": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_services.json",
-  "log_dir": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services",
+  "bf3_api_root": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API",
+  "state_file": "<LAB_ROOT>/.lab/state/lab_services.json",
+  "evidence_file": "<LAB_ROOT>/build_logs/lab_services.json",
+  "log_dir": "<LAB_ROOT>/build_logs/services",
   "total": 26,
   "ready": 26,
   "all_ready": true,
@@ -48,10 +48,10 @@
         "url": "http://127.0.0.1:8000/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/nrf.log",
+      "log": "<LAB_ROOT>/build_logs/services/nrf.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/nrf.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/nrf.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -76,10 +76,10 @@
         "url": "http://127.0.0.1:9000/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/amf.log",
+      "log": "<LAB_ROOT>/build_logs/services/amf.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/amf.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/amf.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -106,10 +106,10 @@
         "url": "http://127.0.0.1:9001/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/smf.log",
+      "log": "<LAB_ROOT>/build_logs/services/smf.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/smf.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/smf.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -136,10 +136,10 @@
         "url": "http://127.0.0.1:9002/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/upf.log",
+      "log": "<LAB_ROOT>/build_logs/services/upf.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/upf.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/upf.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -166,10 +166,10 @@
         "url": "http://127.0.0.1:9003/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/ausf.log",
+      "log": "<LAB_ROOT>/build_logs/services/ausf.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/ausf.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/ausf.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -194,10 +194,10 @@
         "url": "http://127.0.0.1:9004/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/udm.log",
+      "log": "<LAB_ROOT>/build_logs/services/udm.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/udm.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/udm.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -222,10 +222,10 @@
         "url": "http://127.0.0.1:9005/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/udr.log",
+      "log": "<LAB_ROOT>/build_logs/services/udr.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/udr.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/udr.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -250,10 +250,10 @@
         "url": "http://127.0.0.1:9006/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/udsf.log",
+      "log": "<LAB_ROOT>/build_logs/services/udsf.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/udsf.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/udsf.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -276,10 +276,10 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/cu.log",
+      "log": "<LAB_ROOT>/build_logs/services/cu.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/cu/cu.py"
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/cu/cu.py"
       ]
     },
     {
@@ -298,10 +298,10 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/du.log",
+      "log": "<LAB_ROOT>/build_logs/services/du.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py"
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/du/du.py"
       ]
     },
     {
@@ -320,10 +320,10 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/rru.log",
+      "log": "<LAB_ROOT>/build_logs/services/rru.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py"
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/rru/rru.py"
       ]
     },
     {
@@ -342,10 +342,10 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/ptp.log",
+      "log": "<LAB_ROOT>/build_logs/services/ptp.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ptp/ptp.py"
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ptp/ptp.py"
       ]
     },
     {
@@ -366,9 +366,9 @@
         "url": "http://127.0.0.1:9011/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/assurance.log",
+      "log": "<LAB_ROOT>/build_logs/services/assurance.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
         "-m",
         "service_assurance.assurance_api",
         "--host",
@@ -395,9 +395,9 @@
         "url": "http://127.0.0.1:8122/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/smo.log",
+      "log": "<LAB_ROOT>/build_logs/services/smo.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
         "-m",
         "smo.smo_framework",
         "--host",
@@ -424,9 +424,9 @@
         "url": "http://127.0.0.1:8124/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/r1.log",
+      "log": "<LAB_ROOT>/build_logs/services/r1.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
         "-m",
         "smo.r1",
         "--host",
@@ -453,10 +453,10 @@
         "url": "http://127.0.0.1:8123/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/y1.log",
+      "log": "<LAB_ROOT>/build_logs/services/y1.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ric/y1.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ric/y1.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -481,9 +481,9 @@
         "url": "http://127.0.0.1:8120/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/o_ru.log",
+      "log": "<LAB_ROOT>/build_logs/services/o_ru.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
         "-m",
         "ran.fronthaul.o_ru",
         "--host",
@@ -510,9 +510,9 @@
         "url": "http://127.0.0.1:8125/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/o1.log",
+      "log": "<LAB_ROOT>/build_logs/services/o1.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
         "-m",
         "oam.o1",
         "--host",
@@ -539,10 +539,10 @@
         "url": "http://127.0.0.1:8126/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/teiv.log",
+      "log": "<LAB_ROOT>/build_logs/services/teiv.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/oam/teiv.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/oam/teiv.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -567,10 +567,10 @@
         "url": "http://127.0.0.1:8127/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/o2.log",
+      "log": "<LAB_ROOT>/build_logs/services/o2.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/etsi/o2/o_cloud_notification.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/etsi/o2/o_cloud_notification.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -595,9 +595,9 @@
         "url": "http://127.0.0.1:8128/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/security.log",
+      "log": "<LAB_ROOT>/build_logs/services/security.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
         "-m",
         "security.security_service",
         "--host",
@@ -624,10 +624,10 @@
         "url": "http://127.0.0.1:8129/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/slicing.log",
+      "log": "<LAB_ROOT>/build_logs/services/slicing.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/slicing/oran_slicing.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/slicing/oran_slicing.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -652,10 +652,10 @@
         "url": "http://127.0.0.1:8130/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/energy.log",
+      "log": "<LAB_ROOT>/build_logs/services/energy.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/energy/nes.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/energy/nes.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -680,10 +680,10 @@
         "url": "http://127.0.0.1:8131/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/xhaul.log",
+      "log": "<LAB_ROOT>/build_logs/services/xhaul.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/transport/xhaul.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/transport/xhaul.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -708,10 +708,10 @@
         "url": "http://127.0.0.1:8132/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/ntn_radio.log",
+      "log": "<LAB_ROOT>/build_logs/services/ntn_radio.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ntn_radio.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ntn_radio.py",
         "--host",
         "0.0.0.0",
         "--port",
@@ -736,10 +736,10 @@
         "url": "http://127.0.0.1:8088/health",
         "status_code": 200
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/oran_gateway.log",
+      "log": "<LAB_ROOT>/build_logs/services/oran_gateway.log",
       "command": [
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
-        "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/api_gateway/oran_gateway.py",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv/bin/python",
+        "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/api_gateway/oran_gateway.py",
         "--host",
         "0.0.0.0",
         "--port",

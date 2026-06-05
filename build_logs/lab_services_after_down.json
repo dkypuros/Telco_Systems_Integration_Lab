@@ -1,8 +1,8 @@
 {
   "recorded_at": "2026-06-05T15:48:42.452106+00:00",
-  "bf3_api_root": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API",
-  "pidfile": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/lab_services.json",
-  "log_dir": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services",
+  "bf3_api_root": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API",
+  "pidfile": "<LAB_ROOT>/build_logs/lab_services.json",
+  "log_dir": "<LAB_ROOT>/build_logs/services",
   "total": 26,
   "ready": 19,
   "all_ready": false,
@@ -21,7 +21,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/nrf.log",
+      "log": "<LAB_ROOT>/build_logs/services/nrf.log",
       "command": null
     },
     {
@@ -37,7 +37,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/amf.log",
+      "log": "<LAB_ROOT>/build_logs/services/amf.log",
       "command": null
     },
     {
@@ -53,7 +53,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/smf.log",
+      "log": "<LAB_ROOT>/build_logs/services/smf.log",
       "command": null
     },
     {
@@ -69,7 +69,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/upf.log",
+      "log": "<LAB_ROOT>/build_logs/services/upf.log",
       "command": null
     },
     {
@@ -85,7 +85,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/ausf.log",
+      "log": "<LAB_ROOT>/build_logs/services/ausf.log",
       "command": null
     },
     {
@@ -101,7 +101,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/udm.log",
+      "log": "<LAB_ROOT>/build_logs/services/udm.log",
       "command": null
     },
     {
@@ -117,7 +117,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/udr.log",
+      "log": "<LAB_ROOT>/build_logs/services/udr.log",
       "command": null
     },
     {
@@ -133,7 +133,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/udsf.log",
+      "log": "<LAB_ROOT>/build_logs/services/udsf.log",
       "command": null
     },
     {
@@ -149,7 +149,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/cu.log",
+      "log": "<LAB_ROOT>/build_logs/services/cu.log",
       "command": null
     },
     {
@@ -165,7 +165,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/du.log",
+      "log": "<LAB_ROOT>/build_logs/services/du.log",
       "command": null
     },
     {
@@ -181,7 +181,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/rru.log",
+      "log": "<LAB_ROOT>/build_logs/services/rru.log",
       "command": null
     },
     {
@@ -197,7 +197,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/ptp.log",
+      "log": "<LAB_ROOT>/build_logs/services/ptp.log",
       "command": null
     },
     {
@@ -213,7 +213,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/assurance.log",
+      "log": "<LAB_ROOT>/build_logs/services/assurance.log",
       "command": null
     },
     {
@@ -229,7 +229,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/smo.log",
+      "log": "<LAB_ROOT>/build_logs/services/smo.log",
       "command": null
     },
     {
@@ -245,7 +245,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/r1.log",
+      "log": "<LAB_ROOT>/build_logs/services/r1.log",
       "command": null
     },
     {
@@ -261,7 +261,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/y1.log",
+      "log": "<LAB_ROOT>/build_logs/services/y1.log",
       "command": null
     },
     {
@@ -277,7 +277,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/o_ru.log",
+      "log": "<LAB_ROOT>/build_logs/services/o_ru.log",
       "command": null
     },
     {
@@ -293,7 +293,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/o1.log",
+      "log": "<LAB_ROOT>/build_logs/services/o1.log",
       "command": null
     },
     {
@@ -309,7 +309,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/teiv.log",
+      "log": "<LAB_ROOT>/build_logs/services/teiv.log",
       "command": null
     },
     {
@@ -325,7 +325,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/o2.log",
+      "log": "<LAB_ROOT>/build_logs/services/o2.log",
       "command": null
     },
     {
@@ -341,7 +341,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/security.log",
+      "log": "<LAB_ROOT>/build_logs/services/security.log",
       "command": null
     },
     {
@@ -357,7 +357,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/slicing.log",
+      "log": "<LAB_ROOT>/build_logs/services/slicing.log",
       "command": null
     },
     {
@@ -373,7 +373,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/energy.log",
+      "log": "<LAB_ROOT>/build_logs/services/energy.log",
       "command": null
     },
     {
@@ -389,7 +389,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/xhaul.log",
+      "log": "<LAB_ROOT>/build_logs/services/xhaul.log",
       "command": null
     },
     {
@@ -405,7 +405,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/ntn_radio.log",
+      "log": "<LAB_ROOT>/build_logs/services/ntn_radio.log",
       "command": null
     },
     {
@@ -421,7 +421,7 @@
       "health": {
         "ok": null
       },
-      "log": "<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab/build_logs/services/oran_gateway.log",
+      "log": "<LAB_ROOT>/build_logs/services/oran_gateway.log",
       "command": null
     }
   ],

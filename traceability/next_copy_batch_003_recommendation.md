@@ -1,8 +1,8 @@
 # Next Copy-Only Batch Recommendation: Evidence Batch 003
 
-Date: 2026-06-05  
-Target lab: `<USER_HOME>/Documents/Git_Offline/active/9.LABS_Telco_Systems_Integration_Lab`  
-Source umbrella: `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator`  
+Date: 2026-06-05
+Target lab: `<LAB_ROOT>`
+Source umbrella: `<SOURCE_5G_LAB_SIMULATOR_ROOT>`
 Status: recommendation only; no batch-003 files copied yet.
 
 ## Selection rule
@@ -15,13 +15,13 @@ All source files below were checked for existence on 2026-06-05 and are not alre
 
 | Priority | Source | Recommended destination | Standards domain | Reason | Risk / label |
 |---:|---|---|---|---|---|
-| 1 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/docs/specs_guide.md` | `traceability/requirements/tmf-specs-guide.md` | TM Forum; O-RAN; 3GPP | Consolidated guidance linking specs and implementation intent. | Narrative/mapping evidence only; validate against concrete conformance rows before claims. |
-| 2 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/networking_specs_inventory.txt` | `traceability/requirements/networking-spec-inventory.txt` | 3GPP; TM Forum; O-RAN | Inventory of available spec set and expected coverage scope. | Inventory only; does not prove conformance or release maturity. |
-| 3 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/build_logs/stage19_oran_closed_loop.md` | `traceability/evidence_snapshots/techco-stage19-oran-closed-loop.md` | O-RAN | Concrete O-RAN closed-loop behavior evidence for release-mapping validation. | Observed/demo behavior, not formal O-RAN certification. |
-| 4 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/README.md` | `traceability/requirements/tmf638-ctk-r18-0-readme.md` | TMF638 | CTK package context supporting the TMF638 gap in the release register. | README/package context only; no implementation proof. |
-| 5 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/src/order_engine/app/adapters/o2ims_real_adapter.py` | `traceability/standards_mapping/oran-o2ims-real-adapter.py` | O-RAN O2IMS | Small boundary file showing interface/endpoint mapping useful for standards-release correlation. | Source-code mapping evidence only; corroborate behavior with tests/reports. |
-| 6 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/Tech-Co/src/order_engine/app/adapters/bf3_python_adapter.py` | `traceability/standards_mapping/bf3-python-adapter.py` | 3GPP-derived service orchestration/control-plane mapping | Small boundary file for BF3 interaction and operation semantics. | Operational workaround code can be mistaken for protocol compliance; keep interpretation conservative. |
-| 7 | `<USER_HOME>/Documents/Git_Offline/active/9.LABS_5G_lab_simulator/tmforum_psr_learning/00_README.txt` | `references/learning_assets/tmforum-psr-learning-readme.txt` | TM Forum reference/learning | Context for TM Forum PSR learning artifacts already copied as reference-only evidence. | Reference-only; do not treat as conformance proof. |
+| 1 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/specs_guide.md` | `traceability/requirements/tmf-specs-guide.md` | TM Forum; O-RAN; 3GPP | Consolidated guidance linking specs and implementation intent. | Narrative/mapping evidence only; validate against concrete conformance rows before claims. |
+| 2 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/networking_specs_inventory.txt` | `traceability/requirements/networking-spec-inventory.txt` | 3GPP; TM Forum; O-RAN | Inventory of available spec set and expected coverage scope. | Inventory only; does not prove conformance or release maturity. |
+| 3 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/build_logs/stage19_oran_closed_loop.md` | `traceability/evidence_snapshots/techco-stage19-oran-closed-loop.md` | O-RAN | Concrete O-RAN closed-loop behavior evidence for release-mapping validation. | Observed/demo behavior, not formal O-RAN certification. |
+| 4 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/README.md` | `traceability/requirements/tmf638-ctk-r18-0-readme.md` | TMF638 | CTK package context supporting the TMF638 gap in the release register. | README/package context only; no implementation proof. |
+| 5 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/src/order_engine/app/adapters/o2ims_real_adapter.py` | `traceability/standards_mapping/oran-o2ims-real-adapter.py` | O-RAN O2IMS | Small boundary file showing interface/endpoint mapping useful for standards-release correlation. | Source-code mapping evidence only; corroborate behavior with tests/reports. |
+| 6 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/src/order_engine/app/adapters/bf3_python_adapter.py` | `traceability/standards_mapping/bf3-python-adapter.py` | 3GPP-derived service orchestration/control-plane mapping | Small boundary file for BF3 interaction and operation semantics. | Operational workaround code can be mistaken for protocol compliance; keep interpretation conservative. |
+| 7 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/tmforum_psr_learning/00_README.txt` | `references/learning_assets/tmforum-psr-learning-readme.txt` | TM Forum reference/learning | Context for TM Forum PSR learning artifacts already copied as reference-only evidence. | Reference-only; do not treat as conformance proof. |
 
 ## Excluded from the explorer suggestion
 
