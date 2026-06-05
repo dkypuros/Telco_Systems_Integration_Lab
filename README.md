@@ -26,6 +26,22 @@ Authoritative release/conformance status lives in `traceability/standards_releas
 - `experimental/` non-authoritative experiments
 - `vendor_profiles/` vendor-specific profiles and deviations
 
+## Documentation
+
+Start with the formal docs index: [`docs/README.md`](docs/README.md).
+
+Key docs:
+
+- [`docs/architecture.md`](docs/architecture.md) — bucket architecture and source/evidence flow
+- [`docs/standards-mapping.md`](docs/standards-mapping.md) — 3GPP, TM Forum, and O-RAN mapping
+- [`docs/core-network.md`](docs/core-network.md) — copied mock 5G core inventory and caveats
+- [`docs/ran-components.md`](docs/ran-components.md) — copied RAN inventory and caveats
+- [`docs/oran-components.md`](docs/oran-components.md) — copied O-RAN/RIC/E2 inventory and caveats
+- [`docs/tmforum-components.md`](docs/tmforum-components.md) — TM Forum evidence and CTK baseline caveats
+- [`docs/api-reference.md`](docs/api-reference.md) — current API evidence navigation
+- [`docs/testing.md`](docs/testing.md) — test bucket boundaries and evidence promotion path
+- [`docs/conformance-boundary.md`](docs/conformance-boundary.md) — what is proven, what is not, and claim gates
+
 ## Quick Operator Loop
 
 Use the root `lab` command for the current runnable experience:
