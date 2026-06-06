@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "correlation_id": "corr-soa-demo-0001",
+  "recorded_at": "2026-06-06T00:00:00Z",
+  "scenario": "service_order_to_activation_mvp_demo",
+  "capability_slice": "service_order_to_activation/",
+  "evidence_label": "demo_evidence",
+  "claim_boundary": "Repeatable local MVP demo evidence only; not formal 3GPP, O-RAN, or TM Forum conformance.",
+  "inputs": {
+    "product_id": "prod-5g-data-basic",
+    "order_id": "order-e7ff1e2ac906",
+    "service_id": "svc-e7ff1e2ac906",
+    "subscriber_id": "demo-enterprise-001",
+    "subscriber_intent": "subscriber=demo-enterprise-001; access=5g-data",
+    "session_intent": "dnn=internet; slice=sst-1; qos=best-effort",
+    "customer_id": "customer-demo-001",
+    "network_action": "activate_mock_5g_data_service",
+    "mock_activation_result": "activated"
+  },
+  "touched_components": [
+    {
+      "path": "services/catalog_api/",
+      "role": "TMF620-referenced product lookup",
+      "evidence_note": "Returned the basic 5G data product with the shared correlation_id."
+    },
+    {
+      "path": "services/order_engine/",
+      "role": "TMF622/TMF641-referenced product order lifecycle and activation-plan output",
+      "evidence_note": "Created acknowledged -> activation_requested order state and activation plan."
+    },
+    {
+      "path": "services/orchestration/",
+      "role": "Lab-owned orchestration graph",
+      "evidence_note": "Mapped the activation plan to subscriber/session intent and invoked the adapter contract."
+    },
+    {
+      "path": "adapters/3gpp/mock_core_activation_adapter.py",
+      "role": "3GPP-referenced mock-core activation adapter",
+      "evidence_note": "Recorded a controlled local mock-core subscriber/session activation result."
+    },
+    {
+      "path": "tests/integration/test_service_order_to_activation_evidence.py",
+      "role": "Repeatable MVP integration test",
+      "evidence_note": "Asserts the shared correlation_id and public-safe evidence bundle shape."
+    }
+  ],
+  "standards_rows": [
+    {
+      "standards_body": "TM Forum",
+      "spec_id": "TMF620",
+      "release_register_path": "traceability/standards_release_register.yaml",
+      "conformance_level": "demo_evidence for local MVP product lookup only",
+      "known_gap_to_latest": "formal TM Forum CTK evidence missing for this MVP path"
+    },
+    {
+      "standards_body": "TM Forum",
+      "spec_id": "TMF622",
+      "release_register_path": "traceability/standards_release_register.yaml",
+      "conformance_level": "demo_evidence for local MVP order lifecycle only",
+      "known_gap_to_latest": "formal TM Forum CTK evidence missing for this MVP path"
+    },
+    {
+      "standards_body": "TM Forum",
+      "spec_id": "TMF641",
+      "release_register_path": "traceability/standards_release_register.yaml",
+      "conformance_level": "demo_evidence for activation-plan handoff only",
+      "known_gap_to_latest": "formal service-order conformance evidence missing"
+    },
+    {
+      "standards_body": "3GPP",
+      "spec_id": "release-baseline",
+      "release_register_path": "traceability/standards_release_register.yaml",
+      "conformance_level": "functional mock activation evidence only",
+      "known_gap_to_latest": "formal 3GPP protocol conformance evidence missing"
+    }
+  ],
+  "artifact_paths": [
+    "tests/integration/test_service_order_to_activation_evidence.py",
+    "traceability/evidence_snapshots/service-order-to-activation-demo-evidence-bundle.json",
+    "capabilities/service_order_to_activation/flow-contract.yaml"
+  ],
+  "known_gaps": [
+    "No external implementation profile is exercised by this MVP demo evidence.",
+    "No formal TM Forum CTK result is produced by this MVP demo evidence.",
+    "No formal 3GPP protocol conformance evidence is produced by this MVP demo evidence.",
+    "No O-RAN behavior is exercised by this first service-order-to-activation MVP path."
+  ],
+  "next_validation_step": "Use this repeatable MVP evidence as the baseline before adding subscriber lifecycle, slice provisioning, RAN/O-RAN control-loop, or ODA/O2/OCP architecture slices."
+}
