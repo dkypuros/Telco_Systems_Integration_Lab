@@ -150,7 +150,7 @@ def runtime_env() -> dict[str, str]:
 
 
 def runtime_python() -> str:
-    return str(Path(sys.executable))
+    return str(PY if PY.exists() else Path(sys.executable))
 
 
 def service_root(service: dict[str, Any]) -> Path:
@@ -931,6 +931,8 @@ def cmd_up(args: argparse.Namespace) -> int:
         print("The public repository should contain only the copied files needed in these buckets.", file=sys.stderr)
         print("Run ./lab smoke and ./lab test for in-repo readiness evidence after restoring the roots.", file=sys.stderr)
         return 2
+
+    ensure_venv()
 
     if args.replace:
         stop_tracked_services()

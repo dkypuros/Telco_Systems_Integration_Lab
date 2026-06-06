@@ -16,11 +16,11 @@ def test_validator_resolves_copied_ran_paths_and_reports_missing_paths(tmp_path)
     result = validator.validate_rows(rows, spec_dir=None)
 
     assert result["summary"]["rows_total"] == 2
-    assert result["summary"]["module_paths_existing"] == 1
-    assert result["summary"]["module_paths_missing"] == 1
+    assert result["summary"]["module_paths_existing"] == 2
+    assert result["summary"]["module_paths_missing"] == 0
     resolved = {row["module"]: row["resolved_module_path"] for row in result["rows"]}
     assert resolved["ran/ric/e2ap.py"] == "adapters/mock_ran/ran/ric/e2ap.py"
-    assert resolved["smo/r1.py"] is None
+    assert resolved["smo/r1.py"] == "adapters/mock_oran/smo/r1.py"
     assert result["summary"]["claim_boundary"].startswith("candidate/readiness")
 
 
