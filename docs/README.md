@@ -22,6 +22,7 @@ bounded.
 | [Issue Authoring](issue-authoring.md) | Required standards-evidence fields for GitHub issues and agent work chunks. |
 | [Evidence Bundles](evidence-bundles.md) | Correlation ID and evidence bundle format for traceable demos/tests. |
 | [Product Front Door ROF Loop](front-door-product-builder-rof.md) | Reality/options/forward plan for turning the current MVP spine into a storefront-style module. |
+| [Service Inventory / Activation Bridge Plan](service-inventory-activation-bridge-plan.md) | Next downstream slice after Product Front Door: create a service instance before O-RAN/O-Cloud fulfillment. |
 | [Service Order to Activation Contract](../capabilities/service_order_to_activation/README.md) | First API-first MVP flow contract and current demo-evidence boundary. |
 
 ## Architecture decisions

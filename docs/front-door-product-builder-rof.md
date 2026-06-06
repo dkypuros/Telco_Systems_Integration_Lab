@@ -100,10 +100,33 @@ Expose and run every service over HTTP before building the front door.
 - More moving parts before the first visual front door.
 - Higher risk of building infrastructure before validating the user story.
 
-## Forward path recommendation
+## Completed first implementation
 
-Build **Option B: Product Front Door module** first, then follow with Option A as
-a companion evidence explorer.
+The first implementation is complete:
+
+- module id: `product-front-door`
+- port: `8767`
+- entrypoint: `python3 modules/product_front_door/server.py`
+- scope: fixed activation path for `prod-5g-data-basic`
+- evidence boundary: local MVP demo only; O-RAN/O-Cloud/ODA/OCP remain planned gaps
+
+## Next downstream recommendation
+
+Build the **Service Inventory / Activation Bridge** before O-RAN or O-Cloud
+fulfillment. The Product Front Door can now create an order and run mock
+activation, but a downstream domain still needs a service instance and service
+state boundary to attach to.
+
+Planning artifacts:
+
+- [Service Inventory / Activation Bridge Plan](service-inventory-activation-bridge-plan.md)
+- [PRD](../.omx/plans/prd-service-inventory-activation-bridge.md)
+- [Test spec](../.omx/plans/test-spec-service-inventory-activation-bridge.md)
+
+## Historical first implementation recommendation
+
+Build **Option B: Product Front Door module** first, then follow with a service
+inventory / activation bridge and a TMF Evidence Explorer companion.
 
 The first product front door should be intentionally narrow:
 
@@ -124,9 +147,9 @@ The page should explicitly separate:
 - **planned only** — TMF CTK conformance, real service inventory, O-RAN control,
   SMO/O2, O-Cloud/OCP/ODA Canvas, bare metal remediation.
 
-## Stop condition for the first implementation
+## Historical stop condition for the first implementation
 
-The first implementation is complete when:
+The first implementation was considered complete when:
 
 1. the dashboard shows a Product Front Door card;
 2. the module opens at its registered localhost port;
@@ -137,7 +160,7 @@ The first implementation is complete when:
 6. tests prove the module cannot execute arbitrary commands;
 7. docs preserve the claim boundary.
 
-## Next issue shape
+## Historical first issue shape
 
 Title:
 
