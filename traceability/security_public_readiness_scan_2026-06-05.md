@@ -42,7 +42,9 @@ git check-ignore -v --stdin --no-index
 - Follow-up secret checks: no high-signal credentials in the current tracked tree or in existing Git history.
 - Follow-up history rewrite: private absolute path markers were redacted from all reachable commits before public release.
 - Follow-up dependency audit: `pip-audit -r config/requirements.txt` reported `No known vulnerabilities found`.
+- Follow-up static security scan: `bandit -r scripts adapters services lab` reported 0 high-severity issues; remaining findings are simulator hardening items such as wildcard binds/CORS, missing HTTP timeouts, and local CLI subprocess patterns.
 - Follow-up untracked check: `git ls-files -o --exclude-standard` returned no visible untracked files after adding the local ETSI standards cache and `0_to_integrate/` staging ignores.
+- Final backup cleanup: the local pre-redaction history backup bundle was deleted before public sharing.
 
 ## Remediations applied
 
@@ -57,6 +59,7 @@ git check-ignore -v --stdin --no-index
 
 ## Remaining risks before making the repository public
 
-1. **Mock services still use permissive CORS in several FastAPI apps.** This is acceptable for a local simulator, but not for production deployment without origin restrictions.
-2. **Dependency vulnerability audit covers tracked Python requirements only.** `pip-audit` found no known vulnerabilities for `config/requirements.txt` and `npm audit` was skipped because there are no tracked npm manifests; ignored external standards/tool caches were not audited.
-3. **A local-only backup bundle exists outside the repository.** The backup preserves pre-redaction history for recovery and must remain private/off GitHub because it contains the old local path strings.
+1. **Mock services still use permissive CORS and wildcard binds in several FastAPI apps.** This is acceptable for a local simulator, but not for production deployment without origin restrictions and bind-host hardening.
+2. **Several internal HTTP calls lack explicit timeouts.** Bandit reports these as medium-severity availability hardening issues; they are not sensitive-data blockers for public release.
+3. **Dependency vulnerability audit covers tracked Python requirements only.** `pip-audit` found no known vulnerabilities for `config/requirements.txt` and `npm audit` was skipped because there are no tracked npm manifests; ignored external standards/tool caches were not audited.
+4. **GitHub security alert APIs are not active while private.** Dependabot alerts and secret scanning APIs reported disabled/unavailable; enable them after changing repository visibility or through repository security settings if desired.
