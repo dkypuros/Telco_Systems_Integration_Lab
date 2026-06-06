@@ -1,0 +1,16 @@
+{
+  "schema_version": "mvp-0.1",
+  "description": "Functional-smoke product order request fixture for the service_order_to_activation MVP.",
+  "product_id": "prod-5g-data-basic",
+  "customer_id": "customer-demo-001",
+  "requested_action": "add",
+  "correlation_id_example": "corr-order-example-0001",
+  "standards_reference": {
+    "standards_body": "TM Forum",
+    "product_order_spec_id": "TMF622",
+    "service_order_spec_id": "TMF641",
+    "release_register_path": "traceability/standards_release_register.yaml",
+    "evidence_label": "functional_smoke",
+    "claim_boundary": "Functional smoke fixture only; not formal TM Forum conformance."
+  }
+}
