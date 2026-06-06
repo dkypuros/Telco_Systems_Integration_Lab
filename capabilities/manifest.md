@@ -8,7 +8,7 @@ Capabilities are vertical slices. They connect standards, models, procedures, ad
 
 | Capability | Purpose | Expected standards | Current status | Next evidence step |
 |---|---|---|---|---|
-| `service_order_to_activation/` | Customer/order journey from TM Forum order to activation | TMF620, TMF622, TMF641, 3GPP core APIs | planned | Link Tech-Co CTK evidence and order-flow logs before copying service code. |
+| [`service_order_to_activation/`](service_order_to_activation/README.md) | Customer/order journey from TM Forum order to activation | TMF620, TMF622, TMF641, TMF640, 3GPP core APIs | planned contract defined | Implement issues #21-#25 and replace the planned evidence bundle with generated demo evidence. |
 | `slice_provisioning/` | Network slice offer/order/provision path | TM Forum, 3GPP NSSF/NSSAI, O-RAN O2/O1 as applicable | planned | Map local NSSF/slice artifacts and tested-against baseline. |
 | `ran_control_loop/` | RAN policy/control loop | O-RAN A1/E2/E2SM, 3GPP RAN refs | planned | Map O-RAN closed-loop evidence as demo evidence, not formal conformance. |
 | `subscriber_lifecycle/` | Subscriber provisioning and lifecycle | TM Forum order/service APIs, 3GPP UDM/UDR/AMF | planned | Map UDR row/AMF context evidence and local gaps. |

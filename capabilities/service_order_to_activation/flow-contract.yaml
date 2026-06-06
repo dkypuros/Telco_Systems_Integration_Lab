@@ -1,0 +1,157 @@
+schema_version: "1.0"
+capability_slice: "service_order_to_activation/"
+status: "contract_defined"
+current_evidence_label: "planned"
+target_evidence_label: "planned"
+future_promotion_label_after_implementation: "demo_evidence"
+claim_boundary: "API-first MVP design contract only; not formal 3GPP, O-RAN, or TM Forum conformance."
+external_upstream_required: false
+source_intake_boundary: "No full external upstream repository is required or copied for this MVP contract. External systems remain future implementation profiles/interoperability targets."
+
+purpose: >-
+  Define the smallest end-to-end customer/order-to-network activation path that can
+  later be implemented by independent issues without overclaiming standards coverage.
+
+identifiers:
+  - name: "correlation_id"
+    required: true
+    example: "corr-soa-0001"
+    owner: "scenario client or integration test"
+    passes_through: "all services, adapters, logs, and evidence bundles"
+  - name: "product_id"
+    required: true
+    example: "prod-5g-data-basic"
+    owner: "catalog API"
+    passes_through: "order item and activation plan"
+  - name: "order_id"
+    required: true
+    example: "order-soa-0001"
+    owner: "product order lifecycle"
+    passes_through: "orchestration and evidence bundle"
+  - name: "service_id"
+    required: true
+    example: "svc-soa-0001"
+    owner: "activation/service inventory facade"
+    passes_through: "adapter action and evidence bundle"
+  - name: "subscriber_intent"
+    required: true
+    example: "subscriber=demo-enterprise-001; access=5g-data"
+    owner: "orchestration layer"
+    passes_through: "mock core activation adapter"
+  - name: "session_intent"
+    required: true
+    example: "dnn=internet; slice=sst-1; qos=best-effort"
+    owner: "orchestration layer"
+    passes_through: "mock SMF/UPF-facing activation action"
+
+flow_steps:
+  - step_id: "01_catalog_product_lookup"
+    domain: "product_catalog"
+    planned_path: "services/catalog_api/"
+    contract: "TMF620-style product lookup for a basic 5G data product fixture."
+    input_identifiers: ["correlation_id"]
+    output_identifiers: ["correlation_id", "product_id"]
+    standards_rows: ["TMF620"]
+    evidence_required_for_demo:
+      - "catalog response fixture includes product_id and correlation_id"
+      - "unit or smoke test records the product fixture path"
+  - step_id: "02_product_order_create"
+    domain: "product_order"
+    planned_path: "services/order_engine/"
+    contract: "TMF622-style order create/acknowledge flow for one catalog product."
+    input_identifiers: ["correlation_id", "product_id"]
+    output_identifiers: ["correlation_id", "product_id", "order_id"]
+    standards_rows: ["TMF622"]
+    evidence_required_for_demo:
+      - "order lifecycle transitions are recorded from acknowledged to activation_requested"
+      - "order event includes product_id, order_id, and correlation_id"
+  - step_id: "03_service_activation_plan"
+    domain: "service_ordering_activation"
+    planned_path: "services/order_engine/"
+    contract: "Derive a service activation plan that separates commercial order state from network action."
+    input_identifiers: ["correlation_id", "product_id", "order_id"]
+    output_identifiers: ["correlation_id", "product_id", "order_id", "service_id"]
+    standards_rows: ["TMF641", "TMF640"]
+    evidence_required_for_demo:
+      - "activation plan names service_id and the selected network action"
+      - "known TMF641/TMF640 gaps remain explicit"
+  - step_id: "04_orchestration_intent_mapping"
+    domain: "service_orchestration"
+    planned_path: "services/orchestration/"
+    contract: "Map service activation into subscriber and session intent without depending on an external runtime."
+    input_identifiers: ["correlation_id", "product_id", "order_id", "service_id"]
+    output_identifiers:
+      - "correlation_id"
+      - "product_id"
+      - "order_id"
+      - "service_id"
+      - "subscriber_intent"
+      - "session_intent"
+    standards_rows: ["3GPP release-baseline"]
+    evidence_required_for_demo:
+      - "orchestration graph records intent mapping by correlation_id"
+      - "subscriber_intent and session_intent are public-safe demo values"
+  - step_id: "05_mock_core_activation_adapter"
+    domain: "3gpp_mock_core_adapter"
+    planned_path: "adapters/3gpp/"
+    contract: "Translate lab-owned activation intent into a narrow mock 5G core action."
+    input_identifiers:
+      - "correlation_id"
+      - "order_id"
+      - "service_id"
+      - "subscriber_intent"
+      - "session_intent"
+    output_identifiers: ["correlation_id", "service_id", "mock_activation_result"]
+    standards_rows: ["3GPP release-baseline"]
+    evidence_required_for_demo:
+      - "adapter transcript records request/response without secrets or private paths"
+      - "mock core response is bounded as functional/demo evidence only"
+  - step_id: "06_evidence_bundle_record"
+    domain: "evidence_traceability"
+    planned_path: "traceability/evidence_snapshots/"
+    contract: "Persist public-safe evidence bundle linking inputs, touched components, standards rows, gaps, and next validation step."
+    input_identifiers:
+      - "correlation_id"
+      - "product_id"
+      - "order_id"
+      - "service_id"
+      - "subscriber_intent"
+      - "session_intent"
+    output_identifiers: ["correlation_id", "evidence_bundle_path"]
+    standards_rows: ["TMF620", "TMF622", "TMF641", "TMF640", "3GPP release-baseline"]
+    evidence_required_for_demo:
+      - "bundle validates against traceability/evidence_bundle.schema.json"
+      - "bundle claim boundary states not formal conformance"
+
+acceptance_evidence_for_demo_evidence:
+  - "Catalog fixture/API returns prod-5g-data-basic with correlation_id."
+  - "Product order lifecycle returns order_id and order state history."
+  - "Activation plan returns service_id and network activation intent."
+  - "Orchestration output contains subscriber_intent and session_intent."
+  - "3GPP mock-core adapter records a mock activation result by correlation_id."
+  - "Integration test runs without external upstream repositories."
+  - "Evidence bundle records touched components, standards rows, known gaps, artifact paths, and next validation step."
+  - "Public-safe scans and markdown links are clean."
+
+known_gaps:
+  - "No external implementation profile is exercised in the MVP contract."
+  - "No formal TM Forum CTK result is produced by this contract."
+  - "No formal 3GPP protocol conformance evidence is produced by this contract."
+  - "Service inventory and activation APIs are scoped as a lab-owned facade until implementation issues define them."
+
+next_issue_sequence:
+  - issue: 21
+    title: "Build MVP catalog fixture/API for a basic 5G data product"
+    primary_write_scope: "services/catalog_api/"
+  - issue: 22
+    title: "Build MVP product order lifecycle and activation-plan output"
+    primary_write_scope: "services/order_engine/"
+  - issue: 23
+    title: "Build MVP orchestration graph in services/orchestration"
+    primary_write_scope: "services/orchestration/"
+  - issue: 24
+    title: "Build 3GPP mock-core activation adapter for the MVP"
+    primary_write_scope: "adapters/3gpp/"
+  - issue: 25
+    title: "Add end-to-end MVP integration test and public-safe evidence snapshot"
+    primary_write_scope: "tests/integration/; traceability/evidence_snapshots/"

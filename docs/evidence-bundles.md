@@ -8,6 +8,8 @@ The schema lives at
 [`traceability/evidence_bundle.schema.json`](../traceability/evidence_bundle.schema.json).
 A minimal example lives at
 [`traceability/evidence_snapshots/example-mvp-evidence-bundle.json`](../traceability/evidence_snapshots/example-mvp-evidence-bundle.json).
+The service-order-to-activation planned contract bundle lives at
+[`traceability/evidence_snapshots/service-order-to-activation-planned-evidence-bundle.json`](../traceability/evidence_snapshots/service-order-to-activation-planned-evidence-bundle.json).
 
 ## Correlation ID convention
 
@@ -16,7 +18,8 @@ A minimal example lives at
   core/RAN/O-RAN services, tests, and evidence snapshots should propagate that
   value in request metadata or logs.
 - Evidence artifacts should record the same `correlation_id`, plus order/service
-  identifiers when available.
+  identifiers when available. The first MVP also carries `subscriber_intent` and
+  `session_intent` as public-safe intent values, not real subscriber secrets.
 
 ## Claim boundary
 

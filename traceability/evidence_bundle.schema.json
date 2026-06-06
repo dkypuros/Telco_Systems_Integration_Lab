@@ -44,7 +44,9 @@
         "product_id": {"type": "string"},
         "order_id": {"type": "string"},
         "service_id": {"type": "string"},
-        "subscriber_id": {"type": "string"}
+        "subscriber_id": {"type": "string"},
+        "subscriber_intent": {"type": "string"},
+        "session_intent": {"type": "string"}
       },
       "additionalProperties": true
     },

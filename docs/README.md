@@ -20,6 +20,7 @@ bounded.
 | [Conformance Boundary](conformance-boundary.md) | What is proven, what is not proven, and what evidence is required before stronger claims. |
 | [Issue Authoring](issue-authoring.md) | Required standards-evidence fields for GitHub issues and agent work chunks. |
 | [Evidence Bundles](evidence-bundles.md) | Correlation ID and evidence bundle format for traceable demos/tests. |
+| [Service Order to Activation Contract](../capabilities/service_order_to_activation/README.md) | First API-first MVP flow contract and evidence gate for issue #20. |
 
 ## Architecture decisions
 

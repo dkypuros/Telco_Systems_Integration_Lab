@@ -10,7 +10,9 @@
     "product_id": "prod-5g-data-basic",
     "order_id": "order-example-0001",
     "service_id": "svc-example-0001",
-    "subscriber_id": "subscriber-example-0001"
+    "subscriber_id": "subscriber-example-0001",
+    "subscriber_intent": "subscriber=demo-enterprise-001; access=5g-data",
+    "session_intent": "dnn=internet; slice=sst-1; qos=best-effort"
   },
   "touched_components": [
     {
