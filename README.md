@@ -76,12 +76,20 @@ Key docs:
 - [`docs/oran-components.md`](docs/oran-components.md) — copied O-RAN/RIC/E2 inventory and caveats
 - [`docs/tmforum-components.md`](docs/tmforum-components.md) — TM Forum evidence and CTK baseline caveats
 - [`docs/api-reference.md`](docs/api-reference.md) — current API evidence navigation
+- [`docs/modules.md`](docs/modules.md) — local visual/service module registry, dashboard flow, and module authoring rules
 - [`docs/testing.md`](docs/testing.md) — test bucket boundaries and evidence promotion path
 - [`docs/conformance-boundary.md`](docs/conformance-boundary.md) — what is proven, what is not, and claim gates
 
-## Local Visual Modules
+## Local Visual and Service Modules
 
-Optional visual/service modules live under [`modules/`](modules/). The central [`modules/index.json`](modules/index.json) registry reserves localhost ports so future modules can avoid collisions.
+Optional visual/service modules live under [`modules/`](modules/). They are
+local dashboard, scenario, report, and viewer surfaces that sit on top of the
+lab runtime without changing the core telco services.
+
+See the dedicated module guide: [`docs/modules.md`](docs/modules.md).
+
+The central [`modules/index.json`](modules/index.json) registry reserves
+localhost ports so future modules and harness agents can avoid collisions.
 
 Current examples:
 

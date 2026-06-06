@@ -16,6 +16,7 @@ bounded.
 | [O-RAN Components](oran-components.md) | RIC, E2/E2SM, O-RAN gateway, and O-RAN tracking caveats. |
 | [TM Forum Components](tmforum-components.md) | TMF API evidence, CTK baselines, and promotion path. |
 | [API Reference](api-reference.md) | Current API and endpoint evidence sources. |
+| [Local Visual and Service Modules](modules.md) | Module registry, dashboard activation flow, current examples, and module authoring contract. |
 | [Testing](testing.md) | Unit, integration, runtime smoke, regression, interoperability, and conformance boundaries. |
 | [Conformance Boundary](conformance-boundary.md) | What is proven, what is not proven, and what evidence is required before stronger claims. |
 | [Issue Authoring](issue-authoring.md) | Required standards-evidence fields for GitHub issues and agent work chunks. |

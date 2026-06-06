@@ -4,6 +4,9 @@
 lab runtime/evidence surfaces. They are intentionally separate from core
 `services/` so examples can be added without changing the telco runtime itself.
 
+For the public-facing guide, dashboard flow, activation model, and authoring
+contract, see [`docs/modules.md`](../docs/modules.md).
+
 The main module index is [`index.json`](index.json). It reserves local ports so
 future harness work can check which module endpoints are already claimed before
 adding another example.
