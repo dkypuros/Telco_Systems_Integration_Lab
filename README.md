@@ -34,6 +34,7 @@ Key docs:
 
 - [`AGENTS.md`](AGENTS.md) — Codex/agent security rules for public-safe commits
 - [`docs/adr/0001-external-implementation-profiles.md`](docs/adr/0001-external-implementation-profiles.md) — external implementation profiles and capability-domain policy
+- [`docs/end-to-end-telco-capability-blueprint.md`](docs/end-to-end-telco-capability-blueprint.md) — slice-first plan for building the complete standards-traceable telco lab
 - [`docs/architecture.md`](docs/architecture.md) — bucket architecture and source/evidence flow
 - [`docs/standards-mapping.md`](docs/standards-mapping.md) — 3GPP, TM Forum, and O-RAN mapping
 - [`docs/core-network.md`](docs/core-network.md) — copied mock 5G core inventory and caveats

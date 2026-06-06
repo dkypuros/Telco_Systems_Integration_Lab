@@ -8,6 +8,7 @@ bounded.
 
 | Document | Use it for |
 |---|---|
+| [End-to-End Telco Capability Blueprint](end-to-end-telco-capability-blueprint.md) | Slice-first plan for building the complete standards-traceable telco lab without blind upstream source absorption. |
 | [Architecture](architecture.md) | Lab buckets, source boundaries, and how services/adapters/tests/evidence fit together. |
 | [Standards Mapping](standards-mapping.md) | How 3GPP, TM Forum, and O-RAN references map to repo folders and release tracking. |
 | [Core Network](core-network.md) | Mock 5G core service inventory, runtime hooks, and caveats. |
