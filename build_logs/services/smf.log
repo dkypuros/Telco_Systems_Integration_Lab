@@ -1,2 +1,0 @@
-2026-06-05T17:26:32.032581+00:00 SCENARIO FAIL SMF direct fallback POST http://127.0.0.1:9001/nsmf-pdusession/v1/sm-contexts status=502
-2026-06-05T17:26:49.521088+00:00 SCENARIO FAIL SMF direct fallback POST http://127.0.0.1:9001/nsmf-pdusession/v1/sm-contexts status=502

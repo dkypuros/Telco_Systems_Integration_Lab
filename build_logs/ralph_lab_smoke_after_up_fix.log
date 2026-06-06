@@ -1,6 +1,0 @@
-lab smoke: pass
-  AST files: 25
-  Imported modules: 23
-  Missing deps: 0
-  Evidence: <LAB_ROOT>/build_logs/lab_smoke_runtime.json
-  Caveat: Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance.

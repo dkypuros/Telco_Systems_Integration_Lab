@@ -2,6 +2,8 @@
 
 Formal, standards-traceable workspace for end-to-end telco integration across 3GPP, TM Forum, and O-RAN.
 
+![Telco Systems Integration Lab Vision](docs/vision_triangle.svg)
+
 Core rule: preserve originals. Intake from existing workspaces is copy-only and must be recorded in `traceability/` before source code is migrated.
 
 Authoritative release/conformance status lives in `traceability/standards_release_register.yaml`; this file is a derived view.

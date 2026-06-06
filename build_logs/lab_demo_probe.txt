@@ -1,8 +1,0 @@
-Telco Systems Integration Lab Demo Readiness
-================================================
-Managed BF3 services up:   NO (19/26)
-Runtime-ready mock imports: YES
-Regression tests passing:   YES
-Copied AST/import scope:    25 Python files / 23 imports
-What this demonstrates: lab-managed BF3 service lifecycle plus copied mock 5G core/RAN/O-RAN code readiness evidence.
-What it does not claim: Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance.

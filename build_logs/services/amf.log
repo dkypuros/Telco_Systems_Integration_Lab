@@ -1,4 +1,0 @@
-2026-06-05T17:26:32.028202+00:00 SCENARIO OK AMF create UE context POST http://127.0.0.1:9000/amf/ue/ue-demo-001 status=200 response={"message": "UE context created"}
-2026-06-05T17:26:32.029794+00:00 SCENARIO FAIL AMF trigger PDU session POST http://127.0.0.1:9000/amf/pdu-session/create status=500
-2026-06-05T17:26:49.516810+00:00 SCENARIO OK AMF create UE context POST http://127.0.0.1:9000/amf/ue/ue-demo-001 status=200 response={"message": "UE context created"}
-2026-06-05T17:26:49.518247+00:00 SCENARIO FAIL AMF trigger PDU session POST http://127.0.0.1:9000/amf/pdu-session/create status=500
