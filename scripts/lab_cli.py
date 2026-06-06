@@ -1140,17 +1140,35 @@ def cmd_status(args: argparse.Namespace) -> int:
     return 0
 
 
+def readiness_label(*, ok: bool, not_run: bool = False) -> str:
+    if not_run:
+        return "NOT RUN"
+    return "YES" if ok else "NO"
+
+
 def cmd_demo(args: argparse.Namespace) -> int:
     status = read_latest()
-    runtime_ok = status["runtime_smoke"]["status"] == "pass"
-    tests_ok = "passed" in status["pytest"]
+    runtime_status = status["runtime_smoke"]["status"]
+    pytest_status = status["pytest"]
+    runtime_not_run = runtime_status == "not run"
+    tests_not_run = pytest_status == "not run"
+    runtime_ok = runtime_status == "pass"
+    tests_ok = "passed" in pytest_status
     services_ok = bool(status["services"]["all_ready"])
+    ast_count = status["runtime_smoke"]["ast_count"]
+    if ast_count is None:
+        ast_scope = "NOT RUN (run ./lab smoke)"
+    else:
+        ast_scope = f"{ast_count} Python files / {status['runtime_smoke']['imported_count']} imports"
+
     print("Telco Systems Integration Lab Demo Readiness")
     print("================================================")
     print(f"Managed lab services up:   {'YES' if services_ok else 'NO'} ({status['services']['ready']}/{status['services']['total']})")
-    print(f"Runtime-ready mock imports: {'YES' if runtime_ok else 'NO'}")
-    print(f"Regression tests passing:   {'YES' if tests_ok else 'NO'}")
-    print(f"Copied AST/import scope:    {status['runtime_smoke']['ast_count']} Python files / {status['runtime_smoke']['imported_count']} imports")
+    print(f"Runtime-ready mock imports: {readiness_label(ok=runtime_ok, not_run=runtime_not_run)}")
+    print(f"Regression tests passing:   {readiness_label(ok=tests_ok, not_run=tests_not_run)}")
+    print(f"Copied AST/import scope:    {ast_scope}")
+    if runtime_not_run or tests_not_run:
+        print("Next: run ./lab smoke && ./lab test to refresh demo evidence.")
     print("What this demonstrates: lab-managed service lifecycle plus copied mock 5G core/RAN/O-RAN code readiness evidence.")
     print(f"What it does not claim: {CAVEAT}")
     return 0 if runtime_ok and tests_ok and services_ok else 2

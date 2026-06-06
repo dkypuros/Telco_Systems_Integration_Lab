@@ -104,3 +104,33 @@ def test_service_paths_resolve_inside_clean_domain_buckets():
     for service in lab_cli.SERVICE_INVENTORY:
         path = lab_cli.service_path(service)
         assert path.is_relative_to(lab_cli.RUNTIME_ROOTS[service["root"]])
+
+
+def test_demo_marks_missing_smoke_and_test_evidence_as_not_run(monkeypatch, tmp_path, capsys):
+    monkeypatch.setattr(lab_cli, "SMOKE_LOG", tmp_path / "missing-smoke.json")
+    monkeypatch.setattr(lab_cli, "TEST_LOG", tmp_path / "missing-pytest.log")
+    monkeypatch.setattr(lab_cli, "STATUS_LOG", tmp_path / "status.json")
+    monkeypatch.setattr(
+        lab_cli,
+        "services_report",
+        lambda: {
+            "ready": 26,
+            "total": 26,
+            "all_ready": True,
+            "external": [],
+            "failed": [],
+            "state_file": "<state>",
+            "evidence_file": "<evidence>",
+            "log_dir": "<logs>",
+        },
+    )
+
+    result = lab_cli.cmd_demo(object())
+
+    output = capsys.readouterr().out
+    assert result == 2
+    assert "Managed lab services up:   YES (26/26)" in output
+    assert "Runtime-ready mock imports: NOT RUN" in output
+    assert "Regression tests passing:   NOT RUN" in output
+    assert "Copied AST/import scope:    NOT RUN (run ./lab smoke)" in output
+    assert "Next: run ./lab smoke && ./lab test" in output
