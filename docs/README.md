@@ -18,6 +18,12 @@ bounded.
 | [Testing](testing.md) | Unit, integration, runtime smoke, regression, interoperability, and conformance boundaries. |
 | [Conformance Boundary](conformance-boundary.md) | What is proven, what is not proven, and what evidence is required before stronger claims. |
 
+## Architecture decisions
+
+| Decision | Use it for |
+|---|---|
+| [ADR 0001: External implementation profiles](adr/0001-external-implementation-profiles.md) | Why third-party telco systems are profiles/interop targets, not vendored source trees, and how capability domains drive the end-to-end lab. |
+
 ## Supporting project records
 
 | Record | Purpose |

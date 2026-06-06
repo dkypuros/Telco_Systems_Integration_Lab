@@ -11,6 +11,14 @@ This repository is intended to be safe to publish. Follow these rules for every 
 - Do **not** commit local runtime state: `.lab/state/`, generated logs, `.omx` runtime state, caches, virtual environments, or test caches. Durable planning docs under `.omx/plans/*.md` are the only `.omx` content intended to be tracked.
 - Prefer committed `.gitignore` rules over local `.git/info/exclude` for any protection future agents must inherit.
 
+## External implementation profile rules
+
+- Treat third-party/open-source/vendor telco systems as external implementation profiles or interoperability targets, not as source trees to blindly absorb.
+- Do **not** copy full upstream projects such as free5GC, Open5GS, OpenAirInterface/OAI, or similar products into this public repository without an accepted ADR that overrides this rule.
+- Commit public-safe metadata, vendor profiles, adapter contracts, runbooks, and interoperability tests instead of full upstream trees.
+- Do not infer end-to-end telco completeness from any single external profile. IMS/voice, TM Forum OSS/BSS, storefront/e-commerce flows, orchestration, assurance, charging, RAN, O-RAN, and core-network domains must be mapped as separate capabilities with explicit evidence.
+- Use [`docs/adr/0001-external-implementation-profiles.md`](docs/adr/0001-external-implementation-profiles.md) as the architectural source of truth for this policy. OMX plans may sequence work, but they do not override the ADR or these rules.
+
 ## Required checks before public-facing commits
 
 Run these checks before committing anything that affects docs, traceability, copied source, ignore rules, release evidence, or public-readiness state:
