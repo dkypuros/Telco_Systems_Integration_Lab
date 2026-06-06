@@ -86,8 +86,10 @@ Optional visual/service modules live under [`modules/`](modules/). The central [
 Current examples:
 
 ```bash
-python3 modules/dashboard_service/server.py      # http://127.0.0.1:8764/ module card dashboard
-python3 modules/lab_chatter_service/server.py   # http://127.0.0.1:8765/ ./lab chatter viewer
+python3 modules/dashboard_service/server.py        # http://127.0.0.1:8764/ module card dashboard
+# From the dashboard, activate Lab Runtime, UE / Scenario Generator, and Lab Chatter Service.
+python3 modules/ue_scenario_generator/server.py  # optional manual start: http://127.0.0.1:8766/
+python3 modules/lab_chatter_service/server.py    # optional manual start: http://127.0.0.1:8765/
 ```
 
 Use them with the normal lab lifecycle:

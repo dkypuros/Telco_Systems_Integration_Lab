@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "id": "lab-runtime",
+  "name": "Lab Runtime",
+  "default_host": null,
+  "default_port": null,
+  "entrypoint": "./lab up",
+  "activate_command": "./lab up",
+  "status_command": "./lab services --json",
+  "stop_command": "./lab down",
+  "endpoints": [],
+  "reads": [
+    ".lab/state/lab_services.json",
+    "build_logs/lab_services.json",
+    "build_logs/services/*.log"
+  ],
+  "writes": [
+    ".lab/state/lab_services.json",
+    "build_logs/lab_services.json",
+    "build_logs/services/*.log"
+  ],
+  "claim_boundary": "Local lab runtime lifecycle wrapper only; not production readiness and not formal standards conformance."
+}

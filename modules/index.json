@@ -14,9 +14,27 @@
       "module_id": "lab-chatter-service",
       "path": "modules/lab_chatter_service/",
       "description": "Local web/API view over ./lab chatter service logs."
+    },
+    {
+      "port": 8766,
+      "module_id": "ue-scenario-generator",
+      "path": "modules/ue_scenario_generator/",
+      "description": "Local UE/scenario traffic generator that runs fixed ./lab scenario commands."
     }
   ],
   "modules": [
+    {
+      "id": "lab-runtime",
+      "name": "Lab Runtime",
+      "path": "modules/lab_runtime/",
+      "default_port": null,
+      "entrypoint": "./lab up",
+      "surface": "lab_lifecycle",
+      "status": "base",
+      "provides": [
+        "lab_runtime"
+      ]
+    },
     {
       "id": "modules-dashboard",
       "name": "Modules Dashboard",
@@ -27,13 +45,34 @@
       "status": "example"
     },
     {
+      "id": "ue-scenario-generator",
+      "name": "UE / Scenario Generator",
+      "path": "modules/ue_scenario_generator/",
+      "default_port": 8766,
+      "entrypoint": "python3 modules/ue_scenario_generator/server.py",
+      "surface": "local_http",
+      "status": "example",
+      "depends_on": [
+        "lab-runtime"
+      ],
+      "recommended_with": [
+        "lab-chatter-service"
+      ]
+    },
+    {
       "id": "lab-chatter-service",
       "name": "Lab Chatter Service",
       "path": "modules/lab_chatter_service/",
       "default_port": 8765,
       "entrypoint": "python3 modules/lab_chatter_service/server.py",
       "surface": "local_http",
-      "status": "example"
+      "status": "example",
+      "depends_on": [
+        "lab-runtime"
+      ],
+      "recommended_with": [
+        "ue-scenario-generator"
+      ]
     }
   ]
 }

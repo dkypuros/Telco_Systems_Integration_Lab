@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "id": "ue-scenario-generator",
+  "name": "UE / Scenario Generator",
+  "default_host": "127.0.0.1",
+  "default_port": 8766,
+  "entrypoint": "python3 modules/ue_scenario_generator/server.py",
+  "depends_on": ["lab-runtime"],
+  "recommended_with": ["lab-chatter-service"],
+  "endpoints": [
+    {"path": "/", "description": "Small local HTML control panel for fixed lab scenarios."},
+    {"path": "/api/module", "description": "Module metadata."},
+    {"path": "/api/scenarios", "description": "Available fixed scenario commands."},
+    {"path": "POST /api/scenarios/{scenario_id}", "description": "Run one fixed ./lab scenario command."}
+  ],
+  "reads": [
+    ".lab/state/lab_services.json",
+    "build_logs/lab_services.json"
+  ],
+  "writes": [
+    "build_logs/services/*.log"
+  ],
+  "claim_boundary": "Local UE/scenario traffic generator for demo chatter only; not production traffic and not formal standards conformance."
+}

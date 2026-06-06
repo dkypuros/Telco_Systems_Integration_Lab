@@ -25,9 +25,14 @@ def test_modules_dashboard_cards_include_registered_modules():
     ids = {card["id"] for card in payload["cards"]}
     assert payload["ok"] is True
     assert {"modules-dashboard", "lab-chatter-service"} <= ids
-    assert payload["module_count"] >= 2
+    assert payload["module_count"] >= 4
     assert payload["validation_errors"] == []
     assert "not production" in payload["claim_boundary"].lower()
+    chatter = next(card for card in payload["cards"] if card["id"] == "lab-chatter-service")
+    generator = next(card for card in payload["cards"] if card["id"] == "ue-scenario-generator")
+    assert chatter["depends_on"] == ["lab-runtime"]
+    assert chatter["recommended_with"] == ["ue-scenario-generator"]
+    assert generator["depends_on"] == ["lab-runtime"]
 
 
 def test_modules_dashboard_marks_active_registered_port():
@@ -170,3 +175,57 @@ def test_dashboard_http_post_can_activate_and_stop_registered_module(monkeypatch
         thread.join(timeout=5)
 
     assert stop_payload["ok"] is True, stop_payload
+
+
+def test_lab_runtime_card_uses_lab_services_status_without_port(monkeypatch):
+    server = load_server_module()
+
+    def fake_run_lab_command(*args, timeout=120.0):
+        class Result:
+            returncode = 0
+            stdout = json.dumps({"ready": 26, "total": 26, "all_ready": True})
+            stderr = ""
+        assert args == ("services", "--json")
+        return Result()
+
+    monkeypatch.setattr(server, "run_lab_command", fake_run_lab_command)
+
+    payload = server.module_cards(host="127.0.0.1")
+    card = next(card for card in payload["cards"] if card["id"] == "lab-runtime")
+
+    assert card["action_kind"] == "lab_lifecycle"
+    assert card["port"] is None
+    assert card["url"] is None
+    assert card["activated"] is True
+    assert card["status_label"] == "all ready"
+    assert card["runtime_status"]["ready"] == 26
+
+
+def test_lab_runtime_activate_and_stop_call_fixed_lab_commands(monkeypatch):
+    server = load_server_module()
+    calls = []
+
+    def fake_run_lab_command(*args, timeout=120.0):
+        calls.append(args)
+
+        class Result:
+            returncode = 0
+            stderr = ""
+            if args == ("services", "--json"):
+                stdout = json.dumps({"ready": 26, "total": 26, "all_ready": True})
+            else:
+                stdout = "ok"
+
+        return Result()
+
+    monkeypatch.setattr(server, "run_lab_command", fake_run_lab_command)
+
+    activated = server.activate_module("lab-runtime")
+    stopped = server.stop_module("lab-runtime")
+
+    assert activated["ok"] is True
+    assert activated["ready"] == 26
+    assert stopped["ok"] is True
+    assert ("up",) in calls
+    assert ("services", "--json") in calls
+    assert ("down",) in calls

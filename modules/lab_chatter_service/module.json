@@ -6,10 +6,22 @@
   "default_port": 8765,
   "entrypoint": "python3 modules/lab_chatter_service/server.py",
   "endpoints": [
-    {"path": "/", "description": "Small local HTML view that polls the chatter API."},
-    {"path": "/api/module", "description": "Module metadata."},
-    {"path": "/api/ports", "description": "Registered module ports from modules/index.json."},
-    {"path": "/api/chatter?group=all&lines=80", "description": "Recent lab chatter lines grouped like ./lab chatter."}
+    {
+      "path": "/",
+      "description": "Small local HTML view that polls the chatter API."
+    },
+    {
+      "path": "/api/module",
+      "description": "Module metadata."
+    },
+    {
+      "path": "/api/ports",
+      "description": "Registered module ports from modules/index.json."
+    },
+    {
+      "path": "/api/chatter?group=all&lines=80",
+      "description": "Recent lab chatter lines grouped like ./lab chatter."
+    }
   ],
   "reads": [
     "build_logs/services/*.log",
@@ -17,5 +29,11 @@
     "build_logs/lab_services.json"
   ],
   "writes": [],
-  "claim_boundary": "Local visual/API view over lab-captured logs only; not formal 3GPP, O-RAN, or TM Forum conformance evidence."
+  "claim_boundary": "Local visual/API view over lab-captured logs only; not formal 3GPP, O-RAN, or TM Forum conformance evidence.",
+  "depends_on": [
+    "lab-runtime"
+  ],
+  "recommended_with": [
+    "ue-scenario-generator"
+  ]
 }

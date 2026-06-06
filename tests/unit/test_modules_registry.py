@@ -38,3 +38,24 @@ def test_each_module_readme_declares_dependencies_lifecycle_and_boundary():
             assert heading in readme, f"{module['id']} missing {heading}"
         assert "./lab up" in readme
         assert "./lab down" in readme
+
+
+def test_module_dependency_references_point_to_registered_modules():
+    index = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
+    module_ids = {module["id"] for module in index["modules"]}
+
+    for module in index["modules"]:
+        for field in ["depends_on", "recommended_with"]:
+            for referenced_id in module.get(field, []):
+                assert referenced_id in module_ids, f"{module['id']} {field} references unknown module {referenced_id}"
+
+
+def test_chatter_recommends_scenario_generator_and_runtime_dependency():
+    index = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
+    chatter = next(module for module in index["modules"] if module["id"] == "lab-chatter-service")
+    generator = next(module for module in index["modules"] if module["id"] == "ue-scenario-generator")
+
+    assert chatter["depends_on"] == ["lab-runtime"]
+    assert "ue-scenario-generator" in chatter["recommended_with"]
+    assert generator["depends_on"] == ["lab-runtime"]
+    assert "lab-chatter-service" in generator["recommended_with"]

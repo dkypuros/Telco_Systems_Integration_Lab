@@ -70,14 +70,15 @@ the runtime services when finished:
 
 ## Special commands
 
-Start the dashboard and another module in separate terminals:
+Start the dashboard and use it to activate the base lab runtime plus other modules, or start another module manually in a separate terminal:
 
 ```bash
 python3 modules/dashboard_service/server.py
+# click Activate on Lab Runtime, then on Lab Chatter Service
 python3 modules/lab_chatter_service/server.py
 ```
 
-Or use the dashboard card Activate button to start a registered module. The
+Use the dashboard card Activate button to start a registered module. For the Lab Runtime card, Activate runs `./lab up` and Stop runs `./lab down`. The
 chatter card should show an activated green chiclet and open the chatter service
 in a new tab. If the dashboard started the module, a Stop button is also shown.
 

@@ -135,6 +135,66 @@ def reserved_port_for(module_id: str) -> int | None:
     return None
 
 
+def is_lab_lifecycle_module(module: dict[str, Any] | None) -> bool:
+    return bool(module and module.get("surface") == "lab_lifecycle")
+
+
+def run_lab_command(*args: str, timeout: float = 120.0) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [str(REPO_ROOT / "lab"), *args],
+        cwd=REPO_ROOT,
+        text=True,
+        capture_output=True,
+        timeout=timeout,
+        check=False,
+    )
+
+
+def lab_runtime_report() -> dict[str, Any]:
+    result = run_lab_command("services", "--json", timeout=20.0)
+    try:
+        payload = json.loads(result.stdout or "{}")
+    except json.JSONDecodeError:
+        payload = {}
+    ready = int(payload.get("ready", 0) or 0)
+    total = int(payload.get("total", 0) or 0)
+    return {
+        "ok": result.returncode == 0 or bool(payload),
+        "ready": ready,
+        "total": total,
+        "activated": ready > 0,
+        "all_ready": bool(payload.get("all_ready")),
+        "status_label": "activated" if ready > 0 else "registered",
+        "raw": payload,
+        "returncode": result.returncode,
+    }
+
+
+def activate_lab_runtime(module_id: str) -> dict[str, Any]:
+    result = run_lab_command("up", timeout=180.0)
+    report = lab_runtime_report()
+    return {
+        "ok": result.returncode == 0,
+        "module_id": module_id,
+        "status": "started" if result.returncode == 0 else "start_failed",
+        "ready": report["ready"],
+        "total": report["total"],
+        "stdout_tail": result.stdout.splitlines()[-20:],
+        "stderr_tail": result.stderr.splitlines()[-20:],
+    }
+
+
+def stop_lab_runtime(module_id: str) -> dict[str, Any]:
+    result = run_lab_command("down", timeout=120.0)
+    return {
+        "ok": result.returncode == 0,
+        "module_id": module_id,
+        "status": "stopped" if result.returncode == 0 else "stop_failed",
+        "stdout_tail": result.stdout.splitlines()[-20:],
+        "stderr_tail": result.stderr.splitlines()[-20:],
+    }
+
+
 def safe_entrypoint_args(entrypoint: str) -> list[str]:
     """Return a safe argv list for a registered Python module entrypoint.
 
@@ -181,6 +241,8 @@ def activate_module(module_id: str, *, host: str = "127.0.0.1", wait_seconds: fl
     module = registered_module(module_id)
     if not module:
         return {"ok": False, "error": f"unknown module: {module_id}"}
+    if is_lab_lifecycle_module(module):
+        return activate_lab_runtime(module_id)
     port = reserved_port_for(module_id)
     if not port:
         return {"ok": False, "error": f"module has no registered port: {module_id}"}
@@ -262,6 +324,9 @@ def activate_module(module_id: str, *, host: str = "127.0.0.1", wait_seconds: fl
 
 
 def stop_module(module_id: str, *, timeout: float = 3.0) -> dict[str, Any]:
+    module = registered_module(module_id)
+    if is_lab_lifecycle_module(module):
+        return stop_lab_runtime(module_id)
     state = load_module_state()
     record = state.get("modules", {}).get(module_id)
     if not isinstance(record, dict) or record.get("owner") != MANAGER_OWNER:
@@ -310,9 +375,18 @@ def module_cards(host: str = "127.0.0.1") -> dict[str, Any]:
         metadata_path = module_path / "module.json"
         metadata = load_json(metadata_path) if metadata_path.exists() else {}
         reserved = reserved_by_module.get(module["id"], {})
-        port = int(reserved.get("port", module.get("default_port", 0)))
-        activated = port_open(host, port) if port else False
-        record = managed_record(module["id"])
+        record = None
+        runtime_report: dict[str, Any] | None = None
+        if is_lab_lifecycle_module(module):
+            port = None
+            runtime_report = lab_runtime_report()
+            activated = bool(runtime_report["activated"])
+            status_label = "all ready" if runtime_report["all_ready"] else runtime_report["status_label"]
+        else:
+            port = int(reserved.get("port", module.get("default_port", 0)))
+            activated = port_open(host, port) if port else False
+            record = managed_record(module["id"])
+            status_label = "activated" if activated else "registered"
         cards.append(
             {
                 "id": module["id"],
@@ -322,10 +396,14 @@ def module_cards(host: str = "127.0.0.1") -> dict[str, Any]:
                 "url": f"http://{host}:{port}/" if port else None,
                 "activated": activated,
                 "managed": record is not None,
-                "status_label": "activated" if activated else "registered",
+                "status_label": status_label,
                 "entrypoint": module["entrypoint"],
                 "surface": module.get("surface", "unknown"),
+                "action_kind": "lab_lifecycle" if is_lab_lifecycle_module(module) else "local_http",
+                "runtime_status": runtime_report,
                 "description": reserved.get("description", metadata.get("name", module["name"])),
+                "depends_on": module.get("depends_on", metadata.get("depends_on", [])),
+                "recommended_with": module.get("recommended_with", metadata.get("recommended_with", [])),
                 "claim_boundary": metadata.get("claim_boundary", index.get("claim_boundary", "Local module only.")),
             }
         )

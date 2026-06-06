@@ -17,12 +17,17 @@ Required:
 - Repository root as the working directory.
 - Registered module port `8765` from `modules/index.json`.
 
+Recommended for useful output:
+
+- UE / Scenario Generator module, or manual `./lab scenario ...` commands.
+
 Recommended lab lifecycle:
 
 ```bash
 ./lab up
+python3 modules/ue_scenario_generator/server.py
 python3 modules/lab_chatter_service/server.py
-# in another terminal, run scenarios or inspect the browser view
+# in another terminal/browser, run scenarios or inspect the chatter view
 ./lab down
 ```
 
@@ -79,7 +84,7 @@ the runtime services when finished:
 
 ## Special commands
 
-Generate useful chatter in another terminal:
+Generate useful chatter from the UE / Scenario Generator module, or manually in another terminal:
 
 ```bash
 ./lab services
