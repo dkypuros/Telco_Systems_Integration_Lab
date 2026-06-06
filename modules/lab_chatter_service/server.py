@@ -157,11 +157,12 @@ async function loadChatter() {{
   const lines = document.getElementById('lines').value;
   const out = document.getElementById('output');
   try {{
-    const res = await fetch(`/api/chatter?group=${{encodeURIComponent(group)}}&lines=${{encodeURIComponent(lines)}}`);
+    const url = '/api/chatter?group=' + encodeURIComponent(group) + '&lines=' + encodeURIComponent(lines);
+    const res = await fetch(url);
     const data = await res.json();
     if (!data.ok) {{ out.className = 'error'; out.textContent = data.error || 'unknown error'; return; }}
     out.className = data.entries.length ? '' : 'empty';
-    out.textContent = data.entries.length ? data.entries.map(e => e.prefixed).join('\n') : 'No lab chatter found yet. Run ./lab up or ./lab scenario <name>.';
+    out.textContent = data.entries.length ? data.entries.map(e => e.prefixed).join('\\n') : 'No lab chatter found yet. Run ./lab up or ./lab scenario <name>.';
   }} catch (err) {{
     out.className = 'error'; out.textContent = String(err);
   }}

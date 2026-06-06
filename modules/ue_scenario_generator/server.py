@@ -158,9 +158,22 @@ def html_page() -> str:
   <pre id="output">Loading scenarios…</pre>
 </main>
 <script>
+function escapeText(value) {
+  return String(value).replace(/[&<>"']/g, function (char) {
+    return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[char];
+  });
+}
 async function loadScenarios() {
   const data = await (await fetch('/api/scenarios')).json();
-  document.getElementById('buttons').innerHTML = data.scenarios.map(s => `<button onclick="runScenario('${s.id}')">${s.label}</button>`).join('');
+  const buttons = document.getElementById('buttons');
+  buttons.innerHTML = data.scenarios.map(function (s) {
+    return '<button data-scenario="' + escapeText(s.id) + '">' + escapeText(s.label) + '</button>';
+  }).join('');
+  buttons.querySelectorAll('button').forEach(function (button) {
+    button.addEventListener('click', function () {
+      runScenario(button.getAttribute('data-scenario'));
+    });
+  });
   document.getElementById('output').textContent = 'Ready. Activate Lab Runtime first, then run a scenario.';
 }
 async function runScenario(id) {
@@ -175,8 +188,8 @@ async function runScenario(id) {
       `command=${(data.command || []).join(' ')}`,
       '',
       data.stdout || '',
-      data.stderr ? `STDERR:\n${data.stderr}` : ''
-    ].join('\n');
+      data.stderr ? `STDERR:\\n${data.stderr}` : ''
+    ].join('\\n');
   } catch (err) {
     out.textContent = String(err);
   } finally {

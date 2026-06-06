@@ -1,6 +1,9 @@
 import importlib.util
 import json
+import re
+import shutil
 import subprocess
+import tempfile
 import threading
 from pathlib import Path
 from urllib.error import HTTPError
@@ -16,6 +19,22 @@ def load_server_module():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def assert_embedded_scripts_are_valid(html: str) -> None:
+    scripts = re.findall(r"<script>(.*?)</script>", html, re.S)
+    assert scripts
+    assert r"join('\n')" in html
+    assert "data-scenario" in html
+    assert "onclick" not in html
+    node = shutil.which("node")
+    if node is None:
+        return
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        for index, script in enumerate(scripts):
+            script_path = Path(tmp_dir) / f"script-{index}.js"
+            script_path.write_text(script, encoding="utf-8")
+            subprocess.run([node, "--check", str(script_path)], check=True, capture_output=True, text=True)
 
 
 def test_scenario_generator_lists_fixed_scenarios_and_dependencies():
@@ -62,6 +81,12 @@ def test_scenario_generator_rejects_unknown_scenario_before_subprocess(monkeypat
     assert "unknown scenario" in payload["error"]
 
 
+def test_scenario_generator_html_has_valid_embedded_javascript():
+    server = load_server_module()
+
+    assert_embedded_scripts_are_valid(server.html_page())
+
+
 def test_scenario_generator_http_api(monkeypatch):
     server_mod = load_server_module()
 
@@ -74,6 +99,8 @@ def test_scenario_generator_http_api(monkeypatch):
     thread.start()
     try:
         host, port = httpd.server_address
+        with urlopen(f"http://{host}:{port}/", timeout=5) as response:  # noqa: S310 - local test server
+            html = response.read().decode("utf-8")
         with urlopen(f"http://{host}:{port}/api/scenarios", timeout=5) as response:  # noqa: S310 - local test server
             list_payload = json.loads(response.read().decode("utf-8"))
         request = Request(f"http://{host}:{port}/api/scenarios/radio", data=b"", method="POST")
@@ -84,6 +111,7 @@ def test_scenario_generator_http_api(monkeypatch):
         httpd.server_close()
         thread.join(timeout=5)
 
+    assert "Loading scenarios" in html
     assert list_payload["ok"] is True
     assert run_payload["ok"] is True
     assert run_payload["scenario_id"] == "radio"
