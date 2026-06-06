@@ -30,9 +30,13 @@ def test_modules_dashboard_cards_include_registered_modules():
     assert "not production" in payload["claim_boundary"].lower()
     chatter = next(card for card in payload["cards"] if card["id"] == "lab-chatter-service")
     generator = next(card for card in payload["cards"] if card["id"] == "ue-scenario-generator")
+    product_front_door = next(card for card in payload["cards"] if card["id"] == "product-front-door")
     assert chatter["depends_on"] == ["lab-runtime"]
     assert chatter["recommended_with"] == ["ue-scenario-generator"]
     assert generator["depends_on"] == ["lab-runtime"]
+    assert product_front_door["port"] == 8767
+    assert product_front_door["url"] == "http://127.0.0.1:8767/"
+    assert "lab-chatter-service" in product_front_door["recommended_with"]
 
 
 def test_modules_dashboard_marks_active_registered_port():

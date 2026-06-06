@@ -20,6 +20,12 @@
       "module_id": "ue-scenario-generator",
       "path": "modules/ue_scenario_generator/",
       "description": "Local UE/scenario traffic generator that runs fixed ./lab scenario commands."
+    },
+    {
+      "port": 8767,
+      "module_id": "product-front-door",
+      "path": "modules/product_front_door/",
+      "description": "Local storefront-style module for the basic 5G data MVP activation flow."
     }
   ],
   "modules": [
@@ -71,6 +77,20 @@
         "lab-runtime"
       ],
       "recommended_with": [
+        "ue-scenario-generator"
+      ]
+    },
+    {
+      "id": "product-front-door",
+      "name": "Product Front Door",
+      "path": "modules/product_front_door/",
+      "default_port": 8767,
+      "entrypoint": "python3 modules/product_front_door/server.py",
+      "surface": "local_http",
+      "status": "example",
+      "recommended_with": [
+        "modules-dashboard",
+        "lab-chatter-service",
         "ue-scenario-generator"
       ]
     }

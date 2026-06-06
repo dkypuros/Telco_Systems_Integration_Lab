@@ -23,6 +23,7 @@ The module system is intentionally small:
 | [`dashboard_service`](../modules/dashboard_service/) | `8764` | Module card dashboard for discovery, activation, stop, and navigation. |
 | [`ue_scenario_generator`](../modules/ue_scenario_generator/) | `8766` | Fixed scenario buttons that generate UE/session/RAN/O-RAN lab activity. |
 | [`lab_chatter_service`](../modules/lab_chatter_service/) | `8765` | Browser/API view over `./lab chatter` service logs. |
+| [`product_front_door`](../modules/product_front_door/) | `8767` | Storefront-style front door for the basic 5G data product MVP activation path. |
 
 The first useful visual loop is:
 
@@ -41,8 +42,10 @@ From the dashboard:
 1. Activate **Lab Runtime**.
 2. Activate **UE / Scenario Generator**.
 3. Activate **Lab Chatter Service**.
-4. Open the UE generator and run a scenario.
-5. Open the chatter service to watch the resulting service transcript.
+4. Activate **Product Front Door**.
+5. Open the Product Front Door and run the fixed demo product activation.
+6. Open the UE generator and run a scenario.
+7. Open the chatter service to watch the resulting service transcript.
 
 Manual equivalent:
 
@@ -50,6 +53,7 @@ Manual equivalent:
 ./lab up
 python3 modules/ue_scenario_generator/server.py
 python3 modules/lab_chatter_service/server.py
+python3 modules/product_front_door/server.py
 ./lab down
 ```
 
@@ -130,4 +134,3 @@ Modules are local operator/reviewer surfaces. They can make evidence easier to
 see and demos easier to run, but they do not create formal 3GPP, O-RAN, or TM
 Forum conformance by themselves. Any stronger claim must point to the underlying
 tests, traceability records, evidence bundles, and claim gates.
-

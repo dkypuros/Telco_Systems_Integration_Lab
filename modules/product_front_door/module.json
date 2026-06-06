@@ -1,0 +1,16 @@
+{
+  "id": "product-front-door",
+  "name": "Product Front Door",
+  "default_host": "127.0.0.1",
+  "default_port": 8767,
+  "entrypoint": "python3 modules/product_front_door/server.py",
+  "surface": "local_http",
+  "status": "example",
+  "depends_on": [],
+  "recommended_with": [
+    "modules-dashboard",
+    "lab-chatter-service",
+    "ue-scenario-generator"
+  ],
+  "claim_boundary": "Local product-front-door demo over the service-order-to-activation MVP only; not formal TM Forum, 3GPP, O-RAN, ODA, OCP, Kubernetes, or O-Cloud conformance."
+}

@@ -95,7 +95,8 @@ Current examples:
 
 ```bash
 python3 modules/dashboard_service/server.py        # http://127.0.0.1:8764/ module card dashboard
-# From the dashboard, activate Lab Runtime, UE / Scenario Generator, and Lab Chatter Service.
+# From the dashboard, activate Lab Runtime, Product Front Door, UE / Scenario Generator, and Lab Chatter Service.
+python3 modules/product_front_door/server.py      # optional manual start: http://127.0.0.1:8767/
 python3 modules/ue_scenario_generator/server.py  # optional manual start: http://127.0.0.1:8766/
 python3 modules/lab_chatter_service/server.py    # optional manual start: http://127.0.0.1:8765/
 ```

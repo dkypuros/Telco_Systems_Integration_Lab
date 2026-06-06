@@ -19,6 +19,7 @@ Current example:
 | [`dashboard_service/`](dashboard_service/) | `8764` | Card dashboard for registered modules and activation status. |
 | [`ue_scenario_generator/`](ue_scenario_generator/) | `8766` | Fixed UE/session/RAN scenario buttons that generate chatter. |
 | [`lab_chatter_service/`](lab_chatter_service/) | `8765` | Local web/API viewer for `./lab chatter` service logs. |
+| [`product_front_door/`](product_front_door/) | `8767` | Storefront-style front door for the basic 5G data MVP activation path. |
 
 Boundaries:
 
