@@ -4,6 +4,32 @@ Formal, standards-traceable workspace for end-to-end telco integration across 3G
 
 <img src="docs/vision_triangle.svg" alt="Telco Systems Integration Lab Vision" width="440" />
 
+## Architecture Vision
+
+This triangle encapsulates the core philosophy of the Telco Systems Integration Lab. It represents how raw telecom standards are progressively transformed into executable, governed code, culminating in user-facing applications. The lower layers provide the massive foundation required to support the thin, high-value application layer at the top.
+
+This mental model directly aligns with the repository's formal buckets and governance rules:
+
+### 1. Standards Integration (The Foundation)
+At the bottom lies the source of truth. Without this layer, everything built above it is just custom software, not a telecom implementation. This is where we anchor to 3GPP, TM Forum, and O-RAN.
+* **Buckets:** `specs/`, `traceability/`
+* **Mechanisms:** Source inventories, copy manifests, and the `standards_release_register.yaml`.
+
+### 2. Skills Codification
+Moving up, we take those raw standards and convert them into executable, verifiable behaviors and data models. This translates dry specifications into actionable code.
+* **Buckets:** `models/`, `procedures/`, `tests/`
+* **Mechanisms:** Canonical data mappings and automated conformance tests.
+
+### 3. Harness with Safety & Governance
+The middle layer provides a structured, safe environment where these codified skills can run without colliding or deviating from the specifications. It acts as the orchestrator and integration boundary.
+* **Buckets:** `adapters/`, `services/`, `build_logs/`
+* **Mechanisms:** The `./lab` CLI wrapper, safely contained core networks, and strict intake boundaries.
+
+### 4. Use Case Testing & Application Development (The Tip)
+The top layer is where real value is delivered to the operator or end-user. This layer is thin because it heavily relies on the massive foundation of standards and skills beneath it.
+* **Buckets:** `capabilities/`, `apps/`
+* **Mechanisms:** TM Forum storefronts, end-to-end VoNR call demos, and AI observability dashboards.
+
 Core rule: preserve originals. Intake from existing workspaces is copy-only and must be recorded in `traceability/` before source code is migrated.
 
 Authoritative release/conformance status lives in `traceability/standards_release_register.yaml`; this file is a derived view.
