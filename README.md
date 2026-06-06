@@ -7,6 +7,8 @@ Formal, standards-traceable workspace for end-to-end telco integration across O-
 
 **[Discover the Agentic Harness Engine](docs/harness_vision.md)**: "Agentic Telecom" isn't just about an LLM writing scripts. The core of this lab is a massive safety and governance harness that turns O-RAN and 3GPP components into constrained, trackable *skills*—a tightly governed execution paradigm for telecommunications. Read more about the engine powering the architecture layers.
 
+**Related demo example:** [`O-RAN Agent Harness`](https://dkypuros.github.io/oran-agent-harness/) shows a separate public Cloud RAN day-2 closed-loop remediation harness demo; its source bench is available at [`dkypuros/oran-agent-harness`](https://github.com/dkypuros/oran-agent-harness).
+
 ## Architecture Vision
 
 This triangle encapsulates the core philosophy of the Telco Systems Integration Lab. It represents how raw telecom standards are progressively transformed into executable, governed code, culminating in user-facing applications. The lower layers provide the massive foundation required to support the thin, high-value application layer at the top.
