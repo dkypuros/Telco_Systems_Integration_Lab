@@ -2,8 +2,8 @@
 
 Local no-dependency dashboard for the module ecosystem. It reads
 `modules/index.json`, renders cards for registered modules, detects whether each
-module's registered localhost port is active, and links active modules in a new
-tab.
+module's registered localhost port is active, links active modules in a new
+tab, and can activate registered module entrypoints.
 
 ## Dependencies
 
@@ -13,6 +13,7 @@ Required:
 - Repository root as the working directory.
 - Registered module port `8764` from `modules/index.json`.
 - A valid `modules/index.json` where each module has a `module.json` file.
+- Write access to `.lab/state/` and `build_logs/modules/` when using Activate/Stop.
 
 Optional lab lifecycle:
 
@@ -46,6 +47,8 @@ Useful JSON endpoints:
 http://127.0.0.1:8764/api/module
 http://127.0.0.1:8764/api/modules
 http://127.0.0.1:8764/api/ports
+POST http://127.0.0.1:8764/api/modules/{module_id}/activate
+POST http://127.0.0.1:8764/api/modules/{module_id}/stop
 ```
 
 Optional host/port override:
@@ -74,11 +77,16 @@ python3 modules/dashboard_service/server.py
 python3 modules/lab_chatter_service/server.py
 ```
 
-Then refresh the dashboard. The chatter card should show an activated green
-chiclet and open the chatter service in a new tab.
+Or use the dashboard card Activate button to start a registered module. The
+chatter card should show an activated green chiclet and open the chatter service
+in a new tab. If the dashboard started the module, a Stop button is also shown.
 
 ## Boundary
 
-Activation means a registered localhost port accepted a TCP connection. It does
-not prove module health, production readiness, or standards conformance. The
-dashboard is navigation and discovery glue for local modules only.
+Activation means a registered localhost port accepted a TCP connection. The
+Activate button starts only entrypoints listed in `modules/index.json`, without
+shell execution. Stop only targets PIDs recorded by this dashboard under
+`.lab/state/`; it must not kill arbitrary processes already listening on a port.
+Activation does not prove module health, production readiness, or formal
+standards conformance. The dashboard is navigation and discovery glue for local
+modules only.

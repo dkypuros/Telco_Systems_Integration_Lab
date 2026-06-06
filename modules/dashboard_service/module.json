@@ -6,10 +6,30 @@
   "default_port": 8764,
   "entrypoint": "python3 modules/dashboard_service/server.py",
   "endpoints": [
-    {"path": "/", "description": "Local card dashboard for registered modules."},
-    {"path": "/api/module", "description": "Module metadata."},
-    {"path": "/api/modules", "description": "Registered module cards with activation status."},
-    {"path": "/api/ports", "description": "Registered module ports from modules/index.json."}
+    {
+      "path": "/",
+      "description": "Local card dashboard for registered modules."
+    },
+    {
+      "path": "/api/module",
+      "description": "Module metadata."
+    },
+    {
+      "path": "/api/modules",
+      "description": "Registered module cards with activation status."
+    },
+    {
+      "path": "/api/ports",
+      "description": "Registered module ports from modules/index.json."
+    },
+    {
+      "path": "POST /api/modules/{module_id}/activate",
+      "description": "Start a registered module entrypoint if its port is not already active."
+    },
+    {
+      "path": "POST /api/modules/{module_id}/stop",
+      "description": "Stop only a module process previously started by this dashboard."
+    }
   ],
   "reads": [
     "modules/index.json",
