@@ -4,13 +4,14 @@ Scope: current tracked tree for `Telco_Systems_Integration_Lab`, plus a high-sig
 
 ## Result
 
-Current tracked tree is publishable from a sensitive-data perspective after this cleanup pass:
+Current tracked tree is publishable from a sensitive-data perspective after this cleanup pass and the follow-up security check:
 
 - No high-signal credential patterns found in tracked files.
-- No tracked raw 3GPP/O-RAN/TM Forum standards bundles, ZIPs, PDFs, DOCX files, or `Codex.dmg` found.
+- No high-signal credential patterns found in existing Git history.
+- No tracked raw 3GPP/O-RAN/TM Forum/ETSI standards bundles, ZIPs, PDFs, DOCX files, JARs, nested `.git` directories, or `Codex.dmg` found.
 - No tracked sensitive filenames such as `.env`, private keys, kubeconfigs, npm/pypi credentials, or PEM/P12/PFX material found.
 - No current-tree private absolute path markers found after redaction.
-- `.gitignore` now blocks local secrets, runtime state, generated logs, raw standards bundles, and common key/cert material.
+- `.gitignore` now blocks local secrets, runtime state, generated logs, raw standards bundles, local integration staging, and common key/cert material.
 
 ## Commands run
 
@@ -23,8 +24,11 @@ python3 scripts/validate_oran_spec_map.py --strict  # expected exit 1 while know
 git grep -n -I -E '<high-signal secret patterns>' -- .
 git grep -n -I -E '<private/local runtime path patterns>' -- .
 git ls-files | grep -Ei '<sensitive filename patterns>'
-git ls-files | grep -Ei '^specs/(3gpp|oran|tmforum)/.*\.(pdf|docx?|xlsx?|zip|dmg)$|Codex\.dmg'
+git ls-files | grep -Ei '^specs/(3gpp|oran|tmforum|ETSI|etsi)/.*\.(pdf|docx?|xlsx?|zip|jar|dmg)$|Codex\.dmg|(^|/)\.git(/|$)'
 git grep -n -I -E '<high-signal secret patterns>' $(git rev-list --all) -- .
+python -m pip_audit -r config/requirements.txt
+git ls-files -o --exclude-standard
+git check-ignore -v --stdin --no-index
 ```
 
 ## Verification evidence
@@ -33,6 +37,9 @@ git grep -n -I -E '<high-signal secret patterns>' $(git rev-list --all) -- .
 - Markdown link check: tracked Markdown links resolved.
 - O-RAN validator: report regenerates; strict mode exits `1` because it intentionally surfaces 33 missing implementation paths and 1 missing local spec filename stem.
 - Ignore checks: `.env`, `.env.*`, private keys/certs, kubeconfig, `.lab/state/`, `build_logs/**`, `logs/**`, `.omx` runtime dirs, and raw standards bundle paths are ignored.
+- Follow-up secret checks: no high-signal credentials in the current tracked tree or in existing Git history.
+- Follow-up dependency audit: `pip-audit -r config/requirements.txt` reported `No known vulnerabilities found`.
+- Follow-up untracked check: `git ls-files -o --exclude-standard` returned no visible untracked files after adding the local ETSI standards cache and `0_to_integrate/` staging ignores.
 
 ## Remediations applied
 
@@ -42,9 +49,10 @@ git grep -n -I -E '<high-signal secret patterns>' $(git rev-list --all) -- .
 - Redacted private absolute paths in tracked run evidence and traceability artifacts to placeholders such as `<LAB_ROOT>` and `<SOURCE_5G_LAB_SIMULATOR_ROOT>`.
 - Replaced the NRF reusable development JWT default with an ephemeral generated key unless `NRF_JWT_SECRET` is explicitly set.
 - Updated copy-manifest checksums for redacted artifacts.
+- Added local-only ignores for `specs/ETSI/**`, `specs/etsi/**`, and `/0_to_integrate/` so raw ETSI standards, nested downloaded repositories, JARs, and integration staging assets do not enter public history accidentally.
 
 ## Remaining risks before making the repository public
 
 1. **Git history still contains pre-cleanup local path markers.** No high-signal secrets were found in history, but prior private commits retain local path strings. If the repository must be path-clean in history too, publish from a fresh sanitized repository or run a history rewrite before changing repository visibility.
 2. **Mock services still use permissive CORS in several FastAPI apps.** This is acceptable for a local simulator, but not for production deployment without origin restrictions.
-3. **Dependency vulnerability audit was limited.** `npm audit` was skipped because there is no `package.json`; Python security audit tools such as `pip-audit`/`safety` were not installed, so dependency CVE scanning was not performed.
+3. **Dependency vulnerability audit covers tracked Python requirements only.** `pip-audit` found no known vulnerabilities for `config/requirements.txt` and `npm audit` was skipped because there are no tracked npm manifests; ignored external standards/tool caches were not audited.

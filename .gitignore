@@ -42,11 +42,11 @@ build_logs/**
 logs/**
 !logs/
 !logs/.gitkeep
-.omx/context/
-.omx/logs/
-.omx/state/
-.omx/ultragoal/
-.omx/project-memory.json
+# Local OMX runtime state (keep durable planning docs tracked)
+.omx/**
+!.omx/
+!.omx/plans/
+!.omx/plans/*.md
 
 # Node/package caches
 node_modules/
@@ -62,5 +62,14 @@ specs/oran/**
 specs/tmforum/**
 !specs/tmforum/
 !specs/tmforum/.gitkeep
+specs/ETSI/**
+!specs/ETSI/
+!specs/ETSI/.gitkeep
+specs/etsi/**
+!specs/etsi/
+!specs/etsi/.gitkeep
 Codex.dmg
 *.dmg
+
+# Local integration staging
+/0_to_integrate/
