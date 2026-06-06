@@ -21,7 +21,8 @@ bounded.
 | [Conformance Boundary](conformance-boundary.md) | What is proven, what is not proven, and what evidence is required before stronger claims. |
 | [Issue Authoring](issue-authoring.md) | Required standards-evidence fields for GitHub issues and agent work chunks. |
 | [Evidence Bundles](evidence-bundles.md) | Correlation ID and evidence bundle format for traceable demos/tests. |
-| [Service Order to Activation Contract](../capabilities/service_order_to_activation/README.md) | First API-first MVP flow contract and evidence gate for issue #20. |
+| [Product Front Door ROF Loop](front-door-product-builder-rof.md) | Reality/options/forward plan for turning the current MVP spine into a storefront-style module. |
+| [Service Order to Activation Contract](../capabilities/service_order_to_activation/README.md) | First API-first MVP flow contract and current demo-evidence boundary. |
 
 ## Architecture decisions
 

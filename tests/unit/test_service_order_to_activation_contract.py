@@ -42,11 +42,11 @@ def test_mvp_contract_names_required_identifiers_and_flow_order():
         assert "correlation_id" in step["output_identifiers"]
 
 
-def test_mvp_contract_stays_planned_and_blocks_upstream_absorption():
+def test_mvp_contract_tracks_demo_evidence_and_blocks_upstream_absorption():
     contract = load_contract()
     assert contract["capability_slice"] == "service_order_to_activation/"
-    assert contract["current_evidence_label"] == "planned"
-    assert contract["target_evidence_label"] == "planned"
+    assert contract["current_evidence_label"] == "demo_evidence"
+    assert contract["target_evidence_label"] == "demo_evidence"
     assert contract["future_promotion_label_after_implementation"] == "demo_evidence"
     assert contract["external_upstream_required"] is False
     assert "No full external upstream repository" in contract["source_intake_boundary"]
@@ -70,7 +70,7 @@ def test_mvp_contract_maps_expected_standards_and_implementation_scopes():
         assert expected_path in paths
 
 
-def test_readme_documents_the_api_first_mvp_path_and_acceptance_gate():
+def test_readme_documents_the_api_first_mvp_path_and_current_evidence_gate():
     readme = README_PATH.read_text(encoding="utf-8").lower()
     for phrase in [
         "product/catalog -> product order -> activation/orchestration -> mock 5g core adapter -> evidence bundle",
@@ -78,6 +78,7 @@ def test_readme_documents_the_api_first_mvp_path_and_acceptance_gate():
         "subscriber_intent",
         "session_intent",
         "does not prove formal standards conformance",
+        "current demo evidence",
         "tests that run without external upstream repositories",
     ]:
         assert phrase in readme

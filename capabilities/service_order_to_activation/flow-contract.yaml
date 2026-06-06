@@ -1,16 +1,16 @@
 schema_version: "1.0"
 capability_slice: "service_order_to_activation/"
-status: "contract_defined"
-current_evidence_label: "planned"
-target_evidence_label: "planned"
+status: "demo_evidence"
+current_evidence_label: "demo_evidence"
+target_evidence_label: "demo_evidence"
 future_promotion_label_after_implementation: "demo_evidence"
-claim_boundary: "API-first MVP design contract only; not formal 3GPP, O-RAN, or TM Forum conformance."
+claim_boundary: "API-first MVP demo contract only; not formal 3GPP, O-RAN, or TM Forum conformance."
 external_upstream_required: false
 source_intake_boundary: "No full external upstream repository is required or copied for this MVP contract. External systems remain future implementation profiles/interoperability targets."
 
 purpose: >-
   Define the smallest end-to-end customer/order-to-network activation path that can
-  later be implemented by independent issues without overclaiming standards coverage.
+  support current demo evidence and future module work without overclaiming standards coverage.
 
 identifiers:
   - name: "correlation_id"

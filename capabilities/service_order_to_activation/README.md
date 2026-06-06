@@ -1,7 +1,7 @@
 # Service Order to Activation MVP Contract
 
-Status: `planned` contract defined for issue #20
-Target evidence label after implementation: `demo_evidence` for the narrow MVP only
+Status: `demo_evidence` for the narrow MVP path
+Evidence label: `demo_evidence` for the local MVP only
 
 This slice defines the first API-first vertical path for the Telco Systems
 Integration Lab:
@@ -10,8 +10,8 @@ Integration Lab:
 product/catalog -> product order -> activation/orchestration -> mock 5G core adapter -> evidence bundle
 ```
 
-The goal is not to import an external telco source tree. The goal is to define a
-small, lab-owned contract that later implementation issues can build and test
+The goal is not to import an external telco source tree. The goal is to keep a
+small, lab-owned contract that local implementation and module work can build on
 without overclaiming 3GPP, TM Forum, or O-RAN conformance.
 
 ## Source boundary
@@ -64,10 +64,15 @@ The machine-readable contract is
 Authoritative status remains in
 [`traceability/standards_release_register.yaml`](../../traceability/standards_release_register.yaml).
 
-## Acceptance evidence before promoting this slice
+## Current demo evidence
 
-The slice can only move from `planned` to `demo_evidence` after issue #25 or an
-equivalent integration issue produces all of the following:
+This slice has moved from `planned` to narrow `demo_evidence` through the
+repeatable integration test and evidence snapshot:
+
+- [`tests/integration/test_service_order_to_activation_evidence.py`](../../tests/integration/test_service_order_to_activation_evidence.py)
+- [`traceability/evidence_snapshots/service-order-to-activation-demo-evidence-bundle.json`](../../traceability/evidence_snapshots/service-order-to-activation-demo-evidence-bundle.json)
+
+The demo evidence covers:
 
 - catalog response for `prod-5g-data-basic`;
 - order lifecycle with `order_id` and state history;
@@ -79,7 +84,11 @@ equivalent integration issue produces all of the following:
 - known gaps to formal TM Forum and 3GPP conformance explicitly recorded;
 - tests that run without external upstream repositories.
 
-## Planned implementation sequence
+It still does **not** cover formal TM Forum CTK conformance, formal 3GPP
+protocol conformance, O-RAN behavior, O-Cloud/O2/OCP execution, or production
+service inventory.
+
+## Completed MVP implementation sequence
 
 | Issue | Scope |
 |---|---|
