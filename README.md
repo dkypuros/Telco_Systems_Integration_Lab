@@ -5,7 +5,7 @@ Formal, standards-traceable workspace for end-to-end telco integration across O-
 <a href="docs/harness_vision.md"><img src="docs/harness_engine.svg" alt="Agentic Harness Engine" width="400" /></a>
 <img src="docs/vision_triangle.svg" alt="Telco Systems Integration Lab Vision" width="400" />
 
-**[Discover the Agentic Harness Engine](docs/harness_vision.md)**: "Agentic Telecom" isn't just about an LLM writing scripts. The core of this lab is a massive safety and governance harness that turns O-RAN and 3GPP components into constrained, trackable *skills*—an "Oh My Codex" reality for telecommunications. Read more about the engine powering the architecture layers.
+**[Discover the Agentic Harness Engine](docs/harness_vision.md)**: "Agentic Telecom" isn't just about an LLM writing scripts. The core of this lab is a massive safety and governance harness that turns O-RAN and 3GPP components into constrained, trackable *skills*—a tightly governed execution paradigm for telecommunications. Read more about the engine powering the architecture layers.
 
 ## Architecture Vision
 
