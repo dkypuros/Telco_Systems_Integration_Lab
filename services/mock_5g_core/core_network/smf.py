@@ -1,4 +1,4 @@
-# File location: 5G_Emulator_API/core_network/smf.py
+# File location: clean_5g_emulator_api/core_network/smf.py
 # Enhanced with 3GPP TS 23.502-referenced PDU Session Establishment modeling
 # Real protocol mode: PFCP (UDP 8805) for N4 interface toward UPF
 from fastapi import FastAPI, Request, HTTPException

@@ -22,7 +22,7 @@ For running the stack see `docs/operations.md`. For extending the system see
 |-------|-------|--------------|
 | Unit tests | 148+ (43 order_engine, 68 catalog_api, 37 ai_observer) | Individual functions, adapters, models, analyzers |
 | TMF Conformance (CTK) | 1484 tests (1421 TMF620 + 63 TMF622) | API contract conformance to TM Forum standards |
-| 3GPP compliance | 6/6 | BF3 NF protocol compliance (NRF, AMF, SMF) |
+| 3GPP compliance | 6/6 | legacy standalone 5G emulator NF protocol compliance (NRF, AMF, SMF) |
 | Integration sweep | 17 phases | Full stack from bootstrap through port cleanliness |
 | E2E demos | 3 scripts | Customer-facing flows (order, voice, O-RAN closed loop) |
 
@@ -43,8 +43,8 @@ Test files in `src/order_engine/tests/`:
 |------|--------------|
 | `test_tmf622.py` | TMF622 order creation, state machine, decomposer routing |
 | `test_o2ims_real_adapter.py` | O2IMS adapter activate/rollback with httpx mock transport |
-| `test_bf3_adapter_env_config.py` | BF3 adapter reads NF URLs from environment variables |
-| `test_bf3_adapter_rollback_real.py` | BF3 adapter rollback paths (UDR sidecar, AMF deregister) |
+| `test_legacy_5g_emulator_adapter_env_config.py` | legacy standalone 5G emulator adapter reads NF URLs from environment variables |
+| `test_legacy_5g_emulator_adapter_rollback_real.py` | legacy standalone 5G emulator adapter rollback paths (UDR sidecar, AMF deregister) |
 | `test_decomposer.py` | Rules YAML parsing, offering-to-step mapping |
 | `test_saga.py` | Saga coordinator success, partial failure, compensating rollback |
 
@@ -76,7 +76,7 @@ Test files in `src/ai_observer/tests/`:
 
 | File | What it tests |
 |------|--------------|
-| `test_collectors.py` | BF3NfCollector, OrderEngineCollector, OtelLogCollector with mocked HTTP |
+| `test_collectors.py` | legacy standalone 5G emulatorNfCollector, OrderEngineCollector, OtelLogCollector with mocked HTTP |
 | `test_analyzers.py` | LatencyAnalyzer, OrderFailureAnalyzer alert generation |
 | `test_actuators.py` | NfRestartActuator, OrderRetryActuator, PlaybookActuator can_act/execute |
 | `test_action_engine.py` | Confidence threshold gating, propose vs execute paths |
@@ -163,12 +163,12 @@ means the API response does not match the TMF specification schema or behavior.
 
 ## 3GPP Compliance Smoke Test
 
-Tests that the BF3 NFs conform to the relevant 3GPP interfaces.
+Tests that the legacy standalone 5G emulator NFs conform to the relevant 3GPP interfaces.
 
-Requires: BF3 NFs running (bring_up.sh or manual start).
+Requires: legacy standalone 5G emulator NFs running (bring_up.sh or manual start).
 
 ```bash
-cd components/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API
+cd components/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api
 source venv/bin/activate
 python test_3gpp_compliance.py
 ```
@@ -198,7 +198,7 @@ then `bootstrap.sh`, then `bring_up.sh`, and tears everything down at the end.
 |-------|------|-------|
 | pre_clean | lifecycle | Stops any running services, removes stale DB files |
 | bootstrap | lifecycle | Creates venvs, installs dependencies |
-| bring_up | lifecycle | Starts BF3 NFs, catalog_api, order_engine |
+| bring_up | lifecycle | Starts legacy standalone 5G emulator NFs, catalog_api, order_engine |
 | wait_udr_ready | health gate | Polls port 9005 up to 30 s (UDR startup lag) |
 | start_ai_observer | lifecycle | Starts ai_observer on port 8090 |
 | status | verification | Runs status.sh, confirms all services RUNNING |
@@ -346,12 +346,12 @@ tests and demo scripts.
 
 | Field | Value | Source |
 |-------|-------|--------|
-| Default IMSI | `0010102268e6` | Stage 11 evidence (BF3 test UE) |
+| Default IMSI | `0010102268e6` | Stage 11 evidence (legacy standalone 5G emulator test UE) |
 | URLLC S-NSSAI | SST=2, SD=010203 | Stage 16 evidence, rules.yaml OFF-5G-URLLC-SLICE |
 | Enterprise S-NSSAI | SST=1, SD=000001 | rules.yaml OFF-5G-BIZ-PREMIUM |
 | IoT S-NSSAI | SST=3, SD=000002 | rules.yaml OFF-5G-IOT-BASIC |
 
-The `BF3PythonAdapter` generates a random SUPI (`imsi-001010<6-hex-chars>`) for
+The `LegacyFiveGEmulatorAdapter` generates a random SUPI (`imsi-001010<6-hex-chars>`) for
 each order unless the payload explicitly includes a `supi` field. UDM returns
 404 for dynamically generated SUPIs outside its pre-seeded range, which is
 expected behavior (the subscriber is still registered in UDR).
@@ -372,7 +372,7 @@ the `test_vonr_call.py` driver.
 | TMF CTK conformance | Partial | Requires the relevant FastAPI service running on its port. Can be incorporated into CI by adding a bring-up step before Newman. |
 | Integration sweep | Partial | Requires the full stack. Suitable for a dedicated integration CI job. The sweep manages its own lifecycle. |
 | E2E demos | Manual | VoNR requires IMS NFs started manually. O-RAN closed loop is self-managing. Order flow demo is included in the integration sweep. |
-| 3GPP compliance | Partial | Requires BF3 NFs running. Can be added to CI as a post-bring-up step. |
+| 3GPP compliance | Partial | Requires legacy standalone 5G emulator NFs running. Can be added to CI as a post-bring-up step. |
 
 For pure unit test CI (no services), the order_engine, catalog_api, and
 ai_observer test suites are fully self-contained and can run as:

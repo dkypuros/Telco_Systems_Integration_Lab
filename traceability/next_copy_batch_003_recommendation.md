@@ -20,18 +20,18 @@ All source files below were checked for existence on 2026-06-05 and are not alre
 | 3 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/build_logs/stage19_oran_closed_loop.md` | `traceability/evidence_snapshots/techco-stage19-oran-closed-loop.md` | O-RAN | Concrete O-RAN closed-loop behavior evidence for release-mapping validation. | Observed/demo behavior, not formal O-RAN certification. |
 | 4 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/README.md` | `traceability/requirements/tmf638-ctk-r18-0-readme.md` | TMF638 | CTK package context supporting the TMF638 gap in the release register. | README/package context only; no implementation proof. |
 | 5 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/src/order_engine/app/adapters/o2ims_real_adapter.py` | `traceability/standards_mapping/oran-o2ims-real-adapter.py` | O-RAN O2IMS | Small boundary file showing interface/endpoint mapping useful for standards-release correlation. | Source-code mapping evidence only; corroborate behavior with tests/reports. |
-| 6 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/src/order_engine/app/adapters/bf3_python_adapter.py` | `traceability/standards_mapping/bf3-python-adapter.py` | 3GPP-derived service orchestration/control-plane mapping | Small boundary file for BF3 interaction and operation semantics. | Operational workaround code can be mistaken for protocol compliance; keep interpretation conservative. |
+| 6 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/src/order_engine/app/adapters/legacy_5g_emulator_python_adapter.py` | `traceability/standards_mapping/legacy_5g_emulator-python-adapter.py` | 3GPP-derived service orchestration/control-plane mapping | Small boundary file for legacy standalone 5G emulator interaction and operation semantics. | Operational workaround code can be mistaken for protocol compliance; keep interpretation conservative. |
 | 7 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/tmforum_psr_learning/00_README.txt` | `references/learning_assets/tmforum-psr-learning-readme.txt` | TM Forum reference/learning | Context for TM Forum PSR learning artifacts already copied as reference-only evidence. | Reference-only; do not treat as conformance proof. |
 
 ## Excluded from the explorer suggestion
 
 - `Tech-Co/build_logs/stage13_tmf_ctk_conformance.md` — already copied in batch 001 as `build_logs/stage13_tmf_ctk_conformance.md`.
-- `BF3-5G-Demo/spec-analysis/5_Live-Spec-Compliance-Test-Results.txt` — already copied in batch 001 as `traceability/evidence_snapshots/bf3-live-spec-compliance-results.txt`.
+- `legacy-standalone-5g-emulator/spec-analysis/5_Live-Spec-Compliance-Test-Results.txt` — already copied in batch 001 as `traceability/evidence_snapshots/legacy_5g_emulator-live-spec-compliance-results.txt`.
 - `Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/ctk/README.md` — not present; corrected ready path is `Tech-Co/specs/tmforum_standards/CTK-TMF638-ServiceInventory-R18-0/README.md`.
 
 ## Not-copy-yet exclusions
 
-- Do not copy full source trees such as `Tech-Co/src/`, `BF3-5G-Demo/`, `tmforum_psr_learning/`, or `open_source_5g_cores/`.
+- Do not copy full source trees such as `Tech-Co/src/`, `legacy-standalone-5g-emulator/`, `tmforum_psr_learning/`, or `open_source_5g_cores/`.
 - Do not copy `.git`, `.omx`, `.omc`, virtualenvs, `node_modules`, caches, local DBs, generated build outputs, or raw logs.
 - Do not copy bulk spec trees unless each file is listed as an explicit manifest row.
 - Do not claim formal standards conformance from source code or narrative docs alone.

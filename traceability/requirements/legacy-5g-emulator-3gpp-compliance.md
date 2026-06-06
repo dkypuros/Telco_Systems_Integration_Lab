@@ -29,7 +29,7 @@
 
 #### 1.1 AMF with Complete NAS Protocol - 100% ✅
 
-**File:** `5G_Emulator_API/core_network/amf_nas.py`
+**File:** `clean_5g_emulator_api/core_network/amf_nas.py`
 
 **3GPP Specifications - FULLY IMPLEMENTED:**
 ```
@@ -76,7 +76,7 @@ def create_pdu_session_establishment_accept(self, session_data: dict):
 
 #### 1.2 Policy Control Function (PCF) - 100% ✅
 
-**File:** `5G_Emulator_API/core_network/pcf.py`
+**File:** `clean_5g_emulator_api/core_network/pcf.py`
 
 **3GPP Specifications - FULLY IMPLEMENTED:**
 ```
@@ -122,7 +122,7 @@ def create_qos_decisions(self, policy_data: dict) -> dict:
 
 #### 1.3 UPF-Enhanced with Real GTP-U Processing - 100% ✅
 
-**File:** `5G_Emulator_API/core_network/upf_enhanced.py`
+**File:** `clean_5g_emulator_api/core_network/upf_enhanced.py`
 
 **3GPP Specifications - FULLY IMPLEMENTED:**
 ```
@@ -170,7 +170,7 @@ class QosScheduler:
 
 #### 1.4 Complete Service Registry (NRF) - 100% ✅
 
-**File:** `5G_Emulator_API/core_network/nrf.py`
+**File:** `clean_5g_emulator_api/core_network/nrf.py`
 
 **3GPP Specifications - FULLY IMPLEMENTED:**
 ```
@@ -191,7 +191,7 @@ class QosScheduler:
 
 #### 2.1 CU (Centralized Unit) with F1AP - 100% ✅
 
-**File:** `5G_Emulator_API/ran/cu.py`
+**File:** `clean_5g_emulator_api/ran/cu.py`
 
 **3GPP Specifications - FULLY IMPLEMENTED:**
 ```
@@ -218,7 +218,7 @@ def create_rrc_setup(self, ue_context: dict) -> dict:
 
 #### 2.2 DU (Distributed Unit) with Complete Protocol Stack - 100% ✅
 
-**File:** `5G_Emulator_API/ran/du.py`
+**File:** `clean_5g_emulator_api/ran/du.py`
 
 **3GPP Specifications - FULLY IMPLEMENTED:**
 ```
@@ -284,7 +284,7 @@ class ComplianceTestSuite:
 - **Production-grade security** with OAuth2 and 5G-AKA
 - **Enterprise architecture** ready for commercial deployment
 - **World-class documentation** with specification line references
-- **Hardware integration** with DOCA SDK and BlueField-3 DPU
+- **Hardware integration** with DOCA SDK and accelerated edge DPU
 
 ---
 

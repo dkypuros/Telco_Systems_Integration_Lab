@@ -1,4 +1,4 @@
-# File location: 5G_Emulator_API/core_network/ausf.py
+# File location: clean_5g_emulator_api/core_network/ausf.py
 # 3GPP TS 29.509 - Authentication Server Function (AUSF) - standards-referenced mock implementation
 # 3GPP TS 33.501 - 5G Authentication and Key Agreement (5G-AKA) Implementation
 

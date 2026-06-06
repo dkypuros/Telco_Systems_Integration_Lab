@@ -20,8 +20,8 @@ executable evidence.
 
 Useful supporting references:
 
-- [`traceability/requirements/bf3-ran-components.md`](../traceability/requirements/bf3-ran-components.md)
-- [`traceability/requirements/bf3-3gpp-compliance.md`](../traceability/requirements/bf3-3gpp-compliance.md)
+- [`traceability/requirements/legacy_5g_emulator-ran-components.md`](../traceability/requirements/legacy_5g_emulator-ran-components.md)
+- [`traceability/requirements/legacy_5g_emulator-3gpp-compliance.md`](../traceability/requirements/legacy_5g_emulator-3gpp-compliance.md)
 - [`traceability/requirements/networking-spec-inventory.txt`](../traceability/requirements/networking-spec-inventory.txt)
 
 ## Current caveats

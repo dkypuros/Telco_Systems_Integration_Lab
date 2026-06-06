@@ -12,7 +12,7 @@ Telemetry-driven active control plane for the Tech-Co 5G lab.
 
 ## Purpose
 
-The AI observer continuously collects telemetry from the order engine and the BF3 5G
+The AI observer continuously collects telemetry from the order engine and the legacy standalone 5G
 network functions, runs analyzers to detect failure and latency patterns, and (in
 Phase 2) proposes or executes remediation actions via a safety-gated `ActionEngine`.
 
@@ -62,7 +62,7 @@ src/ai_observer/app/
   collectors/
     base.py                   TelemetryCollector ABC: start(), stop(), collect()
     order_engine_collector.py Polls TMF622 /productOrder, emits "order_stats" observations
-    bf3_nf_collector.py       Polls BF3 NF /health endpoints, emits "nf_health" observations
+    legacy_5g_emulator_nf_collector.py       Polls legacy standalone 5G emulator NF /health endpoints, emits "nf_health" observations
     otel_log_collector.py     Scans OTel log outputs, emits "otel_log" observations (6x interval)
   analyzers/
     base.py                   BaseAnalyzer ABC
@@ -93,7 +93,7 @@ default) because log scans are more expensive.
 | Collector                | Source polled                              | Observation type  |
 |--------------------------|--------------------------------------------|-------------------|
 | `OrderEngineCollector`   | TMF622 GET /productOrder                   | `order_stats`     |
-| `BF3NfCollector`         | BF3 NF /health endpoints (AMF, SMF, UDR, UDM, NSSF) | `nf_health` |
+| `legacy standalone 5G emulatorNfCollector`         | legacy standalone 5G emulator NF /health endpoints (AMF, SMF, UDR, UDM, NSSF) | `nf_health` |
 | `OtelLogCollector`       | OTel log outputs from the lab              | `otel_log`        |
 
 `OrderEngineCollector` (`app/collectors/order_engine_collector.py`) tracks state counts
@@ -240,7 +240,7 @@ pytest
 | Variable                    | Default                                          | Description                                              |
 |-----------------------------|--------------------------------------------------|----------------------------------------------------------|
 | `ORDER_ENGINE_URL`          | `http://localhost:8080`                          | Order engine base URL (used by collector and retry actuator) |
-| `BF3_NRF_URL`               | `http://localhost:9000`                          | BF3 NRF URL for NF discovery (used by bf3_nf_collector)  |
+| `legacy standalone 5G emulator_NRF_URL`               | `http://localhost:9000`                          | legacy standalone 5G emulator NRF URL for NF discovery (used by legacy_5g_emulator_nf_collector)  |
 | `POLL_INTERVAL_SECONDS`     | `5`                                              | Base poll interval for collectors and analyzers          |
 | `AI_AUTO_EXECUTE`           | `false`                                          | Enable automatic action execution (`true` / `false`)     |
 | `ACTION_CONFIDENCE_THRESHOLD` | `0.7`                                          | Minimum confidence for a plan to pass Gate 1             |

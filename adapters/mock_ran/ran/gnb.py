@@ -1,4 +1,4 @@
-# File location: 5G_Emulator_API/ran/gnb.py
+# File location: clean_5g_emulator_api/ran/gnb.py
 # 3GPP TS 38.413 - gNodeB NGAP - standards-referenced mock implementation
 # NGAP-like mock signaling for the N2 interface
 # Real protocol mode: NGAP over SCTP/TCP (port 38412) + GTP-U (UDP 2152)

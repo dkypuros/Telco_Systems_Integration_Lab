@@ -22,7 +22,7 @@ High-priority candidates:
 - O-RAN/3GPP evidence:
   - `Tech-Co/build_logs/stage13_tmf_ctk_conformance.md`
   - `Tech-Co/build_logs/stage25_oran_run_capture.md`
-  - `Tech-Co/build_logs/stage1_bf3_verification.md`
+  - `Tech-Co/build_logs/stage1_legacy_5g_emulator_verification.md`
   - `Tech-Co/scripts/demo_oran_closed_loop.sh`
   - `Tech-Co/src/order_engine/app/adapters/o2ims_real_adapter.py`
 
@@ -30,30 +30,30 @@ Important caveat:
 - 3GPP evidence is functional smoke, not full formal protocol conformance.
 - O-RAN closed-loop evidence is demo/functional unless mapped per WG/spec/interface.
 
-## Lane 2: BF3-5G-Demo
+## Lane 2: legacy-standalone-5g-emulator
 
 High-priority candidates:
 
-- `BF3-5G-Demo/spec-analysis/5_Live-Spec-Compliance-Test-Results.txt`
+- `legacy-standalone-5g-emulator/spec-analysis/5_Live-Spec-Compliance-Test-Results.txt`
   - Target: `traceability/evidence_snapshots/`
   - Best caveat artifact because it includes PASS/PARTIAL/NOT TESTED.
-- `BF3-5G-Demo/spec-analysis/1_Spec-to-Code-Analysis.txt`
+- `legacy-standalone-5g-emulator/spec-analysis/1_Spec-to-Code-Analysis.txt`
   - Target: `traceability/requirements/`, `traceability/coverage/`
-- `BF3-5G-Demo/docs/3gpp-compliance.md`
+- `legacy-standalone-5g-emulator/docs/3gpp-compliance.md`
   - Target: `traceability/conformance_matrix/`, `docs/`
   - Caveat: self-asserted/marketing style, corroborate before claims.
-- `BF3-5G-Demo/docs/oran-compliance.md`
+- `legacy-standalone-5g-emulator/docs/oran-compliance.md`
   - Target: `traceability/coverage/`, `docs/`
 - O-RAN mapping engine:
-  - `open-digital-platform-2_0/5G_Emulator_API/oran/o_ran_spec_map.py`
-  - `open-digital-platform-2_0/5G_Emulator_API/oran/oran_spec_coverage.json`
+  - `open-digital-platform-2_0/clean_5g_emulator_api/oran/o_ran_spec_map.py`
+  - `open-digital-platform-2_0/clean_5g_emulator_api/oran/oran_spec_coverage.json`
 - Test candidates:
-  - `open-digital-platform-2_0/5G_Emulator_API/test_oran_compliance.py`
+  - `open-digital-platform-2_0/clean_5g_emulator_api/test_oran_compliance.py`
   - `open-digital-platform-2_0/test_100_compliance.py`
 - Service candidates:
-  - `open-digital-platform-2_0/5G_Emulator_API/main.py`
-  - `open-digital-platform-2_0/5G_Emulator_API/core_network/amf.py`
-  - `open-digital-platform-2_0/5G_Emulator_API/core_network/upf_enhanced.py`
+  - `open-digital-platform-2_0/clean_5g_emulator_api/main.py`
+  - `open-digital-platform-2_0/clean_5g_emulator_api/core_network/amf.py`
+  - `open-digital-platform-2_0/clean_5g_emulator_api/core_network/upf_enhanced.py`
   - representative O-RAN files under `ran/ric/`, `smo/`, and gateway.
 
 Important caveat:
@@ -96,7 +96,7 @@ Do not copy unless explicitly curated:
 Start with evidence and traceability, not implementation:
 
 1. Tech-Co TMF620/TMF622 CTK JSON results and stage13 log.
-2. BF3 live compliance results and spec-to-code analysis.
+2. legacy standalone 5G emulator live compliance results and spec-to-code analysis.
 3. O-RAN coverage map docs/JSON/Python mapping file.
 4. tmforum_psr_learning docs/test results.
 5. Only after the above are mapped, copy service entrypoints in small batches with tests.

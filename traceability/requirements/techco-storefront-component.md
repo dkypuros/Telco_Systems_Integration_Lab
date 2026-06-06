@@ -167,7 +167,7 @@ npm run start      # production server on port 3000
 
 ## Relationship to the Mission-Control Dashboard
 
-`Tech-Co/components/BF3-5G-Demo/demo_front-end/` is a separate mission-control
+`Tech-Co/components/legacy-standalone-5g-emulator/demo_front-end/` is a separate mission-control
 dashboard used during lab demos to visualize NF health, order engine state, and AI
 observer output. It is not the customer storefront. The two apps are entirely
 independent; the storefront is focused on the buyer journey (browse, order, track)

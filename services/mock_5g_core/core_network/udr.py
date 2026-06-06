@@ -1,6 +1,6 @@
-# File location: 5G_Emulator_API/core_network/udr.py
-# File location: 5G_Emulator_API/core_network/udr.py
-# File location: 5G_Emulator_API/core_network/udr.py
+# File location: clean_5g_emulator_api/core_network/udr.py
+# File location: clean_5g_emulator_api/core_network/udr.py
+# File location: clean_5g_emulator_api/core_network/udr.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 import sqlite3

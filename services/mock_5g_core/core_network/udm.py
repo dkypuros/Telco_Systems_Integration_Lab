@@ -1,4 +1,4 @@
-# File location: 5G_Emulator_API/core_network/udm.py
+# File location: clean_5g_emulator_api/core_network/udm.py
 # 3GPP TS 29.503 - Unified Data Management (UDM) - standards-referenced mock implementation
 # Implements Nudm_UECM, Nudm_SDM, Nudm_UEAU, Nudm_EE, Nudm_PP services
 

@@ -22,6 +22,7 @@ LAB_ROOT = Path(__file__).resolve().parents[1]
 # Add runtime paths in process; keep copied source files untouched.
 for rel in [
     "services/mock_5g_core",
+    "services/assurance",
     "adapters/mock_ran",
     "adapters/mock_ran/ran/ric",
     "adapters/mock_oran",
@@ -30,7 +31,12 @@ for rel in [
     if p not in sys.path:
         sys.path.insert(0, p)
 
-COPIED_PY_ROOTS = [LAB_ROOT / "services" / "mock_5g_core", LAB_ROOT / "adapters" / "mock_ran", LAB_ROOT / "adapters" / "mock_oran"]
+COPIED_PY_ROOTS = [
+    LAB_ROOT / "services" / "mock_5g_core",
+    LAB_ROOT / "services" / "assurance",
+    LAB_ROOT / "adapters" / "mock_ran",
+    LAB_ROOT / "adapters" / "mock_oran",
+]
 IMPORT_TARGETS = [
     "config.ports",
     "core_network.transport",
@@ -42,17 +48,35 @@ IMPORT_TARGETS = [
     "core_network.udr",
     "core_network.ausf",
     "core_network.nssf",
+    "core_network.udsf",
     "ran.gnb",
     "ran.cu",
+    "ran.cu.cu",
     "ran.du",
+    "ran.du.du",
+    "ran.rru.rru",
+    "ptp.ptp",
     "e2sm_ni",
     "e2sm_ccc",
     "e2sm_llc",
     "e2ap",
     "ran.ric.near_rt_ric",
     "ran.ric.non_rt_ric",
+    "ran.ric.y1",
     "ran.fronthaul.cus_plane",
+    "ran.fronthaul.m_plane",
+    "ran.fronthaul.o_ru",
     "ran.slicing.oran_slicing",
+    "ran.energy.nes",
+    "ran.ntn_radio",
+    "service_assurance.assurance_api",
+    "smo.smo_framework",
+    "smo.r1",
+    "oam.o1",
+    "oam.teiv",
+    "etsi.o2.o_cloud_notification",
+    "security.security_service",
+    "transport.xhaul",
     "oran.o_ran_spec_map",
     "api_gateway.oran_gateway",
 ]

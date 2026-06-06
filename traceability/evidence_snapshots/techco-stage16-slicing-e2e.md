@@ -7,7 +7,7 @@ Engineer: Claude Code (oh-my-claudecode executor)
 
 ## NSSF Endpoints Discovered
 
-File: `components/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/nssf.py`
+File: `components/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/core_network/nssf.py`
 Port: **9010** (confirmed via `config/ports.py` and NF registration in lifespan)
 
 Endpoints:
@@ -72,7 +72,7 @@ The NSI `nsi-urllc-001` is pre-configured in `NSSFConfiguration.nsi_information[
 
 ### 1. start_3gpp_services.sh
 
-File: `components/BF3-5G-Demo/open-digital-platform-2_0/start_3gpp_services.sh`
+File: `components/legacy-standalone-5g-emulator/open-digital-platform-2_0/start_3gpp_services.sh`
 
 Added NSSF launch between NRF and AMF:
 
@@ -84,9 +84,9 @@ start_service "NSSF" "core_network/nssf.py" 9010
 
 Also added NSSF to the service endpoints summary echo block.
 
-### 2. bf3_python_adapter.py
+### 2. legacy_5g_emulator_python_adapter.py
 
-File: `src/order_engine/app/adapters/bf3_python_adapter.py`
+File: `src/order_engine/app/adapters/legacy_5g_emulator_python_adapter.py`
 
 Changes:
 - Added `NSSF_BASE = "http://127.0.0.1:9010"` and `_AMF_NF_ID` constant
@@ -115,27 +115,27 @@ Added:
 
 File: `src/order_engine/app/decomposition/rules.yaml`
 
-Added `OFF-5G-URLLC-SLICE` rule with 4 steps, all using `bf3_python` adapter:
+Added `OFF-5G-URLLC-SLICE` rule with 4 steps, all using `legacy_5g_emulator_python` adapter:
 
 ```yaml
 OFF-5G-URLLC-SLICE:
   service_category: "5G_URLLC"
   steps:
     - step_name: allocate_slice
-      adapter: bf3_python
-      payload_extra: {slice_type: URLLC, sst: 2, sd: "010203", _adapter: bf3_python}
+      adapter: legacy_5g_emulator_python
+      payload_extra: {slice_type: URLLC, sst: 2, sd: "010203", _adapter: legacy_5g_emulator_python}
     - step_name: provision_subscriber
-      adapter: bf3_python
-      payload_extra: {subscriber_profile: urllc_premium, qos_class: 1, _adapter: bf3_python}
+      adapter: legacy_5g_emulator_python
+      payload_extra: {subscriber_profile: urllc_premium, qos_class: 1, _adapter: legacy_5g_emulator_python}
     - step_name: register_with_amf
-      adapter: bf3_python
-      payload_extra: {sst: 2, sd: "010203", _adapter: bf3_python}
+      adapter: legacy_5g_emulator_python
+      payload_extra: {sst: 2, sd: "010203", _adapter: legacy_5g_emulator_python}
     - step_name: establish_pdu_session
-      adapter: bf3_python
-      payload_extra: {sst: 2, sd: "010203", pdu_session_id: 1, _adapter: bf3_python}
+      adapter: legacy_5g_emulator_python
+      payload_extra: {sst: 2, sd: "010203", pdu_session_id: 1, _adapter: legacy_5g_emulator_python}
 ```
 
-The `_adapter: bf3_python` payload_extra key overrides the heuristic in
+The `_adapter: legacy_5g_emulator_python` payload_extra key overrides the heuristic in
 `_resolve_adapter_for_step` (which otherwise routes "slice" step names to o2ims).
 This required a one-line fix in `tmf622.py` to pass characteristics to that function.
 
@@ -188,23 +188,23 @@ serviceOrderIds: ["86f0cc14-684a-4ca5-b51b-ac9215e55cae"]
 ### Saga step log for completed order 3686fc1f
 
 ```
-allocate_slice via BF3PythonAdapter:
+allocate_slice via LegacyFiveGEmulatorAdapter:
   NSSF GET /nnssf-nsselection/v1/network-slice-information sst=2 sd=010203 -> HTTP 200
   NSSF response: allowedNssaiList[0].allowedSnssai={sst:2, sd:"010203"}, nsiId=nsi-urllc-001
   UDM POST /nudm-sdm/v1/imsi-001010f4998b/am-data/nssai-update -> HTTP 404 (expected, handled)
   STEP SUCCEEDED
 
-provision_subscriber via BF3PythonAdapter:
+provision_subscriber via LegacyFiveGEmulatorAdapter:
   UDR POST /register_user imsi=001010d0a260 -> HTTP 200 {"message":"User registered successfully"}
   UDM GET /nudm-sdm/v1/imsi-001010d0a260/am-data -> HTTP 404 (expected for dynamic SUPI)
   STEP SUCCEEDED
 
-register_with_amf via BF3PythonAdapter:
+register_with_amf via LegacyFiveGEmulatorAdapter:
   AMF POST /amf/ue/imsi-001010222321 -> HTTP 200 {"message":"UE context created"}
   AMF GET  /amf/ue/imsi-001010222321 -> HTTP 200 (verify: rmState=RM-REGISTERED)
   STEP SUCCEEDED
 
-establish_pdu_session via BF3PythonAdapter:
+establish_pdu_session via LegacyFiveGEmulatorAdapter:
   SMF POST /nsmf-pdusession/v1/sm-contexts sNssai={sst:2,sd:"010203"} -> HTTP 200
   Response: status=CREATED, ueIpAddress=10.2.0.1, pduSessionId=1
   STEP SUCCEEDED
@@ -295,7 +295,7 @@ All objectives met:
 - allocate_slice makes real NSSF REST call, receives authorized S-NSSAI (sst=2, nsi-urllc-001)
 - UDM nssai-update attempted (404 handled gracefully per no-NF-code constraint)
 - OFF-5G-URLLC-SLICE offering present in catalog with SPEC, pricing, category
-- rules.yaml decomposes OFF-5G-URLLC-SLICE into 4 steps via bf3_python adapter
+- rules.yaml decomposes OFF-5G-URLLC-SLICE into 4 steps via legacy_5g_emulator_python adapter
 - TMF622 POST order completed with state=completed
 - All 4 saga steps (allocate_slice, provision_subscriber, register_with_amf, establish_pdu_session) succeeded
 - Rollback chain confirmed: allocate_slice -> provision_subscriber -> register_with_amf all rolled back on downstream failure

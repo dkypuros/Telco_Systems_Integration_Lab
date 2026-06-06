@@ -47,7 +47,7 @@ This document analyzes the Radio Access Network (RAN) implementation in the 5G N
 
 ### gNodeB (5G Base Station) {#gnb-section}
 
-**File Location:** `5G_Emulator_API/ran/gnb.py`  
+**File Location:** `clean_5g_emulator_api/ran/gnb.py`  
 **3GPP Compliance Level:** 50% ⚠️ Needs Enhancement  
 **Primary Interfaces:** N2 (AMF), N3 (UPF), Xn (Other gNBs)
 
@@ -186,7 +186,7 @@ The simulator implements the 3GPP-defined CU-DU split architecture but currently
 
 #### Centralized Unit (CU) Implementation
 
-**File Location:** `5G_Emulator_API/ran/cu/cu.py`  
+**File Location:** `clean_5g_emulator_api/ran/cu/cu.py`  
 **3GPP Compliance Level:** 15% ❌ Critical Implementation Needed  
 **Primary Interfaces:** F1 (DU), E1 (Internal), N2 (AMF)
 
@@ -266,7 +266,7 @@ class F1AP_Implementation:
 
 #### Distributed Unit (DU) Implementation
 
-**File Location:** `5G_Emulator_API/ran/du/du.py`  
+**File Location:** `clean_5g_emulator_api/ran/du/du.py`  
 **3GPP Compliance Level:** 15% ❌ Critical Implementation Needed  
 **Primary Interfaces:** F1 (CU)
 
@@ -306,7 +306,7 @@ The RAN protocol stack is currently implemented as basic stubs. Full 3GPP compli
 #### Upper Layer Protocols (CU)
 
 ##### RRC (Radio Resource Control)
-**File Location:** `5G_Emulator_API/ran/cu/rrc.py`  
+**File Location:** `clean_5g_emulator_api/ran/cu/rrc.py`  
 **3GPP Specification:** TS 38.331  
 **Current Compliance:** 5% ❌ Stub Only
 
@@ -355,7 +355,7 @@ class RRC_Implementation:
 ```
 
 ##### PDCP (Packet Data Convergence Protocol)
-**File Location:** `5G_Emulator_API/ran/cu/pdcp.py`  
+**File Location:** `clean_5g_emulator_api/ran/cu/pdcp.py`  
 **3GPP Specification:** TS 38.323  
 **Current Compliance:** 5% ❌ Stub Only
 
@@ -395,7 +395,7 @@ class PDCP_Implementation:
 ```
 
 ##### SDAP (Service Data Adaptation Protocol)
-**File Location:** `5G_Emulator_API/ran/cu/sdap.py`  
+**File Location:** `clean_5g_emulator_api/ran/cu/sdap.py`  
 **3GPP Specification:** TS 37.324  
 **Current Compliance:** 5% ❌ Stub Only
 
@@ -425,7 +425,7 @@ class SDAP_Implementation:
 #### Lower Layer Protocols (DU)
 
 ##### RLC (Radio Link Control)
-**File Location:** `5G_Emulator_API/ran/du/rlc.py`  
+**File Location:** `clean_5g_emulator_api/ran/du/rlc.py`  
 **3GPP Specification:** TS 38.322  
 **Current Compliance:** 5% ❌ Stub Only
 
@@ -467,7 +467,7 @@ class RLC_Implementation:
 ```
 
 ##### MAC (Medium Access Control)
-**File Location:** `5G_Emulator_API/ran/du/mac.py`  
+**File Location:** `clean_5g_emulator_api/ran/du/mac.py`  
 **3GPP Specification:** TS 38.321  
 **Current Compliance:** 5% ❌ Stub Only
 
@@ -509,7 +509,7 @@ class MAC_Implementation:
 ```
 
 ##### PHY (Physical Layer)
-**File Location:** `5G_Emulator_API/ran/du/phy.py`  
+**File Location:** `clean_5g_emulator_api/ran/du/phy.py`  
 **3GPP Specification:** TS 38.200 series  
 **Current Compliance:** 5% ❌ Stub Only
 
@@ -545,7 +545,7 @@ class PHY_Implementation:
 
 ### Remote Radio Unit (RRU)
 
-**File Location:** `5G_Emulator_API/ran/rru/rru.py`  
+**File Location:** `clean_5g_emulator_api/ran/rru/rru.py`  
 **3GPP Compliance Level:** 5% ❌ Basic Structure Only  
 **Primary Interfaces:** Fronthaul (to DU)
 

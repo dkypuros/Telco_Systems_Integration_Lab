@@ -1,7 +1,7 @@
 # RAN Component Reference
 
-**Codebase**: BF3-5G-Demo Python disaggregated RAN implementation
-**Base path**: `components/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/`
+**Codebase**: legacy-standalone-5g-emulator Python disaggregated RAN implementation
+**Base path**: `components/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/`
 **Framework**: FastAPI + uvicorn (gNB, CU, DU, Near-RT RIC, Non-RT RIC)
 **Port config**: `config/ports.py` (RIC: 8095/8096; gNB: 38412 default; CU: 38472; DU: 38473)
 **O-RAN spec refs**: ETSI TS 104038/104039/104040 (E2), ETSI TS 103983 (A1-P)

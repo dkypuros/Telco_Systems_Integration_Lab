@@ -2,7 +2,7 @@
 
 This matrix links every O-RAN-enhanced module in the emulator back to the exact O-RAN Alliance
 specification document it realizes. It is generated from the single source of truth at
-`open-digital-platform-2_0/5G_Emulator_API/oran/o_ran_spec_map.py` and served live by the gateway
+`open-digital-platform-2_0/clean_5g_emulator_api/oran/o_ran_spec_map.py` and served live by the gateway
 at `GET /api/oran/spec-coverage`.
 
 Status legend: **OK** = a runnable module realizes the spec's key procedures/data models;
@@ -118,7 +118,7 @@ Source documents live in the O-RAN catalog at
 ## Regenerating this matrix
 
 ```bash
-cd open-digital-platform-2_0/5G_Emulator_API
+cd open-digital-platform-2_0/clean_5g_emulator_api
 python oran/o_ran_spec_map.py        # prints the summary, writes oran/oran_spec_coverage.json
 python test_oran_compliance.py       # boots each interface and validates a key procedure
 ```

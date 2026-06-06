@@ -1,7 +1,7 @@
 # Stage 15: EPC + RAN Verification
 **Date**: 2026-05-18
 **Scope**: 4G EPC NFs (MME, SGW, PGW, HSS), Non-3GPP interworking (N3IWF, ipsec.py), RAN NFs (gNB, CU, DU, RRU, Near-RT RIC, Non-RT RIC)
-**Venv**: `5G_Emulator_API/venv/` (Python 3.14.4)
+**Venv**: `clean_5g_emulator_api/venv/` (Python 3.14.4)
 
 ---
 

@@ -1,5 +1,5 @@
 """
-Real southbound adapter for BF3/Python 5G NF integration.
+Real southbound adapter for legacy standalone Python 5G NF integration.
 
 Provisions a real subscriber and slice by calling live 5G core NFs.
 All endpoints verified against the running stack (bring_up.sh).
@@ -13,7 +13,7 @@ provision_subscriber:
              udr.db directly with sqlite3 and executes DELETE FROM users WHERE
              imsi=?. This is functionally equivalent to a DELETE API because
              UDR reads from the same SQLite file at query time. The DB path is
-             read from env var BF3_UDR_DB_PATH (default: Tech-Co root udr.db).
+             read from env var TELCO_LAB_UDR_DB_PATH (default: Tech-Co root udr.db).
 
 allocate_slice:
   ACTIVATE : NSSF GET  /nnssf-nsselection/v1/network-slice-information (port 9010)
@@ -71,11 +71,11 @@ logger = logging.getLogger(__name__)
 # NF base URLs - read from environment variables so Docker/K8s deployments can
 # override them without touching source code.  Defaults preserve existing
 # localhost behaviour for bare-metal and development runs.
-UDR_BASE  = os.getenv("BF3_UDR_URL",  "http://localhost:9005")
-UDM_BASE  = os.getenv("BF3_UDM_URL",  "http://localhost:9004")
-AMF_BASE  = os.getenv("BF3_AMF_URL",  "http://localhost:9000")
-SMF_BASE  = os.getenv("BF3_SMF_URL",  "http://localhost:9001")
-NSSF_BASE = os.getenv("BF3_NSSF_URL", "http://localhost:9010")
+UDR_BASE  = os.getenv("TELCO_LAB_UDR_URL",  "http://localhost:9005")
+UDM_BASE  = os.getenv("TELCO_LAB_UDM_URL",  "http://localhost:9004")
+AMF_BASE  = os.getenv("TELCO_LAB_AMF_URL",  "http://localhost:9000")
+SMF_BASE  = os.getenv("TELCO_LAB_SMF_URL",  "http://localhost:9001")
+NSSF_BASE = os.getenv("TELCO_LAB_NSSF_URL", "http://localhost:9010")
 
 # Fixed AMF NF instance ID used when querying NSSF (must be a valid UUID string)
 _AMF_NF_ID = "amf-techco-order-engine-001"
@@ -98,7 +98,7 @@ def _make_imsi(supi: str) -> str:
     return supi.replace("imsi-", "")
 
 
-class BF3PythonAdapter(SouthboundAdapter):
+class LegacyFiveGEmulatorAdapter(SouthboundAdapter):
     """Real adapter: hits live 5G core NFs to provision subscribers and slices."""
 
     # -------------------------------------------------------------------------
@@ -116,7 +116,7 @@ class BF3PythonAdapter(SouthboundAdapter):
             "key": secrets.token_hex(16),
         }
         logger.info(
-            "[BF3Adapter] provision_subscriber -> UDR POST /register_user imsi=%s profile=%s",
+            "[LegacyFiveGEmulatorAdapter] provision_subscriber -> UDR POST /register_user imsi=%s profile=%s",
             imsi, subscriber_profile,
         )
         async with httpx.AsyncClient(timeout=_TIMEOUT) as client:
@@ -124,7 +124,7 @@ class BF3PythonAdapter(SouthboundAdapter):
 
         udr_status = udr_resp.status_code
         udr_json = udr_resp.json() if udr_resp.content else {}
-        logger.info("[BF3Adapter] UDR response HTTP %d: %s", udr_status, udr_json)
+        logger.info("[LegacyFiveGEmulatorAdapter] UDR response HTTP %d: %s", udr_status, udr_json)
 
         if udr_status not in (200, 201):
             raise RuntimeError(
@@ -133,7 +133,7 @@ class BF3PythonAdapter(SouthboundAdapter):
 
         # 2. Verify via UDM access and mobility data (TS 29.505)
         logger.info(
-            "[BF3Adapter] provision_subscriber -> UDM GET /nudm-sdm/v1/%s/am-data", supi
+            "[LegacyFiveGEmulatorAdapter] provision_subscriber -> UDM GET /nudm-sdm/v1/%s/am-data", supi
         )
         async with httpx.AsyncClient(timeout=_TIMEOUT) as client:
             udm_resp = await client.get(f"{UDM_BASE}/nudm-sdm/v1/{supi}/am-data")
@@ -143,7 +143,7 @@ class BF3PythonAdapter(SouthboundAdapter):
         # 404 is expected for SUPIs outside UDM's pre-seeded default range;
         # the subscriber IS registered in UDR regardless.
         logger.info(
-            "[BF3Adapter] UDM /am-data HTTP %d (404 expected for IMSI outside default range)",
+            "[LegacyFiveGEmulatorAdapter] UDM /am-data HTTP %d (404 expected for IMSI outside default range)",
             udm_status,
         )
 
@@ -164,7 +164,7 @@ class BF3PythonAdapter(SouthboundAdapter):
         # Sidecar approach: UDR has no DELETE endpoint so we go directly to the
         # SQLite database it reads from. This is functionally equivalent because
         # UDR performs a fresh sqlite3.connect() on every query. The path is
-        # controlled by BF3_UDR_DB_PATH; the default resolves to the Tech-Co
+        # controlled by TELCO_LAB_UDR_DB_PATH; the default resolves to the Tech-Co
         # root udr.db that bring_up.sh creates alongside udr.py.
         _default_db = os.path.join(
             os.path.dirname(  # Tech-Co root
@@ -180,10 +180,10 @@ class BF3PythonAdapter(SouthboundAdapter):
             ),
             "udr.db",
         )
-        db_path = os.getenv("BF3_UDR_DB_PATH", _default_db)
+        db_path = os.getenv("TELCO_LAB_UDR_DB_PATH", _default_db)
 
         logger.info(
-            "[BF3Adapter] ROLLBACK provision_subscriber: deleting imsi=%s from %s",
+            "[LegacyFiveGEmulatorAdapter] ROLLBACK provision_subscriber: deleting imsi=%s from %s",
             imsi, db_path,
         )
         try:
@@ -197,7 +197,7 @@ class BF3PythonAdapter(SouthboundAdapter):
             finally:
                 conn.close()
             logger.info(
-                "[BF3Adapter] ROLLBACK provision_subscriber: DELETE FROM users WHERE imsi=%s "
+                "[LegacyFiveGEmulatorAdapter] ROLLBACK provision_subscriber: DELETE FROM users WHERE imsi=%s "
                 "-> %d row(s) removed (0 means already absent, idempotent).",
                 imsi, rows_deleted,
             )
@@ -205,7 +205,7 @@ class BF3PythonAdapter(SouthboundAdapter):
             # Non-fatal: log and continue so the saga rollback chain is not
             # interrupted. Operators can inspect udr.db manually if needed.
             logger.warning(
-                "[BF3Adapter] ROLLBACK provision_subscriber: SQLite delete failed "
+                "[LegacyFiveGEmulatorAdapter] ROLLBACK provision_subscriber: SQLite delete failed "
                 "(non-fatal, idempotent): imsi=%s db=%s error=%s",
                 imsi, db_path, exc,
             )
@@ -239,7 +239,7 @@ class BF3PythonAdapter(SouthboundAdapter):
             "slice-info-request-for-registration": slice_info_for_registration,
         }
         logger.info(
-            "[BF3Adapter] allocate_slice -> NSSF GET /nnssf-nsselection/v1/network-slice-information "
+            "[LegacyFiveGEmulatorAdapter] allocate_slice -> NSSF GET /nnssf-nsselection/v1/network-slice-information "
             "sst=%d sd=%s slice_type=%s supi=%s",
             sst, sd, slice_type, supi,
         )
@@ -251,7 +251,7 @@ class BF3PythonAdapter(SouthboundAdapter):
 
         nssf_status = nssf_resp.status_code
         nssf_json = nssf_resp.json() if nssf_resp.content else {}
-        logger.info("[BF3Adapter] NSSF response HTTP %d: %s", nssf_status, nssf_json)
+        logger.info("[LegacyFiveGEmulatorAdapter] NSSF response HTTP %d: %s", nssf_status, nssf_json)
 
         # If NSSF returns a non-2xx status, raise so the saga rolls back.
         if nssf_status not in (200, 201):
@@ -290,7 +290,7 @@ class BF3PythonAdapter(SouthboundAdapter):
             "sliceType": slice_type,
         }
         logger.info(
-            "[BF3Adapter] allocate_slice -> UDM POST /nudm-sdm/v1/%s/am-data/nssai-update "
+            "[LegacyFiveGEmulatorAdapter] allocate_slice -> UDM POST /nudm-sdm/v1/%s/am-data/nssai-update "
             "sst=%d sd=%s",
             supi, auth_sst, auth_sd,
         )
@@ -302,7 +302,7 @@ class BF3PythonAdapter(SouthboundAdapter):
 
         udm_status = udm_resp.status_code
         udm_json = udm_resp.json() if udm_resp.content else {}
-        logger.info("[BF3Adapter] UDM nssai-update HTTP %d: %s", udm_status, udm_json)
+        logger.info("[LegacyFiveGEmulatorAdapter] UDM nssai-update HTTP %d: %s", udm_status, udm_json)
 
         # UDM returns 404 for SUPIs outside its pre-seeded range; that is expected
         # for dynamically provisioned subscribers. Log and continue -- the S-NSSAI
@@ -333,7 +333,7 @@ class BF3PythonAdapter(SouthboundAdapter):
         # NSSF is stateless (selection only, no persistent slice record), so no
         # NSSF DELETE is needed.
         logger.info(
-            "[BF3Adapter] ROLLBACK allocate_slice -> UDM POST "
+            "[LegacyFiveGEmulatorAdapter] ROLLBACK allocate_slice -> UDM POST "
             "/nudm-sdm/v1/%s/am-data/nssai-update (remove sst=%s sd=%s)",
             supi, sst, sd,
         )
@@ -344,13 +344,13 @@ class BF3PythonAdapter(SouthboundAdapter):
                     json={"remove": True, "sst": sst, "sd": sd},
                 )
             logger.info(
-                "[BF3Adapter] ROLLBACK UDM nssai-update HTTP %d: %s",
+                "[LegacyFiveGEmulatorAdapter] ROLLBACK UDM nssai-update HTTP %d: %s",
                 resp.status_code,
                 resp.json() if resp.content else {},
             )
         except Exception as exc:
             logger.warning(
-                "[BF3Adapter] ROLLBACK allocate_slice: UDM nssai-update error (non-fatal): %s",
+                "[LegacyFiveGEmulatorAdapter] ROLLBACK allocate_slice: UDM nssai-update error (non-fatal): %s",
                 exc,
             )
 
@@ -374,7 +374,7 @@ class BF3PythonAdapter(SouthboundAdapter):
         }
 
         logger.info(
-            "[BF3Adapter] register_with_amf -> AMF POST /amf/ue/%s", supi
+            "[LegacyFiveGEmulatorAdapter] register_with_amf -> AMF POST /amf/ue/%s", supi
         )
         async with httpx.AsyncClient(timeout=_TIMEOUT) as client:
             amf_resp = await client.post(
@@ -384,7 +384,7 @@ class BF3PythonAdapter(SouthboundAdapter):
 
         amf_status = amf_resp.status_code
         amf_json = amf_resp.json() if amf_resp.content else {}
-        logger.info("[BF3Adapter] AMF POST response HTTP %d: %s", amf_status, amf_json)
+        logger.info("[LegacyFiveGEmulatorAdapter] AMF POST response HTTP %d: %s", amf_status, amf_json)
 
         if amf_status not in (200, 201):
             raise RuntimeError(
@@ -392,14 +392,14 @@ class BF3PythonAdapter(SouthboundAdapter):
             )
 
         # Verify context was stored
-        logger.info("[BF3Adapter] register_with_amf -> AMF GET /amf/ue/%s (verify)", supi)
+        logger.info("[LegacyFiveGEmulatorAdapter] register_with_amf -> AMF GET /amf/ue/%s (verify)", supi)
         async with httpx.AsyncClient(timeout=_TIMEOUT) as client:
             verify_resp = await client.get(f"{AMF_BASE}/amf/ue/{supi}")
 
         verify_status = verify_resp.status_code
         verify_json = verify_resp.json() if verify_resp.content else {}
         logger.info(
-            "[BF3Adapter] AMF GET verify HTTP %d: %s", verify_status, verify_json
+            "[LegacyFiveGEmulatorAdapter] AMF GET verify HTTP %d: %s", verify_status, verify_json
         )
 
         return {
@@ -414,7 +414,7 @@ class BF3PythonAdapter(SouthboundAdapter):
         supi = _make_supi(payload)
 
         logger.info(
-            "[BF3Adapter] ROLLBACK register_with_amf -> AMF POST /amf/ue/%s/deregister", supi
+            "[LegacyFiveGEmulatorAdapter] ROLLBACK register_with_amf -> AMF POST /amf/ue/%s/deregister", supi
         )
         async with httpx.AsyncClient(timeout=_TIMEOUT) as client:
             dereg_resp = await client.post(
@@ -423,7 +423,7 @@ class BF3PythonAdapter(SouthboundAdapter):
             )
 
         logger.info(
-            "[BF3Adapter] AMF deregister HTTP %d: %s",
+            "[LegacyFiveGEmulatorAdapter] AMF deregister HTTP %d: %s",
             dereg_resp.status_code,
             dereg_resp.json() if dereg_resp.content else {},
         )
@@ -447,7 +447,7 @@ class BF3PythonAdapter(SouthboundAdapter):
         }
 
         logger.info(
-            "[BF3Adapter] establish_pdu_session -> SMF POST /nsmf-pdusession/v1/sm-contexts "
+            "[LegacyFiveGEmulatorAdapter] establish_pdu_session -> SMF POST /nsmf-pdusession/v1/sm-contexts "
             "supi=%s pduSessionId=%d",
             supi, pdu_session_id,
         )
@@ -458,7 +458,7 @@ class BF3PythonAdapter(SouthboundAdapter):
 
         smf_status = smf_resp.status_code
         smf_json = smf_resp.json() if smf_resp.content else {}
-        logger.info("[BF3Adapter] SMF response HTTP %d: %s", smf_status, smf_json)
+        logger.info("[LegacyFiveGEmulatorAdapter] SMF response HTTP %d: %s", smf_status, smf_json)
 
         if smf_status not in (200, 201):
             raise RuntimeError(
@@ -485,7 +485,7 @@ class BF3PythonAdapter(SouthboundAdapter):
         # without raising an error so the saga rollback chain continues cleanly.
         # Stale sessions will be cleaned up when the SMF process restarts.
         logger.warning(
-            "[BF3Adapter] ROLLBACK establish_pdu_session: SMF has no DELETE "
+            "[LegacyFiveGEmulatorAdapter] ROLLBACK establish_pdu_session: SMF has no DELETE "
             "sm-contexts endpoint (best-effort rollback). Checking session "
             "key=%s via GET /smf/sessions.",
             session_key,
@@ -498,7 +498,7 @@ class BF3PythonAdapter(SouthboundAdapter):
                 active_keys = sessions_data.get("sessions", [])
                 if session_key in active_keys:
                     logger.warning(
-                        "[BF3Adapter] ROLLBACK establish_pdu_session: session key=%s "
+                        "[LegacyFiveGEmulatorAdapter] ROLLBACK establish_pdu_session: session key=%s "
                         "is still ACTIVE in SMF memory. No DELETE endpoint available; "
                         "session will be orphaned until SMF restarts. "
                         "Operator action required if persistent cleanup is needed.",
@@ -506,13 +506,13 @@ class BF3PythonAdapter(SouthboundAdapter):
                     )
                 else:
                     logger.info(
-                        "[BF3Adapter] ROLLBACK establish_pdu_session: session key=%s "
+                        "[LegacyFiveGEmulatorAdapter] ROLLBACK establish_pdu_session: session key=%s "
                         "not found in SMF active sessions (already absent or never created).",
                         session_key,
                     )
             else:
                 logger.warning(
-                    "[BF3Adapter] ROLLBACK establish_pdu_session: GET /smf/sessions "
+                    "[LegacyFiveGEmulatorAdapter] ROLLBACK establish_pdu_session: GET /smf/sessions "
                     "returned HTTP %d; SMF may be unreachable. session key=%s status unknown.",
                     sessions_resp.status_code, session_key,
                 )
@@ -520,7 +520,7 @@ class BF3PythonAdapter(SouthboundAdapter):
             # SMF unreachable during rollback: log and continue. The session key
             # is recorded above for operator reference.
             logger.warning(
-                "[BF3Adapter] ROLLBACK establish_pdu_session: could not reach SMF "
+                "[LegacyFiveGEmulatorAdapter] ROLLBACK establish_pdu_session: could not reach SMF "
                 "to verify session status (non-fatal): key=%s error=%s",
                 session_key, exc,
             )
@@ -531,7 +531,7 @@ class BF3PythonAdapter(SouthboundAdapter):
 
     async def activate(self, step_name: str, payload: dict[str, Any]) -> dict:
         logger.info(
-            "[BF3Adapter] ACTIVATE step='%s' payload=%s", step_name, payload
+            "[LegacyFiveGEmulatorAdapter] ACTIVATE step='%s' payload=%s", step_name, payload
         )
 
         if step_name == "provision_subscriber":
@@ -547,20 +547,20 @@ class BF3PythonAdapter(SouthboundAdapter):
             return await self._activate_establish_pdu_session(payload)
 
         logger.warning(
-            "[BF3Adapter] ACTIVATE: unknown step '%s' - returning stub success. "
+            "[LegacyFiveGEmulatorAdapter] ACTIVATE: unknown step '%s' - returning stub success. "
             "Add a real handler for this step.",
             step_name,
         )
         return {
             "status": "stub_success",
-            "adapter": "bf3_python",
+            "adapter": "legacy_5g_emulator_python",
             "step": step_name,
             "note": "No real NF call implemented for this step",
         }
 
     async def rollback(self, step_name: str, payload: dict[str, Any]) -> None:
         logger.info(
-            "[BF3Adapter] ROLLBACK step='%s' payload=%s", step_name, payload
+            "[LegacyFiveGEmulatorAdapter] ROLLBACK step='%s' payload=%s", step_name, payload
         )
 
         if step_name == "provision_subscriber":
@@ -580,6 +580,6 @@ class BF3PythonAdapter(SouthboundAdapter):
             return
 
         logger.warning(
-            "[BF3Adapter] ROLLBACK: unknown step '%s' - no rollback action taken.",
+            "[LegacyFiveGEmulatorAdapter] ROLLBACK: unknown step '%s' - no rollback action taken.",
             step_name,
         )

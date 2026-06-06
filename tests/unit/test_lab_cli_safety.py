@@ -26,12 +26,13 @@ def patch_live_process(monkeypatch, command, *, cwd=""):
     monkeypatch.setattr(lab_cli, "pid_cwd", lambda pid: cwd)
 
 
-def test_managed_inventory_does_not_delegate_to_bf3_main():
+def test_managed_inventory_uses_clean_domain_service_roots():
     commands = [" ".join(lab_cli.service_cmd(service, "rest")) for service in lab_cli.SERVICE_INVENTORY]
     assert commands
-    assert all("5G_Emulator_API/main.py" not in command for command in commands)
+    assert all("main.py" not in command for command in commands)
     assert any("core_network/nrf.py" in command for command in commands)
     assert any("api_gateway/oran_gateway.py" in command for command in commands)
+    assert {service["root"] for service in lab_cli.SERVICE_INVENTORY} <= set(lab_cli.RUNTIME_ROOTS)
 
 
 def test_safe_to_terminate_requires_lab_owner(monkeypatch):
@@ -89,10 +90,16 @@ def test_safe_to_terminate_accepts_module_service_when_cwd_matches(monkeypatch):
     patch_live_process(
         monkeypatch,
         "/opt/homebrew/bin/python -m service_assurance.assurance_api --host 0.0.0.0 --port 9011",
-        cwd=str(lab_cli.BF3_API_ROOT),
+        cwd=str(lab_cli.RUNTIME_ROOTS["assurance"]),
     )
 
     safe, detail = lab_cli.safe_to_terminate(12345, record)
 
     assert safe is True
     assert "verified" in detail
+
+
+def test_service_paths_resolve_inside_clean_domain_buckets():
+    for service in lab_cli.SERVICE_INVENTORY:
+        path = lab_cli.service_path(service)
+        assert path.is_relative_to(lab_cli.RUNTIME_ROOTS[service["root"]])

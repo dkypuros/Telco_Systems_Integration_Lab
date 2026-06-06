@@ -1,4 +1,4 @@
-# File location: 5G_Emulator_API/config/ports.py
+# File location: clean_5g_emulator_api/config/ports.py
 # Network Function Port Assignments
 # Centralized to avoid conflicts and ensure consistency
 

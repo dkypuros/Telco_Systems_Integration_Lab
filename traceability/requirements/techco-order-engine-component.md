@@ -76,7 +76,7 @@ src/order_engine/app/
     rules.yaml          Offering-ID-to-step rules (see Decomposition section below)
   adapters/
     base.py             SouthboundAdapter ABC: activate() and rollback()
-    bf3_python_adapter.py   Real adapter: calls live 5G core NFs
+    legacy_5g_emulator_python_adapter.py   Real adapter: calls live 5G core NFs
     o2ims_adapter.py        Stub adapter: logs and returns success (no real O2IMS call)
     o2ims_real_adapter.py   Real O2IMS adapter: calls Red Hat oran-o2ims REST API
   db/
@@ -129,7 +129,7 @@ Each `SagaResult` records: `step_name`, `success`, `response`, `error`, `rolled_
 | `register_with_amf`     | Real (AMF POST)   | Real: AMF POST `/amf/ue/{supi}/deregister`            |
 | `establish_pdu_session` | Real (SMF POST)   | Best-effort: SMF has no DELETE endpoint; adapter logs orphaned session key and continues |
 
-UDR rollback rationale (see `bf3_python_adapter.py` lines 160-211): UDR exposes no
+UDR rollback rationale (see `legacy_5g_emulator_python_adapter.py` lines 160-211): UDR exposes no
 DELETE endpoint. The adapter opens `udr.db` directly with `sqlite3` and executes
 `DELETE FROM users WHERE imsi=?`. This is safe because UDR performs a fresh
 `sqlite3.connect()` on every query. The operation is idempotent (rowcount=0 if already
@@ -152,12 +152,12 @@ is created per `ProductOrderItem`, containing one `ServiceOrderItem` per step.
 
 | Offering ID substring  | Service category   | Steps (in order)                                                                 |
 |------------------------|--------------------|---------------------------------------------------------------------------------|
-| `OFF-5G-BIZ-PREMIUM`   | 5G_Enterprise      | allocate_slice (o2ims stub), provision_subscriber (bf3_python)                  |
-| `OFF-5G-IOT-BASIC`     | 5G_IoT             | allocate_slice (o2ims stub), provision_subscriber (bf3_python)                  |
-| `OFF-5G-URLLC-LATENCY` | 5G_URLLC           | allocate_slice (o2ims stub), configure_ran (o2ims stub), provision_subscriber (bf3_python) |
-| `OFF-5G-ORAN-BUNDLE`   | 5G_ORAN_Edge       | allocate_o_cloud_resource (o2ims_real), provision_subscriber (bf3_python), register_with_amf (bf3_python) |
-| `OFF-5G-URLLC-SLICE`   | 5G_URLLC           | allocate_slice (bf3_python), provision_subscriber (bf3_python), register_with_amf (bf3_python), establish_pdu_session (bf3_python) |
-| `DEFAULT`              | GenericService     | provision_subscriber (bf3_python)                                               |
+| `OFF-5G-BIZ-PREMIUM`   | 5G_Enterprise      | allocate_slice (o2ims stub), provision_subscriber (legacy_5g_emulator_python)                  |
+| `OFF-5G-IOT-BASIC`     | 5G_IoT             | allocate_slice (o2ims stub), provision_subscriber (legacy_5g_emulator_python)                  |
+| `OFF-5G-URLLC-LATENCY` | 5G_URLLC           | allocate_slice (o2ims stub), configure_ran (o2ims stub), provision_subscriber (legacy_5g_emulator_python) |
+| `OFF-5G-ORAN-BUNDLE`   | 5G_ORAN_Edge       | allocate_o_cloud_resource (o2ims_real), provision_subscriber (legacy_5g_emulator_python), register_with_amf (legacy_5g_emulator_python) |
+| `OFF-5G-URLLC-SLICE`   | 5G_URLLC           | allocate_slice (legacy_5g_emulator_python), provision_subscriber (legacy_5g_emulator_python), register_with_amf (legacy_5g_emulator_python), establish_pdu_session (legacy_5g_emulator_python) |
+| `DEFAULT`              | GenericService     | provision_subscriber (legacy_5g_emulator_python)                                               |
 
 Each step's `payload_extra` fields are merged into the `ServiceOrderItem.serviceCharacteristic`
 list and passed through to `adapter.activate()`.
@@ -173,13 +173,13 @@ adapter handles each step. Priority:
    the value is a registered adapter key, that adapter is used. This is set by
    `payload_extra._adapter` in `rules.yaml`.
 2. Falls back to step-name heuristics: if `"slice"` or `"ran"` appears in the step
-   name, uses `o2ims`; otherwise uses `bf3_python`.
+   name, uses `o2ims`; otherwise uses `legacy_5g_emulator_python`.
 
 The adapter registry (`_ADAPTERS` dict, `tmf622.py` lines 34-38):
 
 | Key           | Class                | Real or stub |
 |---------------|----------------------|--------------|
-| `bf3_python`  | `BF3PythonAdapter`   | Real         |
+| `legacy_5g_emulator_python`  | `LegacyFiveGEmulatorAdapter`   | Real         |
 | `o2ims`       | `O2IMSAdapter`       | Stub         |
 | `o2ims_real`  | `O2IMSRealAdapter`   | Real         |
 
@@ -187,7 +187,7 @@ The adapter registry (`_ADAPTERS` dict, `tmf622.py` lines 34-38):
 
 ## Adapters in Detail
 
-### BF3PythonAdapter (`app/adapters/bf3_python_adapter.py`)
+### LegacyFiveGEmulatorAdapter (`app/adapters/legacy_5g_emulator_python_adapter.py`)
 
 Real adapter. Calls live 5G core NFs for four steps:
 
@@ -250,12 +250,12 @@ pytest
 
 | Variable                  | Default                                          | Description                                      |
 |---------------------------|--------------------------------------------------|--------------------------------------------------|
-| `BF3_UDR_URL`             | `http://localhost:9005`                          | UDR base URL                                     |
-| `BF3_UDM_URL`             | `http://localhost:9004`                          | UDM base URL                                     |
-| `BF3_AMF_URL`             | `http://localhost:9000`                          | AMF base URL                                     |
-| `BF3_SMF_URL`             | `http://localhost:9001`                          | SMF base URL                                     |
-| `BF3_NSSF_URL`            | `http://localhost:9010`                          | NSSF base URL                                    |
-| `BF3_UDR_DB_PATH`         | `<Tech-Co root>/udr.db`                          | Path to UDR SQLite file for sidecar rollback     |
+| `TELCO_LAB_UDR_URL`             | `http://localhost:9005`                          | UDR base URL                                     |
+| `TELCO_LAB_UDM_URL`             | `http://localhost:9004`                          | UDM base URL                                     |
+| `TELCO_LAB_AMF_URL`             | `http://localhost:9000`                          | AMF base URL                                     |
+| `TELCO_LAB_SMF_URL`             | `http://localhost:9001`                          | SMF base URL                                     |
+| `TELCO_LAB_NSSF_URL`            | `http://localhost:9010`                          | NSSF base URL                                    |
+| `TELCO_LAB_UDR_DB_PATH`         | `<Tech-Co root>/udr.db`                          | Path to UDR SQLite file for sidecar rollback     |
 | `O2IMS_BASE_URL`          | `http://localhost:8083`                          | O2IMS API base URL (O2IMSRealAdapter)            |
 | `O2IMS_TOKEN`             | (empty)                                          | Bearer token for O2IMS auth (optional)           |
 | `ORDER_ENGINE_CORS_ORIGINS` | `http://localhost:8095,http://127.0.0.1:8095`  | Comma-separated allowed CORS origins             |
@@ -293,7 +293,7 @@ Interactive docs: http://localhost:8080/docs
 
    ```python
    _ADAPTERS = {
-       "bf3_python": BF3PythonAdapter(),
+       "legacy_5g_emulator_python": LegacyFiveGEmulatorAdapter(),
        "o2ims": O2IMSAdapter(),
        "o2ims_real": O2IMSRealAdapter(),
        "my_adapter": MyAdapter(),   # add this

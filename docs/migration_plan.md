@@ -17,7 +17,7 @@ Create a new formal lab root at `9.LABS_Telco_Systems_Integration_Lab` using cop
 ## First-pass source workspaces
 
 - `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co`
-- `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo`
+- `<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator`
 - `<SOURCE_5G_LAB_SIMULATOR_ROOT>/tmforum_psr_learning`
 - `<SOURCE_5G_LAB_SIMULATOR_ROOT>/open_source_5g_cores`
 - `<SOURCE_5G_LAB_SIMULATOR_ROOT>/5G_Wireline_Simulator`

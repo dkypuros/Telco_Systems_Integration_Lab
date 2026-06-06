@@ -27,7 +27,7 @@ All five NFs use the same pattern:
 - Entrypoint: `if __name__ == "__main__"` block at bottom of each file
 - Port source: `from config.ports import get_port` (centralized in config/ports.py)
 - Launch command: `python3 <nf>.py --host 0.0.0.0 --port <port>`
-- PYTHONPATH must include the `5G_Emulator_API/` root so `config.ports` resolves
+- PYTHONPATH must include the `clean_5g_emulator_api/` root so `config.ports` resolves
 
 ### NF Summaries from Spec Files
 

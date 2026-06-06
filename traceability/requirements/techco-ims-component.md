@@ -1,7 +1,7 @@
 # IMS Component Reference
 
-**Codebase**: BF3-5G-Demo Python IMS stack (~4,200 lines across 5 NFs)
-**Base path**: `components/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/`
+**Codebase**: legacy-standalone-5g-emulator Python IMS stack (~4,200 lines across 5 NFs)
+**Base path**: `components/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/`
 **Framework**: FastAPI + uvicorn (all NFs)
 **Transport**: HTTP/REST (not real SIP/UDP -- see "Transport model" section below)
 **Port config**: `config/ports.py` (IMS range: 9030-9040)
@@ -41,7 +41,7 @@ IMS-HSS (9040) -> S-CSCF (9032) -> I-CSCF (9031) -> P-CSCF (9030) -> MRF (9033)
 
 All five NFs verified healthy in stage 9 (PIDs 85644-86020, all `GET /health` returned 200).
 
-**PYTHONPATH requirement**: `5G_Emulator_API/` root must be on `PYTHONPATH` so
+**PYTHONPATH requirement**: `clean_5g_emulator_api/` root must be on `PYTHONPATH` so
 `from config.ports import get_port` resolves.
 
 ---

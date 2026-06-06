@@ -1,4 +1,4 @@
-# File location: 5G_Emulator_API/core_network/nssf.py
+# File location: clean_5g_emulator_api/core_network/nssf.py
 # 3GPP TS 29.531 - Network Slice Selection Function (NSSF) - standards-referenced mock implementation
 # Implements Nnssf_NSSelection and Nnssf_NSSAIAvailability services
 # Inspired by Free5GC NSSF implementation

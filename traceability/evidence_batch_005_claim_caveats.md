@@ -32,7 +32,7 @@ They are **not** formal TM Forum, 3GPP, IMS/VoNR, RAN/EPC, slicing, or O-RAN con
 - `traceability/evidence_snapshots/techco-stage16-slicing-e2e.md`
 - `traceability/evidence_snapshots/techco-stage9-ims-verification.md`
 - `traceability/evidence_snapshots/techco-stage12-vonr-call.md`
-- `traceability/evidence_snapshots/techco-stage1-bf3-verification.md`
+- `traceability/evidence_snapshots/techco-stage1-legacy_5g_emulator-verification.md`
 - `traceability/requirements/techco-testing.md`
 
 ## Interpretation

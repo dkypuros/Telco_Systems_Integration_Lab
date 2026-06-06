@@ -54,7 +54,7 @@ DOCUMENT FORMAT BREAKDOWN:
 PART 2: SOURCE CODE IMPLEMENTATION INVENTORY
 ================================================================================
 
-Location: <USER_HOME>/Documents/Git_Offline/active/90_5G_lab/BF3-5G-Demo
+Location: <USER_HOME>/Documents/Git_Offline/active/90_5G_lab/legacy-standalone-5g-emulator
 
 CORE NETWORK FUNCTIONS (Python/FastAPI):
 --------------------------------------------------------------------------------
@@ -536,12 +536,12 @@ COMPLETE FOLDER STRUCTURE (48 categories):
 APPENDIX C: 5G LAB PROJECT STRUCTURE
 ================================================================================
 
-Location: <USER_HOME>/Documents/Git_Offline/active/90_5G_lab/BF3-5G-Demo
+Location: <USER_HOME>/Documents/Git_Offline/active/90_5G_lab/legacy-standalone-5g-emulator
 
 DIRECTORY TREE:
 --------------------------------------------------------------------------------
 
-BF3-5G-Demo/
+legacy-standalone-5g-emulator/
 ├── demo_front-end/                 Next.js React Dashboard
 │   ├── src/
 │   │   ├── app/                    Main application routes
@@ -564,7 +564,7 @@ BF3-5G-Demo/
 │   └── testing.md                  Test documentation
 │
 ├── open-digital-platform-2_0/      Main Backend
-│   ├── 5G_Emulator_API/
+│   ├── clean_5g_emulator_api/
 │   │   ├── core_network/           Core NF Implementations
 │   │   │   ├── amf.py              Access & Mobility Mgmt
 │   │   │   ├── amf_nas.py          NAS Protocol Handler

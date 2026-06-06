@@ -8,7 +8,7 @@ This blueprint defines what “complete end-to-end telco lab” means for the Te
 
 The target is not a pile of telco source trees. The target is a **standards-traceable telco digital twin**: a runnable, inspectable, evidence-producing lab that connects customer intent, TM Forum OSS/BSS, service orchestration, network domains, O-RAN control/management, assurance, charging, and conformance boundaries.
 
-This document is capability-first. External implementations such as free5GC, Open5GS, OpenAirInterface/OAI, BF3-derived services, TM Forum learning assets, and future vendor systems are treated as **external implementation profiles** or **interoperability targets**, per [ADR 0001](adr/0001-external-implementation-profiles.md). They are not blindly absorbed as source trees, and they never become standards evidence merely because they exist in the repository or in local staging.
+This document is capability-first. External implementations such as free5GC, Open5GS, OpenAirInterface/OAI, legacy standalone 5G emulator-derived services, TM Forum learning assets, and future vendor systems are treated as **external implementation profiles** or **interoperability targets**, per [ADR 0001](adr/0001-external-implementation-profiles.md). They are not blindly absorbed as source trees, and they never become standards evidence merely because they exist in the repository or in local staging.
 
 ## Planning decision
 

@@ -17,8 +17,8 @@ Those phrases are preserved as **source evidence**, not accepted as current lab 
 - `traceability/requirements/techco-development.md` line 469: - **Type hints**: all function signatures fully annotated.
 - `traceability/requirements/techco-roadmap.md` line 11: The simulator is a fully functional multi-service 5G lab environment running on a single
 - `traceability/requirements/techco-roadmap.md` line 228: - NRF OAuth2 token issuance can optionally delegate to Keycloak for a fully standards-
-- `references/bf3/5g-emulator-getting-started.txt` line 12: This is a 3GPP-compliant 5G network emulator with REAL protocol implementations:
-- `references/bf3/5g-emulator-getting-started.txt` line 427: │   └── COMPLIANCE_REPORT.md
+- `references/legacy_5g_emulator/5g-emulator-getting-started.txt` line 12: This is a 3GPP-compliant 5G network emulator with REAL protocol implementations:
+- `references/legacy_5g_emulator/5g-emulator-getting-started.txt` line 427: │   └── COMPLIANCE_REPORT.md
 
 ## Caveat rule
 

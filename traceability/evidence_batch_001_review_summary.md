@@ -19,8 +19,8 @@ Evidence batch 001 is copied and verified.
 - `traceability/evidence_snapshots/tmf620-v4-ctk-jsonResults.json`
 - `traceability/evidence_snapshots/tmf622-v4-ctk-jsonResults.json`
 - `build_logs/stage13_tmf_ctk_conformance.md`
-- `traceability/evidence_snapshots/bf3-live-spec-compliance-results.txt`
-- `traceability/requirements/bf3-spec-to-code-analysis.txt`
+- `traceability/evidence_snapshots/legacy_5g_emulator-live-spec-compliance-results.txt`
+- `traceability/requirements/legacy_5g_emulator-spec-to-code-analysis.txt`
 - `traceability/evidence_snapshots/tmforum-psr-test-results.txt`
 
 ## Guardrails confirmed

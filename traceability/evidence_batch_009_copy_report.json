@@ -4,7 +4,7 @@
   "results": [
     {
       "copy_batch_id": "planned-code-071",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/nrf.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/core_network/nrf.py",
       "destination_path": "services/mock_5g_core/core_network/nrf.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "3GPP 5GC NRF",
@@ -17,7 +17,7 @@
     },
     {
       "copy_batch_id": "planned-code-072",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/upf.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/core_network/upf.py",
       "destination_path": "services/mock_5g_core/core_network/upf.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "3GPP 5GC UPF",
@@ -30,7 +30,7 @@
     },
     {
       "copy_batch_id": "planned-code-073",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/udm.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/core_network/udm.py",
       "destination_path": "services/mock_5g_core/core_network/udm.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "3GPP 5GC UDM",
@@ -43,7 +43,7 @@
     },
     {
       "copy_batch_id": "planned-code-074",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/ausf.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/core_network/ausf.py",
       "destination_path": "services/mock_5g_core/core_network/ausf.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "3GPP 5GC AUSF",
@@ -56,7 +56,7 @@
     },
     {
       "copy_batch_id": "planned-code-075",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ric/near_rt_ric.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/ran/ric/near_rt_ric.py",
       "destination_path": "adapters/mock_ran/ran/ric/near_rt_ric.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN RIC",
@@ -69,7 +69,7 @@
     },
     {
       "copy_batch_id": "planned-code-076",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ric/non_rt_ric.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/ran/ric/non_rt_ric.py",
       "destination_path": "adapters/mock_ran/ran/ric/non_rt_ric.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN RIC",
@@ -82,7 +82,7 @@
     },
     {
       "copy_batch_id": "planned-code-077",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ric/e2ap.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/ran/ric/e2ap.py",
       "destination_path": "adapters/mock_ran/ran/ric/e2ap.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN E2",
@@ -95,7 +95,7 @@
     },
     {
       "copy_batch_id": "planned-code-078",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ric/e2sm_ccc.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/ran/ric/e2sm_ccc.py",
       "destination_path": "adapters/mock_ran/ran/ric/e2sm_ccc.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN E2SM",
@@ -108,7 +108,7 @@
     },
     {
       "copy_batch_id": "planned-code-079",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ric/e2sm_llc.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/ran/ric/e2sm_llc.py",
       "destination_path": "adapters/mock_ran/ran/ric/e2sm_llc.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN E2SM",
@@ -121,7 +121,7 @@
     },
     {
       "copy_batch_id": "planned-code-080",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/ric/e2sm_ni.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/ran/ric/e2sm_ni.py",
       "destination_path": "adapters/mock_ran/ran/ric/e2sm_ni.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN E2SM",
@@ -134,7 +134,7 @@
     },
     {
       "copy_batch_id": "planned-code-081",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/fronthaul/cus_plane.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/ran/fronthaul/cus_plane.py",
       "destination_path": "adapters/mock_ran/ran/fronthaul/cus_plane.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN Open Fronthaul",
@@ -147,7 +147,7 @@
     },
     {
       "copy_batch_id": "planned-code-082",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/ran/slicing/oran_slicing.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/ran/slicing/oran_slicing.py",
       "destination_path": "adapters/mock_ran/ran/slicing/oran_slicing.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN slicing / 3GPP slicing",
@@ -160,7 +160,7 @@
     },
     {
       "copy_batch_id": "planned-code-083",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/api_gateway/oran_gateway.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/api_gateway/oran_gateway.py",
       "destination_path": "adapters/mock_oran/api_gateway/oran_gateway.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN API gateway",
@@ -173,7 +173,7 @@
     },
     {
       "copy_batch_id": "planned-code-084",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/oran/o_ran_spec_map.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/oran/o_ran_spec_map.py",
       "destination_path": "adapters/mock_oran/oran/o_ran_spec_map.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN spec mapping",
@@ -186,7 +186,7 @@
     },
     {
       "copy_batch_id": "planned-code-085",
-      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/oran/__init__.py",
+      "source_path": "<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/oran/__init__.py",
       "destination_path": "adapters/mock_oran/oran/__init__.py",
       "artifact_class": "mock_source_code_intake",
       "standards_body": "O-RAN support",

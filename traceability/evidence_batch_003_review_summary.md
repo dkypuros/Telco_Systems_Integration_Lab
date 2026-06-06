@@ -21,7 +21,7 @@ Evidence batch 003 is copied and verified.
 - `traceability/evidence_snapshots/techco-stage19-oran-closed-loop.md`
 - `traceability/requirements/tmf638-ctk-r18-0-readme.md`
 - `traceability/standards_mapping/oran-o2ims-real-adapter.py`
-- `traceability/standards_mapping/bf3-python-adapter.py`
+- `traceability/standards_mapping/legacy_5g_emulator-python-adapter.py`
 - `references/learning_assets/tmforum-psr-learning-readme.txt`
 
 ## Guardrails confirmed

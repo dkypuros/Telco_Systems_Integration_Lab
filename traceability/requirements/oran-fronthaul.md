@@ -9,7 +9,7 @@ both planes of the fronthaul interface:
 - **M-Plane** (Management Plane) per `O-RAN.WG4.TS.MP.0-R005-v20.00`
 - **CUS-Plane** (Control, User, Synchronization) per `O-RAN.WG4.TS.CUS.0-R005-v20.00`
 
-Module layout (`open-digital-platform-2_0/5G_Emulator_API/ran/fronthaul/`):
+Module layout (`open-digital-platform-2_0/clean_5g_emulator_api/ran/fronthaul/`):
 
 | File | Role |
 |---|---|

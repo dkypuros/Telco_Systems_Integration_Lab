@@ -56,7 +56,7 @@ This document describes the O-RAN RAN Intelligent Controller (RIC) implementatio
 
 ### Near-RT RIC (Near-Real-Time RIC)
 
-**File Location:** `5G_Emulator_API/ran/ric/near_rt_ric.py`
+**File Location:** `clean_5g_emulator_api/ran/ric/near_rt_ric.py`
 **Port:** 8095
 **Control Loop Latency:** 10ms - 1 second
 **Primary Interfaces:** E2 (to E2 Nodes), A1 receiver (from Non-RT RIC)
@@ -95,7 +95,7 @@ The Near-RT RIC provides near-real-time control of the RAN via the E2 interface.
 
 ### Non-RT RIC (Non-Real-Time RIC)
 
-**File Location:** `5G_Emulator_API/ran/ric/non_rt_ric.py`
+**File Location:** `clean_5g_emulator_api/ran/ric/non_rt_ric.py`
 **Port:** 8096
 **Control Loop Latency:** > 1 second
 **Primary Interfaces:** A1 (to Near-RT RIC), O1 (to SMO)
@@ -128,7 +128,7 @@ The E2 interface connects the Near-RT RIC to E2 Nodes (CU, DU, gNB). It is defin
 
 ### E2AP Procedures
 
-**File Location:** `5G_Emulator_API/ran/ric/e2ap.py`
+**File Location:** `clean_5g_emulator_api/ran/ric/e2ap.py`
 
 | Procedure | Initiator | Description |
 |-----------|-----------|-------------|
@@ -161,7 +161,7 @@ The A1 interface connects the Non-RT RIC to the Near-RT RIC. It is defined by ET
 
 ### A1 Services
 
-**File Location:** `5G_Emulator_API/ran/ric/a1_interface.py`
+**File Location:** `clean_5g_emulator_api/ran/ric/a1_interface.py`
 
 | Service | Description |
 |---------|-------------|
@@ -195,7 +195,7 @@ xApps are applications that run on the Near-RT RIC and implement near-real-time 
 
 ### xApp SDK
 
-**File Location:** `5G_Emulator_API/ran/ric/xapp_sdk.py`
+**File Location:** `clean_5g_emulator_api/ran/ric/xapp_sdk.py`
 
 ```python
 from ran.ric.xapp_sdk import XAppBase
@@ -229,7 +229,7 @@ rApps are applications that run on the Non-RT RIC and implement non-real-time RA
 
 ### rApp SDK
 
-**File Location:** `5G_Emulator_API/ran/ric/rapp_sdk.py`
+**File Location:** `clean_5g_emulator_api/ran/ric/rapp_sdk.py`
 
 ```python
 from ran.ric.rapp_sdk import RAppBase
@@ -262,7 +262,7 @@ CU and DU components include E2 agents for RIC connectivity.
 
 ### CU E2 Agent
 
-**File Location:** `5G_Emulator_API/ran/cu.py` (E2 agent section)
+**File Location:** `clean_5g_emulator_api/ran/cu.py` (E2 agent section)
 
 Supported RAN Functions:
 - E2SM-KPM-CU: PDCP throughput, RLC retransmissions, RRC state
@@ -270,7 +270,7 @@ Supported RAN Functions:
 
 ### DU E2 Agent
 
-**File Location:** `5G_Emulator_API/ran/du.py` (E2 agent section)
+**File Location:** `clean_5g_emulator_api/ran/du.py` (E2 agent section)
 
 Supported RAN Functions:
 - E2SM-KPM-DU: PRB utilization, CQI, MCS, HARQ

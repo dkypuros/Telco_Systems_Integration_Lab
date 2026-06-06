@@ -9,7 +9,7 @@ WG11. Every component is a runnable FastAPI service that registers with the NRF,
 `/health` endpoint, and cites the exact O-RAN specification document it implements.
 
 The authoritative spec-to-code map lives in
-`open-digital-platform-2_0/5G_Emulator_API/oran/o_ran_spec_map.py` and is served live by the
+`open-digital-platform-2_0/clean_5g_emulator_api/oran/o_ran_spec_map.py` and is served live by the
 aggregation gateway at `GET /api/oran/spec-coverage`. See
 [oran-compliance.md](oran-compliance.md) for the full coverage matrix and
 [oran-fronthaul.md](oran-fronthaul.md) for the WG4 Open Fronthaul detail.
@@ -64,7 +64,7 @@ Launch everything (5G core + RAN + O-RAN + gateway) with the platform launcher:
 
 ```bash
 cd open-digital-platform-2_0
-python 5G_Emulator_API/main.py
+python clean_5g_emulator_api/main.py
 ```
 
 Or bring up just the O-RAN layer + gateway:
@@ -97,7 +97,7 @@ curl http://localhost:8088/api/oran/fronthaul
 In-process compliance suite (no ports needed):
 
 ```bash
-cd open-digital-platform-2_0/5G_Emulator_API
+cd open-digital-platform-2_0/clean_5g_emulator_api
 python test_oran_compliance.py
 ```
 

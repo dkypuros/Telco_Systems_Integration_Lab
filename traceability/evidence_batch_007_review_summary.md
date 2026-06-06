@@ -20,7 +20,7 @@ Evidence batch 007 is copied, verified, and claim-caveated.
 - `traceability/requirements/techco-development.md`
 - `traceability/requirements/techco-roadmap.md`
 - `traceability/requirements/techco-storefront-component.md`
-- `references/bf3/5g-emulator-getting-started.txt`
+- `references/legacy_5g_emulator/5g-emulator-getting-started.txt`
 
 ## Claim caveat
 

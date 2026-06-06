@@ -36,7 +36,7 @@ This document provides detailed analysis of all 5G Core Network Function impleme
 
 ### AMF (Access and Mobility Management Function) {#amf-section}
 
-**File Location:** `5G_Emulator_API/core_network/amf.py`  
+**File Location:** `clean_5g_emulator_api/core_network/amf.py`  
 **3GPP Compliance Level:** 70% ✅ Good  
 **Primary Interfaces:** N2 (gNB), N11 (SMF), N12 (AUSF)
 
@@ -133,7 +133,7 @@ with tracer.start_as_current_span("amf_pdu_session_create_request") as span:
 
 ### SMF (Session Management Function) {#smf-section}
 
-**File Location:** `5G_Emulator_API/core_network/smf.py`  
+**File Location:** `clean_5g_emulator_api/core_network/smf.py`  
 **3GPP Compliance Level:** 85% ✅ Excellent  
 **Primary Interfaces:** N11 (AMF), N4 (UPF), N7 (PCF)
 
@@ -263,7 +263,7 @@ session_contexts[session_key] = {
 
 ### UPF (User Plane Function) {#upf-section}
 
-**File Location:** `5G_Emulator_API/core_network/upf.py`  
+**File Location:** `clean_5g_emulator_api/core_network/upf.py`  
 **3GPP Compliance Level:** 80% ✅ Good  
 **Primary Interfaces:** N4 (SMF), N3 (gNB), N6 (DN)
 
@@ -372,7 +372,7 @@ def install_forwarding_rules(self, pfcp_message):
 
 ### NRF (Network Repository Function) {#nrf-section}
 
-**File Location:** `5G_Emulator_API/core_network/nrf.py`  
+**File Location:** `clean_5g_emulator_api/core_network/nrf.py`  
 **3GPP Compliance Level:** 30% ⚠️ Needs Enhancement  
 **Primary Interfaces:** Service-Based Interface (SBI)
 
@@ -446,7 +446,7 @@ class NRF:
 
 ### AUSF (Authentication Server Function) {#ausf-section}
 
-**File Location:** `5G_Emulator_API/core_network/ausf.py`  
+**File Location:** `clean_5g_emulator_api/core_network/ausf.py`  
 **3GPP Compliance Level:** 10% ❌ Critical Implementation Needed  
 **Primary Interfaces:** N12 (AMF), N13 (UDM)
 
@@ -522,7 +522,7 @@ UE ────► gNB ────► AMF ────► AUSF ────► 
 ### UDM/UDR/UDSF (Data Management Functions) {#udm-udr-section}
 
 #### UDM (Unified Data Management)
-**File Location:** `5G_Emulator_API/core_network/udm.py`  
+**File Location:** `clean_5g_emulator_api/core_network/udm.py`  
 **3GPP Compliance Level:** 10% ❌ Critical Implementation Needed
 
 **Required Implementation (TS 29.503, TS 29.505):**
@@ -548,7 +548,7 @@ async def get_session_management_data(supi: str):
 ```
 
 #### UDR (Unified Data Repository)
-**File Location:** `5G_Emulator_API/core_network/udr.py`  
+**File Location:** `clean_5g_emulator_api/core_network/udr.py`  
 **3GPP Compliance Level:** 25% ⚠️ Basic Implementation
 
 **Enhancement Needed:**

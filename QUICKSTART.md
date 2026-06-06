@@ -11,13 +11,13 @@ cd path/to/Telco_Systems_Integration_Lab
 ./lab services
 ```
 
-If you keep the BF3 5G emulator outside this repository, set
-`BF3_5G_API_ROOT=/path/to/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API`
+If you keep the legacy standalone 5G emulator outside this repository, set
+`TELCO_LAB_RUNTIME_ROOT=/path/to/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api`
 before running `./lab up`.
 
 What happens:
 
-- Starts the BF3 5G core, RAN, O-RAN enhancement, NTN radio, and gateway services in the background.
+- Starts the legacy standalone 5G core, RAN, O-RAN enhancement, NTN radio, and gateway services in the background.
 - Avoids the original macOS-fragile `psutil` port-kill path.
 - Starts a cold lab-owned core in dependency order: `NRF -> UPF -> SMF -> AMF`, then the remaining services.
 - Tracks only lab-owned PIDs in `.lab/state/lab_services.json` and mirrors operator evidence to `build_logs/lab_services.json`.

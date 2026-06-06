@@ -26,7 +26,7 @@ Deliverables on disk
 
 3. src/order_engine/app/decomposition/rules.yaml
    - Rule for OFF-5G-ORAN-BUNDLE: allocate_o_cloud_resource (o2ims adapter) ->
-     provision_subscriber (bf3_python) -> register_with_amf (bf3_python)
+     provision_subscriber (legacy_5g_emulator_python) -> register_with_amf (legacy_5g_emulator_python)
    - 9 references to o2ims / o_cloud across the rules file
 
 4. src/order_engine/app/adapters/o2ims_real_adapter.py (from stage 8)

@@ -111,7 +111,7 @@ docs/
   testing.md                  Test suite map and CTK runner instructions
   api_reference.md            OpenAPI endpoint reference for all FastAPI services
   components/
-    5g_core.md                BF3 5G Core NFs (14 NFs, flows, test suite)
+    5g_core.md                legacy standalone 5G Core NFs (14 NFs, flows, test suite)
     ai_observer.md            AI Observer: KPI scraping, anomaly detection
     catalog_api.md            TMF620 Catalog API (68/68 tests, 1421/1421 CTK)
     epc.md                    4G EPC subsystem (MME, SGW, PGW, HSS)

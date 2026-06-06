@@ -2,7 +2,7 @@
 
 Formal, standards-traceable workspace for end-to-end telco integration across 3GPP, TM Forum, and O-RAN.
 
-![Telco Systems Integration Lab Vision](docs/vision_triangle.svg)
+<img src="docs/vision_triangle.svg" alt="Telco Systems Integration Lab Vision" width="440" />
 
 Core rule: preserve originals. Intake from existing workspaces is copy-only and must be recorded in `traceability/` before source code is migrated.
 
@@ -52,7 +52,7 @@ Key docs:
 Use the root `lab` command for the current runnable experience:
 
 ```bash
-./lab up                 # start the BF3 5G core + RAN + O-RAN services in the background
+./lab up                 # start the legacy standalone 5G core + RAN + O-RAN services in the background
 ./lab services           # show live service/process/health status
 ./lab chatter core       # show recent service log chatter, prefixed by service
 ./lab chatter all --follow
@@ -67,7 +67,7 @@ Use the root `lab` command for the current runnable experience:
 ./lab demo               # print a concise demo-readiness summary
 ```
 
-`./lab up` now uses a lab-owned service inventory that mirrors the BF3 launcher service list while avoiding the fragile macOS `psutil.net_connections()` path. It starts a cold lab-owned core in dependency order (`NRF -> UPF -> SMF -> AMF`) so service discovery has a chance to settle, writes authoritative PID/control state to `.lab/state/lab_services.json`, keeps an operator evidence copy at `build_logs/lab_services.json`, and writes per-service logs to `build_logs/services/`. It does **not** kill arbitrary/untracked processes; if a required port is already occupied, it marks that service as external/already-listening and tells you where to inspect.
+`./lab up` now uses a lab-owned service inventory that mirrors the legacy standalone 5G emulator launcher service list while avoiding the fragile macOS `psutil.net_connections()` path. It starts a cold lab-owned core in dependency order (`NRF -> UPF -> SMF -> AMF`) so service discovery has a chance to settle, writes authoritative PID/control state to `.lab/state/lab_services.json`, keeps an operator evidence copy at `build_logs/lab_services.json`, and writes per-service logs to `build_logs/services/`. It does **not** kill arbitrary/untracked processes; if a required port is already occupied, it marks that service as external/already-listening and tells you where to inspect.
 
 A `*` beside a PID in `./lab services` means the process was detected on the port but is external/untracked, so `./lab down` will not kill it.
 

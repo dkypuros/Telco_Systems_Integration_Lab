@@ -20,9 +20,9 @@ All source files below were checked for existence on 2026-06-05 and are not alre
 | 3 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/build_logs/stage16_slicing_e2e.md` | `traceability/evidence_snapshots/techco-stage16-slicing-e2e.md` | 3GPP slicing | End-to-end slicing evidence for service orchestration and network slice mapping. | E2E demo evidence, not protocol conformance. |
 | 4 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/build_logs/stage9_ims_verification.md` | `traceability/evidence_snapshots/techco-stage9-ims-verification.md` | 3GPP IMS | IMS verification evidence supporting VoNR/IMS mapping. | Functional verification only. |
 | 5 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/build_logs/stage12_vonr_call.md` | `traceability/evidence_snapshots/techco-stage12-vonr-call.md` | 3GPP IMS/VoNR | VoNR call evidence to connect IMS docs and verification logs. | Demo evidence; not formal IMS/VoNR conformance. |
-| 6 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/build_logs/stage1_bf3_verification.md` | `traceability/evidence_snapshots/techco-stage1-bf3-verification.md` | 3GPP/O-RAN BF3 integration | Early BF3 verification evidence for source lineage. | Source-local verification only. |
+| 6 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/build_logs/stage1_legacy_5g_emulator_verification.md` | `traceability/evidence_snapshots/techco-stage1-legacy_5g_emulator-verification.md` | 3GPP/O-RAN legacy standalone 5G emulator integration | Early legacy standalone 5G emulator verification evidence for source lineage. | Source-local verification only. |
 | 7 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/testing.md` | `traceability/requirements/techco-testing.md` | TM Forum; 3GPP; O-RAN | Test strategy/documentation context for copied run evidence. | Documentation evidence; check links when copied. |
-| 8 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/tests/requirements-test.txt` | `traceability/evidence_snapshots/bf3-5g-emulator-requirements-test.txt` | 3GPP/O-RAN | Minimal requirements test artifact from emulator API tree. | Small test artifact only; not full test suite migration. |
+| 8 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/tests/requirements-test.txt` | `traceability/evidence_snapshots/legacy_5g_emulator-5g-emulator-requirements-test.txt` | 3GPP/O-RAN | Minimal requirements test artifact from emulator API tree. | Small test artifact only; not full test suite migration. |
 | 9 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/components/5g_core.md` | `traceability/requirements/techco-5g-core-component.md` | 3GPP 5GC | Component-level 5G core explanation for mapping network functions. | Documentation evidence; not conformance proof. |
 | 10 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/components/ran.md` | `traceability/requirements/techco-ran-component.md` | 3GPP RAN; O-RAN adjacency | RAN component explanation to connect RAN evidence and O-RAN docs. | Documentation evidence; check links when copied. |
 
@@ -33,7 +33,7 @@ All source files below were checked for existence on 2026-06-05 and are not alre
 
 ## Not-copy-yet exclusions
 
-- Do not copy full directories: `Tech-Co/docs/`, `Tech-Co/src/`, `BF3-5G-Demo/`, `open_source_5g_cores/`, `5G_Wireline_Simulator/`.
+- Do not copy full directories: `Tech-Co/docs/`, `Tech-Co/src/`, `legacy-standalone-5g-emulator/`, `open_source_5g_cores/`, `5G_Wireline_Simulator/`.
 - Do not copy caches, virtualenvs, `node_modules`, `.git`, `.omx`, local DBs, generated outputs, or uncurated runtime logs.
 - If Markdown files contain local relative links, either copy required linked files under matching relative names or record a deliberate caveat before approval.
 - Do not claim formal TM Forum, 3GPP, or O-RAN conformance from documentation/run captures alone.

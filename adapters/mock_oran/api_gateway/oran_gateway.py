@@ -11,7 +11,7 @@ Surfaces:
   /api/nf/status         - health + load of every network function (dashboard core feed)
   /api/metrics/summary   - time-series metrics + throughput (from OTel cache or synthesized)
   /api/logs              - recent log lines
-  /api/firewall/status   - N6 BlueField-3 firewall status
+  /api/firewall/status   - N6 accelerated edge firewall status
   /api/oran/*            - NEW: aggregated O-RAN view (fronthaul, E2, A1, R1, O1, O2,
                            slicing, security, energy, transport, spec-coverage)
   legacy /api/*          - graceful stubs for the pre-existing factory/ocudu/python-ran panels
@@ -162,7 +162,7 @@ async def nf_status():
 
 
 def _otel_cache_path() -> str:
-    # 5G_Emulator_API/../OpenTelelmetry_Data/cache.json
+    # clean_5g_emulator_api/../OpenTelelmetry_Data/cache.json
     return os.path.join(os.path.dirname(_API_ROOT), "OpenTelelmetry_Data", "cache.json")
 
 
@@ -214,7 +214,7 @@ async def logs():
 
 @app.get("/api/firewall/status")
 async def firewall_status():
-    return {"status": "active", "throughput": "400 Gbps", "backend": "BlueField-3 DPU (DOCA)", "source": "oran-gateway"}
+    return {"status": "active", "throughput": "400 Gbps", "backend": "accelerated edge DPU (DOCA)", "source": "oran-gateway"}
 
 
 # =============================================================================
@@ -365,7 +365,7 @@ async def oran_spec_coverage():
 
 @app.get("/api/factory/status")
 async def factory_status():
-    return {"factory": "BF3-5G", "timestamp": datetime.now(timezone.utc).isoformat(),
+    return {"factory": "legacy standalone 5G emulator-5G", "timestamp": datetime.now(timezone.utc).isoformat(),
             "latest_playbook_title": None, "action_history_count": 0, "approval_count": 0}
 
 

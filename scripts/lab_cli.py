@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """Operator CLI for the Telco Systems Integration Lab.
 
-`lab up` is lab-managed instead of delegating to the BF3
-``5G_Emulator_API/main.py`` launcher.  The original launcher uses psutil to
-scan/kill arbitrary processes by port, which is fragile on macOS and produced
-AccessDenied failures.  This CLI starts the same BF3 service inventory in the
-background, tracks only the PIDs it owns, writes per-service logs, and never
-kills untracked/external processes.
+`lab up` is lab-managed instead of delegating to an old standalone launcher.
+The old launcher used psutil to scan/kill arbitrary processes by port, which is
+fragile on macOS and produced AccessDenied failures.  This CLI starts the
+clean-domain service inventory from the repository buckets, tracks only the PIDs
+it owns, writes per-service logs, and never kills untracked/external processes.
 """
 from __future__ import annotations
 
@@ -41,41 +40,50 @@ SERVICE_LOG_DIR = BUILD_LOGS / "services"
 LAB_OWNER = "telco-lab-cli"
 
 CAVEAT = "Runtime/demo readiness only; not formal 3GPP/O-RAN/TM Forum conformance."
-DEFAULT_BF3_API_ROOT = LAB_ROOT / "external" / "BF3-5G-Demo" / "open-digital-platform-2_0" / "5G_Emulator_API"
-BF3_API_ROOT = Path(os.environ.get(
-    "BF3_5G_API_ROOT",
-    str(DEFAULT_BF3_API_ROOT),
-))
+RUNTIME_ROOTS = {
+    "core": LAB_ROOT / "services" / "mock_5g_core",
+    "ran": LAB_ROOT / "adapters" / "mock_ran",
+    "oran": LAB_ROOT / "adapters" / "mock_oran",
+    "assurance": LAB_ROOT / "services" / "assurance",
+}
 
-# Mirrors the service list in the original BF3 5G_Emulator_API/main.py while
-# avoiding its psutil port-scan/kill behavior.
+
+def runtime_root(root_key: str) -> Path:
+    try:
+        return RUNTIME_ROOTS[root_key]
+    except KeyError as exc:
+        raise ValueError(f"Unknown runtime root: {root_key}") from exc
+
+
+# Clean-domain service inventory copied into the repository buckets. It avoids
+# the old monolithic launcher and preserves only lab-owned PID lifecycle control.
 SERVICE_INVENTORY: list[dict[str, Any]] = [
-    {"id": "nrf", "label": "NRF", "path": "core_network/nrf.py", "port": 8000, "health": ["/health"]},
-    {"id": "amf", "label": "AMF", "path": "core_network/amf.py", "port": 9000, "health": ["/health"], "protocol_aware": True},
-    {"id": "smf", "label": "SMF", "path": "core_network/smf.py", "port": 9001, "health": ["/health"], "protocol_aware": True},
-    {"id": "upf", "label": "UPF", "path": "core_network/upf.py", "port": 9002, "health": ["/health"], "protocol_aware": True},
-    {"id": "ausf", "label": "AUSF", "path": "core_network/ausf.py", "port": 9003, "health": ["/health"]},
-    {"id": "udm", "label": "UDM", "path": "core_network/udm.py", "port": 9004, "health": ["/health"]},
-    {"id": "udr", "label": "UDR", "path": "core_network/udr.py", "port": 9005, "health": ["/health"]},
-    {"id": "udsf", "label": "UDSF", "path": "core_network/udsf.py", "port": 9006, "health": ["/health"]},
-    {"id": "cu", "label": "CU", "path": "ran/cu/cu.py", "port": 9008, "health": [], "fixed_args": True},
-    {"id": "du", "label": "DU", "path": "ran/du/du.py", "port": 9007, "health": [], "fixed_args": True},
-    {"id": "rru", "label": "RRU", "path": "ran/rru/rru.py", "port": 9009, "health": [], "fixed_args": True, "process_only": True},
-    {"id": "ptp", "label": "PTP", "path": "ptp/ptp.py", "port": 9010, "health": [], "fixed_args": True, "process_only": True},
-    {"id": "assurance", "label": "Service Assurance", "path": "service_assurance/assurance_api.py", "module": "service_assurance.assurance_api", "port": 9011, "health": ["/health"]},
-    {"id": "smo", "label": "SMO Framework", "path": "smo/smo_framework.py", "module": "smo.smo_framework", "port": 8122, "health": ["/health"]},
-    {"id": "r1", "label": "R1", "path": "smo/r1.py", "module": "smo.r1", "port": 8124, "health": ["/health"]},
-    {"id": "y1", "label": "Y1 Analytics", "path": "ran/ric/y1.py", "port": 8123, "health": ["/health"]},
-    {"id": "o_ru", "label": "O-RU", "path": "ran/fronthaul/o_ru.py", "module": "ran.fronthaul.o_ru", "port": 8120, "health": ["/health"]},
-    {"id": "o1", "label": "O1", "path": "oam/o1.py", "module": "oam.o1", "port": 8125, "health": ["/health"]},
-    {"id": "teiv", "label": "TEIV", "path": "oam/teiv.py", "port": 8126, "health": ["/health"]},
-    {"id": "o2", "label": "O-Cloud Notification", "path": "etsi/o2/o_cloud_notification.py", "port": 8127, "health": ["/health", "/o-cloud/v1/health"]},
-    {"id": "security", "label": "Security", "path": "security/security_service.py", "module": "security.security_service", "port": 8128, "health": ["/health"]},
-    {"id": "slicing", "label": "O-RAN Slicing", "path": "ran/slicing/oran_slicing.py", "port": 8129, "health": ["/health"]},
-    {"id": "energy", "label": "Network Energy Savings", "path": "ran/energy/nes.py", "port": 8130, "health": ["/health"]},
-    {"id": "xhaul", "label": "xHaul", "path": "transport/xhaul.py", "port": 8131, "health": ["/health"]},
-    {"id": "ntn_radio", "label": "NTN Radio", "path": "ran/ntn_radio.py", "port": 8132, "health": ["/health"]},
-    {"id": "oran_gateway", "label": "O-RAN Gateway", "path": "api_gateway/oran_gateway.py", "port": 8088, "health": ["/health"]},
+    {"id": "nrf", "label": "NRF", "root": "core", "path": "core_network/nrf.py", "module": "core_network.nrf", "port": 8000, "health": ["/health"]},
+    {"id": "amf", "label": "AMF", "root": "core", "path": "core_network/amf.py", "module": "core_network.amf", "port": 9000, "health": ["/health"], "protocol_aware": True},
+    {"id": "smf", "label": "SMF", "root": "core", "path": "core_network/smf.py", "module": "core_network.smf", "port": 9001, "health": ["/health"], "protocol_aware": True},
+    {"id": "upf", "label": "UPF", "root": "core", "path": "core_network/upf.py", "module": "core_network.upf", "port": 9002, "health": ["/health"], "protocol_aware": True},
+    {"id": "ausf", "label": "AUSF", "root": "core", "path": "core_network/ausf.py", "module": "core_network.ausf", "port": 9003, "health": ["/health"]},
+    {"id": "udm", "label": "UDM", "root": "core", "path": "core_network/udm.py", "module": "core_network.udm", "port": 9004, "health": ["/health"]},
+    {"id": "udr", "label": "UDR", "root": "core", "path": "core_network/udr.py", "module": "core_network.udr", "port": 9005, "health": ["/health"]},
+    {"id": "udsf", "label": "UDSF", "root": "core", "path": "core_network/udsf.py", "module": "core_network.udsf", "port": 9006, "health": ["/health"]},
+    {"id": "cu", "label": "CU", "root": "ran", "path": "ran/cu/cu.py", "module": "ran.cu.cu", "port": 9008, "health": [], "fixed_args": True},
+    {"id": "du", "label": "DU", "root": "ran", "path": "ran/du/du.py", "module": "ran.du.du", "port": 9007, "health": [], "fixed_args": True},
+    {"id": "rru", "label": "RRU", "root": "ran", "path": "ran/rru/rru.py", "module": "ran.rru.rru", "port": 9009, "health": [], "fixed_args": True, "process_only": True},
+    {"id": "ptp", "label": "PTP", "root": "ran", "path": "ptp/ptp.py", "module": "ptp.ptp", "port": 9010, "health": [], "fixed_args": True, "process_only": True},
+    {"id": "assurance", "label": "Service Assurance", "root": "assurance", "path": "service_assurance/assurance_api.py", "module": "service_assurance.assurance_api", "port": 9011, "health": ["/health"]},
+    {"id": "smo", "label": "SMO Framework", "root": "oran", "path": "smo/smo_framework.py", "module": "smo.smo_framework", "port": 8122, "health": ["/health"]},
+    {"id": "r1", "label": "R1", "root": "oran", "path": "smo/r1.py", "module": "smo.r1", "port": 8124, "health": ["/health"]},
+    {"id": "y1", "label": "Y1 Analytics", "root": "ran", "path": "ran/ric/y1.py", "module": "ran.ric.y1", "port": 8123, "health": ["/health"]},
+    {"id": "o_ru", "label": "O-RU", "root": "ran", "path": "ran/fronthaul/o_ru.py", "module": "ran.fronthaul.o_ru", "port": 8120, "health": ["/health"]},
+    {"id": "o1", "label": "O1", "root": "oran", "path": "oam/o1.py", "module": "oam.o1", "port": 8125, "health": ["/health"]},
+    {"id": "teiv", "label": "TEIV", "root": "oran", "path": "oam/teiv.py", "module": "oam.teiv", "port": 8126, "health": ["/health"]},
+    {"id": "o2", "label": "O-Cloud Notification", "root": "oran", "path": "etsi/o2/o_cloud_notification.py", "module": "etsi.o2.o_cloud_notification", "port": 8127, "health": ["/health", "/o-cloud/v1/health"]},
+    {"id": "security", "label": "Security", "root": "oran", "path": "security/security_service.py", "module": "security.security_service", "port": 8128, "health": ["/health"]},
+    {"id": "slicing", "label": "O-RAN Slicing", "root": "ran", "path": "ran/slicing/oran_slicing.py", "module": "ran.slicing.oran_slicing", "port": 8129, "health": ["/health"]},
+    {"id": "energy", "label": "Network Energy Savings", "root": "ran", "path": "ran/energy/nes.py", "module": "ran.energy.nes", "port": 8130, "health": ["/health"]},
+    {"id": "xhaul", "label": "xHaul", "root": "oran", "path": "transport/xhaul.py", "module": "transport.xhaul", "port": 8131, "health": ["/health"]},
+    {"id": "ntn_radio", "label": "NTN Radio", "root": "ran", "path": "ran/ntn_radio.py", "module": "ran.ntn_radio", "port": 8132, "health": ["/health"]},
+    {"id": "oran_gateway", "label": "O-RAN Gateway", "root": "oran", "path": "api_gateway/oran_gateway.py", "module": "api_gateway.oran_gateway", "port": 8088, "health": ["/health"]},
 ]
 
 CORE_SERVICES = ["nrf", "amf", "smf", "upf", "ausf", "udm", "udr", "udsf"]
@@ -133,23 +141,24 @@ def extract_json(stdout: str) -> dict[str, Any]:
     return json.loads(stdout[start:])
 
 
-def bf3_env() -> dict[str, str]:
+def runtime_env() -> dict[str, str]:
     env = os.environ.copy()
-    venv_bin = BF3_API_ROOT / "venv" / "bin"
-    if venv_bin.exists():
-        env["PATH"] = f"{venv_bin}{os.pathsep}" + env.get("PATH", "")
-    env["PYTHONPATH"] = f"{BF3_API_ROOT}{os.pathsep}" + env.get("PYTHONPATH", "")
+    pythonpath = os.pathsep.join(str(path) for path in RUNTIME_ROOTS.values())
+    env["PYTHONPATH"] = f"{pythonpath}{os.pathsep}" + env.get("PYTHONPATH", "")
     env.setdefault("PYTHONUNBUFFERED", "1")
     return env
 
 
-def bf3_python() -> str:
-    venv_python = BF3_API_ROOT / "venv" / "bin" / "python"
-    return str(venv_python if venv_python.exists() else Path(sys.executable))
+def runtime_python() -> str:
+    return str(Path(sys.executable))
+
+
+def service_root(service: dict[str, Any]) -> Path:
+    return runtime_root(str(service.get("root", "core")))
 
 
 def service_path(service: dict[str, Any]) -> Path:
-    return BF3_API_ROOT / service["path"]
+    return service_root(service) / service["path"]
 
 
 def service_log_path(service: dict[str, Any]) -> Path:
@@ -161,7 +170,7 @@ def service_marker(service: dict[str, Any]) -> str:
 
 
 def service_cmd(service: dict[str, Any], protocol_mode: str) -> list[str]:
-    cmd = [bf3_python()]
+    cmd = [runtime_python()]
     if service.get("module"):
         cmd.extend(["-m", service["module"]])
     else:
@@ -313,7 +322,7 @@ def safe_to_terminate(pid: int, record: dict[str, Any]) -> tuple[bool, str]:
     marker = str(record.get("marker") or "")
     if marker and command and marker in command:
         return True, "verified command match"
-    if marker and pid_cwd(pid) == str(BF3_API_ROOT) and marker in " ".join(str(value) for value in record.get("command", [])):
+    if marker and pid_cwd(pid) in {str(path) for path in RUNTIME_ROOTS.values()} and marker in " ".join(str(value) for value in record.get("command", [])):
         return True, "verified cwd/recorded command match"
     return False, f"pid command did not match tracked service: {command[:160]}"
 
@@ -442,7 +451,7 @@ def services_report() -> dict[str, Any]:
     failed = [item for item in services if item["state"] in {"failed_to_start", "missing_entrypoint", "exited"}]
     return {
         "recorded_at": now(),
-        "bf3_api_root": str(BF3_API_ROOT),
+        "runtime_roots": {key: str(path) for key, path in RUNTIME_ROOTS.items()},
         "state_file": str(SERVICES_STATE),
         "evidence_file": str(SERVICES_EVIDENCE),
         "log_dir": str(SERVICE_LOG_DIR),
@@ -898,12 +907,13 @@ def cmd_up(args: argparse.Namespace) -> int:
     BUILD_LOGS.mkdir(exist_ok=True)
     SERVICE_LOG_DIR.mkdir(exist_ok=True)
     if args.dry_run:
-        print("lab up would start managed BF3 5G/RAN/O-RAN services in the background")
+        print("lab up would start managed clean-domain 5G/RAN/O-RAN services in the background")
         print("Launcher: lab-owned direct service inventory (no monolithic launcher, no psutil)")
-        print(f"Working directory: {BF3_API_ROOT}")
-        if not BF3_API_ROOT.exists():
-            print("Working directory status: missing; set BF3_5G_API_ROOT or place BF3 under external/ before real startup")
-        print(f"Python: {bf3_python()}")
+        print("Runtime roots:")
+        for key, path in RUNTIME_ROOTS.items():
+            status = "present" if path.exists() else "missing"
+            print(f"  {key:<10} {status:<7} {path.relative_to(LAB_ROOT)}")
+        print(f"Python: {runtime_python()}")
         print("Startup order: dependency-aware NRF -> UPF -> SMF -> AMF, then remaining services")
         for service in service_start_sequence():
             cmd = service_cmd(service, args.protocol_mode)
@@ -913,9 +923,13 @@ def cmd_up(args: argparse.Namespace) -> int:
         print(f"Evidence copy: {SERVICES_EVIDENCE}")
         return 0
 
-    if not BF3_API_ROOT.exists():
-        print(f"BF3 API root not found: {BF3_API_ROOT}", file=sys.stderr)
-        print("Set BF3_5G_API_ROOT or place BF3 under external/BF3-5G-Demo before starting services.", file=sys.stderr)
+    missing_roots = {key: path for key, path in RUNTIME_ROOTS.items() if not path.exists()}
+    if missing_roots:
+        print("Clean-domain runtime roots are missing:", file=sys.stderr)
+        for key, path in missing_roots.items():
+            print(f"  {key}: {path.relative_to(LAB_ROOT)}", file=sys.stderr)
+        print("The public repository should contain only the copied files needed in these buckets.", file=sys.stderr)
+        print("Run ./lab smoke and ./lab test for in-repo readiness evidence after restoring the roots.", file=sys.stderr)
         return 2
 
     if args.replace:
@@ -926,8 +940,8 @@ def cmd_up(args: argparse.Namespace) -> int:
     new_state: dict[str, Any] = {
         "owner": LAB_OWNER,
         "started_at": now(),
-        "bf3_api_root": str(BF3_API_ROOT),
-        "python": bf3_python(),
+        "runtime_roots": {key: str(path) for key, path in RUNTIME_ROOTS.items()},
+        "python": runtime_python(),
         "protocol_mode": args.protocol_mode,
         "services": {},
         "caveat": CAVEAT,
@@ -980,7 +994,7 @@ def cmd_up(args: argparse.Namespace) -> int:
             log_file.write(header.encode())
             log_file.flush()
             try:
-                proc = subprocess.Popen(cmd, cwd=BF3_API_ROOT, env=bf3_env(), stdout=log_file, stderr=subprocess.STDOUT, start_new_session=True)
+                proc = subprocess.Popen(cmd, cwd=service_root(service), env=runtime_env(), stdout=log_file, stderr=subprocess.STDOUT, start_new_session=True)
             except Exception as exc:
                 record.update({"state": "failed_to_start", "error": str(exc)})
                 put_service_record(new_state, service, record)
@@ -1000,7 +1014,7 @@ def cmd_up(args: argparse.Namespace) -> int:
 
     write_services_state(new_state)
     report = wait_for_services(args.wait_seconds)
-    print("lab up: managed BF3 5G/RAN/O-RAN stack")
+    print("lab up: managed clean-domain 5G/RAN/O-RAN stack")
     print_services_table(report)
     if report["all_ready"]:
         external_count = len(report.get("external", []))
@@ -1131,11 +1145,11 @@ def cmd_demo(args: argparse.Namespace) -> int:
     services_ok = bool(status["services"]["all_ready"])
     print("Telco Systems Integration Lab Demo Readiness")
     print("================================================")
-    print(f"Managed BF3 services up:   {'YES' if services_ok else 'NO'} ({status['services']['ready']}/{status['services']['total']})")
+    print(f"Managed lab services up:   {'YES' if services_ok else 'NO'} ({status['services']['ready']}/{status['services']['total']})")
     print(f"Runtime-ready mock imports: {'YES' if runtime_ok else 'NO'}")
     print(f"Regression tests passing:   {'YES' if tests_ok else 'NO'}")
     print(f"Copied AST/import scope:    {status['runtime_smoke']['ast_count']} Python files / {status['runtime_smoke']['imported_count']} imports")
-    print("What this demonstrates: lab-managed BF3 service lifecycle plus copied mock 5G core/RAN/O-RAN code readiness evidence.")
+    print("What this demonstrates: lab-managed service lifecycle plus copied mock 5G core/RAN/O-RAN code readiness evidence.")
     print(f"What it does not claim: {CAVEAT}")
     return 0 if runtime_ok and tests_ok and services_ok else 2
 
@@ -1144,16 +1158,16 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Telco Systems Integration Lab operator CLI")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    up = sub.add_parser("up", help="start the BF3 5G/RAN/O-RAN stack in the background")
+    up = sub.add_parser("up", help="start the clean-domain 5G/RAN/O-RAN stack in the background")
     up.add_argument("--protocol-mode", choices=["rest", "real"], default="rest")
     up.add_argument("--dry-run", action="store_true", help="print the managed service commands without starting services")
     up.add_argument("--replace", action="store_true", help="stop tracked lab-owned services before starting")
     up.add_argument("--wait-seconds", type=float, default=10.0, help="seconds to wait for health/readiness checks")
     up.set_defaults(func=cmd_up)
 
-    sub.add_parser("down", help="stop tracked lab-owned BF3 services").set_defaults(func=cmd_down)
+    sub.add_parser("down", help="stop tracked lab-owned services").set_defaults(func=cmd_down)
 
-    services = sub.add_parser("services", help="show managed BF3 service status")
+    services = sub.add_parser("services", help="show managed lab service status")
     services.add_argument("--json", action="store_true")
     services.set_defaults(func=cmd_services)
 

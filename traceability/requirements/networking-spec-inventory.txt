@@ -278,9 +278,9 @@ Open API model and developer guide
 SECONDARY SPEC LOCATIONS (inside the lab tree)
 ======================================================================
 
-3GPP spec excerpts that drive BF3
-  9.LABS_5G_lab_simulator/BF3-5G-Demo/3GGP_spec/
-  9.LABS_5G_lab_simulator/BF3-5G-Demo/spec-analysis/
+3GPP spec excerpts that drive legacy standalone 5G emulator
+  9.LABS_5G_lab_simulator/legacy-standalone-5g-emulator/3GGP_spec/
+  9.LABS_5G_lab_simulator/legacy-standalone-5g-emulator/spec-analysis/
 
 TM Forum PSR spec material (per-project)
   9.LABS_5G_lab_simulator/tmforum_psr_learning/spec/

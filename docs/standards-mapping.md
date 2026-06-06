@@ -7,9 +7,9 @@ authoritative release state is [`traceability/standards_release_register.yaml`](
 
 | Family | What it covers here | Primary repo areas | Evidence/register path |
 |---|---|---|---|
-| 3GPP | 5G core, RAN, NGAP/N2, PFCP/N4, GTP-U/N3, subscriber/session flows. | `services/mock_5g_core/`, `adapters/mock_ran/`, `procedures/3gpp/`, `tests/conformance/` | `traceability/standards_release_register.yaml`, `traceability/requirements/bf3-3gpp-compliance.md` |
+| 3GPP | 5G core, RAN, NGAP/N2, PFCP/N4, GTP-U/N3, subscriber/session flows. | `services/mock_5g_core/`, `adapters/mock_ran/`, `procedures/3gpp/`, `tests/conformance/` | `traceability/standards_release_register.yaml`, `traceability/requirements/legacy_5g_emulator-3gpp-compliance.md` |
 | TM Forum | Open API evidence and CTK baselines for catalog/order/service APIs. | `adapters/tmforum/`, `services/catalog_api/`, `services/order_engine/`, `traceability/evidence_snapshots/` | `traceability/requirements/tmf-specs-guide.md`, CTK snapshots, release register rows. |
-| O-RAN | RIC, E2/E2SM, O-RAN gateway, fronthaul/slicing evidence. | `adapters/mock_ran/ran/ric/`, `adapters/mock_oran/`, `adapters/oran/`, `procedures/oran/` | `traceability/requirements/oran-compliance.md`, `traceability/requirements/bf3-oran-compliance-matrix.md` |
+| O-RAN | RIC, E2/E2SM, O-RAN gateway, fronthaul/slicing evidence. | `adapters/mock_ran/ran/ric/`, `adapters/mock_oran/`, `adapters/oran/`, `procedures/oran/` | `traceability/requirements/oran-compliance.md`, `traceability/requirements/legacy_5g_emulator-oran-compliance-matrix.md` |
 
 ## 3GPP transport references used by the copied mock services
 

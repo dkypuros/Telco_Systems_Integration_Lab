@@ -24,10 +24,10 @@ Initial batch-002 artifacts:
 - `traceability/evidence_snapshots/tmf638-r18.5-ctk-collection.json`
 - `traceability/evidence_snapshots/tmf638-r18-alt-ctk-collection.json`
 - `traceability/evidence_snapshots/tmf638-r16.5-ctk-environment.json`
-- `traceability/requirements/bf3-oran-compliance-matrix.md`
-- `traceability/requirements/bf3-oran-enhancement-architecture.md`
+- `traceability/requirements/legacy_5g_emulator-oran-compliance-matrix.md`
+- `traceability/requirements/legacy_5g_emulator-oran-enhancement-architecture.md`
 - `traceability/evidence_snapshots/oran-spec-coverage.json`
-- `traceability/requirements/bf3-complete-specification-map.txt`
+- `traceability/requirements/legacy_5g_emulator-complete-specification-map.txt`
 
 Link-fix artifacts copied under original relative filenames:
 
@@ -38,7 +38,7 @@ Link-fix artifacts copied under original relative filenames:
 
 The first code-review pass found broken relative Markdown links in:
 
-- `traceability/requirements/bf3-oran-enhancement-architecture.md`
+- `traceability/requirements/legacy_5g_emulator-oran-enhancement-architecture.md`
 
 The copied file links to:
 
@@ -58,7 +58,7 @@ The fix preserved copy-only semantics by copying those linked source files into 
 
 - Verifier rerun: PASS.
 - Code-review rerun: APPROVE, zero issues.
-- Markdown relative links in `bf3-oran-enhancement-architecture.md` resolve locally.
+- Markdown relative links in `legacy_5g_emulator-oran-enhancement-architecture.md` resolve locally.
 - JSON artifacts parse successfully.
 
 ## Known limitation

@@ -6,7 +6,7 @@ Status: Accepted
 
 The lab goal is to become a complete end-to-end, standards-traceable telco integration environment across OSS/BSS, orchestration, core network, RAN, O-RAN, and test evidence.
 
-Candidate upstream implementations such as free5GC, Open5GS, OpenAirInterface/OAI, BF3-derived simulators, TM Forum learning assets, and other vendor or open-source systems are valuable because they can act as realistic implementations or references.
+Candidate upstream implementations such as free5GC, Open5GS, OpenAirInterface/OAI, legacy standalone 5G emulator-derived simulators, TM Forum learning assets, and other vendor or open-source systems are valuable because they can act as realistic implementations or references.
 
 However, complete upstream repositories are not themselves traceability, conformance evidence, or lab-owned source. Bulk importing them would create public-repository safety risk, license risk, maintenance risk, nested repository risk, generated/binary artifact risk, and standards-claim confusion.
 

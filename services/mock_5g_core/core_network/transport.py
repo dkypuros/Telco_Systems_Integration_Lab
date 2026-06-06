@@ -1,4 +1,4 @@
-# File location: 5G_Emulator_API/core_network/transport.py
+# File location: clean_5g_emulator_api/core_network/transport.py
 # Reusable 3GPP transport helpers for real protocol mode
 # - GTP-U (UDP port 2152) for user plane (N3)
 # - PFCP (UDP port 8805) for session management (N4)

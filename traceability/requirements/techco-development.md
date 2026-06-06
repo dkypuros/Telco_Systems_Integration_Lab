@@ -13,9 +13,9 @@ For running the stack see `docs/operations.md`. For testing see `docs/testing.md
 ```
 Tech-Co/
   components/          Third-party and external component trees (do not modify)
-    BF3-5G-Demo/         NVIDIA BlueField-3 5G emulator (Python ~21k lines)
+    legacy-standalone-5g-emulator/         NVIDIA accelerated edge 5G emulator (Python ~21k lines)
       open-digital-platform-2_0/
-        5G_Emulator_API/ Python NF source (nrf.py, amf.py, smf.py, ...)
+        clean_5g_emulator_api/ Python NF source (nrf.py, amf.py, smf.py, ...)
         start_3gpp_services.sh
         stop_services.sh
   external/            External repos included as source trees
@@ -62,7 +62,7 @@ Tech-Co/
 | catalog_api | Python | FastAPI | 8081 | `src/catalog_api/app/main.py` |
 | ai_observer | Python | FastAPI | 8090 | `src/ai_observer/app/main.py` |
 | storefront | TypeScript | Next.js 14 | 3000 | `src/storefront/src/app/` |
-| BF3 NFs | Python | FastAPI (per NF) | 8000-9010 | `components/.../5G_Emulator_API/` |
+| legacy standalone 5G emulator NFs | Python | FastAPI (per NF) | 8000-9010 | `components/.../clean_5g_emulator_api/` |
 | oran_o2ims | Go | net/http | 8083 | `external/oran_o2ims/` |
 
 All Python services use:
@@ -152,16 +152,16 @@ offering_patterns:
           sst: 1
           sd: "000099"
       - step_name: provision_subscriber
-        adapter: bf3_python
+        adapter: legacy_5g_emulator_python
         payload_extra:
           subscriber_profile: your_profile
           qos_class: 9
-          _adapter: bf3_python
+          _adapter: legacy_5g_emulator_python
 ```
 
 The `adapter` field maps to adapter keys registered in
 `src/order_engine/app/api/tmf622.py` (`_resolve_adapter_for_step`). Current
-valid keys are `bf3_python` and `o2ims`. The `_adapter` key in `payload_extra`
+valid keys are `legacy_5g_emulator_python` and `o2ims`. The `_adapter` key in `payload_extra`
 overrides the routing for that specific step (used for explicit routing in
 multi-adapter rules).
 
@@ -234,7 +234,7 @@ class YourAdapter(SouthboundAdapter):
 ```
 
 Follow the existing adapters for patterns:
-- `bf3_python_adapter.py`: multi-step adapter hitting live NF endpoints via httpx.
+- `legacy_5g_emulator_python_adapter.py`: multi-step adapter hitting live NF endpoints via httpx.
 - `o2ims_real_adapter.py`: adapter with retry logic and idempotent rollback.
 
 ### Step 2: Register the adapter key
@@ -247,8 +247,8 @@ Find `_resolve_adapter_for_step` and add a branch for your key:
 from app.adapters.your_adapter import YourAdapter
 
 def _resolve_adapter_for_step(adapter_key: str) -> SouthboundAdapter:
-    if adapter_key == "bf3_python":
-        return BF3PythonAdapter()
+    if adapter_key == "legacy_5g_emulator_python":
+        return LegacyFiveGEmulatorAdapter()
     if adapter_key == "o2ims":
         return O2IMSRealAdapter()
     if adapter_key == "your_adapter":
@@ -313,7 +313,7 @@ class YourCollector(TelemetryCollector):
 File: `src/ai_observer/app/main.py`
 
 Import your collector and add it to the list of collectors started in the
-lifespan context manager, following the pattern used by `BF3NfCollector`,
+lifespan context manager, following the pattern used by `legacy standalone 5G emulatorNfCollector`,
 `OrderEngineCollector`, and `OtelLogCollector`.
 
 ### Step 3: Add tests

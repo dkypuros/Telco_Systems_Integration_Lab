@@ -20,7 +20,7 @@ This page is a navigation layer. It does not assert formal API conformance.
 
 | Reference | Path |
 |---|---|
-| BF3 API reference snapshot | [`traceability/requirements/bf3-api-reference.md`](../traceability/requirements/bf3-api-reference.md) |
+| legacy standalone 5G emulator API reference snapshot | [`traceability/requirements/legacy_5g_emulator-api-reference.md`](../traceability/requirements/legacy_5g_emulator-api-reference.md) |
 | Tech-Co API reference snapshot | [`traceability/requirements/techco-api-reference.md`](../traceability/requirements/techco-api-reference.md) |
 | TMF specs guide | [`traceability/requirements/tmf-specs-guide.md`](../traceability/requirements/tmf-specs-guide.md) |
 | Runtime integration report | [`traceability/evidence_batch_010_runtime_integration_report.json`](../traceability/evidence_batch_010_runtime_integration_report.json) |

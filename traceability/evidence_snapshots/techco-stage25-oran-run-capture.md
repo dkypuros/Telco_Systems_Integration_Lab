@@ -14,8 +14,8 @@ Result: No processes bound on any of the six ports before the run.
 All ports were clear. No conflicts.
 
 O2IMS binary present: /tmp/oran-o2ims-binary (115 MB, -rwxr-xr-x)
-BF3 venv present: components/BF3-5G-Demo/open-digital-platform-2_0/
-                  5G_Emulator_API/venv/bin/python3 (confirmed)
+legacy standalone 5G emulator venv present: components/legacy-standalone-5g-emulator/open-digital-platform-2_0/
+                  clean_5g_emulator_api/venv/bin/python3 (confirmed)
 
 
 Bring-Up Sequence with Timings

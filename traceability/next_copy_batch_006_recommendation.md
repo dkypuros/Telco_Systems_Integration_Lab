@@ -20,15 +20,15 @@ All source files below were checked for existence on 2026-06-05 and are not alre
 | 3 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/components/ims.md` | `traceability/requirements/techco-ims-component.md` | 3GPP IMS/VoNR | Component doc to pair with IMS and VoNR evidence. | Documentation evidence only. |
 | 4 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/components/epc.md` | `traceability/requirements/techco-epc-component.md` | 3GPP EPC/RAN | Component doc to pair with EPC/RAN verification. | Documentation evidence only. |
 | 5 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/Tech-Co/docs/components/order_engine.md` | `traceability/requirements/techco-order-engine-component.md` | TM Forum; service orchestration | Component doc for order orchestration and TMF-facing service flow. | Documentation evidence; not TMF conformance. |
-| 6 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/testing.md` | `traceability/requirements/bf3-testing.md` | 3GPP; O-RAN | BF3 testing documentation for existing BF3 maps and reports. | Documentation evidence; check claim language. |
-| 7 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/api-reference.md` | `traceability/requirements/bf3-api-reference.md` | 3GPP; O-RAN | BF3 API reference for emulator/service evidence. | Reference doc only. |
-| 8 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/core-network.md` | `traceability/requirements/bf3-core-network.md` | 3GPP 5GC | Core-network documentation for 5G emulator claims. | Documentation evidence only. |
-| 9 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/ric-architecture.md` | `traceability/requirements/ric-architecture.md` | O-RAN RIC | RIC architecture context for O-RAN material. | Documentation evidence only. |
-| 10 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/BF3-5G-Demo/docs/ran-components.md` | `traceability/requirements/bf3-ran-components.md` | 3GPP RAN; O-RAN adjacency | RAN component docs for RAN/O-RAN mapping. | Documentation evidence only. |
+| 6 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/docs/testing.md` | `traceability/requirements/legacy_5g_emulator-testing.md` | 3GPP; O-RAN | legacy standalone 5G emulator testing documentation for existing legacy standalone 5G emulator maps and reports. | Documentation evidence; check claim language. |
+| 7 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/docs/api-reference.md` | `traceability/requirements/legacy_5g_emulator-api-reference.md` | 3GPP; O-RAN | legacy standalone 5G emulator API reference for emulator/service evidence. | Reference doc only. |
+| 8 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/docs/core-network.md` | `traceability/requirements/legacy_5g_emulator-core-network.md` | 3GPP 5GC | Core-network documentation for 5G emulator claims. | Documentation evidence only. |
+| 9 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/docs/ric-architecture.md` | `traceability/requirements/ric-architecture.md` | O-RAN RIC | RIC architecture context for O-RAN material. | Documentation evidence only. |
+| 10 | `<SOURCE_5G_LAB_SIMULATOR_ROOT>/legacy-standalone-5g-emulator/docs/ran-components.md` | `traceability/requirements/legacy_5g_emulator-ran-components.md` | 3GPP RAN; O-RAN adjacency | RAN component docs for RAN/O-RAN mapping. | Documentation evidence only. |
 
 ## Not-copy-yet exclusions
 
-- Do not copy full directories: `Tech-Co/docs/`, `Tech-Co/src/`, `BF3-5G-Demo/`, `open_source_5g_cores/`, `5G_Wireline_Simulator/`.
+- Do not copy full directories: `Tech-Co/docs/`, `Tech-Co/src/`, `legacy-standalone-5g-emulator/`, `open_source_5g_cores/`, `5G_Wireline_Simulator/`.
 - Do not copy caches, virtualenvs, `node_modules`, `.git`, `.omx`, local DBs, generated outputs, or uncurated runtime logs.
 - If Markdown files contain local relative links, either copy required linked files under matching relative names or record a deliberate caveat before approval.
 - Do not claim formal TM Forum, 3GPP, or O-RAN conformance from documentation/reference files alone.
@@ -36,4 +36,4 @@ All source files below were checked for existence on 2026-06-05 and are not alre
 
 ## Execution correction
 
-During Ralph pre-copy link validation, `Tech-Co/docs/reference.md` was replaced with `Tech-Co/docs/operations.md` to avoid a large unresolved build-history link fan-out. `BF3-5G-Demo/docs/ric-architecture.md` keeps its original filename at the destination so `bf3-ran-components.md` can resolve its local relative link.
+During Ralph pre-copy link validation, `Tech-Co/docs/reference.md` was replaced with `Tech-Co/docs/operations.md` to avoid a large unresolved build-history link fan-out. `legacy-standalone-5g-emulator/docs/ric-architecture.md` keeps its original filename at the destination so `legacy_5g_emulator-ran-components.md` can resolve its local relative link.

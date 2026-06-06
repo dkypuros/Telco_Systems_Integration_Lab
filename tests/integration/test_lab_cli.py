@@ -27,11 +27,11 @@ def test_lab_demo_prints_readiness_language():
 def test_lab_up_dry_run_lists_managed_services():
     result = run_lab("up", "--dry-run")
     assert result.returncode == 0, result.stdout + result.stderr
-    assert "managed BF3 5G/RAN/O-RAN services" in result.stdout
+    assert "managed clean-domain 5G/RAN/O-RAN services" in result.stdout
     assert "core_network/nrf.py" in result.stdout
     assert "api_gateway/oran_gateway.py" in result.stdout
     assert "--protocol-mode rest" in result.stdout
-    assert "5G_Emulator_API/main.py" not in result.stdout
+    assert "old standalone" not in result.stdout.lower()
     assert "foreground" not in result.stdout.lower()
 
 

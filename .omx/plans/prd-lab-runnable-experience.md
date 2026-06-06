@@ -17,4 +17,4 @@ Make the Telco Systems Integration Lab immediately usable with one obvious comma
 - No daemon orchestration yet.
 - No production service launch.
 - No formal conformance testing.
-- No full BF3 source copy in this task.
+- No full legacy standalone 5G emulator source copy in this task.

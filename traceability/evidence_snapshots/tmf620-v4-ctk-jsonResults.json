@@ -4472,7 +4472,7 @@
               {
                 "listen": "test",
                 "script": {
-                  "id": "95bb7bf3-a307-4785-8aca-c9e5a7bb9a03",
+                  "id": "95bb7legacy_5g_emulator-a307-4785-8aca-c9e5a7bb9a03",
                   "type": "text/javascript",
                   "exec": [
                     "pm.test(\"Status code is 404\", function () {",
@@ -153732,7 +153732,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "95bb7bf3-a307-4785-8aca-c9e5a7bb9a03",
+                "id": "95bb7legacy_5g_emulator-a307-4785-8aca-c9e5a7bb9a03",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 404\", function () {",

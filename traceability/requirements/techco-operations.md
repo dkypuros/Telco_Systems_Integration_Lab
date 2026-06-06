@@ -14,7 +14,7 @@ on your PATH.
 
 | Tool | Minimum version | Used for |
 |------|----------------|---------|
-| Python | 3.11+ | BF3 NFs, order_engine, catalog_api, ai_observer |
+| Python | 3.11+ | legacy standalone 5G emulator NFs, order_engine, catalog_api, ai_observer |
 | Node.js | 18+ | Storefront (optional), Newman CTK conformance |
 | Go | 1.20+ | O2IMS binary (external/oran_o2ims), only if compiling from source |
 | curl | any | Health checks, demo scripts |
@@ -43,7 +43,7 @@ bash scripts/bootstrap.sh
 
 What it does:
 
-1. Creates `components/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/venv`
+1. Creates `components/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/venv`
    and runs `pip install -r requirements.txt`.
 2. Creates `src/order_engine/venv` and runs `pip install -e .`
    (editable install from `pyproject.toml`).
@@ -52,8 +52,8 @@ What it does:
 Expected output (first run):
 
 ```
-[bootstrap] CREATE venv for BF3 5G_Emulator_API at .../venv
-[bootstrap] OK    BF3 5G_Emulator_API venv ready.
+[bootstrap] CREATE venv for legacy standalone clean_5g_emulator_api at .../venv
+[bootstrap] OK    legacy standalone clean_5g_emulator_api venv ready.
 [bootstrap] CREATE venv for order_engine at .../venv
 [bootstrap] OK    order_engine venv ready.
 [bootstrap] CREATE venv for catalog_api at .../venv
@@ -91,14 +91,14 @@ each step. Do not start services manually in a different order.
 
 | Step | What starts | Health gate | Port |
 |------|-------------|------------|------|
-| 1 | BF3 5G NFs via `start_3gpp_services.sh` | `GET http://localhost:8000/health` (60s timeout) | 8000 |
+| 1 | legacy standalone 5G NFs via `start_3gpp_services.sh` | `GET http://localhost:8000/health` (60s timeout) | 8000 |
 | 1b | UDR database init sidecar (`init_udr_db.py`) | Script exit 0 | n/a |
 | 2 | catalog_api via uvicorn | `GET http://localhost:8081/health` (30s timeout) | 8081 |
 | 3 | order_engine via uvicorn | `GET http://localhost:8080/health` (30s timeout) | 8080 |
 
-### BF3 NF startup sub-order (handled by start_3gpp_services.sh)
+### legacy standalone 5G emulator NF startup sub-order (handled by start_3gpp_services.sh)
 
-The BF3 script enforces its own ordering internally:
+The legacy standalone 5G emulator script enforces its own ordering internally:
 
 1. NRF starts first. Health polled up to 30 seconds.
 2. UPF starts next. Health polled up to 20 seconds. A registration gate then
@@ -108,21 +108,21 @@ The BF3 script enforces its own ordering internally:
 3. AMF, SMF, AUSF, UDM, UDR, UDSF start together.
 4. CU, DU, and service_assurance start as the auxiliary wave.
 
-If you start BF3 NFs manually (outside bring_up.sh), always start NRF first,
+If you start legacy standalone 5G emulator NFs manually (outside bring_up.sh), always start NRF first,
 then UPF, then SMF.
 
 ### Port-by-port reference after bring-up
 
 | Service | Port | Bound address | Health URL |
 |---------|------|--------------|-----------|
-| BF3 NRF | 8000 | 0.0.0.0 | http://localhost:8000/health |
-| BF3 AMF | 9000 | 0.0.0.0 | http://localhost:9000/health |
-| BF3 SMF | 9001 | 0.0.0.0 | http://localhost:9001/health |
-| BF3 UPF | 9002 | 0.0.0.0 | http://localhost:9002/health |
-| BF3 AUSF | 9003 | 0.0.0.0 | http://localhost:9003/health |
-| BF3 UDM | 9004 | 0.0.0.0 | http://localhost:9004/health |
-| BF3 UDR | 9005 | 0.0.0.0 | http://localhost:9005/health |
-| BF3 UDSF | 9006 | 0.0.0.0 | http://localhost:9006/health |
+| legacy standalone 5G emulator NRF | 8000 | 0.0.0.0 | http://localhost:8000/health |
+| legacy standalone 5G emulator AMF | 9000 | 0.0.0.0 | http://localhost:9000/health |
+| legacy standalone 5G emulator SMF | 9001 | 0.0.0.0 | http://localhost:9001/health |
+| legacy standalone 5G emulator UPF | 9002 | 0.0.0.0 | http://localhost:9002/health |
+| legacy standalone 5G emulator AUSF | 9003 | 0.0.0.0 | http://localhost:9003/health |
+| legacy standalone 5G emulator UDM | 9004 | 0.0.0.0 | http://localhost:9004/health |
+| legacy standalone 5G emulator UDR | 9005 | 0.0.0.0 | http://localhost:9005/health |
+| legacy standalone 5G emulator UDSF | 9006 | 0.0.0.0 | http://localhost:9006/health |
 | catalog_api | 8081 | 0.0.0.0 | http://localhost:8081/health |
 | order_engine | 8080 | 0.0.0.0 | http://localhost:8080/health |
 
@@ -131,14 +131,14 @@ PID files are written to `scripts/.pids/`. Logs stream to `build_logs/run/`.
 Expected bring-up output:
 
 ```
-[bring_up] UP    BF3 NFs responded 200
+[bring_up] UP    legacy standalone 5G emulator NFs responded 200
 [bring_up] INIT  UDR database (init_udr_db.py)
 [init_udr_db] Table 'users' ready (created or already existed).
 [bring_up] UP    catalog_api responded 200
 [bring_up] UP    order_engine responded 200
 
 [bring_up] All services up.
-[bring_up] BF3 NFs      -> http://localhost:8000
+[bring_up] legacy standalone 5G emulator NFs      -> http://localhost:8000
 [bring_up] catalog_api  -> http://localhost:8081
 [bring_up] order_engine -> http://localhost:8080
 ```
@@ -167,7 +167,7 @@ Tech-Co Status -- Mon May 18 22:30:00 2026
 ------------------------------------------------------------
 
 Services (from PID files):
-  BF3 NFs               RUNNING  (PID 12345 )  health 200  port 8000
+  legacy standalone 5G emulator NFs               RUNNING  (PID 12345 )  health 200  port 8000
   catalog_api           RUNNING  (PID 12346 )  health 200  port 8081
   order_engine          RUNNING  (PID 12347 )  health 200  port 8080
 
@@ -257,7 +257,7 @@ bring_up.sh and must be brought up manually first.
 ### Start IMS NFs in dependency order
 
 ```bash
-cd components/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API
+cd components/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api
 source venv/bin/activate
 
 python core_network/ims_hss.py --host 0.0.0.0 --port 9040 &
@@ -387,8 +387,8 @@ Stop order (reverse of start order):
 1. ai_observer (if PID file exists in scripts/.pids/ai_observer.pid)
 2. order_engine
 3. catalog_api
-4. BF3 NFs (via SIGTERM, 5 s grace, SIGKILL if needed)
-5. BF3 stop_services.sh (additional NF cleanup if available)
+4. legacy standalone 5G emulator NFs (via SIGTERM, 5 s grace, SIGKILL if needed)
+5. legacy standalone 5G emulator stop_services.sh (additional NF cleanup if available)
 
 After all kills, the script polls ports 8090, 8080, 8081, 8000 via `lsof`
 for up to 10 seconds and warns if any remain bound.
@@ -407,7 +407,7 @@ All services should show `NO PID FILE` or `DEAD`.
 
 | Log file | Contents |
 |---------|---------|
-| `build_logs/run/bf3_nfs.log` | stdout/stderr from start_3gpp_services.sh and all BF3 NF processes |
+| `build_logs/run/legacy_5g_emulator_nfs.log` | stdout/stderr from start_3gpp_services.sh and all legacy standalone 5G emulator NF processes |
 | `build_logs/run/catalog_api.log` | uvicorn stdout for catalog_api |
 | `build_logs/run/order_engine.log` | uvicorn stdout for order_engine |
 | `build_logs/run/ai_observer.log` | uvicorn stdout for ai_observer |
@@ -430,17 +430,17 @@ to `.env` and adjust for your deployment target.
 
 | Variable | Default | Service | Purpose |
 |---------|---------|---------|---------|
-| `BF3_UDR_URL` | `http://localhost:9005` | order_engine | UDR base URL for subscriber registration |
-| `BF3_UDM_URL` | `http://localhost:9004` | order_engine | UDM base URL for subscription data |
-| `BF3_AMF_URL` | `http://localhost:9000` | order_engine | AMF base URL for UE context |
-| `BF3_SMF_URL` | `http://localhost:9001` | order_engine | SMF base URL for PDU session |
-| `BF3_NSSF_URL` | `http://localhost:9010` | order_engine | NSSF base URL for slice selection |
+| `TELCO_LAB_UDR_URL` | `http://localhost:9005` | order_engine | UDR base URL for subscriber registration |
+| `TELCO_LAB_UDM_URL` | `http://localhost:9004` | order_engine | UDM base URL for subscription data |
+| `TELCO_LAB_AMF_URL` | `http://localhost:9000` | order_engine | AMF base URL for UE context |
+| `TELCO_LAB_SMF_URL` | `http://localhost:9001` | order_engine | SMF base URL for PDU session |
+| `TELCO_LAB_NSSF_URL` | `http://localhost:9010` | order_engine | NSSF base URL for slice selection |
 | `ORDER_ENGINE_CORS_ORIGINS` | `http://localhost:8095,http://127.0.0.1:8095` | order_engine | Comma-separated allowed CORS origins |
 | `CATALOG_API_CORS_ORIGINS` | `http://localhost:8095,http://127.0.0.1:8095` | catalog_api | Comma-separated allowed CORS origins |
 | `AI_OBSERVER_CORS_ORIGINS` | `http://localhost:8095,http://127.0.0.1:8095` | ai_observer | Comma-separated allowed CORS origins |
 | `O2IMS_BASE_URL` | `http://localhost:8083` | order_engine | O2IMS API base URL |
 | `O2IMS_TOKEN` | (empty) | order_engine | Bearer token for O2IMS if required |
-| `BF3_UDR_DB_PATH` | Tech-Co root `udr.db` | order_engine | Explicit path to UDR SQLite file (rollback) |
+| `TELCO_LAB_UDR_DB_PATH` | Tech-Co root `udr.db` | order_engine | Explicit path to UDR SQLite file (rollback) |
 
 For the full canonical reference see `config/paths.yaml` (env_defaults section)
 and `docs/reference.md` (if present).
@@ -451,13 +451,13 @@ and `docs/reference.md` (if present).
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
-| `main.py crashed with psutil.AccessDenied` | BF3 NF called `psutil.net_connections()` globally (blocked by macOS SIP) | Fixed in stage 6. Always use `bash scripts/bring_up.sh` rather than launching `main.py` directly. |
+| `main.py crashed with psutil.AccessDenied` | legacy standalone 5G emulator NF called `psutil.net_connections()` globally (blocked by macOS SIP) | Fixed in stage 6. Always use `bash scripts/bring_up.sh` rather than launching `main.py` directly. |
 | `SMF discovery failed: SMF not found` or orders returning 502 | UPF not registered in NRF when SMF started | Fixed in stage 22. The NRF registration gate in `start_3gpp_services.sh` prevents SMF from starting until UPF is visible in NRF. Rerun `bash scripts/bring_up.sh`. |
-| `Order ends in state=partial` | BF3 NF not fully healthy, typically UDR not ready | Run `bash scripts/status.sh`. Check `build_logs/run/bf3_nfs.log`. The integration sweep's `wait_udr_ready` phase (30 s gate on port 9005) handles this automatically. If running manually, wait 10-15 s after bring-up before placing orders. Also verify `udr.db` was initialized (check `build_logs/run/init_udr_db.log`). |
+| `Order ends in state=partial` | legacy standalone 5G emulator NF not fully healthy, typically UDR not ready | Run `bash scripts/status.sh`. Check `build_logs/run/legacy_5g_emulator_nfs.log`. The integration sweep's `wait_udr_ready` phase (30 s gate on port 9005) handles this automatically. If running manually, wait 10-15 s after bring-up before placing orders. Also verify `udr.db` was initialized (check `build_logs/run/init_udr_db.log`). |
 | `Port 8090 still bound after stop_all` | ai_observer PID not tracked by early versions of stop_all.sh | Fixed in stage 22. `stop_all.sh` now explicitly kills ai_observer before the other services. |
 | `CORS errors in dashboard` (all dots red) | Browser blocked cross-origin fetch to service APIs | Fixed in stages 20 and 23. Services allow `http://localhost:8095` by default. If accessing from a different origin, update the `*_CORS_ORIGINS` environment variable and restart the service. |
 | `npm install hangs or fails` | Peer dependency conflict in storefront | Run `npm install --legacy-peer-deps` inside `src/storefront/`. |
-| `bring_up.sh` times out on BF3 NFs | venv not created, or Python path issue | Run `bash scripts/bootstrap.sh --force` then retry. Check `build_logs/run/bf3_nfs.log` for the specific failure. |
+| `bring_up.sh` times out on legacy standalone 5G emulator NFs | venv not created, or Python path issue | Run `bash scripts/bootstrap.sh --force` then retry. Check `build_logs/run/legacy_5g_emulator_nfs.log` for the specific failure. |
 | `demo_order_flow.sh: HTTP 422` | Order payload field name mismatch | The `orderItem` alias validator is present in `src/order_engine/app/models/tmf622_models.py`. Verify you have the stage 6 version of the order engine. |
 | `status.sh shows RUNNING but health 000` | Service alive but port blocked or startup exception | Check `build_logs/run/<service>.log` for the exception. Most common cause is a port already in use from a previous run. Run `stop_all.sh` to clear, then `bring_up.sh`. |
 | `No such table: product_orders` | order_engine SQLite DB created in wrong directory | Fixed in stage 22 integration sweep (pre_clean removes stale DB). For manual runs, delete `src/order_engine/order_engine.db` and any `order_engine.db` at Tech-Co root before starting. |

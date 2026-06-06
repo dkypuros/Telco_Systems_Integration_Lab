@@ -21,15 +21,15 @@ Evidence batch 006 is copied, verified, link-clean, and claim-caveated.
 - `traceability/requirements/techco-ims-component.md`
 - `traceability/requirements/techco-epc-component.md`
 - `traceability/requirements/techco-order-engine-component.md`
-- `traceability/requirements/bf3-testing.md`
-- `traceability/requirements/bf3-api-reference.md`
-- `traceability/requirements/bf3-core-network.md`
+- `traceability/requirements/legacy_5g_emulator-testing.md`
+- `traceability/requirements/legacy_5g_emulator-api-reference.md`
+- `traceability/requirements/legacy_5g_emulator-core-network.md`
 - `traceability/requirements/ric-architecture.md`
-- `traceability/requirements/bf3-ran-components.md`
+- `traceability/requirements/legacy_5g_emulator-ran-components.md`
 
 ## Execution correction
 
-During Ralph pre-copy validation, `Tech-Co/docs/reference.md` was replaced with `Tech-Co/docs/operations.md` to avoid a large unresolved `build_history.md` link fan-out. `BF3-5G-Demo/docs/ric-architecture.md` was copied to `traceability/requirements/ric-architecture.md` so `bf3-ran-components.md` resolves its local link.
+During Ralph pre-copy validation, `Tech-Co/docs/reference.md` was replaced with `Tech-Co/docs/operations.md` to avoid a large unresolved `build_history.md` link fan-out. `legacy-standalone-5g-emulator/docs/ric-architecture.md` was copied to `traceability/requirements/ric-architecture.md` so `legacy_5g_emulator-ran-components.md` resolves its local link.
 
 ## Claim caveat
 

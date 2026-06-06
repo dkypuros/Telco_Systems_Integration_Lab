@@ -32,8 +32,8 @@ They are **not** formal TM Forum, 3GPP, or O-RAN conformance proof unless separa
 
 - `traceability/evidence_snapshots/techco-stage18-tmf620-lift.md`
 - `traceability/evidence_snapshots/techco-stage31-docs-specs-verify.md`
-- `traceability/requirements/bf3-3gpp-compliance.md`
-- `traceability/evidence_snapshots/bf3-5g-emulator-compliance-report.txt`
+- `traceability/requirements/legacy_5g_emulator-3gpp-compliance.md`
+- `traceability/evidence_snapshots/legacy_5g_emulator-5g-emulator-compliance-report.txt`
 
 ## Interpretation
 

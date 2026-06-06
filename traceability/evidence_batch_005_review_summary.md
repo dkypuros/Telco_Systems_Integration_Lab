@@ -21,9 +21,9 @@ Evidence batch 005 is copied, verified, and claim-caveated.
 - `traceability/evidence_snapshots/techco-stage16-slicing-e2e.md`
 - `traceability/evidence_snapshots/techco-stage9-ims-verification.md`
 - `traceability/evidence_snapshots/techco-stage12-vonr-call.md`
-- `traceability/evidence_snapshots/techco-stage1-bf3-verification.md`
+- `traceability/evidence_snapshots/techco-stage1-legacy_5g_emulator-verification.md`
 - `traceability/requirements/techco-testing.md`
-- `traceability/evidence_snapshots/bf3-5g-emulator-requirements-test.txt`
+- `traceability/evidence_snapshots/legacy_5g_emulator-5g-emulator-requirements-test.txt`
 - `traceability/requirements/techco-5g-core-component.md`
 - `traceability/requirements/techco-ran-component.md`
 
@@ -50,4 +50,4 @@ A claim-hygiene scan found source-authored compliance/conformance/pass-rate lang
 
 ## Known limitation
 
-Batch 005 improves evidence coverage for O2IMS, RAN/EPC, slicing, IMS, VoNR, BF3 lineage, and test strategy. It still does not establish formal standards conformance.
+Batch 005 improves evidence coverage for O2IMS, RAN/EPC, slicing, IMS, VoNR, legacy standalone 5G emulator lineage, and test strategy. It still does not establish formal standards conformance.

@@ -19,10 +19,10 @@ Evidence batch 004 is copied, verified, and claim-caveated.
 - `traceability/evidence_snapshots/techco-stage18-tmf620-lift.md`
 - `traceability/evidence_snapshots/techco-stage25-oran-run-capture.md`
 - `traceability/evidence_snapshots/techco-stage31-docs-specs-verify.md`
-- `traceability/requirements/bf3-3gpp-compliance.md`
-- `traceability/evidence_snapshots/bf3-5g-emulator-compliance-report.txt`
-- `traceability/requirements/bf3-depth-of-understanding.txt`
-- `traceability/requirements/bf3-specification-map-index.txt`
+- `traceability/requirements/legacy_5g_emulator-3gpp-compliance.md`
+- `traceability/evidence_snapshots/legacy_5g_emulator-5g-emulator-compliance-report.txt`
+- `traceability/requirements/legacy_5g_emulator-depth-of-understanding.txt`
+- `traceability/requirements/legacy_5g_emulator-specification-map-index.txt`
 - `traceability/requirements/techco-oran-o2ims-component.md`
 - `traceability/requirements/techco-catalog-api-component.md`
 - `experimental/wireline_convergence/5g-wireline-simulator-requirements.txt`

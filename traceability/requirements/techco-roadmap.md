@@ -22,13 +22,13 @@ host via Docker Compose. All major network domains are represented.
 | RAN | gNB, CU, DU, Near-RT RIC, Non-RT RIC | Complete |
 | AI Layer | Observer (Phase 1 observe + Phase 2 propose/execute) | Phase 2 complete |
 | O2IMS | Stub + real adapter bridge | Complete |
-| Provisioning | Saga pattern with rollback, BF3 and O2IMS adapters | Complete |
+| Provisioning | Saga pattern with rollback, legacy standalone 5G emulator and O2IMS adapters | Complete |
 
 ### Architecture patterns in place
 
 - TMF622 product orders decompose to TMF641 service orders via the decomposer.
 - Saga runner handles multi-step provisioning with compensating rollbacks.
-- Adapter registry (bf3_python, o2ims, o2ims_real) routes steps by rules.yaml or
+- Adapter registry (legacy_5g_emulator_python, o2ims, o2ims_real) routes steps by rules.yaml or
   service characteristics.
 - AI Observer collects cross-NF observations, generates proposals, and can execute
   autonomously when `AI_AUTO_EXECUTE=true`.

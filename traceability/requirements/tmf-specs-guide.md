@@ -3,7 +3,7 @@
 **Date**: 2026-05-18
 **Scope**: Which standards are referenced, which are implemented, and what conformance
 status each has achieved. Cross-references the spec library at `Tech-Co/specs/` and the
-per-NF sidecar files at `components/BF3-5G-Demo/.../core_network/*.py.spec.txt`.
+per-NF sidecar files at `components/legacy-standalone-5g-emulator/.../core_network/*.py.spec.txt`.
 
 ---
 
@@ -125,7 +125,7 @@ listener. This would enable real BSS integration. The CTK packages for several A
 ## 3. 3GPP Specs
 
 Tech-Co's Python NFs are each pinned to governing 3GPP TSes via `.py.spec.txt` sidecars
-in `components/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/core_network/`.
+in `components/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/core_network/`.
 
 **Important transport caveat**: All NF-to-NF calls use HTTP/1.1 (FastAPI/httpx). The
 spec requires HTTP/2 for the SBI (TS 29.500 Section 5). Binary protocols (NGAP/SCTP,
@@ -258,7 +258,7 @@ ETSI NFV, MEC, and ZSM specs are in `specs/etsi/`:
 | Area | Location | Tech-Co status |
 |---|---|---|
 | NFV (MANO, VIM, NFVI) | `specs/etsi/NFV/` | REFERENCED. Informs architecture decisions. No VIM or VNFM implemented. |
-| MEC (Multi-access Edge Computing) | `specs/etsi/MEC/` | PARTIALLY REFERENCED. MEC location API sidecar present at `5G_Emulator_API/etsi/mec/location_api.py.spec.txt` and `mec_platform.py.spec.txt`. No production MEC platform implemented. |
+| MEC (Multi-access Edge Computing) | `specs/etsi/MEC/` | PARTIALLY REFERENCED. MEC location API sidecar present at `clean_5g_emulator_api/etsi/mec/location_api.py.spec.txt` and `mec_platform.py.spec.txt`. No production MEC platform implemented. |
 | ZSM (Zero-touch Service Management) | `specs/etsi/ZSM/` | REFERENCED. Informs the AI observer's autonomous control-loop design. No ZSM framework implemented. |
 
 ---

@@ -4,7 +4,7 @@
 Copy the next curated source-code slice after batch 008: remaining mock core functions and O-RAN/RIC support modules.
 
 ## Requirements
-1. Discover candidate files under the canonical BF3 source root.
+1. Discover candidate files under the canonical legacy standalone 5G emulator source root.
 2. Exclude duplicates, virtualenvs, caches, generated files, and whole directories.
 3. Append rows as planned before copying.
 4. Copy only listed files with `shutil.copy2`.

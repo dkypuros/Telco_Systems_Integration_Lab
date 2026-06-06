@@ -1,4 +1,4 @@
-# File location: 5G_Emulator_API/ran/du.py
+# File location: clean_5g_emulator_api/ran/du.py
 # 3GPP TS 38.463 - F1 Application Protocol (F1AP) - standards-referenced mock implementation
 # 3GPP TS 38.321 - Medium Access Control (MAC) - standards-referenced mock implementation
 # 3GPP TS 38.322 - Radio Link Control (RLC) - standards-referenced mock implementation

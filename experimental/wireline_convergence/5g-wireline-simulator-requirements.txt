@@ -490,7 +490,7 @@ PHASE 6: Advanced Features (Optional)
     | Scale                     | Single site / DC             | Multi-site WAN               |
     | Failover Mechanism        | DPU HA (active-backup)       | MPLS FRR (TI-LFA)            |
     | Target Use Case           | Edge AI + 5G UPF             | Carrier transport            |
-    | Hardware Dependency       | BlueField-3 DPU required     | Software-only possible       |
+    | Hardware Dependency       | accelerated edge DPU required     | Software-only possible       |
     +---------------------------+------------------------------+------------------------------+
 
 ========================================================================================================================
@@ -660,7 +660,7 @@ Location: 9.LABS_5G_lab_simulator/michael-softbank/
     +---------------------------------------+--------------------------------------------------+
 
     The Michael-SoftBank lab demonstrates 5G at a single site without MPLS transport.
-    Use it as reference for 5G Core and BlueField-3 DPU integration patterns.
+    Use it as reference for 5G Core and accelerated edge DPU integration patterns.
 
 ========================================================================================================================
                                          EXTERNAL REFERENCES

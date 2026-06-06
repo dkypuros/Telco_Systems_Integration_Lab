@@ -1,4 +1,4 @@
-# File location: 5G_Emulator_API/core_network/nrf.py
+# File location: clean_5g_emulator_api/core_network/nrf.py
 # 3GPP TS 29.510 - Network Repository Function (NRF) - standards-referenced mock implementation
 # Complete Nnrf_NFManagement and Nnrf_NFDiscovery services with OAuth2 security
 

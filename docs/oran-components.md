@@ -26,7 +26,7 @@ asset baseline, the implementation path, and the executable evidence path.
 
 ## Supporting evidence
 
-- [`traceability/requirements/bf3-oran-compliance-matrix.md`](../traceability/requirements/bf3-oran-compliance-matrix.md)
+- [`traceability/requirements/legacy_5g_emulator-oran-compliance-matrix.md`](../traceability/requirements/legacy_5g_emulator-oran-compliance-matrix.md)
 - [`traceability/requirements/oran-compliance.md`](../traceability/requirements/oran-compliance.md)
 - [`traceability/requirements/oran-fronthaul.md`](../traceability/requirements/oran-fronthaul.md)
 - [`traceability/requirements/ric-architecture.md`](../traceability/requirements/ric-architecture.md)

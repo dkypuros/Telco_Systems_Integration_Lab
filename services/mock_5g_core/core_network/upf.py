@@ -1,4 +1,4 @@
-# File location: 5G_Emulator_API/core_network/upf.py
+# File location: clean_5g_emulator_api/core_network/upf.py
 # Enhanced with 3GPP TS 29.244 PFCP protocol support for N4 interface
 # Real protocol mode: GTP-U (UDP 2152) + TUN interface + PFCP (UDP 8805)
 from fastapi import FastAPI, Request, HTTPException

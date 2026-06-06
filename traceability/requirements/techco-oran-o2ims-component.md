@@ -235,7 +235,7 @@ Prerequisites for a working live integration:
 
 - RAN components (Near-RT RIC, Non-RT RIC, CU, DU, gNB): `docs/components/ran.md`
 - 5G core NFs: `docs/components/5g_core.md`
-- BF3 Python adapter (5G core southbound): `src/order_engine/app/adapters/bf3_python_adapter.py`
+- legacy standalone 5G emulator Python adapter (5G core southbound): `src/order_engine/app/adapters/legacy_5g_emulator_python_adapter.py`
 - Original O2IMS stub (untouched): `src/order_engine/app/adapters/o2ims_adapter.py`
 - Order decomposition rules: `src/order_engine/app/decomposition/rules.yaml`
 - Stage 8 build log: `build_logs/stage8_o2ims.md`

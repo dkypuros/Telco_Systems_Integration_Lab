@@ -18,12 +18,12 @@
     },
     {
       "id": "planned-evidence-004",
-      "dst": "traceability/evidence_snapshots/bf3-live-spec-compliance-results.txt",
+      "dst": "traceability/evidence_snapshots/legacy_5g_emulator-live-spec-compliance-results.txt",
       "sha256": "e77fbf5fe912a68faf343e862eb1780a4dcc68e36419cda6ea3a90853af2b827"
     },
     {
       "id": "planned-evidence-005",
-      "dst": "traceability/requirements/bf3-spec-to-code-analysis.txt",
+      "dst": "traceability/requirements/legacy_5g_emulator-spec-to-code-analysis.txt",
       "sha256": "664fd8b6323b7c943d17c71f2e28fa9a3668f33b94e3ff176252afe88a14f261"
     },
     {

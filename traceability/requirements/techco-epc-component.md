@@ -1,7 +1,7 @@
 # EPC Component Reference
 
-**Codebase**: BF3-5G-Demo Python 4G EPC implementation
-**Base path**: `components/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/`
+**Codebase**: legacy-standalone-5g-emulator Python 4G EPC implementation
+**Base path**: `components/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/`
 **Framework**: FastAPI + uvicorn (all NFs)
 **Port config**: `config/ports.py` (EPC range: 9020-9023; N3IWF at 9015)
 **Spec sidecars**: `core_network/mme.py.spec.txt`, `core_network/hss.py.spec.txt`,

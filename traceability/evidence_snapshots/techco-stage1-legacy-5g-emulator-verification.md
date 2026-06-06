@@ -1,8 +1,8 @@
-# Stage 1 Verification — BF3 5G Core on macOS Darwin 24.5.0
+# Stage 1 Verification — legacy standalone 5G Core on macOS Darwin 24.5.0
 
 **Date**: 2026-05-18
 **Verifier**: Claude Code (Executor agent)
-**Code location**: `components/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/`
+**Code location**: `components/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/`
 **Python**: 3.14.4 (Homebrew arm64)
 
 ---
@@ -13,7 +13,7 @@ Commands run in order:
 
 1. Read `main.py`, `requirements.txt`, `start_3gpp_services.sh` to understand entry points and dependencies.
 2. Inspected `core_network/nrf.py`, `amf.py`, `smf.py`, `upf.py`, `ptp/ptp.py`, `ran/rru/rru.py`, `service_assurance/assurance_api.py`, `ran/cu/cu.py` for structure and import patterns.
-3. Created a fresh venv: `python3 -m venv venv_verify` inside `5G_Emulator_API/`.
+3. Created a fresh venv: `python3 -m venv venv_verify` inside `clean_5g_emulator_api/`.
 4. Installed all requirements: `pip install -r requirements.txt` — succeeded (thrift built from source, all packages installed cleanly on Python 3.14.4).
 5. Tested NRF standalone: `python core_network/nrf.py --host 0.0.0.0 --port 8000` — confirmed `/health` returned 200.
 6. Attempted `python main.py` — crashed immediately (see "What failed" section).

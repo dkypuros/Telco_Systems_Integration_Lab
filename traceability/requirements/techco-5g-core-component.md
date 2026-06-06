@@ -1,7 +1,7 @@
 # 5G Core Component Reference
 
-**Codebase**: BF3-5G-Demo Python emulator (~21,000 lines across 15 NFs)
-**Base path**: `components/BF3-5G-Demo/open-digital-platform-2_0/5G_Emulator_API/`
+**Codebase**: legacy-standalone-5g-emulator Python emulator (~21,000 lines across 15 NFs)
+**Base path**: `components/legacy-standalone-5g-emulator/open-digital-platform-2_0/clean_5g_emulator_api/`
 **Framework**: FastAPI + uvicorn (all NFs)
 **Port config**: `config/ports.py` (centralized, canonical)
 **Spec sidecars**: each NF has a `core_network/<nf>.py.spec.txt` tracing code sections to 3GPP TSes
@@ -10,7 +10,7 @@
 
 ## How to Start the 5G Core
 
-The preferred launch path is the Tech-Co bring-up script, which calls the BF3 start script after
+The preferred launch path is the Tech-Co bring-up script, which calls the legacy standalone 5G emulator start script after
 initializing the UDR SQLite database:
 
 ```bash
@@ -18,7 +18,7 @@ initializing the UDR SQLite database:
 bash scripts/bring_up.sh
 ```
 
-`bring_up.sh` does three things before handing off to BF3:
+`bring_up.sh` does three things before handing off to legacy standalone 5G emulator:
 
 1. Creates the UDR SQLite `users` table if it does not exist (UDR startup bug: `init_db()` is
    defined but not called at import time, so the table must be seeded externally):
@@ -32,7 +32,7 @@ bash scripts/bring_up.sh
    "
    ```
 
-2. Calls `components/BF3-5G-Demo/open-digital-platform-2_0/start_3gpp_services.sh`, which uses
+2. Calls `components/legacy-standalone-5g-emulator/open-digital-platform-2_0/start_3gpp_services.sh`, which uses
    `${BASH_SOURCE[0]}` to derive absolute paths and launches NFs in four phases:
    - Phase 1: NRF (port 8000) -- polls `/health` up to 30 s before proceeding
    - Phase 2: UPF (port 9002) -- polls `/health` up to 20 s, then 2 s pause so UPF registers
@@ -43,10 +43,10 @@ bash scripts/bring_up.sh
 
 3. Waits in a non-blocking `process.poll()` loop; `Ctrl-C` terminates all children cleanly.
 
-To stop: `bash components/BF3-5G-Demo/open-digital-platform-2_0/stop_services.sh`
+To stop: `bash components/legacy-standalone-5g-emulator/open-digital-platform-2_0/stop_services.sh`
 
 **PYTHONPATH requirement**: each NF must be launched with `PYTHONPATH` set to the
-`5G_Emulator_API/` root so `from config.ports import get_port` resolves correctly.
+`clean_5g_emulator_api/` root so `from config.ports import get_port` resolves correctly.
 
 ---
 
@@ -129,9 +129,9 @@ session requests to SMF via N11.
 
 **Route ordering note**: `POST /amf/ue/{ue_id}` (line 340) is declared before
 `POST /amf/ue/register` (line 849), so FastAPI routes the parameterized form first. The
-BF3PythonAdapter uses `POST /amf/ue/{supi}` directly (confirmed in stage 11).
+LegacyFiveGEmulatorAdapter uses `POST /amf/ue/{supi}` directly (confirmed in stage 11).
 
-**Status**: Working. Registers with NRF on startup. BF3PythonAdapter calls AMF during order
+**Status**: Working. Registers with NRF on startup. LegacyFiveGEmulatorAdapter calls AMF during order
 activation (steps: `register_with_amf` via `POST /amf/ue/{supi}`, rollback via
 `POST /amf/ue/{supi}/deregister`).
 
@@ -169,7 +169,7 @@ PFCP; handles N11 interface from AMF.
 `upf_url` stays `None` and all PDU session requests return 502. The start script addresses this
 by starting UPF (phase 2) before AMF/SMF (phase 3).
 
-**Status**: Working (when started after UPF per bring-up script). BF3PythonAdapter calls SMF
+**Status**: Working (when started after UPF per bring-up script). LegacyFiveGEmulatorAdapter calls SMF
 during order activation (`establish_pdu_session` via `POST /nsmf-pdusession/v1/sm-contexts`).
 
 **test_3gpp_compliance.py**: triggered indirectly via AMF `POST /amf/pdu-session/create`;
@@ -268,9 +268,9 @@ access and mobility data (Nudm-SDM); authentication data generation (Nudm-UEAU).
 **Pre-seeded subscribers**: `imsi-001010000000001` through `imsi-001010000000004`. Dynamically
 provisioned SUPIs (via UDR `POST /register_user`) are not in UDM's in-memory store and return
 404 on `GET /nudm-sdm/v1/{supi}/am-data` -- this is expected and handled gracefully by
-BF3PythonAdapter (stage 11).
+LegacyFiveGEmulatorAdapter (stage 11).
 
-**Status**: Working. BF3PythonAdapter calls UDM during order activation (`provision_subscriber`
+**Status**: Working. LegacyFiveGEmulatorAdapter calls UDM during order activation (`provision_subscriber`
 verify step: `GET /nudm-sdm/v1/{supi}/am-data`; slice step:
 `GET /nudm-sdm/v1/{supi}/nssai`).
 
@@ -297,7 +297,7 @@ that UDM reads from; minimal REST surface.
 **Startup prerequisite**: `init_db()` must be called before first `/register_user` request.
 The bring-up script handles this. The UDR database file is at `Tech-Co/udr.db`.
 
-**Status**: Working. BF3PythonAdapter calls `POST /register_user` in the `provision_subscriber`
+**Status**: Working. LegacyFiveGEmulatorAdapter calls `POST /register_user` in the `provision_subscriber`
 step. No DELETE endpoint exists; subscriber rollback is log-only (known gap, stage 16).
 
 ---
@@ -395,7 +395,7 @@ authorized S-NSSAI and NSI information based on subscribed and requested NSSAI.
 **Start script**: NSSF was added to `start_3gpp_services.sh` in stage 16, launched between NRF
 and AMF. Before stage 16, it was not started by default.
 
-**Status**: Working (stage 16). BF3PythonAdapter calls NSSF in the `allocate_slice` step:
+**Status**: Working (stage 16). LegacyFiveGEmulatorAdapter calls NSSF in the `allocate_slice` step:
 `GET /nnssf-nsselection/v1/network-slice-information?nf-type=AMF&nf-id=...` with
 `SliceInfoForRegistration` body. Returns `AuthorizedNetworkSliceInfo` with allowed S-NSSAI.
 
@@ -566,7 +566,7 @@ forwarding with encryption and integrity protection.
 
 ## Compliance Test Coverage
 
-`components/BF3-5G-Demo/open-digital-platform-2_0/test_3gpp_compliance.py`
+`components/legacy-standalone-5g-emulator/open-digital-platform-2_0/test_3gpp_compliance.py`
 
 Six tests, all pass (6/6, stage 1 result):
 
@@ -604,7 +604,7 @@ Six tests, all pass (6/6, stage 1 result):
 6. **UDR has no DELETE endpoint**: Subscriber rollback on order failure is log-only (stage 16).
 
 7. **UDM has no POST for NSSAI write**: `nssai-update` returns 404 for dynamic SUPIs;
-   BF3PythonAdapter handles this gracefully (stage 16).
+   LegacyFiveGEmulatorAdapter handles this gracefully (stage 16).
 
 8. **main.py blocking wait design**: original `process.wait()` called sequentially -- NRF
    blocks forever. Fixed in stage 6 with non-blocking `process.poll()` loop.
@@ -614,8 +614,8 @@ Six tests, all pass (6/6, stage 1 result):
 ## Cross-References
 
 - Order engine adapter that calls AMF, SMF, UDR, UDM, NSSF:
-  `src/order_engine/app/adapters/bf3_python_adapter.py`
-- O2IMS adapter (separate southbound, does not call BF3 NFs directly):
+  `src/order_engine/app/adapters/legacy_5g_emulator_python_adapter.py`
+- O2IMS adapter (separate southbound, does not call legacy standalone 5G emulator NFs directly):
   `src/order_engine/app/adapters/o2ims_real_adapter.py`
 - Decomposition rules linking product offerings to NF step sequences:
   `src/order_engine/app/decomposition/rules.yaml`
