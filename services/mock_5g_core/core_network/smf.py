@@ -1,5 +1,5 @@
 # File location: 5G_Emulator_API/core_network/smf.py
-# Enhanced with 3GPP TS 23.502 compliance for PDU Session Establishment
+# Enhanced with 3GPP TS 23.502-referenced PDU Session Establishment modeling
 # Real protocol mode: PFCP (UDP 8805) for N4 interface toward UPF
 from fastapi import FastAPI, Request, HTTPException
 import uvicorn
@@ -212,7 +212,7 @@ def _send_pfcp_establishment_request(pdu_session: dict) -> dict:
 @app.post("/nsmf-pdusession/v1/sm-contexts")
 async def create_sm_context(request: Request):
     """
-    3GPP-compliant Nsmf_PDUSession Create SM Context operation.
+    3GPP-referenced mock Nsmf_PDUSession Create SM Context operation.
     Reference: 3GPP TS 29.502 Section 5.2.2.2.1
     """
     pdu_session_data = await request.json()
@@ -325,7 +325,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "SMF",
-        "compliance": "3GPP TS 29.502",
+        "standards_reference": "3GPP TS 29.502",
         "version": "1.0.0",
         "protocol_mode": PROTOCOL_MODE,
         "pfcp_active": _pfcp_transport is not None and _pfcp_transport.transport is not None

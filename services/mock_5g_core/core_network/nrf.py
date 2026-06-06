@@ -1,5 +1,5 @@
 # File location: 5G_Emulator_API/core_network/nrf.py
-# 3GPP TS 29.510 - Network Repository Function (NRF) - 100% Compliant Implementation
+# 3GPP TS 29.510 - Network Repository Function (NRF) - standards-referenced mock implementation
 # Complete Nnrf_NFManagement and Nnrf_NFDiscovery services with OAuth2 security
 
 from fastapi import FastAPI, HTTPException, Depends, Security, status, Query, Path, Header
@@ -385,7 +385,7 @@ nrf_instance = NRF()
 
 app = FastAPI(
     title="NRF - Network Repository Function",
-    description="3GPP TS 29.510 compliant NRF implementation with OAuth2 security",
+    description="3GPP TS 29.510-referenced mock NRF with OAuth2-style security",
     version="1.0.0"
 )
 
@@ -707,7 +707,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "NRF",
-        "compliance": "3GPP TS 29.510",
+        "standards_reference": "3GPP TS 29.510",
         "version": "1.0.0",
         "registered_nfs": len(nf_profiles),
         "active_subscriptions": len(nf_subscriptions)

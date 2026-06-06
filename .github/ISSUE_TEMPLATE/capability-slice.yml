@@ -1,0 +1,105 @@
+name: Standards-traceable capability issue
+description: Work item for a capability slice, adapter/profile boundary, or standards-evidence gate.
+title: "[capability]: "
+labels:
+  - capability-slice
+  - traceability
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for work derived from the approved capability blueprint.
+        Do not claim stronger standards status than the release register and claim hygiene policy support.
+  - type: input
+    id: capability_slice
+    attributes:
+      label: Capability slice
+      description: "Example: service_order_to_activation/, subscriber_lifecycle/, slice_provisioning/, ran_control_loop/, assurance_to_remediation/, or cross-cutting governance."
+      placeholder: service_order_to_activation/
+    validations:
+      required: true
+  - type: textarea
+    id: standards_scope
+    attributes:
+      label: Standards family and release-register row
+      description: Name each standards family/spec/API and the existing or planned release-register row.
+      placeholder: TMF620 planned row; 3GPP TS 29.510 existing row; O-RAN A1 planned row
+    validations:
+      required: true
+  - type: dropdown
+    id: current_evidence_label
+    attributes:
+      label: Current standards-evidence label
+      options:
+        - reference_only
+        - planned
+        - partial
+        - functional_smoke
+        - demo_evidence
+        - formal_conformance_missing
+        - conformance_candidate
+        - formal_conformance_evidence
+    validations:
+      required: true
+  - type: dropdown
+    id: target_evidence_label
+    attributes:
+      label: Target standards-evidence label for this issue
+      options:
+        - reference_only
+        - planned
+        - partial
+        - functional_smoke
+        - demo_evidence
+        - formal_conformance_missing
+        - conformance_candidate
+        - formal_conformance_evidence
+    validations:
+      required: true
+  - type: textarea
+    id: implementation_paths
+    attributes:
+      label: Allowed implementation paths
+      description: List exact files/directories this issue may edit.
+      placeholder: |
+        - services/catalog_api/
+        - tests/unit/test_catalog_api.py
+    validations:
+      required: true
+  - type: textarea
+    id: tests_evidence
+    attributes:
+      label: Required tests and evidence
+      description: List executable tests, evidence snapshots, and traceability rows this issue must produce or update.
+    validations:
+      required: true
+  - type: textarea
+    id: known_gap
+    attributes:
+      label: Known gap to latest/formal conformance
+      description: State what this issue does not prove.
+      placeholder: No formal 3GPP/TM Forum/O-RAN conformance is claimed.
+    validations:
+      required: true
+  - type: checkboxes
+    id: source_intake_boundary
+    attributes:
+      label: Source-intake and claim-hygiene boundary
+      options:
+        - label: This issue will not copy a full upstream source tree.
+          required: true
+        - label: Any copied/derived file will be recorded in source inventory and copy manifest with license/checksum evidence.
+          required: true
+        - label: Standards language will use only canonical evidence labels from traceability/claim_hygiene_policy.md.
+          required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification commands
+      description: Include the subset of blueprint/AGENTS.md checks that proves this issue.
+      value: |
+        - git diff --check
+        - pytest tests/unit tests/integration tests/regression tests/conformance
+        - public-safe scans from AGENTS.md
+    validations:
+      required: true

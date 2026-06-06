@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Near-RT RIC (Near-Real-Time RAN Intelligent Controller)
-ETSI TS 104038/104039/104040 Compliant Implementation
+ETSI TS 104038/104039/104040-referenced mock implementation
 
 This module implements the Near-RT RIC which provides:
 - E2 interface to E2 Nodes (CU, DU, gNB)

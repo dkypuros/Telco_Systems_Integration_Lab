@@ -1,5 +1,5 @@
 # File location: 5G_Emulator_API/core_network/nssf.py
-# 3GPP TS 29.531 - Network Slice Selection Function (NSSF) - 100% Compliant Implementation
+# 3GPP TS 29.531 - Network Slice Selection Function (NSSF) - standards-referenced mock implementation
 # Implements Nnssf_NSSelection and Nnssf_NSSAIAvailability services
 # Inspired by Free5GC NSSF implementation
 
@@ -640,7 +640,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="NSSF - Network Slice Selection Function",
-    description="3GPP TS 29.531 compliant NSSF implementation",
+    description="3GPP TS 29.531-referenced mock NSSF implementation",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -851,7 +851,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "NSSF",
-        "compliance": "3GPP TS 29.531",
+        "standards_reference": "3GPP TS 29.531",
         "version": "1.0.0",
         "activeSubscriptions": len(nssai_availability_subscriptions)
     }

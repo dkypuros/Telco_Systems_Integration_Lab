@@ -261,8 +261,8 @@ def _measure_kpi(nsi: NSI) -> SliceKPI:
     )
 
 
-def _sla_conformance(nsi: NSI, kpi: SliceKPI) -> Dict[str, Any]:
-    """Compare measured KPIs against SLA targets and classify conformance."""
+def _sla_alignment(nsi: NSI, kpi: SliceKPI) -> Dict[str, Any]:
+    """Compare measured KPIs against SLA targets and classify SLA alignment."""
     sla = nsi.sla
     dl_ok = kpi.achieved_dl_throughput_mbps >= sla.guaranteed_dl_throughput_mbps
     ul_ok = kpi.achieved_ul_throughput_mbps >= sla.guaranteed_ul_throughput_mbps
@@ -280,7 +280,7 @@ def _sla_conformance(nsi: NSI, kpi: SliceKPI) -> Dict[str, Any]:
     return {
         "nsi_id": nsi.nsi_id,
         "snssai": nsi.snssai.key(),
-        "conformant": len(breaches) == 0,
+        "within_sla": len(breaches) == 0,
         "breaches": breaches,
         "checks": {
             "dl_throughput": {"target": sla.guaranteed_dl_throughput_mbps,
@@ -528,24 +528,24 @@ async def get_nsi_kpi(nsi_id: str):
 
 @app.get("/slicing/sla-report")
 async def sla_report():
-    """SLA conformance report across all active slices (achieved KPI vs SLA target)."""
+    """SLA alignment report across all active slices (achieved KPI vs SLA target)."""
     reports = []
-    conformant = 0
+    within_sla = 0
     for nsi in nsi_store.values():
         if nsi.state in (NsiState.TERMINATED, NsiState.DEACTIVATING):
             continue
         kpi = _measure_kpi(nsi)
-        rep = _sla_conformance(nsi, kpi)
+        rep = _sla_alignment(nsi, kpi)
         rep["kpi"] = kpi.model_dump()
         reports.append(rep)
-        if rep["conformant"]:
-            conformant += 1
+        if rep["within_sla"]:
+            within_sla += 1
     return {
         "spec": "O-RAN.WG1.TS.Slicing-Architecture-R004-v14.01",
         "generated_at": _now().isoformat(),
         "total_slices": len(reports),
-        "conformant_slices": conformant,
-        "breaching_slices": len(reports) - conformant,
+        "within_sla_slices": within_sla,
+        "breaching_slices": len(reports) - within_sla,
         "reports": reports,
     }
 

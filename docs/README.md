@@ -18,6 +18,8 @@ bounded.
 | [API Reference](api-reference.md) | Current API and endpoint evidence sources. |
 | [Testing](testing.md) | Unit, integration, runtime smoke, regression, interoperability, and conformance boundaries. |
 | [Conformance Boundary](conformance-boundary.md) | What is proven, what is not proven, and what evidence is required before stronger claims. |
+| [Issue Authoring](issue-authoring.md) | Required standards-evidence fields for GitHub issues and agent work chunks. |
+| [Evidence Bundles](evidence-bundles.md) | Correlation ID and evidence bundle format for traceable demos/tests. |
 
 ## Architecture decisions
 

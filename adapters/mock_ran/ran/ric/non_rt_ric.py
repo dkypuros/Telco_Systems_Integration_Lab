@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Non-RT RIC (Non-Real-Time RAN Intelligent Controller)
-ETSI TS 103983 Compliant Implementation
+ETSI TS 103983-referenced mock implementation
 
 This module implements the Non-RT RIC which provides:
 - A1 interface to Near-RT RIC (policy, enrichment info, ML models)

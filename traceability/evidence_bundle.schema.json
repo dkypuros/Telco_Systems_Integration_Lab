@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/dkypuros/Telco_Systems_Integration_Lab/traceability/evidence_bundle.schema.json",
+  "title": "Telco Systems Integration Lab Evidence Bundle",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "correlation_id",
+    "recorded_at",
+    "scenario",
+    "capability_slice",
+    "evidence_label",
+    "claim_boundary",
+    "inputs",
+    "touched_components",
+    "standards_rows",
+    "artifact_paths",
+    "known_gaps",
+    "next_validation_step"
+  ],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "correlation_id": {"type": "string", "minLength": 8},
+    "recorded_at": {"type": "string", "description": "ISO-8601 timestamp"},
+    "scenario": {"type": "string"},
+    "capability_slice": {"type": "string"},
+    "evidence_label": {
+      "type": "string",
+      "enum": [
+        "reference_only",
+        "planned",
+        "partial",
+        "functional_smoke",
+        "demo_evidence",
+        "formal_conformance_missing",
+        "conformance_candidate",
+        "formal_conformance_evidence"
+      ]
+    },
+    "claim_boundary": {"type": "string"},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "product_id": {"type": "string"},
+        "order_id": {"type": "string"},
+        "service_id": {"type": "string"},
+        "subscriber_id": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "touched_components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "role"],
+        "properties": {
+          "path": {"type": "string"},
+          "role": {"type": "string"},
+          "evidence_note": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "standards_rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["standards_body", "spec_id", "release_register_path", "conformance_level", "known_gap_to_latest"],
+        "properties": {
+          "standards_body": {"type": "string"},
+          "spec_id": {"type": "string"},
+          "release_register_path": {"type": "string"},
+          "conformance_level": {"type": "string"},
+          "known_gap_to_latest": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "artifact_paths": {"type": "array", "items": {"type": "string"}},
+    "known_gaps": {"type": "array", "items": {"type": "string"}},
+    "next_validation_step": {"type": "string"}
+  },
+  "additionalProperties": false
+}

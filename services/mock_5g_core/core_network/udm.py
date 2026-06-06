@@ -1,5 +1,5 @@
 # File location: 5G_Emulator_API/core_network/udm.py
-# 3GPP TS 29.503 - Unified Data Management (UDM) - 100% Compliant Implementation
+# 3GPP TS 29.503 - Unified Data Management (UDM) - standards-referenced mock implementation
 # Implements Nudm_UECM, Nudm_SDM, Nudm_UEAU, Nudm_EE, Nudm_PP services
 
 from fastapi import FastAPI, HTTPException, Request, Path, Query
@@ -320,7 +320,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="UDM - Unified Data Management",
-    description="3GPP TS 29.503 compliant UDM implementation with Nudm services",
+    description="3GPP TS 29.503-referenced mock UDM with Nudm-style services",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -587,7 +587,7 @@ def udm_service():
     """Legacy service endpoint - maintained for backwards compatibility"""
     return {
         "message": "UDM service response",
-        "compliance": "3GPP TS 29.503",
+        "standards_reference": "3GPP TS 29.503",
         "status": "OPERATIONAL",
         "supported_services": udm_instance.supported_services
     }
@@ -599,7 +599,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "UDM",
-        "compliance": "3GPP TS 29.503",
+        "standards_reference": "3GPP TS 29.503",
         "version": "1.0.0",
         "registered_ues": len(ue_contexts)
     }

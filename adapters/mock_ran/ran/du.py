@@ -1,9 +1,9 @@
 # File location: 5G_Emulator_API/ran/du.py
-# 3GPP TS 38.463 - F1 Application Protocol (F1AP) - 100% Compliant Implementation
-# 3GPP TS 38.321 - Medium Access Control (MAC) - 100% Compliant Implementation
-# 3GPP TS 38.322 - Radio Link Control (RLC) - 100% Compliant Implementation
-# 3GPP TS 38.323 - Packet Data Convergence Protocol (PDCP) - 100% Compliant Implementation
-# 3GPP TS 38.201 - Physical Layer (PHY) - 100% Compliant Implementation
+# 3GPP TS 38.463 - F1 Application Protocol (F1AP) - standards-referenced mock implementation
+# 3GPP TS 38.321 - Medium Access Control (MAC) - standards-referenced mock implementation
+# 3GPP TS 38.322 - Radio Link Control (RLC) - standards-referenced mock implementation
+# 3GPP TS 38.323 - Packet Data Convergence Protocol (PDCP) - standards-referenced mock implementation
+# 3GPP TS 38.201 - Physical Layer (PHY) - standards-referenced mock implementation
 
 from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
 from pydantic import BaseModel, Field
@@ -530,7 +530,7 @@ async def slot_processing_task():
 
 app = FastAPI(
     title="gNB-DU - Distributed Unit",
-    description="3GPP TS 38.463 F1AP and complete protocol stack implementation",
+    description="3GPP TS 38.463 F1AP and protocol-stack-referenced mock DU implementation",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -753,7 +753,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "gNB-DU",
-        "compliance": "3GPP TS 38.463, TS 38.321, TS 38.322, TS 38.323, TS 38.201",
+        "standards_reference": "3GPP TS 38.463, TS 38.321, TS 38.322, TS 38.323, TS 38.201",
         "version": "1.0.0",
         "active_ues": len(ue_contexts)
     }

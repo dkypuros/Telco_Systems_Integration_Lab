@@ -1,6 +1,6 @@
 # File location: 5G_Emulator_API/ran/cu.py
-# 3GPP TS 38.463 - F1 Application Protocol (F1AP) - 100% Compliant Implementation
-# 3GPP TS 38.331 - Radio Resource Control (RRC) - 100% Compliant Implementation
+# 3GPP TS 38.463 - F1 Application Protocol (F1AP) - standards-referenced mock implementation
+# 3GPP TS 38.331 - Radio Resource Control (RRC) - standards-referenced mock implementation
 
 from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
 from pydantic import BaseModel, Field
@@ -412,7 +412,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="gNB-CU - Centralized Unit",
-    description="3GPP TS 38.463 F1AP and TS 38.331 RRC compliant implementation",
+    description="3GPP TS 38.463 F1AP and TS 38.331 RRC-referenced mock CU implementation",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -592,7 +592,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "gNB-CU",
-        "compliance": "3GPP TS 38.463, TS 38.331",
+        "standards_reference": "3GPP TS 38.463, TS 38.331",
         "version": "1.0.0",
         "active_ues": len(ue_contexts)
     }

@@ -1,6 +1,6 @@
 # File location: 5G_Emulator_API/ran/gnb.py
-# 3GPP TS 38.413 - gNodeB NGAP Implementation - 100% Compliant
-# Complete NGAP protocol implementation for N2 interface
+# 3GPP TS 38.413 - gNodeB NGAP - standards-referenced mock implementation
+# NGAP-like mock signaling for the N2 interface
 # Real protocol mode: NGAP over SCTP/TCP (port 38412) + GTP-U (UDP 2152)
 
 from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
@@ -612,7 +612,7 @@ async def send_ng_setup_request():
 
 app = FastAPI(
     title="gNodeB - 5G Base Station",
-    description="3GPP TS 38.413 compliant gNodeB with complete NGAP implementation",
+    description="3GPP TS 38.413-referenced mock gNodeB with NGAP-like readiness endpoints",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -870,7 +870,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "gNodeB",
-        "compliance": "3GPP TS 38.413",
+        "standards_reference": "3GPP TS 38.413",
         "version": "1.0.0",
         "protocol_mode": PROTOCOL_MODE,
         "ngap_sctp_connected": _ngap_client is not None and _ngap_client.connected,

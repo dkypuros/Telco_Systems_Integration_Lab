@@ -1,0 +1,30 @@
+profile_name: open5gs
+profile_role: external implementation profile
+upstream:
+  project: Open5GS
+  url: https://open5gs.org/
+  repository_url: https://github.com/open5gs/open5gs
+  pinned_version: planned
+  license: AGPL-3.0-or-later per upstream; verify before any derived artifact
+source_intake_boundary:
+  full_upstream_source_copied: false
+  excluded_artifacts:
+    - nested .git directories
+    - generated binaries and package caches
+    - runtime databases and logs
+    - secrets, certificates, keys, and local environment files
+    - raw standards bundles
+intended_lab_role:
+  capability_slices:
+    - subscriber_lifecycle/
+    - service_order_to_activation/
+  standards_families:
+    - 3GPP subscriber and core-network concepts tracked in the release register
+  current_evidence_label: planned
+  target_evidence_label: planned until runtime-gated interoperability tests exist
+adapter_boundary:
+  lab_owned_path: adapters/3gpp/
+  expected_tests: tests/interoperability/
+  unavailable_runtime_behavior: skip with a clear external-runtime requirement
+known_gap_to_latest: no pinned runtime, adapter contract, or executable interop evidence yet
+next_validation_step: define subscriber provisioning adapter contract without vendoring Open5GS source

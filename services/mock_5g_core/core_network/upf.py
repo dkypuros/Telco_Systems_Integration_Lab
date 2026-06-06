@@ -348,7 +348,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "UPF",
-        "compliance": "3GPP TS 29.244",
+        "standards_reference": "3GPP TS 29.244",
         "version": "1.0.0",
         "protocol_mode": PROTOCOL_MODE,
         "gtpu_active": _gtpu_transport is not None and _gtpu_transport.transport is not None,

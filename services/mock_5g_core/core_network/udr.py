@@ -51,7 +51,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "UDR",
-        "compliance": "3GPP TS 29.504",
+        "standards_reference": "3GPP TS 29.504",
         "version": "1.0.0"
     }
 

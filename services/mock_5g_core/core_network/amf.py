@@ -416,7 +416,7 @@ def trigger_pdu_session_creation(ue_context: dict):
 @app.post("/amf/pdu-session/create")
 async def create_pdu_session(request_data: dict):
     """
-    3GPP-compliant PDU Session Establishment procedure.
+    3GPP-referenced mock PDU Session Establishment procedure.
     Reference: 3GPP TS 23.502 Section 4.3.2.2.1
     """
     logger.info(f"Starting PDU Session Establishment for UE: {request_data.get('ue_id')}")
@@ -435,7 +435,7 @@ async def create_pdu_session(request_data: dict):
     if not ue_context.get('imsi'):
         ue_context['imsi'] = f"00101{ue_id}"
     
-    # Trigger the 3GPP-compliant PDU session creation
+    # Trigger the 3GPP-referenced mock PDU session creation
     sm_response = trigger_pdu_session_creation(ue_context)
     
     if sm_response:
@@ -965,7 +965,7 @@ async def health_check():
     return {
         "status": "healthy",
         "service": "AMF",
-        "compliance": "3GPP TS 29.518, TS 38.413",
+        "standards_reference": "3GPP TS 29.518, TS 38.413",
         "version": "1.0.0",
         "protocol_mode": PROTOCOL_MODE,
         "ngap_server_active": _ngap_server is not None and _ngap_server.server is not None,

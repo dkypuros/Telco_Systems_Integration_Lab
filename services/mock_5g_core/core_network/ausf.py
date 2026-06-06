@@ -1,5 +1,5 @@
 # File location: 5G_Emulator_API/core_network/ausf.py
-# 3GPP TS 29.509 - Authentication Server Function (AUSF) - 100% Compliant Implementation
+# 3GPP TS 29.509 - Authentication Server Function (AUSF) - standards-referenced mock implementation
 # 3GPP TS 33.501 - 5G Authentication and Key Agreement (5G-AKA) Implementation
 
 from fastapi import FastAPI, HTTPException, Request
@@ -194,7 +194,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="AUSF - Authentication Server Function",
-    description="3GPP TS 29.509 compliant AUSF implementation with 5G-AKA support",
+    description="3GPP TS 29.509-referenced mock AUSF with 5G-AKA-style support",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -350,7 +350,7 @@ def ausf_service():
     """Legacy service endpoint - maintained for backwards compatibility"""
     return {
         "message": "AUSF service response",
-        "compliance": "3GPP TS 29.509",
+        "standards_reference": "3GPP TS 29.509",
         "status": "OPERATIONAL",
         "supported_auth_types": ausf_instance.supported_auth_types
     }
@@ -388,7 +388,7 @@ def health_check():
     return {
         "status": "healthy",
         "service": "AUSF",
-        "compliance": "3GPP TS 29.509",
+        "standards_reference": "3GPP TS 29.509",
         "version": "1.0.0",
         "active_contexts": len(authentication_contexts)
     }
