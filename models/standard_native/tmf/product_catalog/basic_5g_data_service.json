@@ -1,0 +1,74 @@
+{
+  "id": "prod-5g-data-basic",
+  "href": "/tmf-api/productCatalogManagement/v5/productSpecification/prod-5g-data-basic",
+  "name": "Basic 5G Data Service",
+  "description": "MVP product fixture for a basic 5G data service order-to-activation flow.",
+  "version": "mvp-0.1",
+  "lifecycleStatus": "Active",
+  "@type": "ProductSpecification",
+  "isBundle": false,
+  "serviceSpecification": [
+    {
+      "id": "svc-spec-5g-data-basic",
+      "name": "5G Data Connectivity Service",
+      "@type": "ServiceSpecificationRef"
+    }
+  ],
+  "productSpecCharacteristic": [
+    {
+      "name": "accessTechnology",
+      "valueType": "string",
+      "configurable": false,
+      "productSpecCharacteristicValue": [
+        {
+          "value": "5G",
+          "isDefault": true
+        }
+      ]
+    },
+    {
+      "name": "defaultDnn",
+      "valueType": "string",
+      "configurable": true,
+      "productSpecCharacteristicValue": [
+        {
+          "value": "internet",
+          "isDefault": true
+        }
+      ]
+    },
+    {
+      "name": "defaultSlice",
+      "valueType": "string",
+      "configurable": true,
+      "productSpecCharacteristicValue": [
+        {
+          "value": "sst-1",
+          "isDefault": true
+        }
+      ]
+    },
+    {
+      "name": "qosIntent",
+      "valueType": "string",
+      "configurable": true,
+      "productSpecCharacteristicValue": [
+        {
+          "value": "best-effort",
+          "isDefault": true
+        }
+      ]
+    }
+  ],
+  "mvp_activation_defaults": {
+    "subscriber_intent": "subscriber=demo-enterprise-001; access=5g-data",
+    "session_intent": "dnn=internet; slice=sst-1; qos=best-effort"
+  },
+  "standards_reference": {
+    "standards_body": "TM Forum",
+    "spec_id": "TMF620",
+    "release_register_path": "traceability/standards_release_register.yaml",
+    "evidence_label": "functional_smoke",
+    "claim_boundary": "Functional smoke fixture only; not formal TM Forum conformance."
+  }
+}
