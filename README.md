@@ -51,6 +51,7 @@ Authoritative release/conformance status lives in `traceability/standards_releas
 - `tests/` unit, integration, interoperability, conformance, regression, and fixtures
 - `docs/` architecture, decisions, migration plans, and runbooks
 - `apps/` UI/dashboard/front-end applications
+- `modules/` optional local visual/service modules with a shared port registry
 - `config/` environment and service configuration
 - `scripts/` safe operational scripts
 - `build_logs/` curated run evidence only
@@ -77,6 +78,27 @@ Key docs:
 - [`docs/api-reference.md`](docs/api-reference.md) — current API evidence navigation
 - [`docs/testing.md`](docs/testing.md) — test bucket boundaries and evidence promotion path
 - [`docs/conformance-boundary.md`](docs/conformance-boundary.md) — what is proven, what is not, and claim gates
+
+## Local Visual Modules
+
+Optional visual/service modules live under [`modules/`](modules/). The central [`modules/index.json`](modules/index.json) registry reserves localhost ports so future modules can avoid collisions.
+
+Current examples:
+
+```bash
+python3 modules/dashboard_service/server.py      # http://127.0.0.1:8764/ module card dashboard
+python3 modules/lab_chatter_service/server.py   # http://127.0.0.1:8765/ ./lab chatter viewer
+```
+
+Use them with the normal lab lifecycle:
+
+```bash
+./lab up
+# run one or more modules in separate terminals
+./lab down
+```
+
+Each module README documents dependencies, run/stop commands, special commands, and claim boundaries.
 
 ## Quick Operator Loop
 

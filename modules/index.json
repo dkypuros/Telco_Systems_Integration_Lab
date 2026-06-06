@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Registry for optional local visual/service modules so harnesses and agents can avoid port collisions.",
+  "claim_boundary": "Local developer/operator module registry only; not production service discovery or security policy.",
+  "reserved_ports": [
+    {
+      "port": 8764,
+      "module_id": "modules-dashboard",
+      "path": "modules/dashboard_service/",
+      "description": "Local module ecosystem dashboard showing registered and activated modules."
+    },
+    {
+      "port": 8765,
+      "module_id": "lab-chatter-service",
+      "path": "modules/lab_chatter_service/",
+      "description": "Local web/API view over ./lab chatter service logs."
+    }
+  ],
+  "modules": [
+    {
+      "id": "modules-dashboard",
+      "name": "Modules Dashboard",
+      "path": "modules/dashboard_service/",
+      "default_port": 8764,
+      "entrypoint": "python3 modules/dashboard_service/server.py",
+      "surface": "local_http",
+      "status": "example"
+    },
+    {
+      "id": "lab-chatter-service",
+      "name": "Lab Chatter Service",
+      "path": "modules/lab_chatter_service/",
+      "default_port": 8765,
+      "entrypoint": "python3 modules/lab_chatter_service/server.py",
+      "surface": "local_http",
+      "status": "example"
+    }
+  ]
+}

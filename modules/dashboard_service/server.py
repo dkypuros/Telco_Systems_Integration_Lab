@@ -1,0 +1,238 @@
+#!/usr/bin/env python3
+"""Local dashboard for registered visual/service modules."""
+
+from __future__ import annotations
+
+import argparse
+import html
+import json
+import socket
+import sys
+from http import HTTPStatus
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from typing import Any
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+MODULE_DIR = Path(__file__).resolve().parent
+MODULE_INDEX_PATH = REPO_ROOT / "modules" / "index.json"
+MODULE_METADATA_PATH = MODULE_DIR / "module.json"
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def module_metadata() -> dict[str, Any]:
+    return load_json(MODULE_METADATA_PATH)
+
+
+def module_index() -> dict[str, Any]:
+    return load_json(MODULE_INDEX_PATH)
+
+
+def validate_registered_ports(index: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    ports: dict[int, str] = {}
+    module_ids = {module["id"] for module in index.get("modules", [])}
+    for item in index.get("reserved_ports", []):
+        port = int(item["port"])
+        module_id = str(item["module_id"])
+        if module_id not in module_ids:
+            errors.append(f"reserved port references unknown module: {module_id}")
+        if port in ports:
+            errors.append(f"port {port} is registered by both {ports[port]} and {module_id}")
+        ports[port] = module_id
+        path = REPO_ROOT / str(item["path"])
+        if not path.exists():
+            errors.append(f"registered module path does not exist: {item['path']}")
+    return errors
+
+
+def port_open(host: str, port: int, timeout: float = 0.15) -> bool:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.settimeout(timeout)
+        return sock.connect_ex((host, port)) == 0
+
+
+def port_available(host: str, port: int) -> bool:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        try:
+            sock.bind((host, port))
+        except OSError:
+            return False
+    return True
+
+
+def module_cards(host: str = "127.0.0.1") -> dict[str, Any]:
+    index = module_index()
+    reserved_by_module = {item["module_id"]: item for item in index.get("reserved_ports", [])}
+    cards: list[dict[str, Any]] = []
+    for module in index.get("modules", []):
+        module_path = REPO_ROOT / module["path"]
+        metadata_path = module_path / "module.json"
+        metadata = load_json(metadata_path) if metadata_path.exists() else {}
+        reserved = reserved_by_module.get(module["id"], {})
+        port = int(reserved.get("port", module.get("default_port", 0)))
+        activated = port_open(host, port) if port else False
+        cards.append(
+            {
+                "id": module["id"],
+                "name": module["name"],
+                "path": module["path"],
+                "port": port,
+                "url": f"http://{host}:{port}/" if port else None,
+                "activated": activated,
+                "status_label": "activated" if activated else "registered",
+                "entrypoint": module["entrypoint"],
+                "surface": module.get("surface", "unknown"),
+                "description": reserved.get("description", metadata.get("name", module["name"])),
+                "claim_boundary": metadata.get("claim_boundary", index.get("claim_boundary", "Local module only.")),
+            }
+        )
+    return {
+        "ok": True,
+        "schema_version": index.get("schema_version", "1.0"),
+        "module_count": len(cards),
+        "activated_count": sum(1 for card in cards if card["activated"]),
+        "cards": cards,
+        "validation_errors": validate_registered_ports(index),
+        "claim_boundary": module_metadata()["claim_boundary"],
+    }
+
+
+def html_page() -> str:
+    metadata = module_metadata()
+    title = html.escape(metadata["name"])
+    return f"""<!doctype html>
+<html lang=\"en\">
+<head>
+  <meta charset=\"utf-8\" />
+  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+  <title>{title}</title>
+  <style>
+    body {{ margin: 0; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #020617; color: #e2e8f0; }}
+    header {{ padding: 1.5rem; border-bottom: 1px solid #1e293b; background: linear-gradient(135deg, #0f172a, #052e16); }}
+    h1 {{ margin: 0; font-size: 1.5rem; color: #86efac; }}
+    .sub {{ color: #cbd5e1; margin-top: .4rem; }}
+    main {{ padding: 1.5rem; }}
+    .grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }}
+    .card {{ background: #0f172a; border: 1px solid #334155; border-radius: 14px; padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,.25); }}
+    .row {{ display: flex; justify-content: space-between; gap: 1rem; align-items: start; }}
+    .title {{ font-weight: 700; color: #f8fafc; }}
+    .chiclet {{ border-radius: 999px; padding: .2rem .55rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }}
+    .on {{ background: #14532d; color: #bbf7d0; border: 1px solid #22c55e; }}
+    .off {{ background: #334155; color: #cbd5e1; border: 1px solid #64748b; }}
+    code {{ color: #93c5fd; }}
+    a {{ color: #86efac; text-decoration: none; }}
+    a:hover {{ text-decoration: underline; }}
+    .muted {{ color: #94a3b8; font-size: .9rem; }}
+    button {{ background: #166534; color: #f0fdf4; border: 1px solid #22c55e; border-radius: 8px; padding: .45rem .75rem; }}
+  </style>
+</head>
+<body>
+<header>
+  <h1>{title}</h1>
+  <div class=\"sub\">Registered local module cards from <code>modules/index.json</code>. Green means the registered port is active.</div>
+</header>
+<main>
+  <button onclick=\"loadModules()\">Refresh</button>
+  <p id=\"summary\" class=\"muted\"></p>
+  <section id=\"cards\" class=\"grid\"></section>
+</main>
+<script>
+function esc(s) {{ return String(s).replace(/[&<>'\"]/g, c => ({{'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}}[c])); }}
+async function loadModules() {{
+  const res = await fetch('/api/modules');
+  const data = await res.json();
+  document.getElementById('summary').textContent = `${{data.activated_count}}/${{data.module_count}} modules activated`;
+  document.getElementById('cards').innerHTML = data.cards.map(card => `
+    <article class=\"card\">
+      <div class=\"row\"><div class=\"title\">${{esc(card.name)}}</div><span class=\"chiclet ${{card.activated ? 'on' : 'off'}}\">${{card.status_label}}</span></div>
+      <p>${{esc(card.description)}}</p>
+      <p class=\"muted\"><code>${{esc(card.path)}}</code><br/>port <code>${{card.port}}</code><br/><code>${{esc(card.entrypoint)}}</code></p>
+      <p>${{card.activated ? `<a href=\"${{esc(card.url)}}\" target=\"_blank\" rel=\"noreferrer\">Open module ↗</a>` : 'Start the module to activate this card.'}}</p>
+    </article>`).join('');
+}}
+loadModules(); setInterval(loadModules, 3000);
+</script>
+</body>
+</html>"""
+
+
+class DashboardRequestHandler(BaseHTTPRequestHandler):
+    server_version = "TelcoModulesDashboard/0.1"
+
+    def log_message(self, format: str, *args: Any) -> None:  # noqa: A002 - stdlib method name
+        return
+
+    def send_json(self, payload: dict[str, Any], status: HTTPStatus = HTTPStatus.OK) -> None:
+        data = json.dumps(payload, indent=2).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
+    def send_html(self, body: str) -> None:
+        data = body.encode("utf-8")
+        self.send_response(HTTPStatus.OK)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
+    def do_GET(self) -> None:  # noqa: N802 - stdlib method name
+        path = self.path.split("?", 1)[0]
+        if path == "/":
+            self.send_html(html_page())
+            return
+        if path == "/api/module":
+            self.send_json(module_metadata())
+            return
+        if path == "/api/modules":
+            host = self.headers.get("Host", "127.0.0.1").split(":", 1)[0] or "127.0.0.1"
+            self.send_json(module_cards(host=host))
+            return
+        if path == "/api/ports":
+            index = module_index()
+            self.send_json({**index, "validation_errors": validate_registered_ports(index)})
+            return
+        self.send_json({"ok": False, "error": "not found"}, status=HTTPStatus.NOT_FOUND)
+
+
+def create_server(host: str, port: int) -> ThreadingHTTPServer:
+    return ThreadingHTTPServer((host, port), DashboardRequestHandler)
+
+
+def main(argv: list[str] | None = None) -> int:
+    metadata = module_metadata()
+    parser = argparse.ArgumentParser(description="Serve the local module dashboard.")
+    parser.add_argument("--host", default=metadata.get("default_host", "127.0.0.1"))
+    parser.add_argument("--port", type=int, default=int(metadata.get("default_port", 8764)))
+    args = parser.parse_args(argv)
+
+    errors = validate_registered_ports(module_index())
+    if errors:
+        for error in errors:
+            print(f"module registry error: {error}", file=sys.stderr)
+        return 2
+    if not port_available(args.host, args.port):
+        print(f"port unavailable: {args.host}:{args.port}", file=sys.stderr)
+        return 2
+
+    server = create_server(args.host, args.port)
+    print(f"Serving {metadata['name']} at http://{args.host}:{args.port}/")
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print("\nStopped modules dashboard.")
+        return 0
+    finally:
+        server.server_close()
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

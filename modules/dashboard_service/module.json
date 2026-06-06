@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "id": "modules-dashboard",
+  "name": "Modules Dashboard",
+  "default_host": "127.0.0.1",
+  "default_port": 8764,
+  "entrypoint": "python3 modules/dashboard_service/server.py",
+  "endpoints": [
+    {"path": "/", "description": "Local card dashboard for registered modules."},
+    {"path": "/api/module", "description": "Module metadata."},
+    {"path": "/api/modules", "description": "Registered module cards with activation status."},
+    {"path": "/api/ports", "description": "Registered module ports from modules/index.json."}
+  ],
+  "reads": [
+    "modules/index.json",
+    "modules/*/module.json"
+  ],
+  "writes": [],
+  "claim_boundary": "Local module navigation surface only; activation means a registered localhost port responded, not production health and not formal standards conformance."
+}
