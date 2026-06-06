@@ -1,6 +1,6 @@
 # Agentic Telecommunications: Telco Systems Integration Lab
 
-Formal, standards-traceable workspace for end-to-end telco integration across 3GPP, TM Forum, and O-RAN.
+Formal, standards-traceable workspace for end-to-end telco integration across O-RAN, 3GPP, and TM Forum.
 
 <img src="docs/vision_triangle.svg" alt="Telco Systems Integration Lab Vision" width="440" />
 

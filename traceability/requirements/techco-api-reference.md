@@ -1794,3 +1794,5 @@ endpoints documented in sections 1 and 2 above.
 
 *All endpoints verified from source code in `core_network/`, `ran/`, `src/order_engine/`,
 `src/catalog_api/`, and `src/ai_observer/`. Ports are host-mapped values from docker-compose.*
+
+<!-- Public-tree note: source labels have been normalized to the clean lab naming policy. -->

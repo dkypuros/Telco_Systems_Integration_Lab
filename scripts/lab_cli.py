@@ -917,7 +917,7 @@ def cmd_up(args: argparse.Namespace) -> int:
         print("Startup order: dependency-aware NRF -> UPF -> SMF -> AMF, then remaining services")
         for service in service_start_sequence():
             cmd = service_cmd(service, args.protocol_mode)
-            print(f"  {service['id']:<13} port={service['port']:<5} log={service_log_path(service)}")
+            print(f"  {service['id']:<13} port={service['port']:<5} entrypoint={service['path']} log={service_log_path(service)}")
             print(f"    {' '.join(cmd)}")
         print(f"PID state: {SERVICES_STATE}")
         print(f"Evidence copy: {SERVICES_EVIDENCE}")

@@ -28,10 +28,11 @@ def patch_live_process(monkeypatch, command, *, cwd=""):
 
 def test_managed_inventory_uses_clean_domain_service_roots():
     commands = [" ".join(lab_cli.service_cmd(service, "rest")) for service in lab_cli.SERVICE_INVENTORY]
+    paths = [str(lab_cli.service_path(service)) for service in lab_cli.SERVICE_INVENTORY]
     assert commands
     assert all("main.py" not in command for command in commands)
-    assert any("core_network/nrf.py" in command for command in commands)
-    assert any("api_gateway/oran_gateway.py" in command for command in commands)
+    assert any("core_network/nrf.py" in path for path in paths)
+    assert any("api_gateway/oran_gateway.py" in path for path in paths)
     assert {service["root"] for service in lab_cli.SERVICE_INVENTORY} <= set(lab_cli.RUNTIME_ROOTS)
 
 
