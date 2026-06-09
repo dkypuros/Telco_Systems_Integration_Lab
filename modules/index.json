@@ -26,6 +26,12 @@
       "module_id": "product-front-door",
       "path": "modules/product_front_door/",
       "description": "Local storefront-style module for the basic 5G data MVP activation flow."
+    },
+    {
+      "port": 8768,
+      "module_id": "nanda-skill-import-demo",
+      "path": "modules/nanda_skill_import_demo/",
+      "description": "Local offline NANDA-style skill import demo with harness governance gate."
     }
   ],
   "modules": [
@@ -92,6 +98,18 @@
         "modules-dashboard",
         "lab-chatter-service",
         "ue-scenario-generator"
+      ]
+    },
+    {
+      "id": "nanda-skill-import-demo",
+      "name": "NANDA Skill Import Demo",
+      "path": "modules/nanda_skill_import_demo/",
+      "default_port": 8768,
+      "entrypoint": "python3 modules/nanda_skill_import_demo/server.py",
+      "surface": "local_http",
+      "status": "experimental",
+      "recommended_with": [
+        "modules-dashboard"
       ]
     }
   ]

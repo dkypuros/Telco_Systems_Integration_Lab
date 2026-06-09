@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "id": "nanda-skill-import-demo",
+  "name": "NANDA Skill Import Demo",
+  "default_host": "127.0.0.1",
+  "default_port": 8768,
+  "entrypoint": "python3 modules/nanda_skill_import_demo/server.py",
+  "surface": "local_http",
+  "status": "experimental",
+  "depends_on": [],
+  "recommended_with": [
+    "modules-dashboard"
+  ],
+  "endpoints": [
+    {
+      "path": "/",
+      "description": "Local visual demo of NANDA-style discovery, harness governance, and disabled skill import."
+    },
+    {
+      "path": "/api/module",
+      "description": "Module metadata."
+    },
+    {
+      "path": "/api/ports",
+      "description": "Registered module ports from modules/index.json."
+    },
+    {
+      "path": "/api/demo-plan",
+      "description": "Deterministic NANDA-style skill import plan from bundled fixtures."
+    },
+    {
+      "path": "POST /api/run-demo",
+      "description": "Run the offline discovery and harness verification demo."
+    }
+  ],
+  "reads": [
+    "experimental/nanda_harness_commerce/fixtures/intent.json",
+    "experimental/nanda_harness_commerce/fixtures/nanda_index.json",
+    "experimental/nanda_harness_commerce/fixtures/harness_policy.json"
+  ],
+  "writes": [],
+  "claim_boundary": "Local offline NANDA-style skill import demo only; not formal NANDA interoperability, not payment settlement, not cryptographic verification, not remote skill execution, and not formal standards conformance."
+}

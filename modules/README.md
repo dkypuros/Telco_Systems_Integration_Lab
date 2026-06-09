@@ -20,6 +20,7 @@ Current example:
 | [`ue_scenario_generator/`](ue_scenario_generator/) | `8766` | Fixed UE/session/RAN scenario buttons that generate chatter. |
 | [`lab_chatter_service/`](lab_chatter_service/) | `8765` | Local web/API viewer for `./lab chatter` service logs. |
 | [`product_front_door/`](product_front_door/) | `8767` | Storefront-style front door for the basic 5G data MVP activation path. |
+| [`nanda_skill_import_demo/`](nanda_skill_import_demo/) | `8768` | Offline NANDA-style skill import demo showing discovery, verification, governance, and human approval. |
 
 Boundaries:
 
