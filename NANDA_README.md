@@ -12,6 +12,26 @@ Here is the plain-English executive summary.
 </div>
 <br>
 
+---
+
+## What This Branch Captures
+
+This branch turns the NANDA/Harness idea into linked docs plus a small offline prototype. Use this checklist to jump to the right artifact:
+
+| Idea captured | Where to look |
+| --- | --- |
+| Harness makes NANDA easier by providing the governed execution environment around agent discovery. | [Plain-English overview](#the-solution-a-three-layer-architecture), [technical concept](docs/nanda-harness-agentic-commerce.md) |
+| Harness is the human steering wheel, with human-in-the-loop approval before risky actions. | [Steering Wheel section](#3-the-steering-wheel-the-harness-governance--safety), [experiment README](experimental/nanda_harness_commerce/README.md) |
+| NANDA acts as discovery, identity, trust, and marketplace-style coordination layer. | [Project NANDA section](#2-the-bridge-project-nanda-identity--commerce), [technical concept](docs/nanda-harness-agentic-commerce.md) |
+| AgentFacts-like metadata carries identity, trust, quality, security, and commercial evidence. | [fixture index](experimental/nanda_harness_commerce/fixtures/nanda_index.json), [simulator checks](experimental/nanda_harness_commerce/simulator.py) |
+| Skill import flow: discover a remote skill, verify it, import a disabled binding, then wait for approval. | [Workflow](#the-workflow-in-action), [experiment README](experimental/nanda_harness_commerce/README.md), [expected plan](experimental/nanda_harness_commerce/fixtures/expected_plan.json) |
+| Governance, security, quality, budget, audit, and revocation checks happen before a skill is enabled. | [policy fixture](experimental/nanda_harness_commerce/fixtures/harness_policy.json), [unit tests](tests/unit/test_nanda_harness_commerce.py) |
+| Commercial layer is modeled as usage metering and settlement metadata, not real payment settlement. | [technical concept](docs/nanda-harness-agentic-commerce.md#commercial-layer-model), [NANDA-style fixture](experimental/nanda_harness_commerce/fixtures/nanda_index.json) |
+| AI Factory / token-metered economy is included as the infrastructure/economic context. | [AI Factories section](#1-the-engine-ai-factories-infrastructure), [architecture SVG](docs/nanda_architecture.svg) |
+| Imported agents must not run blindly; accepted imports remain disabled until human approval. | [expected plan](experimental/nanda_harness_commerce/fixtures/expected_plan.json), [simulator](experimental/nanda_harness_commerce/simulator.py) |
+
+**Boundary:** this branch captures the architecture and control-plane pattern. It does not implement live NANDA interoperability, real cryptographic AgentFacts verification, real payment settlement, or remote skill execution.
+
 ## The Problem
 Imagine you want an AI agent to automatically optimize your telecommunications network. You could just give the AI the keys to your network, but that is incredibly dangerous. It might break something, spend too much money, or accidentally violate corporate security policies. 
 
