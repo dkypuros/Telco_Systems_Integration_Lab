@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <style>
+      .text-title { font-family: 'Inter', system-ui, sans-serif; fill: white; text-anchor: middle; font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+      .text-subtitle { font-family: 'Inter', system-ui, sans-serif; fill: rgba(255, 255, 255, 0.9); text-anchor: middle; font-size: 15px; font-weight: 500; }
+      .text-body { font-family: 'Inter', system-ui, sans-serif; fill: rgba(255, 255, 255, 0.7); text-anchor: middle; font-size: 13px; font-weight: 400; }
+      .layer1 { fill: #059669; } /* Emerald Green */
+      .layer2 { fill: #2563eb; } /* Royal Blue */
+      .layer3 { fill: #9333ea; } /* Purple */
+      .stroke { stroke: #0f172a; stroke-width: 4; stroke-linejoin: round; }
+      .bg { fill: #0f172a; } /* Slate 900 */
+      .arrow { stroke: rgba(255,255,255,0.4); stroke-width: 2; stroke-dasharray: 4; fill: none; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="600" height="450" class="bg" rx="16" ry="16"/>
+
+  <!-- Layer 3: Harness (Top) -->
+  <rect x="100" y="60" width="400" height="100" class="layer3 stroke" rx="10" ry="10"/>
+  <text x="300" y="95" class="text-title">3. The Harness (Steering Wheel)</text>
+  <text x="300" y="120" class="text-subtitle">Human Intent, Governance &amp; Policy</text>
+  <text x="300" y="140" class="text-body">Sandboxing, Budgets, and Human-in-the-Loop (HITL)</text>
+
+  <!-- Connection 3 -> 2 -->
+  <path d="M 300 160 L 300 190" class="arrow"/>
+  <polygon points="295,185 305,185 300,195" fill="rgba(255,255,255,0.4)"/>
+
+  <!-- Layer 2: NANDA (Middle) -->
+  <rect x="100" y="190" width="400" height="100" class="layer2 stroke" rx="10" ry="10"/>
+  <text x="300" y="225" class="text-title">2. Project NANDA (The Bridge)</text>
+  <text x="300" y="250" class="text-subtitle">Discovery, Identity &amp; Agentic Commerce</text>
+  <text x="300" y="270" class="text-body">AgentFacts (Trust), Registry, and Protocol Interoperability</text>
+
+  <!-- Connection 2 -> 1 -->
+  <path d="M 300 290 L 300 320" class="arrow"/>
+  <polygon points="295,315 305,315 300,325" fill="rgba(255,255,255,0.4)"/>
+
+  <!-- Layer 1: AI Factory (Bottom) -->
+  <rect x="100" y="320" width="400" height="100" class="layer1 stroke" rx="10" ry="10"/>
+  <text x="300" y="355" class="text-title">1. AI Factories (The Engine)</text>
+  <text x="300" y="380" class="text-subtitle">Physical Infrastructure &amp; Edge Compute</text>
+  <text x="300" y="400" class="text-body">NVIDIA GPUs, Telco AI-RAN, Token-as-a-Service</text>
+
+</svg>
