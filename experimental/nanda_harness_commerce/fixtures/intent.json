@@ -1,0 +1,14 @@
+{
+  "intent_id": "intent-nanda-commerce-001",
+  "requested_by": "human_operator",
+  "goal": "Add a verified telco security audit skill to inspect service-order-to-activation evidence before promotion.",
+  "required_capability": "telco.security.audit",
+  "acceptable_protocols": ["mcp", "a2a", "https"],
+  "budget": {
+    "currency": "USD",
+    "max_per_invocation": 0.25,
+    "max_monthly": 100.0
+  },
+  "risk_tolerance": "medium",
+  "requires_human_approval": true
+}

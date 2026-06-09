@@ -1,0 +1,24 @@
+{
+  "policy_id": "harness-nanda-import-policy-v0",
+  "allowed_issuers": [
+    "did:web:trusted-nanda-lab.example",
+    "did:web:telco-auditor.example"
+  ],
+  "required_evidence": [
+    "identity_attested",
+    "security_reviewed",
+    "quality_score_present",
+    "governance_policy_present",
+    "commercial_terms_present"
+  ],
+  "minimum_quality_score": 0.9,
+  "maximum_risk": "medium",
+  "allowed_protocols": ["mcp", "a2a", "https"],
+  "require_signature": true,
+  "require_human_approval": true,
+  "commercial_limits": {
+    "currency": "USD",
+    "max_per_invocation": 0.25,
+    "max_monthly": 100.0
+  }
+}

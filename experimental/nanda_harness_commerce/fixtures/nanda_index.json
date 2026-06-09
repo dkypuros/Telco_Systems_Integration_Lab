@@ -1,0 +1,89 @@
+{
+  "index_snapshot_id": "nanda-index-snapshot-demo-001",
+  "records": [
+    {
+      "agent_id": "did:web:telco-auditor.example:agent:security-audit-v1",
+      "agent_name": "Telco Security Audit Skill",
+      "issuer": "did:web:telco-auditor.example",
+      "agentfacts_url": "https://telco-auditor.example/.well-known/agentfacts/security-audit-v1.jsonld",
+      "signature": "demo-signature-present-not-cryptographic-proof",
+      "capabilities": ["telco.security.audit", "tmforum.evidence.review", "policy.findings"],
+      "protocols": [
+        {"type": "mcp", "endpoint": "https://telco-auditor.example/mcp/security-audit"},
+        {"type": "a2a", "endpoint": "https://telco-auditor.example/a2a"}
+      ],
+      "evidence": [
+        "identity_attested",
+        "security_reviewed",
+        "quality_score_present",
+        "governance_policy_present",
+        "commercial_terms_present"
+      ],
+      "quality": {"score": 0.96, "basis": "demo fixture: regression and policy corpus pass"},
+      "risk": "medium",
+      "commercial_terms": {
+        "currency": "USD",
+        "price_per_invocation": 0.12,
+        "metering_unit": "skill_invocation",
+        "settlement_mode": "invoice_or_chargeback_stub"
+      },
+      "governance": {
+        "requires_human_approval": true,
+        "supports_audit_log": true,
+        "supports_revocation": true
+      }
+    },
+    {
+      "agent_id": "did:web:unknown-market.example:agent:cheap-audit",
+      "agent_name": "Cheap Audit Skill",
+      "issuer": "did:web:unknown-market.example",
+      "agentfacts_url": "https://unknown-market.example/agentfacts/cheap-audit.jsonld",
+      "signature": "demo-signature-present-not-cryptographic-proof",
+      "capabilities": ["telco.security.audit"],
+      "protocols": [{"type": "https", "endpoint": "https://unknown-market.example/run"}],
+      "evidence": ["identity_attested", "commercial_terms_present"],
+      "quality": {"score": 0.71, "basis": "demo fixture: incomplete evidence"},
+      "risk": "high",
+      "commercial_terms": {
+        "currency": "USD",
+        "price_per_invocation": 0.01,
+        "metering_unit": "skill_invocation",
+        "settlement_mode": "invoice_or_chargeback_stub"
+      },
+      "governance": {
+        "requires_human_approval": false,
+        "supports_audit_log": false,
+        "supports_revocation": false
+      }
+    },
+    {
+      "agent_id": "did:web:trusted-nanda-lab.example:agent:edge-token-broker",
+      "agent_name": "Edge Token Broker",
+      "issuer": "did:web:trusted-nanda-lab.example",
+      "agentfacts_url": "https://trusted-nanda-lab.example/agentfacts/edge-token-broker.jsonld",
+      "signature": "demo-signature-present-not-cryptographic-proof",
+      "capabilities": ["edge.token.broker", "ai-factory.routing"],
+      "protocols": [{"type": "mcp", "endpoint": "https://trusted-nanda-lab.example/mcp/edge-token-broker"}],
+      "evidence": [
+        "identity_attested",
+        "security_reviewed",
+        "quality_score_present",
+        "governance_policy_present",
+        "commercial_terms_present"
+      ],
+      "quality": {"score": 0.94, "basis": "demo fixture: not the requested capability"},
+      "risk": "medium",
+      "commercial_terms": {
+        "currency": "USD",
+        "price_per_invocation": 0.2,
+        "metering_unit": "token_route_request",
+        "settlement_mode": "invoice_or_chargeback_stub"
+      },
+      "governance": {
+        "requires_human_approval": true,
+        "supports_audit_log": true,
+        "supports_revocation": true
+      }
+    }
+  ]
+}

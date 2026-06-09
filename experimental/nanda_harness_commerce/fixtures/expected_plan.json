@@ -1,0 +1,50 @@
+{
+  "intent_id": "intent-nanda-commerce-001",
+  "status": "awaiting_human_approval",
+  "verified_imports": [
+    {
+      "agent_id": "did:web:telco-auditor.example:agent:security-audit-v1",
+      "agent_name": "Telco Security Audit Skill",
+      "capability": "telco.security.audit",
+      "selected_protocol": "mcp",
+      "endpoint": "https://telco-auditor.example/mcp/security-audit",
+      "price_per_invocation": 0.12,
+      "metering_unit": "skill_invocation",
+      "quality_score": 0.96,
+      "risk": "medium",
+      "enabled": false,
+      "human_approval_required": true,
+      "governance_checks": [
+        "capability_match",
+        "issuer_allowed",
+        "signature_present",
+        "protocol_allowed",
+        "required_evidence_present",
+        "quality_threshold_met",
+        "risk_within_policy",
+        "commercial_terms_within_budget",
+        "audit_and_revocation_supported",
+        "human_approval_required"
+      ]
+    }
+  ],
+  "rejected_candidates": [
+    {
+      "agent_id": "did:web:unknown-market.example:agent:cheap-audit",
+      "reasons": [
+        "issuer_not_allowed",
+        "required_evidence_missing:governance_policy_present,quality_score_present,security_reviewed",
+        "quality_below_threshold",
+        "risk_exceeds_policy",
+        "audit_or_revocation_missing",
+        "human_approval_not_required_by_candidate"
+      ]
+    },
+    {
+      "agent_id": "did:web:trusted-nanda-lab.example:agent:edge-token-broker",
+      "reasons": [
+        "capability_mismatch"
+      ]
+    }
+  ]
+}
