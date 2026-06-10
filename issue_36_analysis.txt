@@ -1,0 +1,110 @@
+Issue #36 repository analysis
+Generated: 2026-06-10
+Status note: historical pre-implementation analysis; later commits add a repo-local Agent Harness boundary slice, so gap statements should be read as intake context rather than current final state.
+Source issue: https://github.com/dkypuros/Telco_Systems_Integration_Lab/issues/36
+Issue state at fetch time: OPEN; labels: enhancement, architecture; comments: none.
+Scope: read-only repository analysis plus this generated text artifact.
+
+Question
+Analyze how the repository currently lines up with issue #36, "[Architecture Proposal] High-Performance Agentic AI ETL via O-RAN O1/R1 & TM Forum Abstractions."
+
+Executive synthesis
+Issue #36 is best treated as a broad architecture epic, not as a single already-implemented feature. The repository has substantial O-RAN mock infrastructure that can support the proposal's perception and action boundaries: O1 FCAPS/NRM/PM/VES, R1 SME/DME service surfaces, A1/Non-RT/Near-RT RIC policy paths, and a zero-trust policy decision point. However, the specific agent-harness pieces requested by the issue are mostly absent or only conceptual: GPU NetFlow/IPFIX ETL, vector/RAG memory, TMF628/TMF642 agent tools, an actual MCP server boundary for typed R1 action intents, a deterministic SMO intent-translation/preflight path, and an EIAP end-to-end prototype.
+
+Ranked synthesis
+
+| Rank | Explanation | Confidence | Basis |
+|---|---|---:|---|
+| 1 | The repo already contains a credible O-RAN mock substrate for issue #36's standards-based telemetry and control boundary, but not the full agentic abstraction layer. | High | O1, PM, VES, R1, RIC, and zero-trust code paths exist; the issue-specific ETL/RAG/TMF/MCP implementation paths do not. |
+| 2 | TM Forum support for issue #36 is weaker than O-RAN support. TMF642 is explicitly marked not implemented, and TMF628 is not represented outside the issue text in the inspected tree. | High | `traceability/requirements/tmf-specs-guide.md` lists TMF642 as NOT IMPLEMENTED; repo-wide search found TMF628 only in issue-body artifacts. |
+| 3 | Claim posture is not yet fully synchronized: code/spec-map artifacts say several O-RAN surfaces are implemented, while release-register/blueprint artifacts still preserve planned/reference-only or formal-conformance caveats. | Medium-High | `adapters/mock_oran/oran/o_ran_spec_map.py` marks O1/R1 implemented; `traceability/standards_release_register.yaml` still says O1 is planned/reference-only and needs adapter/evidence scoping. |
+| 4 | The security/governance pattern is close to the issue's "boundary enforcer" intent, but it is not yet an MCP server enforcing typed R1 SME action intents. | Medium | ZeroTrustEngine and NANDA-style harness-gate demos exist; no concrete MCP server binding surfaced in search. |
+
+Issue task readiness matrix
+
+| Issue #36 task | Current repository support | Analysis |
+|---|---|---|
+| Define R1 DME subscription Protobuf/JSON payload models for agent consumption | Partial | R1 DME JSON-like Pydantic data types, participants, and data jobs exist. No Protobuf surfaced, and the models are generic DME jobs rather than agent-specific subscription contracts. |
+| Implement GPU-accelerated ETL (RAPIDS/Morpheus) for NetFlow/IPFIX anomaly summarization | Not implemented | Search found NetFlow/IPFIX/RAPIDS/Morpheus only in issue-body text, not runtime code. |
+| Map O1 NETCONF/VES streams to long-term RAG/vector memory | Partial substrate only | O1 NETCONF-style config, PM, alarms, and VES event emission exist. No vector database, embeddings, semantic memory, or RAG pipeline surfaced. |
+| Implement TMF628/TMF642 REST API tool-calls for LangChain/LlamaIndex agent toolset | Not implemented | TMF642 is listed as not implemented; TMF628 is not in the repo's TMF implementation guide. No LangChain/LlamaIndex tool surface surfaced. |
+| Implement MCP server bindings for strictly typed R1 SME Action Intents | Not implemented; adjacent governance exists | R1 SME service registration/discovery exists. MCP appears in NANDA/harness governance docs as allowed protocol/bridge intent, not as a running typed MCP server for R1 action intents. |
+| Develop intent-translation engine abstracting NETCONF/gNMI/RESTCONF via SMO policy | Partial adjacent pieces | O1 has direct NETCONF-style edit-config, Non-RT RIC can push A1 policy to Near-RT RIC, and SMO framework catalogs interfaces. No issue-specific deterministic translation engine or digital-twin preflight path surfaced. |
+| Prototype end-to-end Zero-Trust Agentic SecOps using EIAP | Not implemented | No EIAP integration surfaced. Existing zero-trust and NANDA demos are local/offline mocks with explicit claim boundaries. |
+
+Evidence from repository files
+
+1. O-RAN O1 perception/control substrate
+- `adapters/mock_oran/oam/o1.py:8-20` directly states that O1 terminates FCAPS for O-RAN managed elements, exposes configuration, fault, and performance services, and stubs accounting/security via health/spec metadata.
+- `adapters/mock_oran/oam/o1.py:328-360` implements a NETCONF-style edit-config merge into the in-memory managed element NRM tree.
+- `adapters/mock_oran/oam/o1.py:405-432` raises FM alarms and emits VES fault events best-effort.
+- `adapters/mock_oran/oam/o1.py:439-463` exposes PM job creation/list/data routes through `PmJobManager`.
+- `adapters/mock_oran/oam/o1.py:470-486` exposes VES heartbeat emission and O1 health metadata.
+
+2. O1 PM and VES details
+- `adapters/mock_oran/oam/pm.py:60-68` supports FILE_BASED and STREAM_BASED reporting, with streaming mapped to VES measurement events.
+- `adapters/mock_oran/oam/pm.py:182-208` defines PM measurement job structure including measurement types, measured objects, reporting method, and stream target URI.
+- `adapters/mock_oran/oam/pm.py:245-253` describes `PmJobManager` as producing simulated PM data and mapping stream-based reports to VES events.
+- `adapters/mock_oran/oam/ves.py:1-21` defines a VES event library for fault, heartbeat, measurement, pnfRegistration, and notification events from O1-managed network functions.
+- `adapters/mock_oran/oam/ves.py:324-365` implements a best-effort VES collector HTTP client that never breaks runtime when the collector is absent.
+
+3. O-RAN R1 substrate
+- `adapters/mock_oran/smo/r1.py:8-14` states that R1 sits between rApps and SMO/Non-RT RIC, implementing SME, DME, A1-related, and AI/ML-related service groups.
+- `adapters/mock_oran/smo/r1.py:225-253` implements SME service registration, discovery, and deregistration.
+- `adapters/mock_oran/smo/r1.py:260-310` implements DME data-type registration/listing plus DME producer, consumer, and data-job creation/listing.
+- `adapters/mock_oran/smo/r1.py:317-326` proxies A1 policy-type discovery from the Non-RT RIC.
+- `adapters/mock_oran/smo/r1.py:333-349` exposes AI/ML model registry data to rApps via R1.
+- `adapters/mock_oran/smo/aiml.py:121-130` models AI/ML data collection as sourced from DME, O1, A1-EI, or files.
+
+4. RIC/action-adjacent paths
+- `adapters/mock_ran/ran/ric/non_rt_ric.py:205-216` describes the Non-RT RIC as implementing A1 policy, enrichment information, rApp hosting, and O1 integration with SMO.
+- `adapters/mock_ran/ran/ric/non_rt_ric.py:324-373` validates policy type existence, stores policy, then attempts deployment to Near-RT RIC over A1.
+- `adapters/mock_ran/ran/ric/near_rt_ric.py:237-249` describes the Near-RT RIC as implementing E2 interface handling, A1 policy receipt, subscription management, indication processing, control execution, and query handling.
+- `modules/product_front_door/server.py:178-188` explicitly records that the current product-front-door flow does not yet drive O-RAN, SMO, O1, O2, A1, or E2 behavior.
+
+5. Zero-trust / boundary enforcement substrate
+- `adapters/mock_oran/security/zero_trust.py:149-155` defines `ZeroTrustEngine` as a policy decision point applying "never trust, always verify" scoring.
+- `adapters/mock_oran/security/zero_trust.py:207-244` evaluates interface, subject, action, authentication, posture, scopes, and minimum trust before ALLOW/DENY.
+- `adapters/mock_oran/security/security_service.py:317-325` exposes `/security/authorize` as an endpoint that evaluates requests through the zero-trust PDP and logs denials.
+- `experimental/nanda_harness_commerce/README.md:21-56` documents a harness governance gate where intent, discovery, identity/security/quality/commercial evidence, and human authorization decide whether a skill enters the local execution boundary.
+- `experimental/nanda_harness_commerce/fixtures/harness_policy.json:14-18` requires minimum quality, maximum risk, allowed protocols including MCP, signatures, and human approval.
+- `modules/nanda_skill_import_demo/server.py:74-80` renders a demo flow that ends with disabled import and human approval required.
+- `tests/unit/test_nanda_harness_commerce.py:26-33` asserts verified imports remain disabled until human approval.
+
+6. TM Forum gap evidence
+- `traceability/requirements/tmf-specs-guide.md:38-53` lists TM Forum implementation status and marks `TMF642 | Alarm | NOT IMPLEMENTED`.
+- Repository search found `TMF628` only in local issue-body artifacts, not in implementation, tests, or traceability implementation status files.
+
+7. Claim and conformance boundary evidence
+- `adapters/mock_oran/oran/o_ran_spec_map.py:58-65` marks R1AP/R1GAP and O-RAN AI/ML workflow rows as implemented.
+- `adapters/mock_oran/oran/o_ran_spec_map.py:124-134` marks O1 Interface, O1 NRM, O1 PM, and OAM architecture rows as implemented.
+- `traceability/standards_release_register.yaml:315-332` still treats the O1 Interface row as planned/reference-only, not tested, and says an O1/OAM adapter boundary and evidence requirements are needed before implementation issues claim O1 behavior.
+- `tests/unit/test_oran_spec_map_validation.py:11-24` verifies that the O-RAN spec-map validator can resolve copied RAN/R1 module paths and preserves a candidate/readiness claim boundary.
+- `tests/unit/test_oran_spec_map_validation.py:46-51` asserts the generated validation report says it is not a formal O-RAN conformance claim.
+- `docs/end-to-end-telco-capability-blueprint.md:7-21` defines the target as a standards-traceable digital twin and requires traceability/evidence before strong claims.
+- `docs/end-to-end-telco-capability-blueprint.md:112-140` identifies O-RAN control/management, assurance, service orchestration, and assurance-to-remediation as distinct domains/slices that issue #36 spans.
+- `docs/end-to-end-telco-capability-blueprint.md:177-182` treats slice provisioning, RAN control loop, and assurance-to-remediation as planned expansion slices until evidence exists.
+
+Inferences
+
+- The strongest implementation foundation for issue #36 is the existing O-RAN mock stack: O1 + PM + VES + R1 + RIC + zero-trust. These pieces make the issue plausible as an incremental architecture epic rather than greenfield work.
+- The issue's "Perception Layer" can likely reuse O1 PM/VES and R1 DME primitives, but the current repo does not yet have the high-volume ingestion layer, GPU/stream processing layer, or summarization/vectorization layer that would prevent raw telemetry from being fed to an LLM.
+- The issue's "Action Layer" partially overlaps with O1 edit-config and A1 policy paths, but the safety architecture in the issue requires an additional deterministic SMO/harness gate that translates agent intent only after policy and preflight checks. That complete path is not visible in the current code.
+- The issue's "MCP Boundary Enforcer" has conceptual support from NANDA/harness governance and zero-trust authorization, but there is no evidence of an MCP server exposing typed R1 SME action intents while prohibiting direct wire access.
+- The TM Forum part of issue #36 should be considered a gap, not an existing capability, because TMF642 is explicitly not implemented and TMF628 is not tracked as an implementation target outside the issue text.
+- The release/register and code/spec-map mismatch should be resolved before making public-facing claims. The code can be described as mock/demo/readiness support; formal O-RAN conformance or production O1/R1 interoperability is not established by the inspected evidence.
+
+Unknowns / limits
+
+- I did not inspect untracked local issue-body files as authoritative requirements; the source of truth was the live GitHub issue fetched during this analysis.
+- I did not run the full test suite because this was a read-only analysis request, not an implementation or regression-change task.
+- I did not verify official current O-RAN or TM Forum spec versions during this task. The analysis is about repository alignment to issue #36, not external standards currency.
+- I did not find evidence of EIAP-specific integration. It may exist outside this checkout or in a private/staged environment, but it is not established by the inspected repository files.
+- I did not find an MCP server implementation for R1 SME action intents. MCP is present as a governance/protocol concept in the NANDA/harness experiment.
+
+Most useful read-only follow-up probes
+
+1. Inventory all service endpoints that would participate in a minimal issue #36 vertical slice: O1 PM/VES -> R1 DME -> zero-trust authorize -> SMO/RIC action.
+2. Compare `adapters/mock_oran/oran/o_ran_spec_map.py` against `traceability/standards_release_register.yaml` and decide which artifact is the claim source of truth for O1/R1 readiness language.
+3. Search or create a traceability row for TMF628 before any implementation issue references TMF628 as an established repo capability.
+4. Define the narrowest evidence label for issue #36 before implementation: likely "mock/demo substrate" or "planned architecture epic," not conformance or production interoperability.
