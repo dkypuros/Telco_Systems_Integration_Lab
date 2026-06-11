@@ -77,7 +77,7 @@ def test_r1_dme_facade_discovers_default_and_custom_data_types():
 def test_r1_dme_facade_creates_data_job_and_queries_compact_response():
     facade = R1DmeQueryFacade(make_store())
 
-    job = facade.create_data_job(
+    job = facade.create_data_request(
         data_type_id="dme.telemetry.pm.cell-kpi",
         consumer_id="rapp-perception-1",
         query={
@@ -93,6 +93,7 @@ def test_r1_dme_facade_creates_data_job_and_queries_compact_response():
     result = facade.query_telemetry(job["job_definition"])
 
     assert job["status"] == "ACTIVE"
+    assert job["data_request_id"] == job["data_job_id"]
     assert job["data_type_id"] == "dme.telemetry.pm.cell-kpi"
     assert job["job_definition"]["cell_id"] == "NRCellDU=cell-1"
     assert result["target_interface"] == "R1_DME"
@@ -124,11 +125,24 @@ def test_r1_dme_facade_filters_alarm_queries_by_severity():
     assert result["samples"][0]["source"] == "ves_fm"
 
 
+def test_r1_dme_facade_lists_data_requests_with_job_compatibility_alias():
+    facade = R1DmeQueryFacade(make_store())
+
+    request = facade.create_data_request(
+        data_type_id="dme.telemetry.pm.cell-kpi",
+        consumer_id="rapp-perception-1",
+        query={"data_type_id": "dme.telemetry.pm.cell-kpi"},
+    )
+
+    assert facade.list_data_requests(consumer_id="rapp-perception-1") == [request]
+    assert facade.list_data_jobs(consumer_id="rapp-perception-1") == [request]
+
+
 def test_r1_dme_facade_rejects_job_query_data_type_mismatch():
     facade = R1DmeQueryFacade(make_store())
 
     with pytest.raises(ValueError, match="query_data_type_mismatch:dme.telemetry.fm.cell-alarms"):
-        facade.create_data_job(
+        facade.create_data_request(
             data_type_id="dme.telemetry.pm.cell-kpi",
             consumer_id="rapp-perception-1",
             query={"data_type_id": "dme.telemetry.fm.cell-alarms"},

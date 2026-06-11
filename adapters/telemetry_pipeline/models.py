@@ -44,6 +44,7 @@ class TelemetryRecord:
     alarm_condition: str | None = None
     source_interface: str = "O1/VES-inspired"
     source_event: Mapping[str, Any] = field(default_factory=dict)
+    topology: Mapping[str, str] = field(default_factory=dict)
 
     @property
     def index_name(self) -> str:
@@ -79,20 +80,32 @@ class DmeDataType:
 
 
 @dataclass(frozen=True)
-class DmeDataJob:
-    """Data job created through the mock R1 DME facade."""
+class DmeDataRequest:
+    """One-time data request created through the mock R1 DME facade."""
 
-    job_id: str
+    request_id: str
     data_type_id: str
     query: TelemetryQuery
     created_at: datetime
+
+    @property
+    def job_id(self) -> str:
+        """Compatibility alias for older lab code; prefer request_id."""
+
+        return self.request_id
+
+
+# R1AP includes data-job information in registration/subscription contexts.
+# Keep the older lab name as a compatibility alias while documentation leads
+# with data request/subscription terminology.
+DmeDataJob = DmeDataRequest
 
 
 @dataclass(frozen=True)
 class DmeQueryResult:
     """Query result returned by the R1 DME-style facade."""
 
-    job: DmeDataJob
+    request: DmeDataRequest
     records: tuple[TelemetryRecord, ...]
     compact: bool = True
 
@@ -140,6 +153,7 @@ class AgentContextPayload:
     total_events_seen: int
     total_events_retained: int
     total_events_dropped: int
+    topology_context: Mapping[str, Mapping[str, str]] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return _to_plain(self)

@@ -48,7 +48,7 @@ class InMemoryTelemetryStore:
 
 
 def _matches(record: TelemetryRecord, query: TelemetryQuery) -> bool:
-    if query.cell_id and record.cell_id != query.cell_id:
+    if query.cell_id and record.cell_id not in {query.cell_id, _canonical_cell_id(query.cell_id)}:
         return False
     if query.start_time and record.observed_at < query.start_time:
         return False
@@ -69,3 +69,7 @@ def _coerce_event_type(value: EventType | str) -> EventType:
 
 def _coerce_severity(value: AlarmSeverity | str) -> AlarmSeverity:
     return value if isinstance(value, AlarmSeverity) else AlarmSeverity(value)
+
+
+def _canonical_cell_id(cell_id: str) -> str:
+    return cell_id if cell_id.startswith("NRCellDU=") else f"NRCellDU={cell_id}"

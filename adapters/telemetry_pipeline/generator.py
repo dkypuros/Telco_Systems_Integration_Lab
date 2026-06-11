@@ -9,6 +9,20 @@ from uuid import uuid5, NAMESPACE_URL
 from .models import AlarmSeverity, EventType, TelemetryRecord
 
 
+def nrm_topology_for_cell(cell_id: str) -> dict[str, str]:
+    """Return an O1 NRM-inspired managed-object path for a cell fixture."""
+
+    nr_cell_du = cell_id if cell_id.startswith("NRCellDU=") else f"NRCellDU={cell_id}"
+    managed_element = "ManagedElement=lab-smo-managed-element"
+    gnb_du = "GNBDUFunction=lab-gnbdu-1"
+    return {
+        "managed_element": managed_element,
+        "gnb_du_function": gnb_du,
+        "nr_cell_du": nr_cell_du,
+        "distinguished_name": f"{managed_element},{gnb_du},{nr_cell_du}",
+    }
+
+
 def _utc(value: datetime) -> datetime:
     if value.tzinfo is None:
         return value.replace(tzinfo=UTC)
@@ -34,19 +48,22 @@ def create_performance_event(
     """
 
     event_time = _utc(observed_at)
-    event_id = _event_id("pm", cell_id, event_time.isoformat())
+    topology = nrm_topology_for_cell(cell_id)
+    event_id = _event_id("pm", topology["distinguished_name"], event_time.isoformat())
     return {
         "event": {
             "commonEventHeader": {
                 "domain": "measurementsForVfScaling",
                 "eventId": event_id,
                 "eventName": "o1-ves-lab-pm",
-                "sourceName": cell_id,
+                "sourceName": topology["nr_cell_du"],
+                "reportingEntityName": topology["managed_element"],
                 "lastEpochMicrosec": int(event_time.timestamp() * 1_000_000),
                 "startEpochMicrosec": int(event_time.timestamp() * 1_000_000),
             },
             "measurementsForVfScalingFields": {
                 "measurementFieldsVersion": "lab-1",
+                "nrmReference": topology,
                 "additionalMeasurements": {
                     "cell_latency_ms": latency_ms,
                     "downlink_throughput_mbps": throughput_mbps,
@@ -69,19 +86,22 @@ def create_fault_event(
 
     event_time = _utc(observed_at)
     severity_value = severity.value if isinstance(severity, AlarmSeverity) else severity
-    event_id = _event_id("fm", cell_id, event_time.isoformat(), alarm_condition)
+    topology = nrm_topology_for_cell(cell_id)
+    event_id = _event_id("fm", topology["distinguished_name"], event_time.isoformat(), alarm_condition)
     return {
         "event": {
             "commonEventHeader": {
                 "domain": "fault",
                 "eventId": event_id,
                 "eventName": "o1-ves-lab-fm",
-                "sourceName": cell_id,
+                "sourceName": topology["nr_cell_du"],
+                "reportingEntityName": topology["managed_element"],
                 "lastEpochMicrosec": int(event_time.timestamp() * 1_000_000),
                 "startEpochMicrosec": int(event_time.timestamp() * 1_000_000),
             },
             "faultFields": {
                 "faultFieldsVersion": "lab-1",
+                "nrmReference": topology,
                 "eventSeverity": severity_value,
                 "alarmCondition": alarm_condition,
             },
@@ -97,6 +117,11 @@ def ves_event_to_record(payload: Mapping[str, Any]) -> TelemetryRecord:
     observed_at = datetime.fromtimestamp(header["lastEpochMicrosec"] / 1_000_000, tz=UTC)
     domain = header.get("domain")
     cell_id = str(header["sourceName"])
+    topology = (
+        event.get("measurementsForVfScalingFields", {}).get("nrmReference")
+        or event.get("faultFields", {}).get("nrmReference")
+        or nrm_topology_for_cell(cell_id)
+    )
 
     if domain == "fault":
         fault = event.get("faultFields", {})
@@ -108,6 +133,7 @@ def ves_event_to_record(payload: Mapping[str, Any]) -> TelemetryRecord:
             severity=AlarmSeverity(str(fault.get("eventSeverity", "WARNING"))),
             alarm_condition=str(fault.get("alarmCondition", "unspecified")),
             source_event=payload,
+            topology={str(key): str(value) for key, value in topology.items()},
         )
 
     measurements = event.get("measurementsForVfScalingFields", {}).get(
@@ -120,12 +146,13 @@ def ves_event_to_record(payload: Mapping[str, Any]) -> TelemetryRecord:
         observed_at=observed_at,
         kpis={str(name): float(value) for name, value in measurements.items()},
         source_event=payload,
+        topology={str(key): str(value) for key, value in topology.items()},
     )
 
 
 def generate_sample_events(
     *,
-    cell_id: str = "cell-001",
+    cell_id: str = "NRCellDU=cell-001",
     start_time: datetime | None = None,
     count: int = 6,
 ) -> tuple[dict[str, Any], ...]:

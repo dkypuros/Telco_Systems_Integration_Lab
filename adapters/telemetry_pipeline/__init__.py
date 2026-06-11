@@ -2,6 +2,7 @@
 
 from .generator import (
     create_fault_event,
+    nrm_topology_for_cell,
     create_performance_event,
     generate_sample_events,
     normalize_events,
@@ -11,6 +12,7 @@ from .models import (
     AgentContextPayload,
     AlarmSeverity,
     DmeDataJob,
+    DmeDataRequest,
     DmeDataType,
     DmeQueryResult,
     EventType,
@@ -28,6 +30,7 @@ __all__ = [
     "AlarmSeverity",
     "DataFrameBackend",
     "DmeDataJob",
+    "DmeDataRequest",
     "DmeDataType",
     "DmeQueryResult",
     "EventType",
@@ -38,6 +41,7 @@ __all__ = [
     "TelemetryRecord",
     "WindowSummary",
     "create_fault_event",
+    "nrm_topology_for_cell",
     "create_performance_event",
     "detect_dataframe_backend",
     "generate_sample_events",

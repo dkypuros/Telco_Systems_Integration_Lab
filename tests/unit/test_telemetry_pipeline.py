@@ -37,9 +37,12 @@ def test_generator_normalizes_ves_like_pm_and_fm_events():
     pm_record = ves_event_to_record(pm_payload)
     fm_record = ves_event_to_record(fm_payload)
 
-    assert pm_record.cell_id == "cell-a"
+    assert pm_record.cell_id == "NRCellDU=cell-a"
     assert pm_record.event_type is EventType.PERFORMANCE
     assert pm_record.kpis["cell_latency_ms"] == 32.5
+    assert pm_record.topology["managed_element"] == "ManagedElement=lab-smo-managed-element"
+    assert pm_record.topology["gnb_du_function"] == "GNBDUFunction=lab-gnbdu-1"
+    assert pm_record.topology["nr_cell_du"] == "NRCellDU=cell-a"
     assert fm_record.event_type is EventType.FAULT
     assert fm_record.severity is AlarmSeverity.MAJOR
     assert fm_record.alarm_condition == "lab-interference"
@@ -57,7 +60,7 @@ def test_store_queries_by_cell_time_kpi_and_severity():
     warnings = store.query(TelemetryQuery(cell_id="cell-a", severity=AlarmSeverity.WARNING))
 
     assert len(performance) == 6
-    assert all(record.cell_id == "cell-a" for record in performance)
+    assert all(record.cell_id == "NRCellDU=cell-a" for record in performance)
     assert len(warnings) == 1
     assert warnings[0].alarm_condition == "lab-interference-warning"
     assert store.index_counts() == {"telemetry-20260610": 7}
@@ -69,16 +72,16 @@ def test_r1_dme_facade_exposes_jobs_without_direct_store_coupling():
     facade = R1DmeFacade(store)
 
     data_types = facade.discover_data_types()
-    job = facade.create_data_job(
+    request = facade.create_data_request(
         data_type_id=data_types[0].data_type_id,
         query=TelemetryQuery(cell_id="cell-b", limit=3),
     )
-    result = facade.query_data_job(job.job_id)
+    result = facade.query_data_request(request.request_id)
 
     assert data_types[0].source_interface == "O1/VES-inspired"
     assert "not formal" in data_types[0].claim_boundary
     assert len(result.records) == 3
-    assert result.to_dict()["job"]["data_type_id"] == "oran.telemetry.cell.pm-fm.v1"
+    assert result.to_dict()["request"]["data_type_id"] == "oran.telemetry.cell.pm-fm.v1"
 
 
 def test_summarizer_outputs_compact_context_with_backpressure_windowing():
@@ -143,4 +146,5 @@ def test_agent_context_payload_has_claim_boundary_not_conformance_claim():
 
     assert "not NVIDIA or O-RAN conformance" in payload["claim_boundary"]
     assert payload["policy"]["overflow_strategy"] == "keep_latest"
+    assert payload["topology_context"]["NRCellDU=cell-001"]["distinguished_name"].endswith("NRCellDU=cell-001")
     assert payload["windows"]

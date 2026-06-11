@@ -74,7 +74,12 @@ class TelemetryQuery:
 
 @dataclass(frozen=True)
 class DmeDataJob:
-    """Local DME-style data job metadata."""
+    """Local DME data job for a one-time request or subscription.
+
+    R1AP data access uses data jobs for both data request and data
+    subscription delivery modes. Agent-facing docs should lead with request /
+    subscription language and treat job as the R1AP resource container.
+    """
 
     data_type_id: str
     job_definition: TelemetryQuery
@@ -85,8 +90,16 @@ class DmeDataJob:
     claim_boundary: str = _CLAIM_BOUNDARY
     created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
+    @property
+    def data_request_id(self) -> str:
+        """Compatibility-friendly request identifier for one-time data access."""
+
+        return self.data_job_id
+
     def to_dict(self) -> dict[str, Any]:
-        return _to_plain(self)
+        item = _to_plain(self)
+        item["data_request_id"] = self.data_request_id
+        return item
 
 
 @dataclass(frozen=True)
@@ -156,7 +169,7 @@ class R1DmeQueryFacade:
             ]
         return [entry.to_dict() for entry in sorted(entries, key=lambda item: item.data_type_id)]
 
-    def create_data_job(
+    def create_data_request(
         self,
         *,
         data_type_id: str,
@@ -164,7 +177,7 @@ class R1DmeQueryFacade:
         query: TelemetryQuery | Mapping[str, Any],
         target_uri: str | None = None,
     ) -> dict[str, Any]:
-        """Create a local DME-style data job for a compact telemetry query."""
+        """Create a local DME data request backed by an R1AP-style data job."""
         if data_type_id not in self._data_types:
             raise ValueError(f"unknown_data_type:{data_type_id}")
         normalized_query = self._coerce_query(query)
@@ -179,12 +192,22 @@ class R1DmeQueryFacade:
         self._jobs[job.data_job_id] = job
         return job.to_dict()
 
-    def list_data_jobs(self, *, consumer_id: str | None = None) -> list[dict[str, Any]]:
-        """List local data jobs, optionally filtered by consumer."""
+    def create_data_job(self, **kwargs: Any) -> dict[str, Any]:
+        """Compatibility alias; prefer create_data_request in agent code."""
+
+        return self.create_data_request(**kwargs)
+
+    def list_data_requests(self, *, consumer_id: str | None = None) -> list[dict[str, Any]]:
+        """List local data request/subscription containers, optionally filtered."""
         jobs = list(self._jobs.values())
         if consumer_id is not None:
             jobs = [job for job in jobs if job.consumer_id == consumer_id]
         return [job.to_dict() for job in sorted(jobs, key=lambda item: item.created_at)]
+
+    def list_data_jobs(self, *, consumer_id: str | None = None) -> list[dict[str, Any]]:
+        """Compatibility alias for R1AP data-job terminology."""
+
+        return self.list_data_requests(consumer_id=consumer_id)
 
     def query_telemetry(self, query: TelemetryQuery | Mapping[str, Any]) -> dict[str, Any]:
         """Run a compact local telemetry query through the DME-style boundary."""

@@ -112,6 +112,7 @@ def summarize_for_agent(
         total_events_seen=len(ordered),
         total_events_retained=total_retained,
         total_events_dropped=total_dropped,
+        topology_context=_topology_context(ordered),
     )
 
 
@@ -177,3 +178,11 @@ def _anomaly_flags(
     if dropped:
         flags.append("backpressure_applied")
     return tuple(flags)
+
+
+def _topology_context(records: Iterable[TelemetryRecord]) -> dict[str, dict[str, str]]:
+    context: dict[str, dict[str, str]] = {}
+    for record in records:
+        if record.topology:
+            context.setdefault(record.cell_id, dict(record.topology))
+    return context
