@@ -37,13 +37,23 @@ Mock O1/VES-inspired FM/PM events
   -> R1DmeFacade / R1DmeQueryFacade
        (DME type registration/discovery + data request/subscription boundary)
   -> summarize_for_agent()
-       (optional cuDF detection, standard-library CPU summarization)
+       (aggregation runs on the detected cuDF GPU / pandas CPU / stdlib backend)
   -> compact Agent Harness perception input
 ```
 
 The store is intentionally an in-memory deterministic mock. It mirrors the behavior a
 lab needs from a shared telemetry search/persistence layer without claiming that it
 replicates Ericsson EIAP SDL, production Kafka, or Elasticsearch internals.
+
+There are two R1 DME-style facades, and they are **layers, not rivals**:
+`adapters.telemetry_pipeline.r1_dme.R1DmeFacade` is the pipeline-internal, store-facing
+boundary that returns typed `TelemetryRecord`s under the combined data type
+`oran.telemetry.cell.pm-fm.v1`; `adapters.agent_harness.perception.r1_dme.R1DmeQueryFacade`
+is the dependency-free, agent-facing adapter that splits PM/FM
+(`dme.telemetry.pm.cell-kpi` / `dme.telemetry.fm.cell-alarms`) and returns compact
+JSON-able payloads. The agent-facing facade normalizes the pipeline's typed records, so
+it can sit directly on top of the pipeline store (proved by
+`test_agent_facing_facade_composes_on_pipeline_store`).
 
 ## Local spec grounding
 
@@ -84,6 +94,10 @@ TM Forum anchors present in the repo:
 - Firehose behavior is explicit: `SummarizationPolicy` uses tumbling windows and a
   `max_events_per_window` cap. The current overflow strategy is `keep_latest`, and
   summaries report dropped counts plus a `backpressure_applied` anomaly flag.
+- VES vocabulary tracks VES 7.x (the cited ONAP VES 7.2.1): PM events use the
+  `measurement` domain and `measurementFields`, not the deprecated VES 5.x
+  `measurementsForVfScaling*`. The parser still accepts the legacy 5.x block so older
+  fixtures keep working.
 
 ## Implemented modules
 
@@ -92,7 +106,7 @@ TM Forum anchors present in the repo:
 | `adapters/telemetry_pipeline/generator.py` | Builds deterministic VES-like FM/PM fixtures and adds O1 NRM-inspired topology references. |
 | `adapters/telemetry_pipeline/store.py` | Provides `InMemoryTelemetryStore` query behavior and deterministic index naming. |
 | `adapters/telemetry_pipeline/r1_dme.py` | Exposes DME type registration/discovery and data-request APIs through `R1DmeFacade`; keeps data-job aliases only for R1AP compatibility. |
-| `adapters/telemetry_pipeline/summarizer.py` | Produces compact agent context with safe backend detection, CPU fallback, windowing, backpressure, and topology context. |
+| `adapters/telemetry_pipeline/summarizer.py` | Produces compact agent context; runs window aggregation on the detected cuDF/pandas/stdlib backend with windowing, backpressure, and topology context. |
 | `adapters/telemetry_pipeline/models.py` | Defines typed records, queries, DME request containers, summaries, and policies. |
 | `adapters/agent_harness/perception/r1_dme.py` | Provides an Agent Harness-facing R1 DME query facade with data request terminology and data-job compatibility aliases. |
 | `tests/unit/test_telemetry_pipeline.py` | Proves deterministic generation, query, DME request, windowing, backpressure, topology context, and claim boundaries. |
@@ -124,16 +138,28 @@ backend information, NRM-inspired topology context, and claim-boundary text. It 
 not contain raw credentials, private paths, direct network-element commands, or direct
 database handles.
 
-## Optional GPU story
+## GPU / CPU backend ladder
 
-`detect_dataframe_backend()` safely detects whether `cudf` is import-discoverable. The
-current summarizer remains standard-library CPU-safe so tests pass on laptops and CI.
-This keeps the architecture RAPIDS/Morpheus-ready without adding mandatory heavyweight
-dependencies or requiring CUDA for the public lab.
+`detect_dataframe_backend()` safely detects the best available dataframe library
+(`importlib.util.find_spec`, no heavy import) and `summarize_for_agent()` actually runs
+the per-window aggregation on it:
 
-Future GPU work can swap the internal aggregation implementation behind the same typed
-`AgentContextPayload` contract once a CUDA environment and performance tests are part
-of the lab profile.
+1. **cuDF (GPU)** when RAPIDS is importable — groupby/reductions execute on CUDA.
+2. **pandas (CPU)** otherwise — the same vectorized reductions on CPU.
+3. **stdlib** when neither is importable — pure-Python reductions.
+
+The three paths are kept numerically identical (NaN-skipping mean, missing-as-zero sum,
+4-decimal rounding), and a test asserts the stdlib and pandas backends produce the same
+window summaries. Any runtime error in the dataframe path falls back to stdlib, so the
+public lab never breaks on a laptop or in CI and no CUDA dependency is mandatory.
+
+This means the backend label in the payload reflects work that was really performed, not
+just a capability probe. Swapping to a GPU node changes only `backend` and where the
+reduction runs — the typed `AgentContextPayload` contract is unchanged.
+
+Caveat: window aggregates are computed over *retained* events, so a dropped burst under
+backpressure can bias them; the `backpressure_applied` flag and dropped-event counts make
+that loss explicit to the agent.
 
 ## Claim boundary
 

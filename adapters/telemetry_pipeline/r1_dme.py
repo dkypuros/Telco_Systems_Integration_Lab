@@ -1,8 +1,22 @@
-"""Mock R1 DME-style facade over the local telemetry store."""
+"""Store-facing R1 DME-style facade (the pipeline-internal boundary).
+
+This is one of two R1 DME-style facades in the lab; they are layers, not rivals:
+
+* This ``R1DmeFacade`` is the **pipeline-internal** boundary. It sits directly on a
+  typed :class:`InMemoryTelemetryStore`, registers the combined data type
+  ``oran.telemetry.cell.pm-fm.v1``, and returns typed :class:`TelemetryRecord`
+  objects. Use it inside the pipeline / in tests that want typed results.
+* :class:`adapters.agent_harness.perception.r1_dme.R1DmeQueryFacade` is the
+  **agent-facing** adapter. It is dependency-free, splits the agent-facing data
+  types into ``dme.telemetry.pm.cell-kpi`` / ``dme.telemetry.fm.cell-alarms``, and
+  returns compact JSON-able payloads (no raw store handles). It can wrap the records
+  this store yields, so the agent layer composes on top of this one.
+"""
 
 from __future__ import annotations
 
 from datetime import UTC, datetime
+from typing import Callable
 from uuid import uuid5, NAMESPACE_URL
 
 from .models import DmeDataRequest, DmeDataType, DmeQueryResult, TelemetryQuery
@@ -16,8 +30,15 @@ DEFAULT_CLAIM_BOUNDARY = (
 class R1DmeFacade:
     """Expose telemetry by data types and data requests, never direct store handles."""
 
-    def __init__(self, store: InMemoryTelemetryStore) -> None:
+    def __init__(
+        self,
+        store: InMemoryTelemetryStore,
+        *,
+        now_provider: Callable[[], datetime] | None = None,
+    ) -> None:
         self._store = store
+        # Injectable clock so request ids/timestamps can be made deterministic in tests.
+        self._now = now_provider or (lambda: datetime.now(tz=UTC))
         self._data_types: dict[str, DmeDataType] = {}
         self._requests: dict[str, DmeDataRequest] = {}
         self.register_data_type(
@@ -47,7 +68,7 @@ class R1DmeFacade:
         if data_type_id not in self._data_types:
             raise ValueError(f"unknown data type: {data_type_id}")
         query = query or TelemetryQuery()
-        created_at = datetime.now(tz=UTC)
+        created_at = self._now()
         request_id = str(uuid5(NAMESPACE_URL, f"{data_type_id}:{query!r}:{created_at.isoformat()}"))
         request = DmeDataRequest(
             request_id=request_id,

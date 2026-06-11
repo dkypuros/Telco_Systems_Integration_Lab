@@ -138,6 +138,62 @@ def test_backend_detection_is_safe_without_optional_gpu_dependency():
     assert backend.reason
 
 
+def test_summary_aggregates_are_identical_across_backends():
+    from adapters.telemetry_pipeline.summarizer import DataFrameBackend
+
+    records = normalize_events(generate_sample_events(cell_id="cell-x"))
+    stdlib_backend = DataFrameBackend(name="stdlib-cpu", gpu_accelerated=False, reason="forced")
+    pandas_backend = DataFrameBackend(name="pandas-compatible-cpu", gpu_accelerated=False, reason="forced")
+
+    via_stdlib = summarize_for_agent(records, backend=stdlib_backend).to_dict()
+    via_pandas = summarize_for_agent(records, backend=pandas_backend).to_dict()
+
+    # The detected backend is real (it labels the payload) but must not change numbers.
+    assert via_stdlib["backend"] == "stdlib-cpu"
+    assert via_pandas["backend"] == "pandas-compatible-cpu"
+    assert via_stdlib["windows"] == via_pandas["windows"]
+    assert via_pandas["windows"][0]["latency_mean_ms"] is not None
+
+
+def test_agent_facing_facade_composes_on_pipeline_store():
+    """The two R1 DME facades are layers: the agent-facing one wraps the pipeline store."""
+
+    from adapters.agent_harness.perception import PM_DATA_TYPE_ID, R1DmeQueryFacade
+
+    store = InMemoryTelemetryStore()
+    store.ingest(normalize_events(generate_sample_events(cell_id="cell-z")))
+
+    facade = R1DmeQueryFacade(list(store.query()))
+    result = facade.query_telemetry(
+        {
+            "data_type_id": PM_DATA_TYPE_ID,
+            "cell_id": "NRCellDU=cell-z",
+            "kpis": ["cell_latency_ms"],
+        }
+    )
+
+    assert result["total_events"] == 6
+    assert result["kpi_summaries"][0]["kpi"] == "cell_latency_ms"
+    assert result["target_interface"] == "R1_DME"
+
+
+def test_dme_request_id_is_deterministic_with_injected_clock():
+    from datetime import datetime as _dt
+
+    store = InMemoryTelemetryStore()
+    store.ingest(normalize_events(generate_sample_events(cell_id="cell-c")))
+    frozen = lambda: _dt(2026, 6, 10, 12, 0, tzinfo=UTC)
+
+    first = R1DmeFacade(store, now_provider=frozen).create_data_request(
+        query=TelemetryQuery(cell_id="cell-c")
+    )
+    second = R1DmeFacade(store, now_provider=frozen).create_data_request(
+        query=TelemetryQuery(cell_id="cell-c")
+    )
+
+    assert first.request_id == second.request_id
+
+
 def test_agent_context_payload_has_claim_boundary_not_conformance_claim():
     store = InMemoryTelemetryStore()
     store.ingest(normalize_events(generate_sample_events()))

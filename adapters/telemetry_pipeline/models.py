@@ -122,6 +122,7 @@ class SummarizationPolicy:
     overflow_strategy: str = "keep_latest"
     latency_threshold_ms: float = 50.0
     sgnb_success_rate_floor: float = 0.95
+    moving_average_windows: int = 3
 
 
 @dataclass(frozen=True)

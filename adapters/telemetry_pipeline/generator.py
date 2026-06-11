@@ -53,7 +53,10 @@ def create_performance_event(
     return {
         "event": {
             "commonEventHeader": {
-                "domain": "measurementsForVfScaling",
+                # VES 7.x renamed the measurement domain from the VES 5.x
+                # "measurementsForVfScaling" to "measurement"; ONAP VES 7.2.1 is the
+                # reference this lab cites, so emit the current names.
+                "domain": "measurement",
                 "eventId": event_id,
                 "eventName": "o1-ves-lab-pm",
                 "sourceName": topology["nr_cell_du"],
@@ -61,7 +64,7 @@ def create_performance_event(
                 "lastEpochMicrosec": int(event_time.timestamp() * 1_000_000),
                 "startEpochMicrosec": int(event_time.timestamp() * 1_000_000),
             },
-            "measurementsForVfScalingFields": {
+            "measurementFields": {
                 "measurementFieldsVersion": "lab-1",
                 "nrmReference": topology,
                 "additionalMeasurements": {
@@ -117,8 +120,13 @@ def ves_event_to_record(payload: Mapping[str, Any]) -> TelemetryRecord:
     observed_at = datetime.fromtimestamp(header["lastEpochMicrosec"] / 1_000_000, tz=UTC)
     domain = header.get("domain")
     cell_id = str(header["sourceName"])
+    # Accept VES 7.x "measurementFields" and legacy VES 5.x
+    # "measurementsForVfScalingFields" so older fixtures still parse.
+    measurement_fields = (
+        event.get("measurementFields") or event.get("measurementsForVfScalingFields") or {}
+    )
     topology = (
-        event.get("measurementsForVfScalingFields", {}).get("nrmReference")
+        measurement_fields.get("nrmReference")
         or event.get("faultFields", {}).get("nrmReference")
         or nrm_topology_for_cell(cell_id)
     )
@@ -136,9 +144,7 @@ def ves_event_to_record(payload: Mapping[str, Any]) -> TelemetryRecord:
             topology={str(key): str(value) for key, value in topology.items()},
         )
 
-    measurements = event.get("measurementsForVfScalingFields", {}).get(
-        "additionalMeasurements", {}
-    )
+    measurements = measurement_fields.get("additionalMeasurements", {})
     return TelemetryRecord(
         event_id=str(header["eventId"]),
         cell_id=cell_id,

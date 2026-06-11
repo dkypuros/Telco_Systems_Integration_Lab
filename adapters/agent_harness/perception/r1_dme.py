@@ -1,7 +1,20 @@
-"""Dependency-free repo-local R1 DME-style telemetry query facade.
+"""Agent-facing, dependency-free R1 DME-style telemetry query facade.
 
-This module intentionally models a safe local boundary only. It does not claim
-formal O-RAN R1, Ericsson EIAP, Elasticsearch, or TM Forum conformance.
+This is the **agent-facing** half of the lab's two R1 DME-style facades; the two are
+layers, not rivals:
+
+* This :class:`R1DmeQueryFacade` is what the Agent Harness talks to. It is
+  dependency-free, splits telemetry into the agent-facing data types
+  ``dme.telemetry.pm.cell-kpi`` / ``dme.telemetry.fm.cell-alarms`` (see
+  :data:`PM_DATA_TYPE_ID` / :data:`FM_DATA_TYPE_ID`), and returns compact JSON-able
+  payloads — never raw store handles. It normalizes plain dict rows *and* the typed
+  ``TelemetryRecord`` objects emitted by ``adapters.telemetry_pipeline``, so it can
+  sit directly on top of that pipeline's store.
+* ``adapters.telemetry_pipeline.r1_dme.R1DmeFacade`` is the pipeline-internal,
+  store-facing boundary that returns typed records.
+
+It does not claim formal O-RAN R1, Ericsson EIAP, Elasticsearch, or TM Forum
+conformance.
 """
 
 from __future__ import annotations
@@ -10,19 +23,34 @@ from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, field, fields, is_dataclass
 from datetime import datetime, timezone
+from enum import Enum
 from typing import Any
 from uuid import uuid4
 
 _CLAIM_BOUNDARY = "repo-local R1 DME-style telemetry facade; not formal O-RAN, EIAP, or TM Forum conformance"
+
+# Canonical agent-facing data-type ids, shared so the pipeline bridge and this facade
+# cannot drift. PM/FM are split here (vs. the pipeline's combined pm-fm type) because
+# the agent queries performance and fault streams independently.
+PM_DATA_TYPE_ID = "dme.telemetry.pm.cell-kpi"
+FM_DATA_TYPE_ID = "dme.telemetry.fm.cell-alarms"
+
+# Map a pipeline TelemetryRecord event_type onto an agent-facing data type so the
+# typed pipeline store can be consumed directly by this facade.
+_DATA_TYPE_BY_EVENT: dict[str, str] = {
+    "performance": PM_DATA_TYPE_ID,
+    "fault": FM_DATA_TYPE_ID,
+}
+
 _DEFAULT_DATA_TYPES: tuple[tuple[str, str, str, tuple[str, ...]], ...] = (
     (
-        "dme.telemetry.pm.cell-kpi",
+        PM_DATA_TYPE_ID,
         "Cell performance telemetry",
         "Public-safe O1/VES-inspired per-cell KPI measurements exposed through a local DME-style query boundary.",
         ("pm", "kpi", "cell", "telemetry"),
     ),
     (
-        "dme.telemetry.fm.cell-alarms",
+        FM_DATA_TYPE_ID,
         "Cell alarm telemetry",
         "Public-safe O1/VES-inspired alarm events exposed through a local DME-style query boundary.",
         ("fm", "alarm", "cell", "telemetry"),
@@ -286,7 +314,14 @@ class R1DmeQueryFacade:
             payload.get("timestamp") or payload.get("event_time") or payload.get("observed_at") or payload.get("time")
         )
         cell_id = str(payload.get("cell_id") or payload.get("resource_id") or payload.get("managed_object") or "").strip()
-        data_type_id = str(payload.get("data_type_id") or payload.get("kind") or "").strip()
+        data_type_id = str(_enum_value(payload.get("data_type_id") or payload.get("kind")) or "").strip()
+        if not data_type_id:
+            # Pipeline TelemetryRecord objects carry event_type, not data_type_id;
+            # map them onto the agent-facing data types so this facade can wrap the
+            # typed pipeline store directly.
+            event_kind = _enum_value(payload.get("event_type"))
+            if event_kind is not None:
+                data_type_id = _DATA_TYPE_BY_EVENT.get(str(event_kind).lower(), "")
         if timestamp is None or not cell_id or not data_type_id:
             return None
 
@@ -297,13 +332,14 @@ class R1DmeQueryFacade:
             if _is_number(value)
         }
 
-        severity = payload.get("severity") or payload.get("alarm_severity")
+        severity = _enum_value(payload.get("severity") or payload.get("alarm_severity"))
+        source = _enum_value(payload.get("source") or payload.get("event_type")) or "telemetry"
         return _NormalizedRecord(
             timestamp=timestamp,
             cell_id=cell_id,
             data_type_id=data_type_id,
             severity=str(severity).upper() if severity else None,
-            source=str(payload.get("source") or payload.get("event_type") or "telemetry"),
+            source=str(source),
             kpis=metrics,
         )
 
@@ -420,6 +456,12 @@ def _coerce_datetime(value: datetime | str | None) -> datetime | None:
 
 def _maybe_iso(value: datetime | None) -> str | None:
     return value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z") if value else None
+
+
+def _enum_value(value: Any) -> Any:
+    """Unwrap an Enum (e.g. pipeline EventType/AlarmSeverity) to its plain value."""
+
+    return value.value if isinstance(value, Enum) else value
 
 
 def _is_number(value: Any) -> bool:
